@@ -4,7 +4,7 @@
 ```npm i```
 
 ## Development
-```npm start```
+```npm run dev```
 
 ## Production
 ```npm run deploy```
