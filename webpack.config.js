@@ -8,13 +8,13 @@ var devFlagPlugin = new webpack.DefinePlugin({
 module.exports = {	
 	devtool: 'eval',
 	entry: [
-		'webpack-dev-server/client?http://localhost:8080',
+		'webpack-dev-server/client?http://127.0.0.1:8080',
 		'webpack/hot/only-dev-server',
 		path.resolve(__dirname, 'app/index.js')
 	],
 	output: {
 		path: path.join(__dirname, 'build'),
-		filename: 'bundle.js',
+		filename: 'bundle.js'
 	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
