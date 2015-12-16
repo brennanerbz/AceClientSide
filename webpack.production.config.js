@@ -3,6 +3,7 @@ var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 var config = {
+	devtool: 'source-map',
 	entry: path.resolve(__dirname, 'app/index.js'),
 	output: {
 		path: path.join(__dirname, 'build'),
@@ -19,13 +20,20 @@ var config = {
 		      	}
 			})
 	],
+	resolve: {
+	    extensions: ['', '.js', '.jsx']
+    },
 	module: {
 		loaders: [
-			{
-				test: /\.js$/,
-				exclude: [node_modules_dir],
-				loader: 'babel'
-			},
+			{ 
+				test: /\.jsx$/,
+		        loader: 'babel',
+		        include: path.join(__dirname, 'app') },
+	        { 
+	        	test: /\.js$/,
+		        loader: 'babel',
+		        exclude: /node_modules/ 
+		    },
 			{
 			  test: /\.json$/,
 			  loader: 'json'
