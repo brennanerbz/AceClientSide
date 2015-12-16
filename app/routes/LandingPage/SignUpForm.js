@@ -8,7 +8,7 @@ import * as useractions from '../../actions/user';
 require('./SignUpForm.scss');
 
 // import validator from 'validator';
-import Validation from 'react-validation';
+// import Validation from 'react-validation';
 
 @connect(state => ({
 		user: state.user.user
