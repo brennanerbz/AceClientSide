@@ -13,9 +13,9 @@ import reducers from '../reducers';
 import persistState from 'redux-localstorage';
 
 let middleware = [thunk];
-middleware.push(createLogger({
-	collapsed: true
-}))
+// middleware.push(createLogger({
+// 	collapsed: true
+// }))
 
 var store = compose(	
 	applyMiddleware(...middleware),
