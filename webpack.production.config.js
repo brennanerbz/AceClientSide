@@ -8,7 +8,7 @@ var config = {
 	output: {
 		path: path.join(__dirname, 'build'),
 		filename: 'bundle.js',
-		publicPath: '/build/'
+		publicPath: 'https://ace-app.herokuapp.com/'
 	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
@@ -52,15 +52,15 @@ var config = {
 			},
 			{
 				test: /\.(png|jpg)$/, 
-				loader: 'url-loader?limit=8192'
+				loader: 'url-loader?limit=10000'
 			},
-			{
-			    test: /.*\.(gif|png|jpe?g|svg)$/i,
-			    loaders: [
-			      'file?hash=sha512&digest=hex&name=[hash].[ext]',
-			      'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65", speed: 6}}'
-			    ]
-			},
+			// {
+			//     test: /.*\.(gif|png|jpe?g|svg)$/i,
+			//     loaders: [
+			//       'file?hash=sha512&digest=hex&name=[hash].[ext]',
+			//       'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65", speed: 6}}'
+			//     ]
+			// },
 			{
 				test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
 				loader : 'file-loader'
