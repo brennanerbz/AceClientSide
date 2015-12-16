@@ -51,6 +51,10 @@ var config = {
 				loaders: ["style", "css", "sass"]
 			},
 			{
+				test: /\.(png|jpg)$/, 
+				loader: 'url-loader?limit=8192'
+			},
+			{
 			    test: /.*\.(gif|png|jpe?g|svg)$/i,
 			    loaders: [
 			      'file?hash=sha512&digest=hex&name=[hash].[ext]',

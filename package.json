@@ -81,8 +81,7 @@
     "textarea-autosize": "^0.4.1",
     "typed": "^0.3.3",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.2",
-    "webpack-dev-middleware": "^1.0.11"
+    "webpack": "^1.12.2"
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
