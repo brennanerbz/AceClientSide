@@ -8,6 +8,10 @@
     "start": "node server.js",
     "lint": "eslint app"
   },
+  "engines": {
+      "node": "5.2.0",
+      "npm": "3.5.2"
+  },
   "author": "Brennan Erbeznik & Nathan Lomeli",
   "license": "MIT",
   "dependencies": {
