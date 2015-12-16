@@ -1,0 +1,19 @@
+.sprite_div {
+	vertical-align: top;
+	.sprite_frame {
+		display: table-cell;
+		vertical-align: middle;
+		&.small, img {
+			width: 19px;
+		}
+		&.icon_left {
+			padding-right: 6px;
+		}
+	}
+	.sprite_text {
+		display: table-cell;
+		vertical-align: middle;
+		color: #555459;
+		padding-left: 10px;
+	}
+}

@@ -1,0 +1,72 @@
+.summary {
+	margin-top: 10px;
+	margin-left: 0px;
+	.summary_header {
+		font-size: 22px;
+		padding-left: 10px;
+		margin-bottom: 20px;
+	}
+	.summary_table {
+		-webkit-font-smoothing: antialiased;
+		background: #FBFAF8;
+		// border-spacing: 0!important;
+		margin-bottom: 20px;
+		width: 95%;
+		border-collapse: separate;
+		border-radius: 3px;
+		border: 1px solid rgba(214,210,203,0.3);
+		td {
+			border-bottom: 1px solid rgba(214,210,203,0.3);
+			border-right: 1px solid rgba(214,210,203,0.3);
+			line-height: 1.35;
+			padding: 13px;
+			text-align: center;
+			font-size: 16.5px;
+			&.slot_item {
+				max-width: 70px;
+				white-space: nowrap;
+				text-overflow: ellipsis!important;
+				overflow: hidden!important;
+			}
+			&.row_label {
+				text-align: left;
+				font-size: 16.5px;
+				padding-right: 0px;
+				border-bottom: none!important;
+				min-width: 80px!important;
+				max-width: 90px!important;
+				text-shadow: none;
+				&.recall {
+					color: #1DB379;
+				}
+				&.mc {
+					color: #5FCBE0;
+				}
+				&.fb {
+					color: #EEB83D;
+				}
+				&.copy {
+					color: #E22963;
+				}
+			}
+			&.count, &.percent {
+				border-bottom: none!important;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+		}
+		tr {
+			td {
+				&:last-child {
+					border-right: none!important;
+				}
+			}
+		}
+		.copy_row {
+			td {
+				border-bottom: none!important;
+			}
+		}
+	}
+}
+

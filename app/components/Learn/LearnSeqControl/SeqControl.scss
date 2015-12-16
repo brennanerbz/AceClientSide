@@ -1,0 +1,117 @@
+.seq_control {
+	width: 160px;
+	position: absolute;
+	left: 0;
+	float: left;
+	background: #fff;
+	color: #383F45;
+	padding-top: 0.25rem;
+	padding-left: 1.2em;
+	padding-right: 1.2em;
+	height: 200px;
+	// border-left: 1px solid #fafafa!important;
+	border-color: #fff!important;
+	&.top-to-bottom {
+	    -webkit-border-image: 
+	      -webkit-gradient(linear, 0 0, 0 100%, from(#e8e8e8), to(rgba(0, 0, 0, .055))) 1 100%;
+	    -webkit-border-image: 
+	      -webkit-linear-gradient(#e8e8e8, rgba(0, 0, 0, .055)) 1 100%;
+	    -moz-border-image:
+	      -moz-linear-gradient(#e8e8e8, rgba(0, 0, 0, .055)) 1 100%;    
+	    -o-border-image:
+	      -o-linear-gradient(#e8e8e8, rgba(0, 0, 0, .055)) 1 100%;
+	    border-image:
+	      linear-gradient(to bottom, #e8e8e8, rgba(0, 0, 0, .055)) 1 100%;
+      	border-right: 1px solid;
+      	border-left: 1px solid #fff!important;
+	}
+	.round_divider {
+		// margin-right: -.125rem;
+		margin: -5px 0px 0 0em;
+		padding: 5rem 0px 0rem 0rem;
+		line-height: 1.2rem;
+		font-size: 1rem;
+		font-family: "Calibri";
+		color: #555459;
+		font-weight: 900;
+		text-align: center;
+		cursor: default;
+		clear: both;
+		position: relative;
+		width: 100%;
+		hr {
+			position: absolute;
+			border-top: 1px solid #f3f3f3;
+			top: 1.1rem;
+			right: 0px;
+			left: 0rem;
+			margin: 0;
+		}
+		.round_divider_label {
+			background:#fff;
+			padding: 0 1rem;
+			display: inline-block;
+			margin: 0 auto;
+			position: relative;			
+		}		
+	}	
+	.term_first, .label_term_first {
+		position: absolute;
+		left: 55px;
+		top: 95px;
+	}
+	.label_term_first {
+		left: 80px;
+		top: 92px;
+		font-size: 13.5px;
+	}
+	.start_over {
+		display: table;
+		margin: 0 auto;
+		text-align: center;
+		.startover_btn {
+			background: #FFF;
+			border: 1px solid #C7CACD;
+			color: #555549;
+			text-shadow: none;
+			&:hover {
+				box-shadow: none;
+				color: #32A2E6;
+				border: 1px solid #ccc;
+			}
+		}
+	}
+	/*---------Sign Posting --------*/
+	.sign_posts {
+		display: table;
+		margin: 0 auto;
+		width: 100%;
+		text-align: center;
+		.sign_posting_list {
+			margin: 0;
+			margin-top: 2px;
+			padding: 0;
+			padding-bottom: 10px;
+		}
+
+		.sign_posting_list li {
+			display: inline;
+			list-style-type: none;
+			&:not(:first-child) {
+				padding-left: 10px;
+			}
+		}
+		.sign_circle {
+			color: #D8D8D8;
+			opacity: 0.9;
+			font-size: 10px;
+		}
+
+		.complete_sign {
+			color: #54B6AC;
+		}
+		.active_sign {
+			color: #4186F5;
+		}
+	}	
+}

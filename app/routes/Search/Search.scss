@@ -1,0 +1,30 @@
+.search_page {
+	padding-top: 75px;
+	padding-left: 180px;
+	padding-bottom: 2em;
+	min-height: 425px;
+	letter-spacing: 0.01em;
+	// -webkit-font-smoothing: antialiased;
+	&.no_sidenav_container {
+		padding-left: 15px!important;
+	}
+	nav {
+		display: block;
+		&.search_tabs {
+			position: relative;
+			&:after, &:before {
+				display: table;
+			}
+			&:after {
+				clear: both;
+			}
+		}
+	}
+	.search_content {
+		margin-top: -1px;
+		border-top: 1px solid #bdc4c9;
+		&.searching {
+			opacity: 0.4;
+		}
+	}
+}

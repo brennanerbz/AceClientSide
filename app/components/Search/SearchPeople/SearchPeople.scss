@@ -1,0 +1,67 @@
+.search_people_container {
+	display: block;
+	position: relative;
+	margin-top: 1.5em;
+	h2 {
+		letter-spacing: 0.01em;
+		display: inline-block;
+		font-size: 14.5px;
+	    color: #888;
+		padding: 0;
+	}
+	.people_list {
+		margin-top: 1em;
+		.search_user_item {
+			display: table;
+			margin-bottom: 0px!important;
+			&:first-child {
+				margin-top: -20px;
+			}
+			.user_pic_container {
+				display: table-cell;
+				position: relative;
+				opacity: 0.9;
+				padding-right: 25px;
+				img {
+					&.user_pic {
+						cursor: pointer;
+						padding-top: 30px;
+						height: 85px;	
+						opacity: 0.6;
+					}
+				}				
+				&:hover {
+					opacity: 1;
+				}
+			}
+			.user_content {
+				display: table-cell;
+				position: relative;
+				margin-left: 10px;
+				border-bottom: 1px solid #f3f3f3;
+				padding-bottom: 10px;
+				width: 100%;
+				.username {
+					color: #006FC8;
+					font-size: 19px;
+					padding-bottom: 0;
+					margin-bottom: 0;
+					cursor: pointer;
+					&:hover { 
+						text-decoration: underline;
+					}
+				}				
+				.fullname {
+					color: #696969;
+					display: block;
+					font-size: 14px;
+					padding-bottom: 10px;
+				}
+				.user_stats {
+					color: #C0C0C0;
+					font-size: 13.5px;
+				}
+			}
+		}
+	}
+}

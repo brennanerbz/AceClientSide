@@ -1,0 +1,117 @@
+.learn_card {
+	background: #FFFFFF;	
+	.top_cue_container {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+		.correct_label {
+			padding-left: 10px;
+			color: #53AE65;
+			font-size: 22px;
+			margin-bottom: 10px;
+		}
+		p {
+			width: 85%;
+		}
+		.dont_know_btn {
+			position: absolute;
+			right: 0;
+			top: 0px;
+			font-size: 13.5px;
+		}
+	}
+	.card-header {
+		background-color: #fff;
+		border-bottom: 1px solid #FBD6D8;
+		height: 53px;
+	}
+	.help_divider {
+		// margin-right: -.125rem;
+		margin: 0rem -18px 0 -1.5rem;
+		padding: 0rem 18px 0.5rem 1.5rem;
+		line-height: 1.2rem;
+		font-size: 1rem;
+		font-family: "Calibri";
+		color: #555459;
+		font-weight: 900;
+		text-align: center;
+		cursor: default;
+		clear: both;
+		position: relative;
+		min-width: 460px;
+		hr {
+			position: absolute;
+			border-top: 1px solid #f3f3f3;
+			top: 1.1rem;
+			right: 18px;
+			left: 1.5rem;
+			margin: 0;
+		}
+		.help_divider_label {
+			background:#fff;
+			padding: 0 1rem;
+			display: inline-block;
+			margin: 0 auto;
+			position: relative;			
+		}		
+	}
+
+		
+
+	p {
+		&.cue {
+			
+			font-size: 20.5px!important;
+			padding-bottom: 5px;
+			margin-bottom: 0px;
+			margin-left: 10px;
+			&.fade_in {
+
+			}
+			.blurry_text {
+			   color: transparent;
+			   text-shadow: 0 0 20px rgba(0,0,0,0.10);
+			}
+		}
+	}
+	//*---------Practice Arrows--------*/
+	.arrow {
+		color: #85898D!important;
+		img {
+			height: 15px;
+			opacity: 0.8;
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+	.arrow_right {
+		margin-left: 15px;
+	}
+	 //*---------Global CSS to remove blue highlight when clicked--------*/
+
+	*::selection 
+	{
+	    background-color:transparent;
+	} 
+	*::-moz-selection
+	{
+	    background-color:transparent;
+	}
+	*
+	{        
+	    -webkit-user-select: none;
+	    -moz-user-select: -moz-none;
+	    /*IE10*/
+	    -ms-user-select: none;
+	    user-select: none;
+
+	    /*You just need this if you are only concerned with android and not desktop browsers.*/
+	    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	} 
+	
+}
+
+
+
+

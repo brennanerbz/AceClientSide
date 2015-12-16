@@ -1,0 +1,140 @@
+.quick_login_container {
+	z-index: 99999999;
+	background-image: linear-gradient(-180deg, #555 0%, transparent 100%);
+	.card {
+		z-index: 300;
+		position: absolute;
+		top: 50px;
+		right: 50px;
+		background: #fff;
+		box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+		width: 220px;
+		padding: 1em;
+		border: 1px solid #E8E8E8;
+		img {
+			&.arrow.up {
+				position: absolute;
+				top: -12px;
+				right: 15px;
+				opacity: 1;
+			}
+		}
+		.log_in_group {
+			button {
+				color: #fff;
+				width: 100%;
+				text-shadow: none;
+				font-weight: 400;
+				font-size: 13px!important;
+				letter-spacing: 0.02em;
+				position: relative;
+				padding-left: 23px;
+				margin-bottom: 10px;
+				height: 27px;
+				line-height: 27px;
+				&.google_button {
+					background-image: linear-gradient(-180deg, #F87A6E 0%, #DC4E41 100%);
+					border-radius: 3px;
+					img {
+						top: 6px;
+					}
+				}
+				&.facebook_button {
+					background-image: linear-gradient(-180deg, #6B88C9 0%, #35508A 100%);
+					border-radius: 3px;
+					padding-left: 40px;
+					padding-right: 17px;
+					img {
+						height: 18px;
+					    bottom: 1px;
+					    left: 13px;
+					    padding-right: 15px;
+					}
+				}
+				img {
+					height: 15px;
+					opacity: 1;
+					position: absolute;
+					left: 8px;
+					top: 8px;
+					border-right: 1px solid rgba(0, 0, 0, 0.10);
+					padding-right: 8px;
+				}
+			}
+			.day_divider {
+				margin: 0.2rem 0 0.4rem 0;
+				padding: 0;
+				min-width: 100%;
+				text-align: center;
+			    cursor: default;
+			    clear: both;
+			    position: relative;
+				hr {
+					position: absolute;
+				    border-top: 1px solid #e8e8e8;
+				    top: .75rem;
+				    right: 0;
+				    left: 0;
+				    margin: 0;
+				}
+				.day_divider_label {
+					background: #fff;
+				    padding: .05rem .75rem;
+				    display: inline-block;
+				    margin: 0 auto;
+				    position: relative;
+				    border-radius: .25rem;
+				    color: #ccc;
+				}
+			}
+		}
+		.log_in_form {
+			input[type="checkbox"] {
+				&:focus, &:active {
+					border: none;
+					outline: none;
+					box-shadow: none;
+				}
+			}
+			input, button {
+				font-size: 13px!important;
+				height: 27px;
+				line-height: 26px;
+			}
+			input {
+				width: 100%;
+				&:first-child {
+					margin-bottom: 8px;
+				}
+				&:nth-child(2) {
+					width: 55%;
+					display: table-cell;
+					margin-right: 8px;
+				}
+			}
+			button {
+				display: table-cell;
+				width: 40%;
+				margin-top: -3px;
+			}
+			span, a { 
+				font-size: 12.5px;
+			}
+			a {
+				cursor: pointer; 
+				.forgot {
+					color: #ccc;
+					text-decoration: underline;
+					margin-top: 5px;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+.set_info {
+	margin-top: -1px;
+	border-top: 1px solid #bdc4c9;
+	width: 90%;
+	margin-left: 10px;
+	.set_details {
+		margin-top: 25px;
+		.subject_list, .purpose, .visibility, .editability {
+			margin-bottom: 25px;
+		}
+		.purpose {
+			margin-top: 10px;
+		}
+		.info_header {
+			font-size: 15.5px;
+			font-weight: 700;
+			color: #555459;
+			letter-spacing: 0.01em;
+			margin-bottom: 0;
+		}
+		.info_purpose, .subject {
+			font-size: 16px;
+			color: #666;
+			-webkit-font-smoothing: antialiased;
+		}
+		.subject {
+			font-weight: 400;
+			&:not(.first) {
+				margin-left: 10px;
+			}
+		}
+		.created_details {
+			font-size: 15px;
+			color: #9E9EA6;
+			font-style: italic;
+		}
+	}
+	.info_icon {
+		height: 25px!important;
+		margin-left: -3px;
+	}
+}

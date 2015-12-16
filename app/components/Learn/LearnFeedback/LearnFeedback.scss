@@ -1,0 +1,30 @@
+.feedback {
+	border-top: 1px solid #F3F3F3;
+	padding-top: 20px;
+	margin-bottom: -15px;
+	position: relative;
+	span {
+		font-size: 16px;
+	}
+	.feedback_message {
+		margin-left: 15px;
+		display: inline-block;
+	}
+	.related_choice {
+		cursor: pointer;
+		color: #2B80B9;
+		opacity: 0.95;
+		&:hover {
+			opacity: 1;
+		}
+	}	
+}
+
+.supplemental_feedback {
+	position: absolute;
+	top: 18px;
+	.feedback_quotes {
+		height: 20px;
+		margin-left: -40px;
+	}
+}

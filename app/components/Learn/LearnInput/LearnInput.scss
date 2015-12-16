@@ -1,0 +1,66 @@
+
+.input_box {
+	display: inline-flex;
+	position: relative;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	form {
+		width: 100%;
+		border-radius: 4px;
+		margin-right: 10px;
+		input {
+			letter-spacing: 0.01em;
+			display: inline-block;
+			width: 100%;
+			border: 1px solid #d9d9d9;
+			border-radius: 3px;
+			height: 34px;
+			padding: 0 10px 1px 6.5px;
+			font-size: 17.5px;
+			&:focus {
+				border: 1px solid #498DFF;
+				box-shadow: 0 0 7px rgba(39, 128, 248, .15);
+				// outline: none;
+			}
+			&:active {
+				// outline: none;
+			}
+			&.correct_answer {
+				color: #57AD67;
+			}
+		}
+	}
+	.answer_btn {
+		background: #5596E7;
+		color: #fff;	
+		&:hover { 
+			box-shadow: inset 0 -2px rgba(0,0,0,.25);
+			border: none;			
+		}	
+	}		
+}
+
+// .form-control::-webkit-input-placeholder {
+//    color: #B2B2B2;
+// }
+
+// .form-control:-moz-placeholder { /* Firefox 18- */
+//    color: #B2B2B2;  
+// }
+
+// .form-control::-moz-placeholder {  /* Firefox 19+ */
+//    color: #B2B2B2;  
+// }
+
+// .form-control:-ms-input-placeholder {  
+//    color: #B2B2B2;  
+// }
+
+/* Rectangle 2319: */
+// background: #FFFFFF;
+// border: 1px solid #498DFF;
+
+// border-radius: 4px;
+
+

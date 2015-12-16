@@ -1,0 +1,89 @@
+.user_settings {
+	font-family: "Lato";
+	padding-bottom: 65px;
+	section {
+		&.setting {
+			clear: both;
+			margin: 0 auto;
+			margin: 5px 12px 0 0;
+			min-width: 550px;
+			max-width: 830px;
+			padding: 8px 0;
+			&:not(:first-child) {
+				margin-top: 40px;
+			}
+			header {
+				float: left;
+				display: block;
+				img {
+					height: 35px;
+					margin: 10px auto 0 auto;
+					text-align: center;
+					display: block;
+				}
+				h1 {
+					color: #666;
+					font-size: 16px;
+					margin: 16px auto 8px auto;
+					text-align: center;
+					max-width: 6em;
+					line-height: 1.35;
+				}
+			}
+			.box {
+				clear: none;
+				margin: 0 16px 0 130px;
+				overflow: hidden;
+				padding: 16px;
+				min-height: 100px;
+				background: #fff;
+				border-radius: 3px;
+				border: 1px solid #e8e8e8;
+				form {
+					clear: none;
+					width: 100%;
+					h2 {
+						color: #111;
+						font-size: 24px;
+						padding: 4px 8px;
+					}
+					button {
+						margin: 8px;
+					}
+					p {
+						color: #555;
+					    font-size: 14.5px;
+					    padding: 4px 8px;
+					    +label {
+					    	border-top: 1px solid #eee;
+				    	    margin-top: 16px;
+				    	    padding-top: 16px;
+					    }
+					}
+					label {
+						display: block;
+			    	    padding: 8px;
+			    	    padding-top: 0px;
+			    	    strong {
+			    	    	display: block;
+			    	    	font-size: 13px;
+			    	    	margin: 4px 0 0 0;
+			    	    }
+			    	    input {
+			    	    	&.text {
+			    	    		border-radius: 3px;
+			    	    		display: block;
+			    	    		font-size: 14px;
+			    	    		margin: 4px 0 0 0;
+			    	    		padding: 4px;
+			    	    		width: 220px;
+			    	    		max-width: 90%;
+			    	    	}
+			    	    }
+					}
+				}
+				
+			}
+		}
+	}
+}

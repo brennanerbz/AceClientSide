@@ -1,0 +1,77 @@
+.online_item {
+	padding-bottom: 0.75rem;
+	cursor: pointer;
+	&:hover {
+		.online_user_pic {
+			opacity: 1;
+		}
+	}
+}
+.activity_item_container{
+	padding: 0.5rem 0;
+}
+.activity_item {
+	display: table;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: normal;
+	color: #555459;
+	.link {
+		color: #0063C3;
+	}
+	.activity_action {
+		display: table-cell;
+		.activity_icon {
+			display: inline-block;
+			vertical-align: middle;
+			height: 18px;
+			opacity: 0.7;
+			-webkit-transition: opacity 0.05s ease-in-out;
+			transition: opacity 0.05s ease-in-out;			
+		}
+		.online_user_pic {
+			border-radius: 100%;
+			display: inline-block;
+			vertical-align: middle;
+			height: 21px;
+			opacity: 0.7;
+			-webkit-transition: opacity 0.05s ease-in-out;
+			transition: opacity 0.05s ease-in-out;						
+		}
+		.active {
+			opacity: 1;
+		}	
+	}	
+	.activity_message {
+		display: table-cell;
+		vertical-align: middle;
+		font-size: 14px;
+		line-height: 22px;
+		padding-left: 10px;
+		font-family: "Slack-Lato";
+		.message_content {			
+			opacity: 0.9;
+			width: 100%;
+		}
+		.activity_user {
+			width: 100%;
+			i.online_icon {	
+				color: #60D156;
+				opacity: 1;
+				position: absolute;
+				right: 25px;
+				&:before {
+					font-family: Arial;
+					content: '\25CF';
+				}
+			}
+		}
+		.message_datetime {
+			display: block;
+			opacity: 0.3;
+			font-size: 12px;
+			line-height: 1.9;
+		}
+	}
+}
+

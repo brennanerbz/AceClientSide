@@ -1,0 +1,53 @@
+.error_page {
+	text-align: center;
+	padding-top: 150px;
+	.error_card {
+		display: table;
+		position: relative;
+		margin: 0 auto;
+		width: 700px;
+		height: 200px;
+		border: 1px solid #E4E4E4;
+		border-radius: 0.35em;
+		padding: 2em;
+		padding-top: 2.5em;
+		.error_msg, .error_logo {
+			display: table-cell;
+		}
+		.error_msg {
+			position: relative;
+			text-align: left;
+			padding-top: 0!important;
+			margin-top: 0!important;
+			img {
+				position: absolute;
+				top: 0;
+				height: 35px;
+			}
+			p {
+				position: relative;
+				display: block;
+				padding: 0.25em 0;
+				&:first-child {
+					padding-top: 0.65em;
+				}
+				&:last-child {
+					padding-bottom: 0;
+				}
+			}
+		}
+		.error_logo {
+			img {
+				height: 150px;
+				position: relative;
+				display: inline-block;
+				right: 0;
+				margin-right: -20px!important;
+				padding-right: 0!important;
+				margin-bottom: 0;
+			}
+			padding-bottom: 0;
+			margin-bottom: 0;
+		}
+	}
+}

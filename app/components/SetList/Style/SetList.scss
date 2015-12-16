@@ -1,0 +1,107 @@
+.recent_view {
+	position: relative;
+	letter-spacing: 0.01em;
+	ul {
+		&.recent_view_sections {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			// overflow: auto;
+			zoom: 1;
+			li {
+				&.recent_section {
+					margin-bottom: 48px;
+					h1 {
+						&.recent_section_title {
+							font-size: 12px;
+							color: #aaa;
+							margin: 0;
+							padding-bottom: 9px;
+							border-bottom: 1px solid #e5e5e5;
+						}
+					}
+					ul {
+						&.set_list {
+							margin: 0;
+							padding: 0;
+							list-style-type: none;
+							li {
+								&.set_item {
+									margin-top: -1px;
+									border-top: 1px solid transparent;
+									border-bottom: 1px solid #e5e5e5;
+									padding: 12px 0;
+									cursor: pointer;
+									z-index: 1;
+									&:hover {
+										border-color: #E1F1FE;
+										background: #F4FAFF;
+									}
+									.set_list_item_wrapper {
+										display: table;
+										width: 100%;
+										min-height: 38px;
+										> * {
+											display: table-cell;
+										    vertical-align: middle;
+										}
+										.set_list_item_icon {
+											width: 53px;
+											.file_icon {
+												position: relative;
+												display: block;
+												width: 32px;
+												height: 32px;
+												margin: auto;
+												opacity: 0.45;
+												z-index: 1000;
+												img {
+													max-width: 100%;
+													width: 26px;
+												    height: 32px;
+												}
+											}
+										}
+										.set_list_item_details {
+											width: calc(100% - 208px);
+											.heading {
+												// -webkit-font-smoothing: antialiased;
+												color: #006FC8;
+												font-size: 16.5px;
+												line-height: 1.5;
+												text-overflow: ellipsis;
+												white-space: nowrap;
+												overflow: hidden;
+												&.draft {
+													color: #3d464d;
+													span {
+														&.draft_label {
+															font-size: 14.5px;
+															margin-left: 10px;
+															color: #DE4A32;
+														}
+													}
+												}
+											}
+											.sub_heading {
+												color: #aaa;
+												margin: 1px 0 0 0;
+												font-size: 11px;
+												line-height: 1.5;
+												-webkit-font-smoothing: antialiased;
+												text-overflow: ellipsis;
+												white-space: nowrap;
+												overflow: hidden;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+}

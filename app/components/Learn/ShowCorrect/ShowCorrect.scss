@@ -1,0 +1,22 @@
+.show_correct_container {
+	.show_correct {
+		background: #FBFAF8;
+		border: 1px solid #F5F5F5;
+		border-left: 1px solid #53AE7D;
+		border-radius: 0.15em;
+		padding: 5px;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		.correct_answer {
+			color: #000;
+			margin: 0;
+			margin-left: 5px;
+			font-size: 18px;
+		}	
+	}
+	.continue_btn {
+		margin-left: 10px;
+		font-size: 17.5px;	
+		cursor: pointer;
+	}
+}

@@ -1,0 +1,36 @@
+.diff_controls {
+	margin-top: 10px;
+    margin-bottom: 10px;
+    // margin-top: 10px;
+    /* padding-bottom: 11px; */
+    position: relative;
+    display: inline-flex;		
+	.toggle_btn {
+		margin-left: 10px;
+		width: 35px;
+		height: 35px;
+		border-radius: 6px;
+		border: 1px solid #C7CACD;
+		box-shadow: none;
+		position: relative;
+		color: #67686e;
+		opacity: 0.75;
+		display: inline-block;
+		cursor: pointer;
+		.diff_icon {
+			position: absolute;
+			height: 5px;
+			top: 13px;
+			left: 7.5px;
+			border-color: rgba(0,0,0,.1);
+		}		
+		&:hover {
+			opacity: 1;
+		}
+	}
+	.help_btn {
+		height: 35px;
+		line-height: 1em;
+	}
+}
+

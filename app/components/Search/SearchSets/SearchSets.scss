@@ -1,0 +1,72 @@
+.search_sets_container {
+	display: block;
+	position: relative;
+	width: 100%;
+	padding-top: 1.5em;
+	h2 {
+		letter-spacing: 0.01em;
+		display: inline-block;
+		font-size: 14.5px;
+	    color: #888;
+		padding: 0;
+	}
+	.sets_list {
+		width: 100%;
+		.search_set_item {
+			width: 100%!important;
+			border-top: 1px solid transparent;
+			border-bottom: 1px solid #e5e5e5;
+			padding: 8.5px 0;
+			cursor: pointer;
+			display: table;
+			.set_icon_container {
+				display: table-cell;
+				position: relative;
+				opacity: 0.5;
+				padding-right: 25px;
+				cursor: pointer;
+				img {
+					&.set_icon {
+						padding-top: 15px;
+						height: 50px;
+					}
+				}
+				&:hover {
+					opacity: 0.89;
+				}
+			}
+			.set_content {
+				display: table-cell;
+				position: relative;
+				margin-left: 10px;
+				width: 100%;
+				padding-bottom: 10px;
+				width: 540px!important;
+				.set_title {
+					color: #006FC8;
+					font-size: 18px;
+					padding-bottom: 0;
+					margin-bottom: 0;
+					cursor: pointer;
+					&:hover { 
+						text-decoration: underline;
+					}
+				}
+				.set_creator {
+					color: #aaa;
+					font-size: 14.5px;
+					margin-bottom: 0;
+					cursor: pointer;
+				}
+				.set_purpose {
+					color: #545454;
+					font-size: 14px;
+				}
+				.set_stats {
+					color: #888;
+					font-size: 13.5px;
+				}
+			}
+		}
+	}
+}

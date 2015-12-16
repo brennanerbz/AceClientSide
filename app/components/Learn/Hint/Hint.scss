@@ -1,0 +1,24 @@
+.hint_container {
+		background-color: #fff;
+		box-shadow: 0 1px 10px #e3e3e3;
+		padding:13px 18px 4px 20px !important;
+		border: 1px solid #e3e3e3;
+		border-radius: 0.35em;	
+		margin-top: 5px;
+	.hint {
+		margin-bottom: 5px;
+	}
+	.hint_source {
+		font-size: 15px!important;
+		color: #57AD68;
+		margin-bottom: 8px;
+	}
+	.hint_label {
+		font-size: 15px!important;
+		color: #ccc;
+		margin-top: -4px;
+		padding-bottom: 0!important;
+		margin-bottom: 3px!important;
+
+	}
+}

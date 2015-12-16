@@ -1,0 +1,112 @@
+.profile_view {
+	.profile_header {
+		display: table;
+		position: relative;
+		width: 100%;
+		.profile_pic_container {
+			float: left;
+			img { 
+				padding-top: 5px;
+				&.profile_pic_image {
+					display: inline-block;
+					height: 110px;
+					width: 110px;
+					border-radius: 999em;
+					padding: 0;
+					margin: 0 10px 2px 0;
+				}
+			}			
+		}
+		.profile_name_container {
+			display: block;
+			width: 100%;
+			margin-left: 150px;
+			.profile_username {
+				font-family: "Lato";
+				font-size: 1.8em;
+				font-weight: 700;
+				letter-spacing: 0.01em;
+				margin-bottom: 5px!important;
+			}
+			.profile_fullname {
+				opacity: 0.6;
+				font-size: 16px;
+			}
+		}
+	}
+	nav {
+		display: block;
+		&.profile_tabs {
+			position: relative;
+		    /* line-height: 38px; */
+		    margin-left: 150px;
+		    margin-top: -40px;
+			.tab_set {
+				a {
+					padding: 0.5pt 2.5pc 1px;
+					margin-bottom: -14px;
+				}
+			}		
+		}
+	}
+	.profile_setlist_container {
+		padding-top: 15px;
+		.no_sets {
+			margin: 70px auto;
+			max-width: 900px;
+			min-width: 700px;
+			padding-right: 3em;
+			img {
+				margin: 0 auto;
+				display: table;
+				height: 175px;
+			}
+			h1 {
+				margin-top: 25px;
+				text-align: center;
+				&.set_count {
+					font-size: 1.15rem;
+					font-weight: 400;
+					padding-bottom: 15px;
+					color: #666;
+				}
+			}
+		}
+	}
+	.profile_info {
+		width: 90%;
+		margin-left: 10px;
+		.section_header {
+			margin-top: 110px;
+		}
+		.profile_details {
+			padding-left: 10px;
+			.info_header {
+				font-size: 12px;
+				font-weight: 700;
+				color: #9E9EA6;
+				padding-bottom: 0;
+				margin-bottom: 0;
+			}
+			.info_child {
+				font-size: 14px;
+			}
+			.created_details {
+				padding-top: 10px;
+				font-size: 14px;
+				color: #9E9EA6;
+				font-style: italic;
+			}
+		}
+		.info_icon {
+			height: 25px!important;
+			margin-left: 2px;
+		}
+	}	
+}
+
+
+
+
+
+
