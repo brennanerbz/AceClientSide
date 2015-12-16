@@ -264,7 +264,7 @@ export default class SignUpForm extends Component {
 								&&
 								<div>
 									<h4 className="start_now">Ready to give it a try?</h4>
-									<p className="access">Ace is currently in private beta. Sign up below and we'll send you an email when access is available.</p>
+									<p className="access">Acuit is currently in private beta. Sign up below and we'll send you an email when access is available.</p>
 								</div>
 							}
 						</div>
