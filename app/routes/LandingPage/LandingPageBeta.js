@@ -72,7 +72,7 @@ export default class LandingPage extends Component {
 				<div style={{maxWidth: '405px'}} className="landing_page_container landing_beta">
 					<div className="marketing_copy">
 						<h1>Join the Ace beta</h1>
-						<p className="product_description">An app that automatically turns your files, text and links into interactive <span className="">study material.</span> </p>
+						<p className="product_description">Imagine the ability to instantly turn your files, text and links into interactive <span className="">study material. That's Ace.</span> </p>
 						<SignUpForm 
 							notify={(email) => {
 								::this.handleNotify(email)
