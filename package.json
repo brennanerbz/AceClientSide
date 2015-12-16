@@ -4,7 +4,7 @@
   "description": "First launch of landing page for beta on Heroku",
   "main": "app/index.js",
   "scripts": {
-    "postinstall": "webpack --config ./webpack-prod.config.js --progress --colors",
+    "postinstall": "webpack --optimize-minimize --optimize-occurence-order -p --config webpack.production.config.js",
     "start": "node server.js",
     "lint": "eslint app"
   },
