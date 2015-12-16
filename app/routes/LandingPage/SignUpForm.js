@@ -286,7 +286,7 @@ export default class SignUpForm extends Component {
 								{
 									!this.props.onWaitlist
 									? 'We\'ll let you know when an early version is ready for you.'
-									: 'You\'re on the waitlist! We\'ll contact you shortly.'
+									: 'We\'re happy you signed up! We\'ll contact you shortly.'
 								}</p>
 							</div>
 					}

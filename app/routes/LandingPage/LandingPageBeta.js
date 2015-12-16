@@ -71,8 +71,8 @@ export default class LandingPage extends Component {
 			<div className="landing_page">
 				<div style={{maxWidth: '405px'}} className="landing_page_container landing_beta">
 					<div className="marketing_copy">
-						<h1>Join the Ace beta</h1>
-						<p className="product_description">Imagine the ability to instantly turn your files, text and links into interactive <span className="">study material. That's Ace.</span> </p>
+						<h1>Join the Acuit beta</h1>
+						<p className="product_description">Imagine the ability to instantly turn your files, text and links into interactive <span className="">study material. That's Acuit.</span> </p>
 						<SignUpForm 
 							notify={(email) => {
 								::this.handleNotify(email)
@@ -91,7 +91,7 @@ export default class LandingPage extends Component {
 					</div>
 				</div>
 				<div className="sample_transform beta">
-					<p className="leading_question">Check out all you can do in Ace.</p>
+					<p className="leading_question">Check out all you can do in Acuit.</p>
 					<img src={carrot_down}/>
 				</div>
 				<div className="product_slides">
@@ -130,7 +130,7 @@ export default class LandingPage extends Component {
 									Never fail again
 								</h1>
 								<p className="product_description">
-									 Bombed the last assignment? Your future is safe. Sign up for Ace and <b>get grilled on your material with more examples, hints and step-by-step feedback</b>. Your progress will be stored, so you can learn about your mistakes and avoid them next time.
+									 Bombed the last assignment? Your future is safe. Sign up for Acuit and <b>get grilled on your material with more examples, hints and step-by-step feedback</b>. Your progress will be stored, so you can learn about your mistakes and avoid them next time.
 								</p>
 							</section>
 						</li>
@@ -155,12 +155,12 @@ export default class LandingPage extends Component {
 					lineHeight: '19px',
 					padding: '1.5em'
 				}} className="footer">	
-					<p>&copy; Ace 2015. The Apple logo is a trademark of it's respective owner.</p>
+					<p>&copy; Acuit 2015. The Apple logo is a trademark of it's respective owner.</p>
 				</div>
 				<div className="notify_wrapper">
 					<span id="notify" className={classnames({'hide': !this.state.show_notification}, "success")}>
 						<span className="notify_msg">
-							You've been added to the Ace waitlist using your <b>{this.state.email}</b> email.
+							You've been added to the Acuit waitlist using your <b>{this.state.email}</b> email.
 						</span>
 					</span>
 				</div>
