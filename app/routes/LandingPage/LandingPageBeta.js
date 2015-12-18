@@ -20,7 +20,24 @@ export default class LandingPage extends Component {
 		email: null,
 		on_waitlist: false, 
 		modal_is_open: false,
-		show_notification: false
+		show_notification: false,
+		features: [
+			{
+				heading: 'Drag, drop and sync',
+				body: 'Not just your notes, but all your files, videos, PDFs, and documents can be stored, and transformed. If you use services like YouTube or Wikipedia, just paste the link and the content will be instantly transformable too.',
+				img: require('../../assets/drag_drop_comp.png')
+			},
+			{
+				heading: 'Instantly turn your material into questions',
+				body: 'Sometimes you don\'t have the time to type it all out. When you\'re on the go you can instantly turn your documents into any format you need--from outlines, flashcards and tutorials to practice tests.',
+				img: require('../../assets/turn_into_questions.png')
+			},
+			{
+				heading: 'Practice until you\'re perfect',
+				body: 'Get grilled on your material with more examples, hints and step-by-step feedback. Your progress will be stored, so you can learn about your mistakes and avoid them next time.',
+				img: require('../../assets/practice_perfect.png')
+			},
+		]
 	}
 
 	setCookie(cname, cvalue, exdays) {
@@ -60,12 +77,67 @@ export default class LandingPage extends Component {
 		}, 6500)
 	}
 
+	renderFeatures() {
+		return this.state.features.map((feature, i) => {
+			const { heading, body, img } = feature,
+					tag = heading.split(' ').join('').slice(0, 5),
+					text = (
+						<div className="text">
+							<h2 className="header">
+								{heading}
+							</h2>
+							<p className="body">
+								{body}
+							</p>
+						</div>
+					),
+					media = (
+						<div className="media">
+							<h2 className="header header_responsive">{heading}</h2>
+							<img className={classnames("image_responsive" , {'big': i & 1})} src={img}/>
+							<div className="image_wrapper">
+								<img 
+									style={
+										{
+											marginTop: i == 0 ? '10px' : '0'
+										}
+									}
+									className={classnames("image" , {'big': i & 1})}
+									src={img}/>
+							</div>
+						</div>
+					)
+			return(
+				<article key={tag} className="content_row">
+					<article className={classnames("media_text", {'alt_order': !(i & 1) })}>
+						<div>
+							<div className="media_text_wrapper">
+								{
+									(i & 1)
+									? media
+									: text
+								}
+							</div>
+							<div className="media_text_wrapper">
+								{
+									(i & 1)
+									? text
+									: media
+								}
+							</div>
+						</div>										
+					</article>
+					<section className="expanding_section">
+					</section>
+				</article>
+			)
+		})	
+	}
+
 
 	render() {
-		const drag_drop = require('../../assets/drag_drop_comp.png'),
-			  practice_perfect = require('../../assets/practice_perfect.png'),
-			  hero_image_bg = require('../../assets/hero_background_img.png'),
-			  logo = require('../../assets/brand_logo.png');
+		const logo = require('../../assets/brand_logo.png'),
+			  hero_image_bg = require('../../assets/hero_background_img.png');
 		return(		
 			<div className="landing_page">
 				<div className="landing_page_container landing_beta">
@@ -81,7 +153,7 @@ export default class LandingPage extends Component {
 						<div className="page_content_panel">
 							<div className="page_intro_txt">
 								<h1>A study app that works for you</h1>
-								<h2>Be one of the first to try Snapdocs beta, an app that instantly turns your notes, files and links into practice questions.
+								<h2>Be one of the first to try Acuit beta, an app that instantly turns your notes, files and links into practice questions.
 								</h2>
 							</div>
 							<div className="page_register_form">
@@ -97,49 +169,16 @@ export default class LandingPage extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="product_slides">
-					<ul className="slide_list">
-						<li className="slide" id="drag_drop">
-							<section>
-								<img src={drag_drop}/>
-								<h1 className="header">
-									Drag, drop and sync
-								</h1>
-								<p className="product_description">
-									Not just your notes, or your problem set, but <b>all your files</b>, videos, PDFs, and documents can be stored, and transformed. <br/> <br/>  If you use services like YouTube or Wikipedia, just paste the link and the content will be <b>instantly transformable</b> too.
-								</p>
-							</section>
-						</li>
-						<li className="slide" id="share">
-							<section>
-								<h1 className="header">
-									Snapdocs turns your material into questions
-								</h1>
-								<p className="product_description"> 
-									Sometimes you don't have the time to type it all out. When you're on the go <b>you can instantly turn your documents into any interactive format you need</b>--from outlines, flashcards and tutorials to practice tests. 
-								</p>
-								<img style={{
-									top: '58px',
-								    right: '4.39rem',
-								    height: '250px',
-								    width: '250px'
-								}}  src=""/>
-							</section>
-						</li>
-						<li className="slide" id="learn">
-							<section>
-								<img src={practice_perfect}/>
-								<h1 className="header">
-									Practice until you're perfect
-								</h1>
-								<p className="product_description">
-									 Bombed the last assignment? Your future is safe. Sign up for Acuit and <b>get grilled on your material with more examples, hints and step-by-step feedback</b>. Your progress will be stored, so you can learn about your mistakes and avoid them next time.
-								</p>
-							</section>
-						</li>
-					</ul>
+				<div className="separator">
+					<hr/>
 				</div>
-				<div className="last_call">
+				<section className="features_container twelve_col">
+						{::this.renderFeatures()}
+				</section>
+				<div className="separator">
+					<hr/>
+				</div>
+				<div style={{ width: '380px'}} className="last_call">
 					<SignUpForm 
 						notify={(email) => {
 							::this.handleNotify(email)
