@@ -24,17 +24,17 @@ export default class LandingPage extends Component {
 		features: [
 			{
 				heading: 'Drag, drop and sync',
-				body: 'Not just your notes, but all your files, videos, PDFs, and documents can be stored, and transformed. If you use services like YouTube or Wikipedia, just paste the link and the content will be instantly transformable too.',
+				body: 'Not just your notes, but all your files, videos, PDFs, and documents can be stored, and transformed. If you use YouTube or Wikipedia, just paste the link and the content will be instantly available to transform too.',
 				img: require('../../assets/drag_drop_comp.png')
 			},
 			{
 				heading: 'Instantly turn your material into questions',
-				body: 'Sometimes you don\'t have the time to type it all out. When you\'re on the go you can instantly turn your documents into any format you need--from outlines, flashcards and tutorials to practice tests.',
+				body: 'Ace reads the material you upload, and automatically creates practice questions for you. That way, studying is faster than ever before and you can focus on what you want to.',
 				img: require('../../assets/turn_into_questions.png')
 			},
 			{
 				heading: 'Practice until you\'re perfect',
-				body: 'Get grilled on your material with more examples, hints and step-by-step feedback. Your progress will be stored, so you can learn about your mistakes and avoid them next time.',
+				body: 'Test yourself on your material with more automated examples, hints and step-by-step feedback. Your progress will be stored, so you can learn about your mistakes and avoid them next time.',
 				img: require('../../assets/practice_perfect.png')
 			},
 		]
