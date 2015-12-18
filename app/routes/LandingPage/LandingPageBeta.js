@@ -81,6 +81,8 @@ export default class LandingPage extends Component {
 		return this.state.features.map((feature, i) => {
 			const { heading, body, img } = feature,
 					tag = heading.split(' ').join('').slice(0, 5),
+					normal_height = Math.round($(window).height() / 3.9),
+					big_height = Math.round($(window).height() / 2.65),
 					text = (
 						<div className="text">
 							<h2 className="header">
@@ -94,7 +96,12 @@ export default class LandingPage extends Component {
 					media = (
 						<div className="media">
 							<h2 className="header header_responsive">{heading}</h2>
-							<img className={classnames("image_responsive" , {'big': i & 1})} src={img}/>
+							<img 
+								style={{
+									height: i & 1 ? big_height : normal_height
+								}}
+								className={classnames("image_responsive" , {'big': i & 1})} 
+								src={img}/>
 							<div className="image_wrapper">
 								<img 
 									style={
@@ -178,7 +185,7 @@ export default class LandingPage extends Component {
 				<div className="separator">
 					<hr/>
 				</div>
-				<div style={{ width: '380px'}} className="last_call">
+				<div className="last_call">
 					<SignUpForm 
 						notify={(email) => {
 							::this.handleNotify(email)
