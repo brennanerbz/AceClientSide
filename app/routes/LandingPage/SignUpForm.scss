@@ -1,11 +1,14 @@
 .sign_up_container {
 	.card {
-		padding: 2.5em;
-		max-width: 450px;
+		// padding: 2.5em;
+		// max-width: 450px;
 		font-family: "Lato";
 		&.beta {
 			padding-left: 0;
-			padding-top: 1em;
+			padding-top: 3.25em;
+			@media screen and (max-width: 720px) {
+				padding-top: 2.75em;
+			}
 		}
 		&.last_call {
 			padding-left: 1em;
@@ -64,7 +67,7 @@
 				&:not(:focus) {
 					border: 1px solid #D0D4D9!important;
 				}
-				box-shadow: none;
+				// box-shadow: none;
 				&#beta_email {
 					margin-bottom: 6px;
 				}

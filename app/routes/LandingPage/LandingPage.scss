@@ -20,13 +20,74 @@
 		padding-left: 0.1rem;
 		padding-right: 0.1rem;
 		&.landing_beta {
-			padding-bottom: 7em;
-			.marketing_copy {
-				top: 12.5em;
-				p {
-					&.product_description {
-						font-size: 18.5px;
-						max-width: 385px;
+			padding-bottom: 9em;
+			.page_promo_wrapper {
+				max-width: 900px;
+				text-align: center;
+				margin: 0 auto;
+				.page_header_logo_wrapper {
+					max-width: 210px;
+					margin: 0 auto 30px auto;
+					img {
+						width: 100%;
+					}
+				}
+				.main_img_wrapper {
+					margin: 0 auto;
+					max-width: 670px;
+					img {
+						width: 100%;
+						@media screen and (max-width: 720px) {
+							width: 102.5%;
+						}
+					}
+				}
+				.page_content_panel {
+					font-family: "Open Sans";
+					.page_intro_txt {
+						text-align: left;
+						display: inline-block;
+						width: 340px;
+						margin-right: 70px;
+						vertical-align: top;
+						@media screen and (max-width: 850px) {
+							margin-right: 15px;
+						}
+						@media screen and (max-width: 720px) {
+							text-align: center;
+							display: block;
+							margin: 0 auto;
+						}
+						h1 {
+							font-weight: 300;
+							font-size: 31px!important;
+							margin-bottom: 15px;
+							padding-bottom: 0;
+							line-height: 140%;
+							@media screen and (max-width: 720px) {
+								padding-top: 0.5em;
+							}
+						}
+						h2 {
+							font-weight: 300;
+							font-size: 18px!important;
+							line-height: 130%;
+							@media screen and (max-width: 720px) {
+								padding-top: 1em;
+							}
+						}
+					}
+					.page_register_form {
+						display: inline-block;
+						width: 350px;
+						margin: 15px 0 0 70px;
+						@media screen and (max-width: 850px) {
+							margin-left: 15px;
+						}
+						@media screen and (max-width: 720px) {
+							display: block;
+							margin: 0 auto;
+						}
 					}
 				}
 			}
@@ -76,16 +137,6 @@
 						padding-bottom: 2px;
 						border-bottom: 1px solid #e8e8e8;
 					}
-				}
-			}
-		}
-		.sign_up {
-			display: inline-block;
-			padding-left: 605px;
-			.sign_up_container {
-				margin-top: 4.5em;
-				&.beta {
-					margin-top: 9.5em;
 				}
 			}
 		}

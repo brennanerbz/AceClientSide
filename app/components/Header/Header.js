@@ -104,12 +104,17 @@ export default class Header extends Component {
 								// ? <span className="loading_line"></span>
 								: null
 							}
-							<div className="header_logo">
-								<Link className="site-logo" to="/">						
-										<img className={classnames("site_icon")} 
-											 src={logo} />
-								</Link>
-							</div>
+							{
+								false
+								&&
+								<div className="header_logo">
+									<Link className="site-logo" to="/">						
+											<img className={classnames("site_icon")} 
+												 src={logo} />
+									</Link>
+								</div>
+							}
+							
 							<div className="header_content">
 								{
 									root_path == '/' && !logged_in 

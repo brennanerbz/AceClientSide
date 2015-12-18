@@ -158,6 +158,7 @@ export default class SignUpForm extends Component {
 				email: null,
 				email_error: false
 			})
+			this.refs.beta_email.blur()
 		} else {
 			this.setState({
 				email_error: true
@@ -202,6 +203,7 @@ export default class SignUpForm extends Component {
 					style={{
 						height: '42px'
 					}}
+					ref="beta_email"
 					id="beta_email"
 					value={this.state.email}
 					onChange={(e) => {
@@ -224,7 +226,7 @@ export default class SignUpForm extends Component {
 				    {
 				    	this.props.onWaitlist
 				    	? "On waitlist"
-				    	: "Join Waitlist"
+				    	: "Sign up"
 				    }
 				</button>
 			</form>
@@ -285,8 +287,8 @@ export default class SignUpForm extends Component {
 								}}>
 								{
 									!this.props.onWaitlist
-									? 'We\'ll let you know when an early version is ready for you.'
-									: 'We\'re happy you signed up! We\'ll contact you shortly.'
+									? 'Sign up and we\'ll send you an invite shortly.'
+									: 'We\'re happy you signed up! We\'ll contact you ASAP.'
 								}</p>
 							</div>
 					}

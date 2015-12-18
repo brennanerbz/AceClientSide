@@ -60,47 +60,50 @@ export default class LandingPage extends Component {
 		}, 6500)
 	}
 
+
 	render() {
-		const file_formats = require('../../assets/file_formats.png'),
-			  transfer = require('../../assets/transfer.png'),
-			  sample_learn = require('../../assets/sample_learn.png'),
-			  carrot_down = require('../../assets/carrot_down_white.png'),
-			  hero_image = require('../../assets/hero_image.png'),
-			  study_formats = require('../../assets/study_formats.png');
+		const drag_drop = require('../../assets/drag_drop_comp.png'),
+			  practice_perfect = require('../../assets/practice_perfect.png'),
+			  hero_image_bg = require('../../assets/hero_background_img.png'),
+			  logo = require('../../assets/brand_logo.png');
 		return(		
 			<div className="landing_page">
-				<div style={{maxWidth: '405px'}} className="landing_page_container landing_beta">
-					<div className="marketing_copy">
-						<h1>Join the Acuit beta</h1>
-						<p className="product_description">Imagine the ability to instantly turn your files, text and links into interactive <span className="">study material. That's Acuit.</span> </p>
-						<SignUpForm 
-							notify={(email) => {
-								::this.handleNotify(email)
-							}}
-							beta={true} 
-							onWaitlist={this.state.on_waitlist}
-							shouldAutoFocus={!!this.state.on_waitlist} />
+				<div className="landing_page_container landing_beta">
+					<div className="page_promo_wrapper">
+						<div className="page_header_logo_wrapper">
+							<div className="page_header_logo">
+								<img style={{ width: '170px' }}  className="logo" src={logo}/>
+							</div>
+						</div>
+						<div className="main_img_wrapper">
+							<img className="hero_img" src={hero_image_bg}/>
+						</div>
+						<div className="page_content_panel">
+							<div className="page_intro_txt">
+								<h1>A study app that works for you</h1>
+								<h2>Be one of the first to try Snapdocs beta, an app that instantly turns your notes, files and links into practice questions.
+								</h2>
+							</div>
+							<div className="page_register_form">
+								<SignUpForm 
+									notify={(email) => {
+										::this.handleNotify(email)
+									}}
+									beta={true} 
+									onWaitlist={this.state.on_waitlist}
+									shouldAutoFocus={true }
+								/>
+							</div>
+						</div>
 					</div>
-					<div style={{
-						paddingLeft: '500px',
-						paddingTop: '4.5em'
-					}} className="sign_up hero">
-						<img style={{
-							height: '475px'
-						}} src={hero_image} className="hero_image"/>
-					</div>
-				</div>
-				<div className="sample_transform beta">
-					<p className="leading_question">Check out all you can do in Acuit.</p>
-					<img src={carrot_down}/>
 				</div>
 				<div className="product_slides">
 					<ul className="slide_list">
 						<li className="slide" id="drag_drop">
 							<section>
-								<img src={file_formats}/>
+								<img src={drag_drop}/>
 								<h1 className="header">
-									Drag, drop and transform
+									Drag, drop and sync
 								</h1>
 								<p className="product_description">
 									Not just your notes, or your problem set, but <b>all your files</b>, videos, PDFs, and documents can be stored, and transformed. <br/> <br/>  If you use services like YouTube or Wikipedia, just paste the link and the content will be <b>instantly transformable</b> too.
@@ -110,7 +113,7 @@ export default class LandingPage extends Component {
 						<li className="slide" id="share">
 							<section>
 								<h1 className="header">
-									Eliminate wasted time
+									Snapdocs turns your material into questions
 								</h1>
 								<p className="product_description"> 
 									Sometimes you don't have the time to type it all out. When you're on the go <b>you can instantly turn your documents into any interactive format you need</b>--from outlines, flashcards and tutorials to practice tests. 
@@ -120,14 +123,14 @@ export default class LandingPage extends Component {
 								    right: '4.39rem',
 								    height: '250px',
 								    width: '250px'
-								}}  src={transfer}/>
+								}}  src=""/>
 							</section>
 						</li>
 						<li className="slide" id="learn">
 							<section>
-								<img src={sample_learn}/>
+								<img src={practice_perfect}/>
 								<h1 className="header">
-									Never fail again
+									Practice until you're perfect
 								</h1>
 								<p className="product_description">
 									 Bombed the last assignment? Your future is safe. Sign up for Acuit and <b>get grilled on your material with more examples, hints and step-by-step feedback</b>. Your progress will be stored, so you can learn about your mistakes and avoid them next time.
