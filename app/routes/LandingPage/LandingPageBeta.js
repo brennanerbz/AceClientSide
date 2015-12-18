@@ -144,7 +144,7 @@ export default class LandingPage extends Component {
 					<div className="page_promo_wrapper">
 						<div className="page_header_logo_wrapper">
 							<div className="page_header_logo">
-								<img style={{ width: '170px' }}  className="logo" src={logo}/>
+								<img style={{ width: '150px' }}  className="logo" src={logo}/>
 							</div>
 						</div>
 						<div className="main_img_wrapper">

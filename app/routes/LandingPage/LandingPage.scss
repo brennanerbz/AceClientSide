@@ -10,7 +10,7 @@
 		max-width: 1020px !important;
 		width: 100%;
 		font-family: "Lato";
-		padding-top: 0.5em;
+		padding-top: 0em;
 		display: block;
 		position: relative;
 		padding-bottom: 9.5em;
@@ -23,6 +23,7 @@
 			padding-bottom: 8em;
 			@media screen and (max-width: 767px) {
 				padding-bottom: 4em;
+				margin-top: -50px;
 			}
 			.page_promo_wrapper {
 				max-width: 990px;
@@ -194,7 +195,7 @@
 		.content_row {
 			margin: 120px auto;
 			padding: 0;
-			overflow: hidden;
+			// overflow: hidden;
 			&:first-child {
 				@media screen and (max-width: 990px) {
 					margin-top: 0;
@@ -306,7 +307,7 @@
 								width: 100%;
 								max-width: 400px;
 								&.big {
-									height: 280px;
+									height: 265px;
 								}
 							}
 						}
