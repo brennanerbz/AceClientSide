@@ -24,17 +24,17 @@ export default class LandingPage extends Component {
 		features: [
 			{
 				heading: 'Drag, drop and sync',
-				body: 'Not just your notes, but all your files, videos, PDFs, and documents can be stored, and transformed. If you use YouTube or Wikipedia, just paste the link and the content will be instantly available to transform too.',
+				body: 'Not just your notes, but all your docs, YouTube videos, Wikipedia articles and PDFs can be kept in Acuit.',
 				img: require('../../assets/drag_drop_comp.png')
 			},
 			{
 				heading: 'Instantly turn your material into questions',
-				body: 'Ace reads the material you upload, and automatically creates practice questions for you. That way, studying is faster than ever before and you can focus on what you want to.',
+				body: 'Acuit reads the material you upload, and automatically creates practice questions. That way, studying is faster than ever before.',
 				img: require('../../assets/turn_into_questions.png')
 			},
 			{
 				heading: 'Practice until you\'re perfect',
-				body: 'Test yourself on your material with more automated examples, hints and step-by-step feedback. Your progress will be stored, so you can learn about your mistakes and avoid them next time.',
+				body: 'Test yourself on your material with more automated examples, hints and step-by-step feedback. As you progress, you\'ll learn how and why you made your mistakes so you can avoid them next time.',
 				img: require('../../assets/practice_perfect.png')
 			},
 		]
@@ -160,7 +160,7 @@ export default class LandingPage extends Component {
 						<div className="page_content_panel">
 							<div className="page_intro_txt">
 								<h1>A study app that works for you</h1>
-								<h2>Be one of the first to try Acuit beta, an app that instantly turns your notes, files and links into practice questions.
+								<h2>Be the first to try Acuit beta, an app that instantly turns your notes, files and links into practice questions.
 								</h2>
 							</div>
 							<div className="page_register_form">
