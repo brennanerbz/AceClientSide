@@ -11,13 +11,21 @@ const server = require('./api'),
 
 export function checkCookies() {
 	let user = {},
-		cks = []
+		cks = [],
+		fid_index,
+		token_index,
+		ck;
 	if(document.cookie.length > 0) {
 		if(document.cookie.slice(0, 5) == 'email') return;
 		const cookies = document.cookie.split(";")
 		for(var c = 0; c < cookies.length; c++) {
-			let fid_index = cookies.indexOf('__fid');
-			let token_index = cookies.indexOf('__ftkn');
+			ck = cookies[c]
+			if(ck.indexOf('__fid') !== -1) {
+				fid_index = c
+			}
+			if(ck.indexOf('__ftkn') !== -1) {
+				token_index = c
+			}
 		}
 		if(fid_index !== -1 && token_index !== -1) {
 			user['id'] = Number(cookies[fid_index].substr(6))
