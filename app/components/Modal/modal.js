@@ -12,7 +12,7 @@ export default class Modal extends Component {
 	state = {
 		purpose: null,
 		type: null,
-		git: null
+		git: 'try now'
 	}
 
 	componentWillReceiveProps(nextProps) {
