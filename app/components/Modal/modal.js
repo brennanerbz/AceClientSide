@@ -11,7 +11,8 @@ export default class Modal extends Component {
 
 	state = {
 		purpose: null,
-		type: null
+		type: null,
+		git: null
 	}
 
 	componentWillReceiveProps(nextProps) {
