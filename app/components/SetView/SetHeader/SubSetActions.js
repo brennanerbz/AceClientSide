@@ -57,7 +57,7 @@ export default class SubSetActions extends Component {
 
 
 	toggleModal(value) {
-		$('[data-toggle="tooltip"]').tooltip('hide')
+		// $('[data-toggle="tooltip"]').tooltip('hide')
 		this.setState({ 
 			modal_open: true,
 			modal_type: value
@@ -89,7 +89,13 @@ export default class SubSetActions extends Component {
 				<Modal  open={this.state.modal_open} 
 						closeModal={() => this.setState({ modal_open: false })}
 						type={this.state.modal_type}
-						{...this.props} />
+						set={this.props.set}
+						updateSet={this.props.updateSet}
+						createSet={this.props.createSet}
+						assignment={this.props.assignment}
+						deleteAssignment={this.props.deleteAssignment}
+						pushState={this.props.pushState}
+						/>
 
 				<button onClick={() => { 
 							this.setState({more_is_open: true})

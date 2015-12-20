@@ -178,10 +178,7 @@ export default class CreateSetPage extends Component {
 		return(
 			<DocumentTitle title="Create | Ace">
 				<div>
-					<Modal  open={this.state.login_prompt_modal} 
-							type={this.state.modal_type}
-							pushState={this.props.pushState}
-							/>
+					
 					<div className={classnames("CreateSetPage", {"rendered": rendered })}>
 					{
 						isLoadingSet

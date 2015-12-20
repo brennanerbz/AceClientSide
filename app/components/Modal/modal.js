@@ -12,14 +12,14 @@ export default class Modal extends Component {
 	state = {
 		purpose: null,
 		type: null,
-		git: 'try now'
+		dynamic: false
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if(!this.props.open && nextProps.open) {
 			if(this.props.type !== 'log_in' && nextProps.type !== null) {
-				$(this.refs.modal).modal()
 				this.setState({type: nextProps.type})
+				$(this.refs.modal).modal()
 			} else {
 				$(this.refs.modal).modal({
 					backdrop: 'static',
@@ -29,8 +29,7 @@ export default class Modal extends Component {
 		}
 		if(this.props.type !== 'log_in') {
 			$(this.refs.modal).on('hidden.bs.modal', (e) => {
-				this.setState({type: null})
-			  	this.props.closeModal()
+				this.setState({type: null, dynamic: false})
 			})
 		}
 	}
@@ -110,7 +109,13 @@ export default class Modal extends Component {
 								set.visibility == 'private'
 								&& "Only you can see it "
 							}
-							<a className="change_permission_link">
+							<a className="change_permission_link"
+							   onClick={() => {
+							   	this.setState({
+							   		type: 'settings',
+							   		dynamic: true
+							   	})
+							   }}>
 								Change permissions
 							</a>
 						</div>
@@ -268,7 +273,8 @@ export default class Modal extends Component {
 	}
 
 	render() {
-		const { type, assignment, pushState, deleteAssignment, set } = this.props;
+		const { assignment, pushState, deleteAssignment, set } = this.props,
+			  { type, dynamic } = this.state;
 		return(
 			<div ref="modal" 
 				 className="modal fade" 
@@ -300,6 +306,9 @@ export default class Modal extends Component {
 							type == 'settings'
 							? <button type="button"
 									  className="button primary button-small float_right"
+									  onClick={() => {
+									  	this.props.closeModal()
+									  }}
 									  data-dismiss="modal" >
 							  Done
 							  </button>
@@ -307,12 +316,12 @@ export default class Modal extends Component {
 						}
 						<h3 className={classnames("modal-title")} id="myModalLabel">
 							{
-								this.state.type !== null && this.state.type == 'share'
+								type !== null && type == 'share'
 								? `Share link to '${set.title}'`
 								: null
 							}
 							{
-								this.state.type !== null && this.state.type == 'settings'
+								type !== null && type == 'settings'
 								? `Settings` 
 								: null
 							}
@@ -341,12 +350,12 @@ export default class Modal extends Component {
 						</h3>
 					</div>
 					{
-						type == 'share'
+						type !== null && type == 'share'
 						? ::this.renderShareBody()
 						: null
 					}
 					{
-						type == 'settings'
+						type !== null && type == 'settings'
 						? ::this.renderSettingsBody(...this.props)
 						: null
 					}
@@ -373,20 +382,51 @@ export default class Modal extends Component {
 						<div className="modal-footer">
 							<button type="button" 
 									className="button outline" 
-									data-dismiss="modal">
+									onClick={() => {
+										if(dynamic) {
+											this.setState({
+												type: 'share',
+												dynamic: false
+											})
+										} else if (!dynamic) {
+											this.props.closeModal()
+										}
+									}}
+									data-dismiss={!dynamic && 'modal'}>
 									Cancel
 							</button>
 							{
-								type !== 'confirm'
+								type !== 'confirm' 
 								? 
 								<button type="button" 
 										className="button primary" 
 										data-dismiss='modal'
-										onClick={type == 'textarea' ? ::this.changePurpose : null}>
+										onClick={() => {
+											type == 'textarea' 
+											? ::this.changePurpose 
+											: null
+											type == 'settings' && dynamic 
+											? this.setState({
+												type: 'share',
+												dynamic: false
+											})
+											: null
+											this.props.closeModal()
+										}}>
 										{
 											type == 'textarea'
 											? 'Update purpose'
-											: 'Done'
+											: null
+										}
+										{
+											type == 'settings' && dynamic
+											? 'Save settings'
+											: null
+										}
+										{
+											type == 'share'
+											? 'Done'
+											: null
 										}
 								</button>
 								: null
@@ -396,7 +436,10 @@ export default class Modal extends Component {
 								?
 								<button className="button button-danger" 
 										data-dismiss="modal"
-										onClick={() => deleteAssignment(assignment.id, pushState)}>
+										onClick={() => { 
+											deleteAssignment(assignment.id, pushState)
+											this.props.closeModal()
+										}}>
 									Delete set
 								</button>
 								: null
