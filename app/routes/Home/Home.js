@@ -46,10 +46,8 @@ export default class Home extends Component {
 		clearTransferState()
 		let poll = this.checkChangedAssignments(this.state.assignments, assignments)
 		setTimeout(() => {
-			if(!poll) {
-				pollAssignments(Number(document.cookie.split(';')[0].substr(6)))
-			}
-		}, 150)
+			pollAssignments(user_id)
+		}, 500)
 	}	
 
 	checkChangedAssignments(arr1, arr2) {

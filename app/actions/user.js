@@ -10,12 +10,30 @@ const server = require('./api'),
 
 
 export function checkCookies() {
-	let user = {}
+	let user = {},
+		cks = [],
+		fid_index,
+		token_index,
+		ck;
 	if(document.cookie.length > 0) {
 		if(document.cookie.slice(0, 5) == 'email') return;
-		const cookies = document.cookie.split(";")
-		user['id'] = Number(cookies[0].substr(6))
-		user['token'] = cookies[1].substr(7)
+		let cookies = document.cookie.split(";")
+		console.log(cookies)
+		for(var c = 0; c < cookies.length; c++) {
+			ck = cookies[c]
+			if(ck.indexOf('__fid') !== -1) {
+				fid_index = c
+			}
+			if(ck.indexOf('__ftkn') !== -1) {
+				token_index = c
+			}
+		}
+		console.log(fid_index)
+		console.log(token_index)
+		if(fid_index !== undefined && fid_index !== -1 && token_index !== undefined && token_index !== -1) {
+			user['id'] = cookies[fid_index].substr(6).replace('=', '')
+			user['token'] = cookies[token_index].substr(8)
+		} 
 		return user;
 	}
 }
@@ -48,7 +66,8 @@ export function getToken(email, password, replaceState) {
 
 export function checkLoggedIn() {
 	let user = checkCookies()
-	if(user == undefined) {
+	console.log(user)
+	if(user == undefined || Object.keys(user).length == 0) {
 		noUserFound()
 		return { 
 			type: 'LOGIN_USER_FAILURE',
@@ -59,7 +78,7 @@ export function checkLoggedIn() {
 	else {
 		return { 
 			type: 'LOGIN_USER_SUCCESS',
-			user: null,
+			user: user,
 			logged_in: true 
 		};
 	}
@@ -82,6 +101,10 @@ export function fetchUser() {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_USER})
 		let user = checkCookies()
+		if(user == undefined || Object.keys(user).length == 0) {
+			dispatch({type: RECEIVE_USER_FAILURE})
+			return;
+		}
 		request
 		.get(`${api_url}/users/${user.id}`)
 		.end((err, res) => {
@@ -148,6 +171,8 @@ export function logOut(pushState) {
 		dispatch({type: LOGOUT_USER})
 		document.cookie = "__fid=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 		document.cookie = "__ftkn=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 		setTimeout(() => {
 			if(document.cookie.length == 0) {
 				dispatch({type: LOGOUT_USER_SUCCESS}) 
