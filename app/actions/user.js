@@ -20,8 +20,8 @@ export function checkCookies() {
 			let token_index = cookies.indexOf('__ftkn');
 		}
 		if(fid_index !== -1 && token_index !== -1) {
-			user['id'] = Number(cookies[0].substr(6))
-			user['token'] = cookies[1].substr(7)
+			user['id'] = Number(cookies[fid_index].substr(6))
+			user['token'] = cookies[token_index].substr(7)
 		} 
 		return user;
 	}
