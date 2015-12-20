@@ -69,7 +69,7 @@ export function checkLoggedIn() {
 	document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	let user = checkCookies()
 	console.log(user)
-	if(user == undefined) {
+	if(user == undefined || Object.keys(user).length == 0) {
 		noUserFound()
 		return { 
 			type: 'LOGIN_USER_FAILURE',
@@ -103,6 +103,10 @@ export function fetchUser() {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_USER})
 		let user = checkCookies()
+		if(user == undefined || Object.keys(user).length == 0) {
+			dispatch({type: RECEIVE_USER_FAILURE})
+			return;
+		}
 		request
 		.get(`${api_url}/users/${user.id}`)
 		.end((err, res) => {
