@@ -47,6 +47,8 @@ export function getToken(email, password, replaceState) {
 }
 
 export function checkLoggedIn() {
+	document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	let user = checkCookies()
 	if(user == undefined) {
 		noUserFound()
