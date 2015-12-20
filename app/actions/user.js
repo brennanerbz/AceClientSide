@@ -65,13 +65,9 @@ export function getToken(email, password, replaceState) {
 }
 
 export function checkLoggedIn() {
-	// document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-	// document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-	document.cookie = "_gat=1;";
-	document.cookie = "_ga=1.31;";
 	let user = checkCookies()
 	console.log(user)
-	if(user == undefined || Object.keys(user).length == 0) {
+	if(user == undefined || Object.keys(user).length == 0 || isNaN(user.id)) {
 		noUserFound()
 		return { 
 			type: 'LOGIN_USER_FAILURE',
