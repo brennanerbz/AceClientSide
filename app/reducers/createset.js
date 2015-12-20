@@ -170,7 +170,7 @@ export function createset(state = createState, action) {
       }
       let incoming_associations = action.associations,
           incoming_asc_order = action.associations_order,
-          next_order = incoming_associations[incoming_asc_order.slice(-1)[0]].order + 1 
+          next_order;
 
       if(incoming_asc_order.length == 0) {
         incoming_associations = state.associations
@@ -184,6 +184,9 @@ export function createset(state = createState, action) {
         }
         incoming_asc_order.push('asc_1')
         next_order = 2
+      }
+      if(incoming_asc_order.length > 1) {
+        next_order = incoming_associations[incoming_asc_order.slice(-1)[0]].order + 1 
       }
 
       return {

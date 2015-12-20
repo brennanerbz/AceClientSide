@@ -105,7 +105,7 @@ export default class Header extends Component {
 								: null
 							}
 							{
-								false
+								logged_in
 								&&
 								<div className="header_logo">
 									<Link className="site-logo" to="/">						

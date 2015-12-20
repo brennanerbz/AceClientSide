@@ -8,7 +8,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
 module.exports = {	
 	devtool: 'eval',
 	entry: [
-		'webpack-dev-server/client?http://127.0.0.1:8080',
+		'webpack-dev-server/client?http://localhost:3000',
 		'webpack/hot/only-dev-server',
 		path.resolve(__dirname, 'app/index.js')
 	],
@@ -48,11 +48,8 @@ module.exports = {
 				loaders: ["style", "css", "sass"]
 			},
 			{
-			    test: /.*\.(gif|png|jpe?g|svg)$/i,
-			    loaders: [
-			      'file?hash=sha512&digest=hex&name=[hash].[ext]',
-			      'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65", speed: 6}}'
-			    ]
+				test: /\.(png|jpg)$/, 
+				loader: 'url-loader?limit=10000'
 			},
 			{
 				test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
