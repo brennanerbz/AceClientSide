@@ -33,24 +33,6 @@
 			opacity: 1!important;
 		}
 	}
-	.saving_label {
-		position: fixed;
-		display: block;
-		top: 15px;
-		left: 280px;
-		z-index: 999!important;
-		padding-left: 1pc;
-		margin-right: 75pt;
-		border-left: 1px solid #e5e5e5;
-		font-size: .9rem;
-		letter-spacing: 0.02em;
-		line-height: 22px;
-		font-weight: 400;
-		color: #9e9ea6;
-		-webkit-transition: opacity .12s;
-		-moz-transition: opacity .12s;
-		transition: opacity .12s;
-	}
 }
 
 // /*Header*/
@@ -384,7 +366,7 @@ hr.CreateSetBreak {
     bottom: 10px;
 }
 .Button-set {
-	line-height: 44px;
+	// line-height: 44px;
 	display: inline-block;
 	white-space: nowrap;
 	vertical-align: top;
@@ -392,22 +374,7 @@ hr.CreateSetBreak {
 .Button-set .button {
 	vertical-align: middle;
 }
-// .button {
-// 	display: inline-block;
-// 	position: relative;
-// 	height: 37px;
-// 	padding: 0 16px;
-// 	color: rgba(0, 0, 0, 0.44);
-// 	background: transparent none repeat scroll 0% 0%;
-// 	border: 1px solid rgba(0, 0, 0, 0.15);
-// 	font-size: 14px;
-// 	text-align: center;
-// 	cursor: pointer;
-// 	border-radius: 999em;
-// 	letter-spacing: -0.01em;
-// 	font-weight: 300;
-// 	font-family: 'Roboto';
-// }
+
 
 
 .button-circle {

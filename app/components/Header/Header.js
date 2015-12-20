@@ -11,6 +11,7 @@ import SearchBox from './SearchBox/SearchBox';
 import Avatar from '../Avatar/Avatar';
 import Menu from '../Menu/Menu';
 import QuickLogIn from '../QuickLogIn/QuickLogIn';
+import SavingLabel from '../CreateSet/SavingLabel/SavingLabel';
 
 import * as useractions from '../../actions/user';
 
@@ -24,7 +25,15 @@ import * as useractions from '../../actions/user';
 	set_id: state.learn.current_sequence.set_id,
 	isFetching: state.sets.isFetchingAssignments,
 	fetchingLearn: state.learn.isFetchingLearn,
-	current_sequence: state.learn.current_sequence
+	current_sequence: state.learn.current_sequence,
+
+	/* create-set */
+	set: state.createset.set,
+	assignment: state.createset.assignment,
+	isLoadingSet: state.createset.isLoadingSet,
+	isCreatingSet: state.createset.isCreatingSet,
+	isUpdatingSet: state.createset.isUpdatingSet,
+	isCreatingItem: state.createset.isCreatingItem
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -116,6 +125,19 @@ export default class Header extends Component {
 							}
 							
 							<div className="header_content">
+								{
+									root_path == 'createset'
+									&& !this.props.isLoadingSet
+									&&
+									<SavingLabel 
+										assignment={this.props.assignment}
+										set={this.props.set}
+										isLoadingSet={this.props.isLoadingSet}
+										isCreatingSet={this.props.isCreatingSet}
+										isUpdatingSet={this.props.isUpdatingSet}
+										isCreatingItem={this.props.isCreatingItem}
+									/>
+								}
 								{
 									root_path == '/' && !logged_in 
 									&& <LandingLinks 

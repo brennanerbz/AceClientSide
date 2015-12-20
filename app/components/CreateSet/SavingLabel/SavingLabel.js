@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+require('./SavingLabel.scss');
 
 export default class SavingLabel extends Component {
 	static propTypes = {

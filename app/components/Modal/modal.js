@@ -10,13 +10,15 @@ export default class Modal extends Component {
 	}
 
 	state = {
-		purpose: null
+		purpose: null,
+		type: null
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if(!this.props.open && nextProps.open) {
-			if(this.props.type !== 'log_in') {
+			if(this.props.type !== 'log_in' && nextProps.type !== null) {
 				$(this.refs.modal).modal()
+				this.setState({type: nextProps.type})
 			} else {
 				$(this.refs.modal).modal({
 					backdrop: 'static',
@@ -26,6 +28,7 @@ export default class Modal extends Component {
 		}
 		if(this.props.type !== 'log_in') {
 			$(this.refs.modal).on('hidden.bs.modal', (e) => {
+				this.setState({type: null})
 			  	this.props.closeModal()
 			})
 		}
@@ -80,7 +83,6 @@ export default class Modal extends Component {
 		}
 		return (
 			<div className="modal-body share_link">
-				<a id="shared_link" className="remove_link">Remove link</a>
 				<h2>Link to set</h2>
 				<div className="copy_link_input_container"
 					 onClick={() => this.refs.share_link.select()}>
@@ -304,12 +306,12 @@ export default class Modal extends Component {
 						}
 						<h3 className={classnames("modal-title")} id="myModalLabel">
 							{
-								type == 'share'
+								this.state.type !== null && this.state.type == 'share'
 								? `Share link to '${set.title}'`
 								: null
 							}
 							{
-								type == 'settings'
+								this.state.type !== null && this.state.type == 'settings'
 								? `Settings` 
 								: null
 							}

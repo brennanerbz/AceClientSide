@@ -188,14 +188,6 @@ export default class CreateSetPage extends Component {
 						? <LoadingSpinner />
 						: 
 						<div>
-							<SavingLabel 
-								assignment={this.props.assignment}
-								set={this.props.set}
-								isLoadingSet={this.props.isLoadingSet}
-								isCreatingSet={this.props.isCreatingSet}
-								isUpdatingSet={this.props.isUpdatingSet}
-								isCreatingItem={this.props.isCreatingItem}
-							/>
 							<CreateSetHeader 
 								assignment={this.props.assignment}
 								associations={this.props.associations}

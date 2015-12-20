@@ -55,12 +55,6 @@ export default class SubSetActions extends Component {
 		more_is_open: false
 	}	
 
-	componentDidMount() {
-		// $('[data-toggle="tooltip"]').tooltip({
-		// 	delay: { show: 500, hide: 50},
-		// 	template: '<div class="tooltip bottom_tool" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-		// })
-	}
 
 	toggleModal(value) {
 		$('[data-toggle="tooltip"]').tooltip('hide')
@@ -87,7 +81,6 @@ export default class SubSetActions extends Component {
 						    }}
 					   		ref="share"				   
 					   		title="Share"
-					   		// data-toggle="tooltip" 
 					  		data-placement="bottom">
 						Share					
 					</button>
@@ -99,13 +92,11 @@ export default class SubSetActions extends Component {
 						{...this.props} />
 
 				<button onClick={() => { 
-							// $('[data-toggle="tooltip"]').tooltip('hide')
 							this.setState({more_is_open: true})
 						}} 
 						className={classnames('toggle_btn', {'active': this.state.more_is_open})}
 						ref="more"				   
 						title="More actions"
-						// data-toggle="tooltip" 
 						data-placement="bottom" >
 					<i className="">
 						<img style={_smallicon} className="share_icon" src={more}/>
@@ -121,7 +112,6 @@ export default class SubSetActions extends Component {
 						target_node={this.refs.more}
 						pushState={this.props.pushState}
 						hideDropdown={() => {
-							// $('[data-toggle="tooltip"]').tooltip('hide')
 							this.setState({
 								more_is_open: false
 							})
