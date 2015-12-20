@@ -17,7 +17,7 @@ export function checkCookies() {
 		ck;
 	if(document.cookie.length > 0) {
 		if(document.cookie.slice(0, 5) == 'email') return;
-		const cookies = document.cookie.split(";")
+		let cookies = document.cookie.split(";")
 		for(var c = 0; c < cookies.length; c++) {
 			ck = cookies[c]
 			if(ck.indexOf('__fid') !== -1) {
@@ -27,7 +27,7 @@ export function checkCookies() {
 				token_index = c
 			}
 		}
-		if(fid_index !== -1 && token_index !== -1) {
+		if(fid_index !== undefined && fid_index !== -1 && token_index !== undefined && token_index !== -1) {
 			user['id'] = Number(cookies[fid_index].substr(6))
 			user['token'] = cookies[token_index].substr(7)
 		} 
