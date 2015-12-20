@@ -33,6 +33,10 @@ export default class Modal extends Component {
 			})
 		}
 	}
+
+	shouldComponentUpdate(nextProps) {
+		return !(!nextProps.open && !this.props.open)
+	}
 	
 	componentDidUpdate(prevProps) {
 		if((!prevProps.open && this.props.open) ) {
