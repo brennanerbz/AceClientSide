@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 
 /* Load landing page or Home */
-import LandingPage from '../LandingPage/LandingPage';
+import LandingPage from '../LandingPage/LandingPageBeta';
 import Home from '../Home/Home';
 
 @connect(state => ({

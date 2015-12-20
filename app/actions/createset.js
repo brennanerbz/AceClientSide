@@ -663,6 +663,7 @@ export function createAssociation(item_id, index, ref) {
 				set_id: set_id,
 				order: order
 			})
+			console.log(association)
 			await axios.post(`${api_url}/associations/`, association)
 			.then(res => { 
 				association = res.data

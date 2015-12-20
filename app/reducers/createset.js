@@ -177,7 +177,7 @@ export function createset(state = createState, action) {
         incoming_asc_order = state.associations_order
         next_order = 1
       }
-      if(incoming_asc_order.length == 1) {
+      else if(incoming_asc_order.length == 1) {
         incoming_associations['asc_1'] = { 
           index: 1,
           order: 1
@@ -185,7 +185,7 @@ export function createset(state = createState, action) {
         incoming_asc_order.push('asc_1')
         next_order = 2
       }
-      if(incoming_asc_order.length > 1) {
+      else if(incoming_asc_order.length > 1) {
         next_order = incoming_associations[incoming_asc_order.slice(-1)[0]].order + 1 
       }
 
