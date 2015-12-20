@@ -31,7 +31,7 @@ export function checkCookies() {
 		console.log(fid_index)
 		console.log(token_index)
 		if(fid_index !== undefined && fid_index !== -1 && token_index !== undefined && token_index !== -1) {
-			user['id'] = Number(cookies[fid_index].substr(6))
+			user['id'] = cookies[fid_index].substr(6)
 			user['token'] = cookies[token_index].substr(8)
 		} 
 		return user;
@@ -67,7 +67,7 @@ export function getToken(email, password, replaceState) {
 export function checkLoggedIn() {
 	let user = checkCookies()
 	console.log(user)
-	if(user == undefined || Object.keys(user).length == 0 || isNaN(user.id)) {
+	if(user == undefined || Object.keys(user).length == 0) {
 		noUserFound()
 		return { 
 			type: 'LOGIN_USER_FAILURE',
