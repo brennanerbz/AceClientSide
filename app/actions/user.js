@@ -10,12 +10,19 @@ const server = require('./api'),
 
 
 export function checkCookies() {
-	let user = {}
+	let user = {},
+		cks = []
 	if(document.cookie.length > 0) {
 		if(document.cookie.slice(0, 5) == 'email') return;
 		const cookies = document.cookie.split(";")
-		user['id'] = Number(cookies[0].substr(6))
-		user['token'] = cookies[1].substr(7)
+		for(var c = 0; c < cookies.length; c++) {
+			let fid_index = cookies.indexOf('__fid');
+			let token_index = cookies.indexOf('__ftkn');
+		}
+		if(fid_index !== -1 && token_index !== -1) {
+			user['id'] = Number(cookies[0].substr(6))
+			user['token'] = cookies[1].substr(7)
+		} 
 		return user;
 	}
 }
