@@ -65,8 +65,10 @@ export function getToken(email, password, replaceState) {
 }
 
 export function checkLoggedIn() {
-	document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-	document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	// document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	// document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	document.cookie = "_gat=1;";
+	document.cookie = "_ga=1.31;";
 	let user = checkCookies()
 	console.log(user)
 	if(user == undefined || Object.keys(user).length == 0) {
@@ -173,6 +175,8 @@ export function logOut(pushState) {
 		dispatch({type: LOGOUT_USER})
 		document.cookie = "__fid=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 		document.cookie = "__ftkn=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 		setTimeout(() => {
 			if(document.cookie.length == 0) {
 				dispatch({type: LOGOUT_USER_SUCCESS}) 
