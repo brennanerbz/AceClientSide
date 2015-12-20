@@ -32,7 +32,7 @@ export function checkCookies() {
 		console.log(token_index)
 		if(fid_index !== undefined && fid_index !== -1 && token_index !== undefined && token_index !== -1) {
 			user['id'] = Number(cookies[fid_index].substr(6))
-			user['token'] = cookies[token_index].substr(7)
+			user['token'] = cookies[token_index].substr(8)
 		} 
 		return user;
 	}
@@ -68,6 +68,7 @@ export function checkLoggedIn() {
 	document.cookie = "_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	let user = checkCookies()
+	console.log(user)
 	if(user == undefined) {
 		noUserFound()
 		return { 
@@ -79,7 +80,7 @@ export function checkLoggedIn() {
 	else {
 		return { 
 			type: 'LOGIN_USER_SUCCESS',
-			user: null,
+			user: user,
 			logged_in: true 
 		};
 	}
