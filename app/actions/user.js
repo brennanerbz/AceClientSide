@@ -31,7 +31,7 @@ export function checkCookies() {
 		console.log(fid_index)
 		console.log(token_index)
 		if(fid_index !== undefined && fid_index !== -1 && token_index !== undefined && token_index !== -1) {
-			user['id'] = cookies[fid_index].substr(6)
+			user['id'] = cookies[fid_index].substr(6).replace('=', '')
 			user['token'] = cookies[token_index].substr(8)
 		} 
 		return user;
