@@ -101,17 +101,16 @@ export default class CreateSetPage extends Component {
 			if(Object.keys(params).length !== 0) { 
 				this.setState({ editing: true })
 				loadEditing(params.id, pushState)
-				// localStorage.removeItem('set_id')
 				return; 
 			} else {
 				let asgns = this.props.assignments
-				.filter(a => a.finalized == null)
+				.filter(a => a.set.finalized == null)
+				if(asgns == undefined || asgns.length === 0) return;
 				let sorted_asgns = asgns
 				.sort((a, b) => {
 					return new Date(b.creation) - new Date(a.creation)
 				})
 				let id = sorted_asgns[0].set_id
-				// let id = localStorage.getItem('set_id')
 				if(id !== undefined && id !== null) {
 					this.setState({ editing: true })
 					loadEditing(Number(id), pushState)

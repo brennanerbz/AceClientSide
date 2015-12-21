@@ -141,12 +141,6 @@ export default class Header extends Component {
 						}
 					} className={classnames("header_container", {"landing": root_path == '/' && !logged_in}, {'beta': true})}>				
 						<div className='header'>
-							{ 
-								isFetching || fetchingLearn
-								? null
-								// ? <span className="loading_line"></span>
-								: null
-							}
 							{
 								logged_in
 								&&

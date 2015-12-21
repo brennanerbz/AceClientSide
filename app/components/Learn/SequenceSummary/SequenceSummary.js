@@ -59,7 +59,7 @@ export default class SequenceSummary extends Component {
 					</tbody>
 				</table>
 				<button className="button primary"
-						onClick={() => this.props.newSequence(null)}>
+						onClick={() => this.props.handleNewSequence(true)}>
 						Start new sequence</button>
 			</div>
 		);

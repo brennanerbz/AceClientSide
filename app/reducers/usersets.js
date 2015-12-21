@@ -6,6 +6,10 @@ import {
 	RECEIVE_ASSINGMENTS_FAILURE
 } from '../actions/usersets';
 
+import {
+	CREATE_ASSIGNMENT_SUCCESS
+} from '../actions/createset';
+
 let init_state = {
 	isFetchingAssignments: false,
 	assignmentsFlag: false,
@@ -30,6 +34,26 @@ export default function sets(state = init_state, action) {
 				assignmentsFlag: false,
 				sets: sets_list,
 				assignments: action.assignments
+			}
+		case CREATE_ASSIGNMENT_SUCCESS:
+			let assignments = state.assignments,
+				assignment = action.assignment,
+				sets = [];
+			if(assignments.length === 0) {
+				assignments.push(assignment)
+			} else {
+				let add = assignments.forEach(a => {
+					if(a.id == assignment.id) return false
+				})
+				if(add) assignments.push(assignment)
+			}
+			assignments.forEach(a => {
+				sets.push(a.set)
+			})
+			return {
+				...state,
+				assignments: assignments,
+				sets: sets
 			}
 		case RECEIVE_ASSINGMENTS_FAILURE:
 		default:

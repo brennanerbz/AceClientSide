@@ -11,7 +11,7 @@ const server = require('./api'),
 export const REQUEST_LEARN = 'REQUEST_LEARN';
 export const RECEIVE_LEARN_SUCCESS = 'RECEIVE_LEARN_SUCCESS';
 export const RECEIVE_LEARN_FAILURE = 'RECEIVE_LEARN_FAILURE';
-export function fetchLearn(assignment_id, starred) {
+export function fetchLearn(set_id, starred) {
 	return (dispatch, getState) => {
 		dispatch(clearLearn())
 		dispatch({type: REQUEST_LEARN})
@@ -21,16 +21,35 @@ export function fetchLearn(assignment_id, starred) {
 			}, 250)
 			return;
 		}
-		try {
-			dispatch(fetchSequence(assignment_id, starred))
-			dispatch(fetchSlots())
+		let assignments = getState().sets.assignments,
+			assignment = assignments.filter(a => a.set_id == set_id)[0];
+		if(assignment !== undefined) {
+			dispatch(fetchSequence(assignment.id, starred))
+		} else {
+			dispatch(createAssignment(getState().user.user.id, set_id, starred))
 		}
-		catch (err) {
-			dispatch({
-				type: RECEIVE_LEARN_FAILURE,
-				error: Error(err)
-			})
+		dispatch(fetchSlots())
+	}
+}
+export const RECEIVE_ASSIGNMENT_SUCCESS = 'RECEIVE_ASSIGNMENT_SUCCESS';
+export const RECEIVE_ASSIGNMENT_FAILURE = 'RECEIVE_ASSIGNMENT_FAILURE'
+export function createAssignment(user_id, set_id, starred) {
+	return(dispatch, getState) => {
+		let assignment = {
+			set_id: set_id,
+			user_id: user_id
 		}
+		request
+		.post(`${api_url}/assignments/`)
+		.send(assignment)
+		.end((err, res) => {
+			if(res.ok) {
+				dispatch(fetchSequence(res.body.id, starred))
+				dispatch({type: RECEIVE_ASSIGNMENT_SUCCESS})
+			} else {
+				dispatch({type: RECEIVE_ASSIGNMENT_FAILURE})
+			}
+		})
 	}
 }
 
@@ -41,7 +60,7 @@ export function fetchLearn(assignment_id, starred) {
 export const REQUEST_SEQUENCE = 'REQUEST_SEQUENCE';
 export const RECEIVE_SEQUENCE_SUCCESS = 'RECEIVE_SEQUENCE_SUCCESS';
 export const RECEIVE_SEQUENCE_FAILURE = 'RECEIVE_SEQUENCE_FAILURE';
-export function fetchSequence(assignment_id, stared, mode) {
+export function fetchSequence(assignment_id, starred) {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_SEQUENCE})
 		let sequence;
@@ -50,7 +69,7 @@ export function fetchSequence(assignment_id, stared, mode) {
 		.end((err, res) => {
 			if(res.ok) {
 				sequence = res.body
-				if(sequence !== undefined && !sequence.completed) {
+				if(Object.keys(sequence).length !== 0 && !sequence.completed) {
 					dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
 				} else {
 					dispatch(newSequence(assignment_id, starred))
@@ -61,7 +80,7 @@ export function fetchSequence(assignment_id, stared, mode) {
 					error: Error(err)
 				}) 
 			}
-		})					
+		})	
 	}
 }
 
@@ -92,23 +111,16 @@ export function newSequence(assignment_id, starred) {
 		})
 		var sequence_id, sequence;
 		request
-		.post(`${api_url}/sequences/no-slots/`)
+		.post(`${api_url}/sequences/`)
 		.send(new_sequence)
 		.end(function (err, res) {
 			if(res.ok) {
 				sequence = res.body;
 				sequence_id = res.body.id	
 				dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
-				request
-				.post(`${api_url}/sequences/${sequence_id}/slots/`)
-				.timeout(150)
-				.end(function(err, res) {
-					if(res.ok) dispatch({type: CREATE_SLOTS_SUCCESS})
-					else console.log('timedout')
-				})
-				setTimeout(() => {
+				if(!getState().learn.isFetchingSlots) {
 					dispatch(fetchSlots())
-				}, 50)
+				}
 			} else {
 				dispatch({
 					type: NEW_SEQUENCE_FAILURE,

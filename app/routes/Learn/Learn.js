@@ -72,11 +72,9 @@ export default class Learn extends Component {
 	}
 
 	componentWillMount() {
-		const { assignments, params, location } = this.props,
-			  assignment = assignments.filter(a => a.set_id == params.id)[0],
-			  path = location.pathname.split('/')[3],
-			  starred = path !== undefined ? true : false;
-		fetchLearn(assignment.id, starred)
+		const { fetchLearn } = this.props;
+		let ri = this.handleNewSequence(false) /* Route info */
+		fetchLearn(ri.id, ri.starred)
 	}	
 
 	componentDidMount() {
@@ -89,6 +87,21 @@ export default class Learn extends Component {
 				this.setState({
 					inputvalue: ''
 				});
+			}
+		}
+	}
+
+	handleNewSequence(call) {
+		const { params, location, newSequence } = this.props,
+			  path = location.pathname.split('/')[3],
+			  starred = path !== undefined ? true : false;
+		if(call) {
+			let assignment = this.props.assignments.filter(a => a.set_id == params.id)[0]
+			newSequence(assignment.id, starred)
+		} else {
+			return {
+				id: params.id,
+				starred: starred
 			}
 		}
 	}
@@ -152,15 +165,15 @@ export default class Learn extends Component {
 			 	showCompletedSequence, 
 			 	isGrading,
 			 	isShowingCompletedRound,
-			 	newSequence,
 			 	nextRound,
+			 	params,
 			 	skipSlot } = this.props;
 		if(event.which && isShowingCompletedRound) {
 			nextRound()
 			return;
 		}
 		if(event.which && showCompletedSequence) {
-			newSequence(null)
+			this.handleNewSequence(true)
 			return;
 		}
 		if(event.which && showCorrect) {
@@ -261,7 +274,11 @@ export default class Learn extends Component {
 										}
 										{
 											showCompletedSequence && !isShowingCompletedRound
-											&&<SequenceSummary {...this.props}/>
+											&&
+											<SequenceSummary
+												handleNewSequence={::this.handleNewSequence}
+												{...this.props}
+											/>
 										}
 										{
 											!showCompletedSequence && isShowingCompletedRound 
