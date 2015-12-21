@@ -3,10 +3,9 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 import { reduxReactRouter, 
-		 routerStateReducer, 
-		 ReduxRouter } from 'redux-router';
+		 routerStateReducer } from 'redux-router';
 
-import createHistory from 'history/lib/createBrowserHistory';
+import { createHistory } from 'history';
 import routes from '../routes';
 import reducers from '../reducers';
 

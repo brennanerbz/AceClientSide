@@ -18,7 +18,6 @@ export function checkCookies() {
 	if(document.cookie.length > 0) {
 		if(document.cookie.slice(0, 5) == 'email') return;
 		let cookies = document.cookie.split(";")
-		console.log(cookies)
 		for(var c = 0; c < cookies.length; c++) {
 			ck = cookies[c]
 			if(ck.indexOf('__fid') !== -1) {
@@ -28,8 +27,6 @@ export function checkCookies() {
 				token_index = c
 			}
 		}
-		console.log(fid_index)
-		console.log(token_index)
 		if(fid_index !== undefined && fid_index !== -1 && token_index !== undefined && token_index !== -1) {
 			user['id'] = cookies[fid_index].substr(6).replace('=', '')
 			user['token'] = cookies[token_index].substr(8)
@@ -66,7 +63,6 @@ export function getToken(email, password, replaceState) {
 
 export function checkLoggedIn() {
 	let user = checkCookies()
-	console.log(user)
 	if(user == undefined || Object.keys(user).length == 0) {
 		noUserFound()
 		return { 

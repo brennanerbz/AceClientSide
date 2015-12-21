@@ -14,6 +14,12 @@ export function fetchSet(user_id, set_id, pushState) {
 	return async(dispatch, getState) => {
 		dispatch({type: FETCH_CREATE_SET})
 		try {
+			if(getState().user.isFetchingUser) {
+				setTimeout(() => {
+					dispatch(fetchSet(user_id, set_id, pushState))
+				}, 250)
+				return;
+			}
 			let set = {}, items = {}, associations = {}, associations_order = [],
 			assignment = await getState().sets.assignments.filter(assign => assign.set_id == set_id)[0]
 			await axios.get(`${api_url}/sets/${set_id}`).then(res => { 
@@ -35,7 +41,7 @@ export function fetchSet(user_id, set_id, pushState) {
 				}
 				associations_order.push(root_asc_name)
 			})
-			if(set.editability == 'creator' && set.creator_id !== user_id) {
+			if(set.editability == 'creator' && set.creator_id !== getState().user.user.id) {
 				pushState(null, '/')
 				return;
 			}
@@ -65,10 +71,6 @@ export function loadEditing(set_id, pushState) {
 			let transferState = getState().transfer,
 				user = getState().user.user,
 				set, assignment, items = {}, associations = {}, associations_order = [];
-			if(Object.keys(user).length == 0) { setTimeout(() => { 
-				dispatch(loadEditing(set_id, pushState))
-				return;
-			}, 250)}
 			if(transferState.set !== null && transferState.set !== undefined) {
 				if(transferState.set.id == set_id) {
 					set = transferState.set
