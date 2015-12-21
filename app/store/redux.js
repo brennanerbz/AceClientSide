@@ -5,7 +5,7 @@ import createLogger from 'redux-logger';
 import { reduxReactRouter, 
 		 routerStateReducer } from 'redux-router';
 
-import { createHistory } from 'history';
+import createHistory from 'history/lib/createBrowserHistory'
 import routes from '../routes';
 import reducers from '../reducers';
 

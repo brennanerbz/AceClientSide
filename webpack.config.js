@@ -5,7 +5,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
 	__DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 });
 
-module.exports = {	
+var config = {	
 	devtool: 'eval',
 	entry: [
 		'webpack-dev-server/client?http://localhost:3000',
@@ -54,10 +54,13 @@ module.exports = {
 			{
 				test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
 				loader : 'file-loader'
-			}
+			} 
 		]
 	},
 	resolve: {
 	  extensions: ['', '.js', '.json', '.jsx']
 	}
 }
+
+
+module.exports = config;

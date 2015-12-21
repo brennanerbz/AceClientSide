@@ -365,7 +365,7 @@ export default class Modal extends Component {
 					}
 					{
 						type == 'textarea'
-						? ::this.renderTextAreaBody(...this.props)
+						? ::this.renderTextAreaBody()
 						: null
 					}
 					{
@@ -385,29 +385,23 @@ export default class Modal extends Component {
 						? null
 						:
 						<div className="modal-footer">
+							<button type="button" 
+									className="button outline" 
+									onClick={() => {
+										if(dynamic) {
+											this.setState({
+												type: 'share',
+												dynamic: false
+											})
+										} else if (!dynamic) {
+											this.props.closeModal()
+										}
+									}}
+									data-dismiss={!dynamic && 'modal'}>
+									Cancel
+							</button>
 							{
-								type == 'settings' && !dynamic
-								? null
-								:
-								<button type="button" 
-										className="button outline" 
-										onClick={() => {
-											if(dynamic) {
-												this.setState({
-													type: 'share',
-													dynamic: false
-												})
-											} else if (!dynamic) {
-												this.props.closeModal()
-											}
-										}}
-										data-dismiss={!dynamic && 'modal'}>
-										Cancel
-								</button>
-							}
-							
-							{
-								(type == 'confirm') || (type == 'settings' && !dynamic)
+								type == 'confirm'
 								? null
 								:
 								<button type="button" 
@@ -415,7 +409,7 @@ export default class Modal extends Component {
 										data-dismiss='modal'
 										onClick={() => {
 											type == 'textarea' 
-											? ::this.changePurpose 
+											? ::this.changePurpose()
 											: null
 											type == 'settings' && dynamic 
 											? this.setState({

@@ -70,9 +70,7 @@ import Modal from '../../components/Modal/modal';
 	})
 )
 export default class CreateSetPage extends Component {
-	constructor(props, context) {
-		super(props, context)
-	}
+	
 	static propTypes = {
 		
 	}
@@ -103,15 +101,15 @@ export default class CreateSetPage extends Component {
 			if(Object.keys(params).length !== 0) { 
 				this.setState({ editing: true })
 				loadEditing(params.id, pushState)
-				localStorage.removeItem('set_id')
+				// localStorage.removeItem('set_id')
 				return; 
 			} else {
-				let id = localStorage.getItem('set_id')
-				if(id !== undefined && id !== null) {
-					this.setState({ editing: true })
-					loadEditing(Number(id), pushState)
-					pushState(null, `/createset/${id}`)
-				}
+				// let id = localStorage.getItem('set_id')
+				// if(id !== undefined && id !== null) {
+				// 	this.setState({ editing: true })
+				// 	loadEditing(Number(id), pushState)
+				// 	pushState(null, `/createset/${id}`)
+				// }
 			}
 		}
 	}
@@ -131,11 +129,11 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log('nextProps set', '\n', nextProps.set)
+		// console.log('nextProps set', '\n', nextProps.set)
 		if(this.props.set == null && nextProps.set !== null) {
-			if(localStorage.getItem('set_id') == null && !this.state.editing) {
-				localStorage.setItem('set_id', nextProps.set.id)
-			}
+			// if(localStorage.getItem('set_id') == null && !this.state.editing) {
+			// 	localStorage.setItem('set_id', nextProps.set.id)
+			// }
 		}
 	}
 
@@ -178,7 +176,7 @@ export default class CreateSetPage extends Component {
 				return;
 			}
 		}
-		if(set !== null && typeof set !== 'function') {
+		if(set !== null) {
             if(associations !== null && Object.keys(associations).length > 1) reorder()
             if(assignment == null && !deleted) {
             	updateSet(set, {name: 'finalized', prop: null})

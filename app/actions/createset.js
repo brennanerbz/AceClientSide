@@ -516,9 +516,9 @@ export const CREATE_ITEM = 'CREATE_ITEM';
 export const CREATE_ITEM_SUCCESS = 'CREATE_ITEM_SUCCESS';
 export const CREATE_ITEM_FAILURE = 'CREATE_ITEM_FAILURE';
 export function createItem(index, ...args) {
-	return async(dispatch, getState) => {
+	return (dispatch, getState) => {
 		dispatch({type: CREATE_ITEM})
-		try {                                                                                                            
+		try {                                                                                                      
 			let item = Object.assign({}, _itemtemplate),
 				user = getState().user.user,
 				set  = getState().createset.set,
@@ -527,7 +527,7 @@ export function createItem(index, ...args) {
 				ref;
 
 			if(set == undefined) {
-				await dispatch(createSet())
+				dispatch(createSet())
 				setTimeout(() => {
 					dispatch(createItem(index, ...args))
 				}, 5)
@@ -562,21 +562,22 @@ export function createItem(index, ...args) {
 				}
 			}
 			item.creator_id = user.id
-			await axios.post(`${api_url}/items/`, item)
-			.then(res => item = res.data)
-			if(Object.keys(association).length == 0) {
-				await dispatch({type: CREATE_ITEM_SUCCESS, item, index})
-				await dispatch(createAssociation(item.id, index, ref))
-			} else {
-				await dispatch({type: CREATE_ITEM_SUCCESS, item, index})
-				await dispatch(updateAssociation(association.association, 
-												ref,
-												{name: 'item', prop: item}, 
-												{name: 'item_id', prop: item.id}))
-			}
-			// if(item.target !== null) {
-			// 	await dispatch(getDefSuggestions(null, item.target))
-			// }
+			request
+			.post(`${api_url}/items/`)
+			.send(item)
+			.end((err, res) => {
+				item = res.body;
+				if(Object.keys(association).length == 0) {
+					dispatch({type: CREATE_ITEM_SUCCESS, item, index})
+					dispatch(createAssociation(item.id, index, ref))
+				} else {
+					dispatch({type: CREATE_ITEM_SUCCESS, item, index})
+					dispatch(updateAssociation(association.association, 
+													ref,
+													{name: 'item', prop: item}, 
+													{name: 'item_id', prop: item.id}))
+				}
+			})
 		} catch(err) {
 			dispatch({
 				type: CREATE_ITEM_FAILURE,
@@ -659,13 +660,11 @@ export function createAssociation(item_id, index, ref) {
 			let set_id = getState().createset.set.id,
 				order = getState().createset.order,
 				association;
-			
 			association = Object.assign({..._associationtemplate}, {
 				item_id: item_id,
 				set_id: set_id,
 				order: order
 			})
-			console.log(association)
 			await axios.post(`${api_url}/associations/`, association)
 			.then(res => { 
 				association = res.data
