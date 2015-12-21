@@ -34,8 +34,7 @@ var _icon = {
 var _smallicon = {
 	position: 'absolute',
 	display: 'inline-block',
-	height: '5.5px',
-	top: '13px',
+	top: '11px',
 	left: '7px',
 	opacity: '0.8'
 }
@@ -104,9 +103,7 @@ export default class SubSetActions extends Component {
 						ref="more"				   
 						title="More actions"
 						data-placement="bottom" >
-					<i className="">
-						<img style={_smallicon} className="share_icon" src={more}/>
-					</i>					
+						<img  style={{height: '3.95px'}} className="share_icon" src={more}/>
 				</button>
 
 				{

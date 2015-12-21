@@ -54,6 +54,7 @@ const routes = (
         <Route path="import" component={Import}/>
 
         <Route path="learn/:id" component={Learn}/>
+        <Route path="learn/:id/starred" component={Learn}/>
 
         <Route path="search/concepts/:query" component={Search}/>
         <Route path="search/sets/:query" component={Search}/>

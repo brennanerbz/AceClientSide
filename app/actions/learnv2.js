@@ -11,12 +11,18 @@ const server = require('./api'),
 export const REQUEST_LEARN = 'REQUEST_LEARN';
 export const RECEIVE_LEARN_SUCCESS = 'RECEIVE_LEARN_SUCCESS';
 export const RECEIVE_LEARN_FAILURE = 'RECEIVE_LEARN_FAILURE';
-export function fetchLearn(user_id, set_id, assignment_id) {
+export function fetchLearn(assignment_id, starred) {
 	return (dispatch, getState) => {
 		dispatch(clearLearn())
 		dispatch({type: REQUEST_LEARN})
+		if(getState().user.isFetchingUser || getState().sets.isFetchingAssignments) {
+			setTimeout(() => {
+				dispatch(fetchLearn(assignment_id, starred))
+			}, 250)
+			return;
+		}
 		try {
-			dispatch(fetchSequence(user_id, set_id, assignment_id))
+			dispatch(fetchSequence(assignment_id, starred))
 			dispatch(fetchSlots())
 		}
 		catch (err) {
@@ -35,40 +41,27 @@ export function fetchLearn(user_id, set_id, assignment_id) {
 export const REQUEST_SEQUENCE = 'REQUEST_SEQUENCE';
 export const RECEIVE_SEQUENCE_SUCCESS = 'RECEIVE_SEQUENCE_SUCCESS';
 export const RECEIVE_SEQUENCE_FAILURE = 'RECEIVE_SEQUENCE_FAILURE';
-function requestSequence() {		
-	return {
-		type: REQUEST_SEQUENCE
-	}
-}
-export function fetchSequence(user_id, set_id, assignment_id, mode) {
+export function fetchSequence(assignment_id, stared, mode) {
 	return (dispatch, getState) => {
-		dispatch(requestSequence())
-		let sequences, sequence;
-		axios.get(`${api_url}/sequences/?user_id=${Number(user_id)}&set_id=${Number(set_id)}`)
-		.then(res => {
-			sequences = res.data.sequences
-			if(sequences !== undefined) {
-				let sorted_sequences = sequences.sort((s1, s2) => {
-					return new Date(s2.creation) - new Date(s1.creation)
-				});
-				sequence = sorted_sequences[0]
+		dispatch({type: REQUEST_SEQUENCE})
+		let sequence;
+		request
+		.get(`${api_url}/assignments/${assignment_id}/sequences/latest?stars=${starred}`)
+		.end((err, res) => {
+			if(res.ok) {
+				sequence = res.body
 				if(sequence !== undefined && !sequence.completed) {
 					dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
 				} else {
-					sequence = { type: 'noprior' }
-					dispatch(newSequence(sequence, user_id, set_id, assignment_id))
+					dispatch(newSequence(assignment_id, starred))
 				}
 			} else {
-				sequence = { type: 'noprior' }
-				dispatch(newSequence(sequence, user_id, set_id, assignment_id))
+				dispatch({
+					type: RECEIVE_SEQUENCE_FAILURE,
+					error: Error(err)
+				}) 
 			}
-		}).catch(err => {
-			dispatch({
-				type: RECEIVE_SEQUENCE_FAILURE,
-				error: Error(err)
-			}) 
-		})
-					
+		})					
 	}
 }
 
@@ -78,9 +71,8 @@ export function fetchSequence(user_id, set_id, assignment_id, mode) {
 */
 export const NEW_SEQUENCE_FAILURE = 'NEW_SEQUENCE_FAILURE';
 var _default_sequence = {
-	user_id: null,
-	set_id: null,
 	assignment_id: null,
+	stars: false,
 	mode: 'learn',
 	format: 'recall',
 	timing: 'off',
@@ -91,32 +83,13 @@ var _default_sequence = {
 	reverse_cue: false,
 	difficulty_chosen_by_user: false
 }
-export function newSequence(prevsequence, user_id, set_id, assignment_id) {
+export function newSequence(assignment_id, starred) {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_LEARN})
-		let new_sequence,
-			current_sequence = getState().learn.current_sequence;
-		if(prevsequence == null) {
-			new_sequence = Object.assign({..._default_sequence}, {
-				user_id: current_sequence.user_id,
-				set_id: current_sequence.set_id,
-				assignment_id: current_sequence.assignment_id !== undefined ? current_sequence.assignment_id : null
-			})
-		} else {
-			if(prevsequence.type == 'noprior') {
-				new_sequence = Object.assign({..._default_sequence}, {
-					user_id: user_id,
-					set_id: set_id,
-					assignment_id: assignment_id !== undefined ? assignment_id : null
-				})
-			} else if(prevsequence.type == 'completed') {
-				new_sequence = Object.assign({..._default_sequence}, {
-					user_id: prevsequence.user_id,
-					set_id: prevsequence.set_id,
-					assignment_id: prevsequence.assignment_id !== undefined ? prevsequence.assignment_id : null
-				})
-			} 
-		}
+		let new_sequence = Object.assign({..._default_sequence}, {
+			assignment_id: assignment_id,
+			stars: starred
+		})
 		var sequence_id, sequence;
 		request
 		.post(`${api_url}/sequences/no-slots/`)

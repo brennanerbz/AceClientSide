@@ -33,7 +33,8 @@ import * as useractions from '../../actions/user';
 	isLoadingSet: state.createset.isLoadingSet,
 	isCreatingSet: state.createset.isCreatingSet,
 	isUpdatingSet: state.createset.isUpdatingSet,
-	isCreatingItem: state.createset.isCreatingItem
+	isCreatingItem: state.createset.isCreatingItem,
+	isUpdatingItem: state.createset.isUpdatingItem
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -50,7 +51,29 @@ export default class Header extends Component {
 	state = {
 		isSetMenuOpen: false,
 		choices: ['Go to set', 'Edit', 'Privacy settings', 'Mode'],
-		popover: false
+		popover: false,
+		show_border: false
+	}
+
+	componentDidMount() {
+		window.addEventListener('scroll', ::this.handleScroll)
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', ::this.handleScroll)
+	}
+
+	handleScroll() {
+		const node = document.body;
+		if(node.scrollTop > 50) {
+			this.setState({
+				show_border: true
+			})
+		} else {
+			this.setState({
+				show_border: false
+			})
+		}
 	}
 
 	openSetMenu() {
@@ -102,10 +125,21 @@ export default class Header extends Component {
 				? null
 				:
 				<div className={classnames("header_positioner beta", 
-					{'no_border': (root_path == 'createset' 
+					{
+					'no_border': (root_path == 'createset' 
 					|| root_path == 'import'
-					|| root_path == '/' && !logged_in)  })}>
-					<div className={classnames("header_container", {"landing": root_path == '/' && !logged_in}, {'beta': true})}>				
+					|| root_path == '/' && !logged_in)
+					},
+					{
+					'create_border': this.state.show_border && root_path == 'createset'
+					}
+					)}>
+					<div style={						
+						{
+							paddingTop: this.state.show_border && root_path == 'createset' && '8px',
+							paddingBottom: this.state.show_border && root_path == 'createset' && '16px'
+						}
+					} className={classnames("header_container", {"landing": root_path == '/' && !logged_in}, {'beta': true})}>				
 						<div className='header'>
 							{ 
 								isFetching || fetchingLearn
@@ -136,6 +170,7 @@ export default class Header extends Component {
 										isCreatingSet={this.props.isCreatingSet}
 										isUpdatingSet={this.props.isUpdatingSet}
 										isCreatingItem={this.props.isCreatingItem}
+										isUpdatingItem={this.props.isUpdatingItem}
 									/>
 								}
 								{

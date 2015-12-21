@@ -14,6 +14,9 @@
     &.no_border {
         border: none!important;
     }
+    &.create_border {
+        box-shadow: 0 1px rgba(0,0,0,.1),0 2px rgba(0,0,0,.01),0 3px rgba(0,0,0,.01);
+    }
     .header_container {
         z-index: 300;
         background: #fff;

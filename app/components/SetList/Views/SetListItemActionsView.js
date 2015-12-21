@@ -16,7 +16,12 @@ export default class SetListItemActionsView extends Component {
 				{
 					!this.props.mouseIsOver
 					&&
-					<img style={{height: '5.5px'}} className="placeholder" src={more}/>
+					<img style={
+						{
+							height: '3.75px',
+							opacity: '0.5'
+						}
+					} className="placeholder" src={more}/>
 				}
 				{
 					this.props.mouseIsOver
@@ -43,7 +48,7 @@ export default class SetListItemActionsView extends Component {
 							vertical_displacement={0}
 							horizontal_displacement={0}
 						>
-							<img style={{height: '5.5px'}}  className="" src={more}/>
+							<img style={{height: '3.75px'}}  className="" src={more}/>
 						</button>
 					</div>
 				}

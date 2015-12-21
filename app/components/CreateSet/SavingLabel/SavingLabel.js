@@ -20,7 +20,8 @@ export default class SavingLabel extends Component {
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.isCreatingSet 
 			|| nextProps.isUpdatingSet 
-			|| nextProps.isCreatingItem) {
+			|| nextProps.isCreatingItem
+			|| nextProps.isUpdatingItem) {
 			this.setState({
 				message: 'Saving...'
 			});

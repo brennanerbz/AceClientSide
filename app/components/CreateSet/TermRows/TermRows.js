@@ -30,7 +30,7 @@ export default class TermRows extends Component {
 
 	scrollToBottom() {
 		const node = document.body;
-		node.scrollTop = node.scrollHeight;
+		node.scrollTop = node.scrollHeight 
 	} 
 
 	render() {

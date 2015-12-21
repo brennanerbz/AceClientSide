@@ -47,7 +47,11 @@ import SequenceSummary from '../../components/Learn/SequenceSummary/SequenceSumm
 	current_trial: state.learn.current_trial,
 	feedback: state.learn.feedback,
 	user_answer: state.learn.user_answer,
-	sets: state.sets.set_items
+	sets: state.sets.set_items,
+
+
+	assignments: state.sets.assignments,
+	location: state.router.location
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -68,8 +72,11 @@ export default class Learn extends Component {
 	}
 
 	componentWillMount() {
-		const {fetchLearn, params } = this.props;
-		fetchLearn(1, Number(params.id))
+		const { assignments, params, location } = this.props,
+			  assignment = assignments.filter(a => a.set_id == params.id)[0],
+			  path = location.pathname.split('/')[3],
+			  starred = path !== undefined ? true : false;
+		fetchLearn(assignment.id, starred)
 	}	
 
 	componentDidMount() {
