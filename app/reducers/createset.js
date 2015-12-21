@@ -418,7 +418,23 @@ export function createset(state = createState, action) {
     case CLEAR_SET:
       return {
         ...state = createState,
-        rows: [null, null],
+        order: 1,
+        last_index: 1,
+        associations: {
+          asc_0: {
+            order: 1,
+            index: 0
+          },
+          asc_1: {
+            order: 2,
+            index: 1
+          }
+        },
+        items: {},
+        associations_order: [
+          'asc_0', 'asc_1'
+        ],
+        associations_length: 2,
         cleared: true
       }
     case LOADING_SET: 

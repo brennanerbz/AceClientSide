@@ -92,6 +92,10 @@ export default class FlunkApp extends Component {
 		else if(route !== '/') { return }
 	}
 
+	componentWillUnmount() {
+		clearInterval(this.onlinePoll)
+	}
+
 	render() {
 		let route = this.props.router.location.pathname,
 			count = route.match(/\//g).length,

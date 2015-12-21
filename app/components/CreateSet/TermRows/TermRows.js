@@ -19,18 +19,18 @@ export default class TermRows extends Component {
 	  window.removeEventListener('resize', this.handleResize)
 	}
 
-	componentDidUpdate = (prevProps, prevState) => {
-		const { asssociations_length } = this.props;
-		if(prevProps.asssociations_length < asssociations_length) this.scrollToBottom()
+	componentWillReceiveProps(nextProps) {
+		const { associations_length } = this.props;
+		if(nextProps.associations_length > associations_length) this.scrollToBottom()
 	}
 
 	handleResize = () => {
 	  this.props.resize()
 	}
 
-	scrollToBottom = () => {
-	  const node = document.body;
-	  node.scrollTop = node.scrollHeight;
+	scrollToBottom() {
+		const node = document.body;
+		node.scrollTop = node.scrollHeight;
 	} 
 
 	render() {
