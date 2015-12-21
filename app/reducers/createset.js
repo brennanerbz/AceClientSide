@@ -158,7 +158,8 @@ export function createset(state = createState, action) {
       return {
         ...state,
         unmounting: false,
-        able_to_spark: false
+        able_to_spark: false,
+        set: null
       }
     case LOAD_EDITING_SUCCESS:     
       let _subjects = [];

@@ -39,6 +39,7 @@ import Modal from '../../components/Modal/modal';
 	state: state.createset,
 	set: state.createset.set,
 	assignment: state.createset.assignment,
+	assignments: state.sets.assignments,
 	title: state.createset.title,
 	id: state.createset.id,
 	purpose: state.createset.purpose,
@@ -95,7 +96,6 @@ export default class CreateSetPage extends Component {
 
 	componentWillMount() {
 		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in } = this.props;
-		// localStorage.removeItem('set_id')
 		if(logged_in) {
 			loadSetFlag()
 			if(Object.keys(params).length !== 0) { 
@@ -104,12 +104,19 @@ export default class CreateSetPage extends Component {
 				// localStorage.removeItem('set_id')
 				return; 
 			} else {
+				let asgns = this.props.assignments
+				.filter(a => a.finalized == null)
+				let sorted_asgns = asgns
+				.sort((a, b) => {
+					return new Date(b.creation) - new Date(a.creation)
+				})
+				let id = sorted_asgns[0].set_id
 				// let id = localStorage.getItem('set_id')
-				// if(id !== undefined && id !== null) {
-				// 	this.setState({ editing: true })
-				// 	loadEditing(Number(id), pushState)
-				// 	pushState(null, `/createset/${id}`)
-				// }
+				if(id !== undefined && id !== null) {
+					this.setState({ editing: true })
+					loadEditing(Number(id), pushState)
+					pushState(null, `/createset/${id}`)
+				}
 			}
 		}
 	}
@@ -129,7 +136,7 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// console.log('nextProps set', '\n', nextProps.set)
+		console.log('nextProps set', '\n', nextProps.set)
 		if(this.props.set == null && nextProps.set !== null) {
 			// if(localStorage.getItem('set_id') == null && !this.state.editing) {
 			// 	localStorage.setItem('set_id', nextProps.set.id)

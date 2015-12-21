@@ -14,7 +14,7 @@ export function fetchSet(user_id, set_id, pushState) {
 	return async(dispatch, getState) => {
 		dispatch({type: FETCH_CREATE_SET})
 		try {
-			if(getState().user.isFetchingUser) {
+			if(getState().user.isFetchingUser || getState().sets.isFetchingAssignments) {
 				setTimeout(() => {
 					dispatch(fetchSet(user_id, set_id, pushState))
 				}, 250)
@@ -518,55 +518,56 @@ export const CREATE_ITEM_FAILURE = 'CREATE_ITEM_FAILURE';
 export function createItem(index, ...args) {
 	return (dispatch, getState) => {
 		dispatch({type: CREATE_ITEM})
-		try {                                                                                                      
-			let item = Object.assign({}, _itemtemplate),
-				user = getState().user.user,
-				set  = getState().createset.set,
-				id,
-				association = {},
-				ref;
+		                                                                                                     
+		let item = Object.assign({}, _itemtemplate),
+			user = getState().user.user,
+			set  = getState().createset.set,
+			id,
+			association = {},
+			ref;
 
-			if(set == undefined) {
-				dispatch(createSet())
-				setTimeout(() => {
-					dispatch(createItem(index, ...args))
-				}, 5)
-				return; 
-			}
+		if(set == undefined) {
+			dispatch(createSet())
+			setTimeout(() => {
+				dispatch(createItem(index, ...args))
+			}, 5)
+			return; 
+		}
 
-			if(args.length > 0) {
-				for(var i = 0; i < args.length; i++) {
-					let arg = args[i],
-						name = arg.name,
-						prop = arg.prop;
-					if(name == 'child') {
-						item = Object.assign({...item}, {
-							parent_id: prop.id,
-							target: prop.target,
-							cue: prop.cue,
-							synonyms: prop.synonyms !== null ? prop.synonyms.join("|") : null,
-							image: prop.image,
-							message: prop.message,
-							visibility: prop.visibility
-						})
-					}
-					if(item.hasOwnProperty(name)) {
-						item[name] = prop
-					}
-					if(name == 'association') {
-						association = prop
-					}
-					if(name == 'association_ref') {
-						ref = prop
-					}
+		if(args.length > 0) {
+			for(var i = 0; i < args.length; i++) {
+				let arg = args[i],
+					name = arg.name,
+					prop = arg.prop;
+				if(name == 'child') {
+					item = Object.assign({...item}, {
+						parent_id: prop.id,
+						target: prop.target,
+						cue: prop.cue,
+						synonyms: prop.synonyms !== null ? prop.synonyms.join("|") : null,
+						image: prop.image,
+						message: prop.message,
+						visibility: prop.visibility
+					})
+				}
+				if(item.hasOwnProperty(name)) {
+					item[name] = prop
+				}
+				if(name == 'association') {
+					association = prop
+				}
+				if(name == 'association_ref') {
+					ref = prop
 				}
 			}
-			item.creator_id = user.id
-			request
-			.post(`${api_url}/items/`)
-			.send(item)
-			.end((err, res) => {
-				item = res.body;
+		}
+		item.creator_id = user.id
+		request
+		.post(`${api_url}/items/`)
+		.send(item)
+		.end((err, res) => {
+			item = res.body;
+			if(res.ok) {
 				if(Object.keys(association).length == 0) {
 					dispatch({type: CREATE_ITEM_SUCCESS, item, index})
 					dispatch(createAssociation(item.id, index, ref))
@@ -577,13 +578,14 @@ export function createItem(index, ...args) {
 													{name: 'item', prop: item}, 
 													{name: 'item_id', prop: item.id}))
 				}
-			})
-		} catch(err) {
-			dispatch({
-				type: CREATE_ITEM_FAILURE,
-				error: Error(err)
-			})
-		}
+			}
+			 else {
+				dispatch({
+					type: CREATE_ITEM_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
 	}
 }
 

@@ -37,10 +37,36 @@ export default class FlunkApp extends Component {
 		error: PropTypes.string
 	}
 
+	state = {
+		show_notification: false,
+		error_msg: false,
+		error_type: 0,
+		success_msg: false
+	}
+
+	onlinePoll = {}
+
+	pollConnection() {
+		let online = navigator.onLine
+		if(!online) {
+			this.setState({
+				show_notification: true,
+				error_msg: true
+			})
+		} else if (online) {
+			this.setState({
+				show_notification: false,
+				error_msg: false
+			})
+		}
+	}
 
 	componentWillMount() {
 		const { fetchAssignments, checkLoggedIn, fetchUser, pushState, router } = this.props; 
 		if(checkLoggedIn().logged_in) fetchUser()
+		this.onlinePoll = setInterval(() => {
+			::this.pollConnection()
+		}, 2500)
 	}
 
 	renderSideNav() {
@@ -83,6 +109,27 @@ export default class FlunkApp extends Component {
 				})}>
 					{::this.renderSideNav()}
 					{childrenWithProps}
+				</div>
+				<div className="notify_wrapper">
+					<span id="notify" 
+						  className={classnames(
+						  	{
+						  		'hide': !this.state.show_notification
+						  	},
+						  	{
+						  		'success': this.state.success_msg
+						  	},
+						  	{
+						  		'error': this.state.error_msg
+						  	}
+						  	)}>
+						<span className="notify_msg">
+							{
+								this.state.error_msg 
+								&& 'Apologies, trouble connecting to Acuit. Hang on tight.'
+							}
+						</span>
+					</span>
 				</div>
 			</div>
 		);
