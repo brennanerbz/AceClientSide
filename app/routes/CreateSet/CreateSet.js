@@ -97,11 +97,21 @@ export default class CreateSetPage extends Component {
 
 	componentWillMount() {
 		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in } = this.props;
+		// localStorage.removeItem('set_id')
 		if(logged_in) {
 			loadSetFlag()
 			if(Object.keys(params).length !== 0) { 
 				this.setState({ editing: true })
-				loadEditing(params.id, pushState) 
+				loadEditing(params.id, pushState)
+				localStorage.removeItem('set_id')
+				return; 
+			} else {
+				let id = localStorage.getItem('set_id')
+				if(id !== undefined && id !== null) {
+					this.setState({ editing: true })
+					loadEditing(Number(id), pushState)
+					pushState(null, `/createset/${id}`)
+				}
 			}
 		}
 	}
@@ -118,6 +128,15 @@ export default class CreateSetPage extends Component {
 		this.subPoll = setInterval(() => {
 			::this.subjectPoll()
 		}, 2500)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log('nextProps set', '\n', nextProps.set)
+		if(this.props.set == null && nextProps.set !== null) {
+			if(localStorage.getItem('set_id') == null && !this.state.editing) {
+				localStorage.setItem('set_id', nextProps.set.id)
+			}
+		}
 	}
 
 	stayOnPage() {
@@ -159,8 +178,7 @@ export default class CreateSetPage extends Component {
 				return;
 			}
 		}
-
-		if(set !== null) {
+		if(set !== null && typeof set !== 'function') {
             if(associations !== null && Object.keys(associations).length > 1) reorder()
             if(assignment == null && !deleted) {
             	updateSet(set, {name: 'finalized', prop: null})

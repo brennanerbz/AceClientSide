@@ -307,7 +307,7 @@ export default class Modal extends Component {
 							: null
 						}
 						{
-							type == 'settings'
+							type == 'settings' && !dynamic
 							? <button type="button"
 									  className="button primary button-small float_right"
 									  onClick={() => {
@@ -381,27 +381,35 @@ export default class Modal extends Component {
 						&& ::this.renderThankYou()
 					}
 					{
-						type !== 'settings' && type !== 'log_in' && type !== 'thank_you'
-						?
+					 	(type == 'log_in') || (type == 'thank_you') || (type == 'settings' && !dynamic)
+						? null
+						:
 						<div className="modal-footer">
-							<button type="button" 
-									className="button outline" 
-									onClick={() => {
-										if(dynamic) {
-											this.setState({
-												type: 'share',
-												dynamic: false
-											})
-										} else if (!dynamic) {
-											this.props.closeModal()
-										}
-									}}
-									data-dismiss={!dynamic && 'modal'}>
-									Cancel
-							</button>
 							{
-								type !== 'confirm' 
-								? 
+								type == 'settings' && !dynamic
+								? null
+								:
+								<button type="button" 
+										className="button outline" 
+										onClick={() => {
+											if(dynamic) {
+												this.setState({
+													type: 'share',
+													dynamic: false
+												})
+											} else if (!dynamic) {
+												this.props.closeModal()
+											}
+										}}
+										data-dismiss={!dynamic && 'modal'}>
+										Cancel
+								</button>
+							}
+							
+							{
+								(type == 'confirm') || (type == 'settings' && !dynamic)
+								? null
+								:
 								<button type="button" 
 										className="button primary" 
 										data-dismiss='modal'
@@ -433,7 +441,6 @@ export default class Modal extends Component {
 											: null
 										}
 								</button>
-								: null
 							}
 							{
 								type == 'confirm'
@@ -449,7 +456,6 @@ export default class Modal extends Component {
 								: null
 							}
 						</div>
-						: null
 					}
 					</div>
 				</div>

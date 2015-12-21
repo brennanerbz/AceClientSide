@@ -228,6 +228,21 @@ a {
     position: absolute;
     margin-top: -0.25rem;
     margin-left: -1.25rem;
+    outline: none!important;
+	border: none!important;
+    &:active, &:focus {
+		outline: none!important;
+		border: none!important;
+		box-shadow: none;
+	}
+}
+
+input[type='radio'] {
+	&:active, &:focus {
+		outline: none!important;
+		border: none!important;
+		box-shadow: none!important;
+	}
 }
 
 /* ----------- */

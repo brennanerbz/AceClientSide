@@ -188,7 +188,7 @@ export function createset(state = createState, action) {
       else if(incoming_asc_order.length > 1) {
         next_order = incoming_associations[incoming_asc_order.slice(-1)[0]].order + 1 
       }
-
+      console.log('load_editing set', action.set)
       return {
         ...state,
         editing: true,
