@@ -12,7 +12,8 @@ export default class SetHeader extends Component {
 
 	render() {
 		const image = require('../../../assets/set_profile_image.png');
-		const { title, item_count, creator_username, creator_id, id, pushState } = this.props;
+		const { title, item_count, creator_username, creator_id, id, pushState, starred } = this.props,
+		learn_route = starred ? `/learn/${id}/starred` : `/learn/${id}`
 		return(
 			<span className="set_header">				
 				<div className="page_header_wrapper header_info inline_info">
@@ -28,7 +29,7 @@ export default class SetHeader extends Component {
 					</span>
 				</div>
 				<div className="main_actions">
-					<Link to={`/learn/${id}`}>
+					<Link to={learn_route}>
 						<button className="button primary">
 						Learn</button>
 					</Link>

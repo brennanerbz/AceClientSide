@@ -217,7 +217,16 @@ export function updateCase(_case, ...args) {
 			}
 		})
 	}
-}	
+}
+
+export const SELECT_STARRED_ITEMS = 'SELECT_STARRED_ITEMS';
+export function selectStarredItems(stars) {
+	return {
+		type: SELECT_STARRED_ITEMS,
+		stars
+	}
+}
+
 
  
 export const CLEAR_SETVIEW = 'CLEAR_SETVIEW';

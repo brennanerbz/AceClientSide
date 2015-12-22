@@ -23,6 +23,8 @@ export default class Terms extends Component {
 					items={this.props.items}
 					set={this.props.set} 
 					pushState={this.props.pushState}
+					starred={this.props.starred}
+					selectStarredItems={this.props.selectStarredItems}
 				/>	
 			</div>
 		);

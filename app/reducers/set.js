@@ -32,6 +32,8 @@ import {
 	UPDATE_CASE_SUCCESS,
 	UPDATE_CASE_FAILURE,
 
+	SELECT_STARRED_ITEMS,
+
 	CLEAR_SETVIEW
 } from '../actions/set';
 
@@ -51,6 +53,7 @@ const initial_setstate = {
 	isFetchingSupplemental: false,
 	cases: [], // organized by association id as key
 	total_starred: 0,
+	starred: false,
 	subjects: [],
 	doc: null,
 	has_studied: null,
@@ -148,6 +151,11 @@ export default function setView(state = initial_setstate, action) {
 		case CLEAR_SETVIEW:
 			return {
 				...state = initial_setstate
+			}
+		case SELECT_STARRED_ITEMS:
+			return {
+				...state,
+				starred: action.stars
 			}
 		case RECEIVE_SET_FAILURE:
 		case RECEIVE_ASSOCIATIONS_FAILURE:

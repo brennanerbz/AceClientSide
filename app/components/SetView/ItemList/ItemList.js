@@ -49,11 +49,14 @@ export default class ItemList extends Component {
 					&&
 					<ItemListActions 
 						{...this.props}
+						filterStarred={this.state.filterStarred}
 						selectAll={() => {
 							this.setState({filterStarred: false})
+							this.props.selectStarredItems(false)
 						}}
 						selectStarred={() => {
 							this.setState({filterStarred: true})
+							this.props.selectStarredItems(true)
 						}}
 					/>
 				}

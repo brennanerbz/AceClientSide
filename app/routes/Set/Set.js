@@ -39,6 +39,7 @@ import Tabs from '../../components/SetView/Tabs/Tabs';
 	items: state.setView.items,
 	cases: state.setView.cases,
 	total_starred: state.setView.total_starred,
+	starred: state.setView.starred,
 	isFetchingSupplemental: state.setView.isFetchingSupplemental
 	}),
 	dispatch => ({
@@ -84,6 +85,8 @@ export default class Set extends Component {
 				associations: this.props.associations,
 				cases: this.props.cases,
 				total_starred: this.props.total_starred,
+				starred: this.props.starred,
+				selectStarredItems: this.props.selectStarredItems,
 				isFetchingSupplemental: this.props.isFetchingSupplemental,
 				updateCase: this.props.updateCase,
 				creator_id: this.props.creator_id,
@@ -114,7 +117,8 @@ export default class Set extends Component {
 									set={this.props.set}
 									title={this.props.title}
 									user={this.props.user}
-									
+									starred={this.props.starred}
+									pushState={this.props.pushState}
 								/>		
 								<Tabs 
 									location={this.props.loc}

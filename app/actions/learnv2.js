@@ -28,7 +28,7 @@ export function fetchLearn(set_id, starred) {
 		} else {
 			dispatch(createAssignment(getState().user.user.id, set_id, starred))
 		}
-		dispatch(fetchSlots())
+		// dispatch(fetchSlots())
 	}
 }
 
@@ -83,6 +83,7 @@ export function fetchSequence(assignment_id, starred) {
 				sequence = res.body
 				if(Object.keys(sequence).length !== 0 && !sequence.completed) {
 					dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
+					dispatch(fetchSlots(sequence.id))
 				} else {
 					dispatch(newSequence(assignment_id, starred))
 				}
@@ -131,7 +132,7 @@ export function newSequence(assignment_id, starred) {
 				sequence_id = res.body.id	
 				dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
 				if(!getState().learn.isFetchingSlots) {
-					dispatch(fetchSlots())
+					dispatch(fetchSlots(sequence.id))
 				}
 			} else {
 				dispatch({
