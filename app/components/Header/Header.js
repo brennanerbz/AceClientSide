@@ -131,7 +131,7 @@ export default class Header extends Component {
 					|| root_path == '/' && !logged_in)
 					},
 					{
-					'create_border': this.state.show_border && root_path == 'createset'
+						'create_border': this.state.show_border && root_path == 'createset'
 					}
 					)}>
 					<div style={						
@@ -139,7 +139,14 @@ export default class Header extends Component {
 							paddingTop: this.state.show_border && root_path == 'createset' && '8px',
 							paddingBottom: this.state.show_border && root_path == 'createset' && '16px'
 						}
-					} className={classnames("header_container", {"landing": root_path == '/' && !logged_in}, {'beta': true})}>				
+					} className={classnames("header_container", 
+						{
+							"landing": root_path == '/' && !logged_in
+						}, 
+						{
+							'beta': true
+						}
+						)}>				
 						<div className='header'>
 							{
 								logged_in
@@ -240,6 +247,17 @@ export default class Header extends Component {
 										</Link>
 								</span>						
 								: null }
+								{
+									fetchingLearn
+									&&
+									<span  
+									style={{
+										display: 'block',
+										height: '28px'
+									}}
+									className="open_set_container">
+									</span>
+								}
 							</div>
 							<div className="header_user">
 								{

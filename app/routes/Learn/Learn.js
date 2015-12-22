@@ -40,6 +40,7 @@ import SequenceSummary from '../../components/Learn/SequenceSummary/SequenceSumm
 	showLearn: state.learn.isFetchingLearn,
 	showCorrect: state.learn.isShowingCorrect,
 	showCompletedSequence: state.learn.isShowingCompletedSequence,
+	isFetchingSequenceStats: state.learn.isFetchingSequenceStats,
 	sequence_stats: state.learn.sequence_stats,
 	showFeedback: state.learn.isShowingFeedback,
 	slots: state.learn.slots,
@@ -284,6 +285,7 @@ export default class Learn extends Component {
 											<SequenceSummary
 												handleNewSequence={::this.handleNewSequence}
 												sequence_stats={this.props.sequence_stats}
+												isFetchingSequenceStats={this.props.isFetchingSequenceStats}
 												{...this.props}
 											/>
 										}

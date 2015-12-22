@@ -171,6 +171,7 @@ export function updateSequence(_sequence) {
 				const sequence = res.data;
 				dispatch({type: UPDATE_SEQUENCE_SUCCESS, sequence}) 
 				if(sequence.completed) {
+					dispatch({type: SHOW_COMPLETED_SEQUENCE})
 					dispatch(fetchSequenceStats(sequence.id))
 				} 
 			}).then(() => {
@@ -190,6 +191,7 @@ export function updateSequence(_sequence) {
 }
 
 export const FETCH_SEQ_STATS = 'FETCH_SEQ_STATS';
+export const FETCH_SEQ_STATS_SUCCESS = 'FETCH_SEQ_STATS_SUCCESS';
 export function fetchSequenceStats(id) {
 	return(dispatch, getState) => {
 		dispatch({type: FETCH_SEQ_STATS})
@@ -198,7 +200,7 @@ export function fetchSequenceStats(id) {
 		.end((err, res) => {
 			if(res.ok) {
 				let stats = res.body;
-				dispatch({type: SHOW_COMPLETED_SEQUENCE, stats})
+				dispatch({type: FETCH_SEQ_STATS_SUCCESS, stats})
 			}
 		})
 	}
@@ -631,6 +633,8 @@ export function nextRound() {
 		let	new_position = getState().learn.position,
 			current_sequence = getState().learn.current_sequence,
 			sequence;
+		console.log('pos:', new_position)
+		console.log('cur_seq:', current_sequence)
 		if(new_position >= current_sequence.length) {
 			sequence = Object.assign({...current_sequence}, {completed: true, type: 'completed'})
 		} else {

@@ -187,6 +187,11 @@ export function signUp(user_info, pushState) {
 	return (dispatch, getState) => {
 		dispatch({type: CREATE_USER})
 		let new_user;
+		for(var prop in user_info) {
+			if(user_info.hasOwnProperty('email_error')) {
+				delete user_info.email_error
+			}
+		}
 		request
 		.post(`${api_url}/users/`)
 		.send(user_info)

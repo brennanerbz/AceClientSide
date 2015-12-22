@@ -52,6 +52,8 @@ import {
 	SHOW_CORRECT,
 
 	SHOW_COMPLETED_SEQUENCE,
+	FETCH_SEQ_STATS,
+	FETCH_SEQ_STATS_SUCCESS,
 
 	SKIP_SUCCESS,
 	SKIP_FAILURE,
@@ -83,6 +85,7 @@ const initial_learnstate = {
 	isChangingDifficulty: false,
 	isShowingCorrect: false,
 	isShowingCompletedSequence: false,
+	isFetchingSequenceStats: false,
 	isShowingFeedback: false,
 	isShowingHint: false,
 	isUpdatingState: false,
@@ -305,14 +308,24 @@ export default function learn(state = initial_learnstate, action) {
 				...state,
 				isShowingCompletedRound: false
 			}
+		case FETCH_SEQ_STATS:
+			return {
+				...state,
+				isFetchingSequenceStats: true
+			}
 		case SHOW_COMPLETED_SEQUENCE: 
 			return {
 				...state,
 				isShowingCompletedSequence: true,
 				isShowingCompletedRound: false,
 				isUpdatingState: false,
-				isShowingCorrect: false,
-				sequence_stats: action.stats
+				isShowingCorrect: false
+			}
+		case FETCH_SEQ_STATS_SUCCESS:
+			return {
+				...state,
+				sequence_stats: action.stats,
+				isFetchingSequenceStats: false
 			}
 		case SKIP_SUCCESS:
 		case MOVE_SLOT_SUCCESS:
