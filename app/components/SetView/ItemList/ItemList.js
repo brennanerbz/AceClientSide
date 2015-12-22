@@ -3,12 +3,27 @@ require('./ItemList.scss');
 import Item from './Item';
 import ItemListActions from './ItemListActions';
 
+import SelectInput from '../../SelectInput/SelectInput';
+
 export default class ItemList extends Component {
 	static propTypes = {
 	}
 
 	state = {
-		filterStarred: false
+		filterStarred: false,
+		options: [
+			{
+				message: 'Study all terms',
+				img: null,
+				value: false
+			},
+			{
+				message: `Study # * terms only`,
+				img: require('../../../assets/star.png'),
+				value: true
+			}
+		],
+		active_option_index: 0
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -16,7 +31,7 @@ export default class ItemList extends Component {
 			this.setState({
 				filterStarred: false
 			})
-		}
+		} 
 	}
 
 
@@ -47,16 +62,21 @@ export default class ItemList extends Component {
 				{
 					this.props.total_starred > 0
 					&&
-					<ItemListActions 
-						{...this.props}
-						filterStarred={this.state.filterStarred}
-						selectAll={() => {
-							this.setState({filterStarred: false})
-							this.props.selectStarredItems(false)
+					<SelectInput 
+						custom_style={{
+								position: 'absolute',
+								right: '0px',
+							    top: '-47.5px'	
 						}}
-						selectStarred={() => {
-							this.setState({filterStarred: true})
-							this.props.selectStarredItems(true)
+						filler_number={this.props.total_starred}
+						options={this.state.options}
+						active_option_index={this.state.active_option_index}
+						handleSelect={(stars, index) => {
+							this.setState({
+								filterStarred: stars,
+								active_option_index: index
+							})
+							this.props.selectStarredItems(stars)
 						}}
 					/>
 				}

@@ -35,7 +35,7 @@ var _smallicon = {
 	position: 'absolute',
 	display: 'inline-block',
 	top: '11px',
-	left: '7px',
+	left: '0px',
 	opacity: '0.8'
 }
 var member_count_container = {
@@ -67,13 +67,14 @@ export default class SubSetActions extends Component {
 		const { set, createset } = this.props,
 			member_icon = require('../../../assets/profile_icon.png'),
 			share_icon = require('../../../assets/share.png'),
-			more = require('../../../assets/elipses.png');
+			more = require('../../../assets/elipses.png'),
+			blue_more = require('../../../assets/blue_elipses.png');
 		return(
 			<div style={secondary_actions} className="secondary_actions">
 				{
 					this.props.assignment !== null
 					&&
-					<button className={classnames('button outline')}
+					<button className={classnames('button secondary')}
 						    onClick={() => ::this.toggleModal('share')}
 						    style={{
 						    	marginLeft: '5px'
@@ -99,11 +100,17 @@ export default class SubSetActions extends Component {
 				<button onClick={() => { 
 							this.setState({more_is_open: true})
 						}} 
-						className={classnames('toggle_btn', {'active': this.state.more_is_open})}
+						className={classnames('toggle_btn button secondary',  {'active': this.state.more_is_open})}
 						ref="more"				   
 						title="More actions"
 						data-placement="bottom" >
-						<img  style={{height: '3.95px'}} className="share_icon" src={more}/>
+						<img style={
+							{
+								position: 'absolute',
+								height: '3.95px',
+								left: '8.5px'
+							}
+						} className="share_icon" src={blue_more}/>
 				</button>
 
 				{
