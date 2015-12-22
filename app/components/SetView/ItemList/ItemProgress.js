@@ -46,9 +46,9 @@ export default class ItemProgress extends Component {
 
 	render() {
 		const { _case } = this.props;
-		if(_case !== null && _case !== undefined) {
+		if(_case !== undefined) {
 			let progress_key;
-			if(_case.total_correct === 0 && _case.total_incorrect === 0) {
+			if(_case == null || (_case.total_correct === 0 && _case.total_incorrect === 0)) {
 				progress_key = 'no_answers'
 			} else if (_case.total_correct < _case.total_incorrect) {
 				progress_key = 'negative'

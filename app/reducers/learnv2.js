@@ -91,6 +91,7 @@ const initial_learnstate = {
 	current_sequence: {},
 	sequence_length: null,
 	sequence_completed: false,
+	sequence_stats: null,
 	sequence_id: null,
 	position: null,
 	start: 0,
@@ -221,7 +222,13 @@ export default function learn(state = initial_learnstate, action) {
 				trials: action.trials,
 			}
 		case NEW_TRIAL_SUCCESS:
-			const _newtrials = state.trials.concat(action._trial);
+			let _newtrials = state.trials.concat(action._trial),
+				_state_slots = state.slots;
+			_state_slots.map(slot => {
+				if(slot.item_id == action._trial.item_id) {
+					slot.format = action._trial.format
+				}
+			}) 
 			return {
 				...state,
 				isFetchingLearn: false,
@@ -230,6 +237,7 @@ export default function learn(state = initial_learnstate, action) {
 				isShowingCompletedRound: false,
 				trials: _newtrials,
 				current_trial: action._trial,
+				slots: _state_slots
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
 			let _slot = state.slots.filter(slot => slot.order === action.sequence.position)[0],
@@ -303,7 +311,8 @@ export default function learn(state = initial_learnstate, action) {
 				isShowingCompletedSequence: true,
 				isShowingCompletedRound: false,
 				isUpdatingState: false,
-				isShowingCorrect: false
+				isShowingCorrect: false,
+				sequence_stats: action.stats
 			}
 		case SKIP_SUCCESS:
 		case MOVE_SLOT_SUCCESS:

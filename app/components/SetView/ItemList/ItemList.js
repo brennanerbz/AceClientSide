@@ -42,7 +42,6 @@ export default class ItemList extends Component {
 				return asc.id == starred_instances[starred_instances.indexOf(asc.id)]
 			})
 		}
-		let _case;
 		return(
 			<div className="item_list_container">
 				{
@@ -60,7 +59,7 @@ export default class ItemList extends Component {
 				}
 				<ul className="item_list">
 					{sorted_asssociations.map((asc, i) => {
-						_case = this.props.cases !== undefined
+						let _case = this.props.cases !== undefined
 						? this.props.cases.filter(c => c.association_id == asc.id)[0]
 						: null
 						return <Item key={i} 

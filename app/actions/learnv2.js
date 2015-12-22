@@ -22,7 +22,7 @@ export function fetchLearn(set_id, starred) {
 			return;
 		}
 		let assignments = getState().sets.assignments,
-			assignment = assignments.filter(a => a.set_id == set_id)[0];
+			assignment = assignments.filter(a => Number(a.set_id) == Number(set_id))[0];
 		if(assignment !== undefined) {
 			dispatch(fetchSequence(assignment.id, starred))
 		} else {
@@ -31,14 +31,26 @@ export function fetchLearn(set_id, starred) {
 		dispatch(fetchSlots())
 	}
 }
+
+
+var _assignmenttemplate = {
+	user_id: null,
+	set_id: null,
+	new_sequence_difficulty: 'intermediate',
+	starred: false,
+	deadline: null,
+	wallpaper: null,
+	permission: 'nonadmin',
+	privacy: 'public'
+}
 export const RECEIVE_ASSIGNMENT_SUCCESS = 'RECEIVE_ASSIGNMENT_SUCCESS';
 export const RECEIVE_ASSIGNMENT_FAILURE = 'RECEIVE_ASSIGNMENT_FAILURE'
 export function createAssignment(user_id, set_id, starred) {
 	return(dispatch, getState) => {
-		let assignment = {
-			set_id: set_id,
+		let assignment = Object.assign({..._assignmenttemplate}, {
+			set_id: Number(set_id),
 			user_id: user_id
-		}
+		})
 		request
 		.post(`${api_url}/assignments/`)
 		.send(assignment)
@@ -159,7 +171,7 @@ export function updateSequence(_sequence) {
 				const sequence = res.data;
 				dispatch({type: UPDATE_SEQUENCE_SUCCESS, sequence}) 
 				if(sequence.completed) {
-					dispatch({type: SHOW_COMPLETED_SEQUENCE})
+					dispatch(fetchSequenceStats(sequence.id))
 				} 
 			}).then(() => {
 				if(!getState().learn.current_sequence.completed) {
@@ -174,6 +186,21 @@ export function updateSequence(_sequence) {
 				error: Error(err)
 			})
 		}
+	}
+}
+
+export const FETCH_SEQ_STATS = 'FETCH_SEQ_STATS';
+export function fetchSequenceStats(id) {
+	return(dispatch, getState) => {
+		dispatch({type: FETCH_SEQ_STATS})
+		request
+		.get(`${api_url}/sequences/${id}/stats/`)
+		.end((err, res) => {
+			if(res.ok) {
+				let stats = res.body;
+				dispatch({type: SHOW_COMPLETED_SEQUENCE, stats})
+			}
+		})
 	}
 }
 
@@ -357,7 +384,6 @@ export function newTrial(trial) {
 				delete new_trial[_prop]
 			}
 		}
-		console.log(new_trial)
 		axios.post(`${api_url}/trials/`, 
 			new_trial
 		).then(res => {

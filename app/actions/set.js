@@ -179,9 +179,10 @@ export function fetchCases(assignment_id) {
 		request
 		.get(`${api_url}/assignments/${assignment_id}/instances`)
 		.end((err, res) => {
-			cases = res.body.instances
-			dispatch({type: FETCH_CASES_SUCCESS, cases })
-			console.log(cases)
+			if(res.ok) {
+				cases = res.body.instances
+				dispatch({type: FETCH_CASES_SUCCESS, cases })
+			}
 		})
 	}
 }	

@@ -40,6 +40,7 @@ import SequenceSummary from '../../components/Learn/SequenceSummary/SequenceSumm
 	showLearn: state.learn.isFetchingLearn,
 	showCorrect: state.learn.isShowingCorrect,
 	showCompletedSequence: state.learn.isShowingCompletedSequence,
+	sequence_stats: state.learn.sequence_stats,
 	showFeedback: state.learn.isShowingFeedback,
 	slots: state.learn.slots,
 	current_sequence: state.learn.current_sequence,
@@ -243,7 +244,12 @@ export default class Learn extends Component {
 					 {
 						!showLearn && slots !== undefined
 						? <div>
-							<SeqControl {...this.props}/>
+
+							<SeqControl 
+							handleNewSequence={::this.handleNewSequence}
+							{...this.props}
+							/>
+
 								<div className={classnames("learn_container", 
 											   {'no_border': isShowingCompletedRound || showCompletedSequence },
 											   {"round_summary": isShowingCompletedRound})}>
@@ -277,6 +283,7 @@ export default class Learn extends Component {
 											&&
 											<SequenceSummary
 												handleNewSequence={::this.handleNewSequence}
+												sequence_stats={this.props.sequence_stats}
 												{...this.props}
 											/>
 										}

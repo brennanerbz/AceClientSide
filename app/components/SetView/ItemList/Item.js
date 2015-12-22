@@ -16,7 +16,7 @@ export default class Item extends Component {
 	}
 
 	componentDidMount() {
-		const { _case } = this.props;
+		let { _case } = this.props;
 		if(_case !== null && _case !== undefined) {
 			this.setState({
 				starred: _case.starred,
@@ -27,11 +27,16 @@ export default class Item extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		const { _case, association, isFetchingSupplemental } = nextProps;
-		if(!isFetchingSupplemental && _case !== null) {
+		if(!isFetchingSupplemental && _case !== null && _case !== undefined) {
 			this.setState({
 				case: _case,
 				starred: _case.starred
 			})
+		} else if (_case == undefined || _case == null) {
+			this.setState({
+				case: null,
+				starred: false
+			});
 		}
 	}
 
@@ -53,8 +58,7 @@ export default class Item extends Component {
 					mouseIsOver: false
 				})}>
 				{
-					this.state.case !== null 
-					&& this.props.studied !== null
+					this.props.studied !== null
 					&&
 					<ItemProgress 
 						_case={this.state.case}

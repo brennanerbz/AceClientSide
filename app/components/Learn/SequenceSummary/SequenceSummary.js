@@ -6,7 +6,8 @@ export default class SequenceSummary extends Component {
 	}
 
 	render() {
-		const { slots } = this.props;
+		const { sequence_stats } = this.props;
+		let ss = sequence_stats, slots_count = ss.slots_count;
 		return(
 			<div className="summary">
 				<h3 className="summary_header">Overall Progress</h3>
@@ -17,10 +18,10 @@ export default class SequenceSummary extends Component {
 								Define 
 							</td>
 							<td className="count">
-								{slots.filter(slot => slot.format == 'recall').length} / {slots.length} 
+								{ss.recall_correct_count} / {slots_count} 
 							</td>
 							<td className="percent">
-								{(slots.filter(slot => slot.format == 'recall').length / slots.length) / 100 * 10000} % 
+								{(ss.recall_correct_count / slots_count) / 100 * 10000} % 
 							</td>
 						</tr>
 						<tr className="mc_row">
@@ -28,10 +29,10 @@ export default class SequenceSummary extends Component {
 								Multiple Choice
 							</td>
 							<td className="count">
-								{slots.filter(slot => slot.format == 'mc').length} / {slots.length} 
+								{ss.mc_correct_count} / {slots_count} 
 							</td>
 							<td className="percent">
-								{(slots.filter(slot => slot.format == 'mc').length / slots.length) / 100 * 10000} % 
+								{(ss.mc_correct_count / slots_count) / 100 * 10000} % 
 							</td>
 						</tr>
 						<tr className="fb_row">
@@ -39,10 +40,10 @@ export default class SequenceSummary extends Component {
 								 Fill in the Blank
 							</td>
 							<td className="count">
-								{slots.filter(slot => slot.format == 'stem').length} / {slots.length} 
+								{ss.stem_correct_count} / {slots_count} 
 							</td>
 							<td className="percent">
-								{(slots.filter(slot => slot.format == 'stem').length / slots.length) / 100 * 10000} % 
+								{(ss.stem_correct_count / slots_count) / 100 * 10000} % 
 							</td>
 						</tr>
 						<tr className="copy_row">
@@ -50,10 +51,10 @@ export default class SequenceSummary extends Component {
 								Copy Answer
 							</td>
 							<td className="count">
-								{slots.filter(slot => slot.format == 'copy').length} / {slots.length} 
+								{ss.copy_correct_count} / {slots_count} 
 							</td>
 							<td className="percent">
-								{(slots.filter(slot => slot.format == 'copy').length / slots.length) / 100 * 10000} % 
+								{(ss.copy_correct_count / slots_count) / 100 * 10000} % 
 							</td>
 						</tr>
 					</tbody>
