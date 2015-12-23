@@ -9,8 +9,8 @@ import DocumentTitle from 'react-document-title';
 require('./Conversation.scss');
 
 /* Actions and API calls */
-import * as learnactions from '../../actions/learnv2';
-import * as setactions from '../../actions/usersets';
+import * as learnActions from '../../actions/learnv2';
+import * as setActions from '../../actions/usersets';
 
 /* Minor components */
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
@@ -19,7 +19,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import Header from '../../components/Conversation/Header/Containers/HeaderContainer';
 import Messages from '../../components/Conversation/Messages/Containers/MessagesContainer';
 import Footer from '../../components/Conversation/Footer/Containers/FooterContainer';
-import Slots from '../../components/Conversation/Slots/Containers/SlotsContainer';
+import Slots from '../../components/Conversation/Slots/Containers/SlotsListContainer';
 // import Settings from '../../components/Conversation/Settings/Settings';
 
 
@@ -36,8 +36,11 @@ export default class Conversation extends Component {
 
 	render() {
 		return(
-			<div className="main_content">
-				<h1>Working</h1>
+			<div id="convo_ui" className="fluid_container">
+				<Header />
+				<Slots />
+				<Messages />
+				<Footer />
 			</div>
 		);
 	}

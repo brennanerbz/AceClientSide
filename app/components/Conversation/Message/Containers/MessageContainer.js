@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class SlotContainer extends Component {
+export default class MessageContainer extends Component {
 	static propTypes = {
 	}
 
