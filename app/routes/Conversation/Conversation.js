@@ -43,7 +43,9 @@ export default class Conversation extends Component {
 			<div id="convo_ui" className="fluid_container">
 				<Header />
 				<Slots />
-				<Messages />
+				<div id="convo_ui_body">
+					<Messages />
+				</div>
 				<Footer />
 			</div>
 		);

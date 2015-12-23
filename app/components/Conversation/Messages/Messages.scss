@@ -1,0 +1,129 @@
+#messages_container {
+    // margin-top: 58px;
+	margin-left: 220px;
+	.scroller {
+		overflow-x: hidden;
+	}
+	#msgs_scroller {
+		overflow-y: auto;
+	    outline: 0;
+	}
+	#msgs_div {
+		padding-bottom: 1rem;
+		margin: 0;
+		clear: both;
+	}
+	.msgs_holder {
+		padding: 0;
+	    margin: 0;
+	    clear: both;
+	}
+	#end_help {
+		color: #9e9ea6;
+		font-family: "Lato",sans-serif;
+		padding-top: 1rem;
+		font-size: .8rem;
+		line-height: 1.2rem;
+		color: #666;
+		padding-left: 72px;
+		#end_display_help {
+			// padding: 1rem;
+			margin: 1rem 0;
+			#end_display_meta {
+				padding: 0 1.1rem 0 0;
+				font-size: 1.1rem;
+				color: #9e9ea6;
+				font-family: "Lato",sans-serif;
+				line-height: 1.5rem;
+				max-width: 750px;
+				h1 {
+					font-size: 30px;
+					line-height: 30px;
+					color: #4d394b;
+				}
+				p {
+					color: #555459;
+				    margin: 0 auto 1rem;
+				}
+				ul {
+					&.end_display_actions {
+						margin: 0 0 1rem;
+						li {
+							display: inline-block;
+							margin: 0 1rem 1rem 0;
+							list-style: none;
+							font-size: .9rem;
+						}
+					}
+				}
+			}
+		}
+	}
+	.message {
+		display: block;
+		width: 100%;
+		margin: 0 auto -1px;
+		position: relative;
+		padding: 1px 2.5rem 2px 0;
+		border-left: none;
+		border-right: none;
+		border-top: 1px solid transparent;
+		border-bottom: 1px solid transparent;
+		font-family: "Lato", sans-serif;
+		color: #2c2d30;
+		font-size: 15px;
+		line-height: 22px;
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		-ms-user-select: text;
+		user-select: text;
+		word-wrap: break-word;
+		.action_hover_container {
+			display: none;
+			position: absolute;
+			top: -20px;
+			right: 18px;
+			border: 1px solid rgba(0,0,0,.15);
+			border-radius: 6px;
+			overflow: hidden;
+			-webkit-transition: border 50ms ease-in 0s;
+			-moz-transition: border 50ms ease-in 0s;
+			transition: border 50ms ease-in 0s;
+			z-index: 97;
+		}
+		.message_gutter {
+			text-align: right;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 72px;
+			padding-right: 10px;
+			.star {
+				margin-top: 1px;
+			    margin-left: 4px;
+			}
+		}
+		.message_content {
+			margin-left: 72px;
+			.message_sender {
+				display: inline;
+				word-break: break-word;
+				font-weight: 900;
+				margin-right: .25rem;
+				font-weight: 900;
+				color: #2c2d30!important;
+				line-height: 18px;
+			}
+			.star {
+				display: inline;
+				line-height: 9pt;
+			}
+			.message_body {
+				cursor: text;
+				color: #9e9ea6;
+				font-style: italic;
+				display: block;
+			}
+		}
+	}
+}
