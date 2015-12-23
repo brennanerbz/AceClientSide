@@ -211,7 +211,7 @@ export default class CreateSetHeader extends Component {
 									  }}
 									  onChange={(event) => this.setState({subjects: event.target.value})}
 									  autoFocus={true}/>
-							<div className="button_group">
+							<div style={{ marginTop: '3.5px'}} className="button_group">
 								<button className="button button-outline button-small"
 										onClick={() => {
 											this.setState({
@@ -221,7 +221,7 @@ export default class CreateSetHeader extends Component {
 										}}
 										>Cancel
 								</button>
-								<button className="button button-primary button-small"
+								<button className="button primary button-small"
 										ref="submit_subjects"				   
 										title="Max subjects: 3"
 										data-toggle="tooltip" 

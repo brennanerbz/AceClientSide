@@ -98,7 +98,7 @@
 }
 
 .CreateSetHeader-section-title .CreateSetHeader-textarea .AutoExpandTextArea {
-	font-size: 36px;
+	font-size: 31px;
 	margin-bottom: -29px;
 }
 
@@ -244,7 +244,7 @@
 	font-family: 'Lato';
 	font-size: 16px;
 	border: 1px solid #498DFF;
-	border-radius: 3px;
+	border-radius: 2px;
 	outline: none;
 	margin-bottom: 10px;
 }
@@ -492,7 +492,7 @@ textarea:hover:ms-input-placeholder {
 	margin-top: -20px!important;
 	padding-top: 0!important;
 	.textarea_note {
-		font-size: .85rem;
+		font-size: 1rem;
 		font-weight: 400;
 		color: #9e9ea6;
 		display: block;
@@ -502,12 +502,14 @@ textarea:hover:ms-input-placeholder {
 	label {
 		display: block;
 		color: #9e9ea6!important;
+		font-size: 0.90em;
+		padding-bottom: 5px;
 	}
 	textarea {
 		border-radius: 0.25rem;
 		border: 1px solid #C5C5C5;
 		padding: 0.25rem 0.5rem 0.25rem!important;
-		font-size: 0.85rem;
+		font-size: 0.92rem;
 		width: 40%;
 		&:hover {
 			border-color: #2780f8;
@@ -520,6 +522,7 @@ textarea:hover:ms-input-placeholder {
 	}
 	.button_group {
 		button {
+			font-size: 13px!important;
 			&:first-child {
 				margin-right: 0.5rem!important;
 			}

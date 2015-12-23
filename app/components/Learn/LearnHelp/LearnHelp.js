@@ -42,6 +42,7 @@ export default class LearnHelp extends Component {
 						{
 							user_answer !== null 
 							&& user_answer.length > 0
+							&& false // temp
 							&& 
 							<UserAnswer user_answer={user_answer}
 										current_trial={current_trial} />
