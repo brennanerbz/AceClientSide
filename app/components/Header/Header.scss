@@ -34,7 +34,9 @@
         &.convo {
             padding-bottom: 25px;
             padding-top: 9.5px;
-            width: 95%;
+            width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
             min-width: 1005px!important;
         }
         &.landing {

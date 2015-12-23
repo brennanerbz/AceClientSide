@@ -35,6 +35,69 @@
 			    }
 			}
 		}
-
+		.scroll_hider {
+			overflow: hidden;
+			#slots_scroller {
+				padding: 0 0 5rem;
+			    overflow-y: scroll;
+			    // height: 1800px;
+			    width: 220px;
+			    .slots {
+			    	margin: 1rem 0 2rem;
+			    	width: inherit;
+			    }
+			    h2 {
+			    	&#slot_header {
+			    		text-align: left;
+			    		font-size: .8rem;
+			    		line-height: 1.25rem;
+			    		margin: 0 1rem .1rem;
+			    		text-transform: uppercase;
+			    		font-weight: 700;
+			    		color: #ab9ba9;
+			    		width: 165px;
+			    		position: relative;
+			    	}
+			    }
+			    ul {
+			    	&#slots_list {
+			    		list-style-type: none;
+			    		text-align: left;
+			    		margin: 0 1px 0 0;
+			    		width: 204px;
+			    		#slot_wrapper {
+			    			width: 220px;
+			    			border-bottom: 1px solid blue;
+							&:first-child {
+								border-top: 1px solid blue;
+							}
+			    		}
+			    		li {
+			    			width: 204px;
+			    			border: 1px solid yellow;
+			    			padding: 1em;
+			    			#slot_progress {
+			    				border: 1px solid green;
+			    				padding: 0.1em;
+			    				margin-right: 0.55em;
+			    			}
+			    			#slot_preview {
+			    				font-size: 13px;
+			    			}
+			    		}
+			    	}
+			    }
+			}
+		}
+	}
+	#sequence_control {
+		width: 220px;
+		float: left;
+		position: fixed;
+		font-family: "Lato";
+		bottom: 0;
+		border: 2px solid green;
+		text-align: center;
+		margin: 0 auto;
 	}
 }

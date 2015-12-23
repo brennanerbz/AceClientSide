@@ -35,20 +35,45 @@ export default class SlotsListContainer extends Component {
 										Slot header
 									</h2>
 									<ul id="slots_list">
-										<li className={classnames(`slot`)}>
-											<span className="overflow_ellipsis">
-												<span id="slot_progress">
-													0
+										<div id="slot_wrapper">
+											<li className={classnames(`slot`)}>
+												<span className="overflow_ellipsis">
+													<span id="slot_progress">
+														0
+													</span>
+													<span id="slot_preview">
+														This is a preview of the slot, it should be the cue data
+													</span>
 												</span>
-												<span id="slot_preview">
-													This is a preview of the slot, it should be the cue data
+											</li>
+										</div>
+										<div id="slot_wrapper">
+											<li className={classnames(`slot`)}>
+												<span className="overflow_ellipsis">
+													<span id="slot_progress">
+														0
+													</span>
+													<span id="slot_preview">
+														This is a preview of the slot, it should be the cue data
+													</span>
 												</span>
-											</span>
-										</li>
+											</li>
+										</div>
 									</ul>
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div id="sequence_control">
+					<button id="start_sequence_over" className="button outline tertiary">
+						Start over
+					</button>
+					<div id="sequence_progress_count">
+						8 of 24
+					</div>
+					<div id="sequence_progress_bar">
+						Progress bar
 					</div>
 				</div>
 			</div>
