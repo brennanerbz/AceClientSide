@@ -1,0 +1,40 @@
+#slots_list {
+	#col_slots_list_bg {
+		height: 1800px;
+		width: 220px;
+		position: fixed;
+		top: 58px;
+		left: 0;
+		border: 1px solid red;
+	}
+	#col_slots_list {
+		width: 220px;
+		float: left;
+		position: relative;
+		font-family: "Lato";
+		top: 58px;
+		border: 2px solid green;
+		&:hover {
+			#scroll_wrapper_for_slots {
+				.scroll_bar {
+					visibility: visible!important;
+				}
+			}
+		}
+		#slots_overlay {
+			// TODO
+		}
+		#scroll_wrapper_for_slots {
+			.scroll_bar {
+				visibility: hidden;
+			    background: #453744;
+			    .scroll_inner {
+			    	border: 3px solid #453744;
+			    	background: #FFFFFF;
+			    	opacity: 0.7;
+			    }
+			}
+		}
+
+	}
+}

@@ -109,7 +109,7 @@ export default class FlunkApp extends Component {
 			<div>
 				<Header root_path={root_path}/>
 				<div className={classnames("outer_shell", {
-					"void": root_path == '/' && !this.props.logged_in
+					"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
 				})}>
 					{::this.renderSideNav()}
 					{childrenWithProps}

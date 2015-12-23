@@ -31,6 +31,12 @@
                 float: none;
             }
         }
+        &.convo {
+            padding-bottom: 25px;
+            padding-top: 9.5px;
+            width: 95%;
+            min-width: 1005px!important;
+        }
         &.landing {
             .header {
                 .header_logo {

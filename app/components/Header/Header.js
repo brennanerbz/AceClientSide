@@ -131,7 +131,7 @@ export default class Header extends Component {
 					|| root_path == '/' && !logged_in)
 					},
 					{
-						'create_border': this.state.show_border && root_path == 'createset'
+						'create_border': this.state.show_border && root_path == 'createset' 
 					}
 					)}>
 					<div style={						
@@ -145,6 +145,9 @@ export default class Header extends Component {
 						}, 
 						{
 							'beta': true
+						},
+						{
+							'convo': root_path == 'convo'
 						}
 						)}>				
 						<div className='header'>
@@ -186,6 +189,7 @@ export default class Header extends Component {
 									|| root_path == 'import' 
 									|| root_path == 'learn' 
 									|| (root_path == '/' && !logged_in)
+									|| root_path == 'convo'
 									? null
 									: <SearchBox {...this.props}/>
 								}
@@ -194,6 +198,7 @@ export default class Header extends Component {
 									|| root_path == 'import' 
 									|| root_path == 'learn'
 									|| (root_path == '/' && !logged_in )
+									|| root_path == 'convo'
 									? null
 									: <button className="create_set_btn_group"
 											  onClick={() => { 
@@ -210,6 +215,7 @@ export default class Header extends Component {
 									|| root_path == 'import' 
 									|| root_path == 'learn'
 									|| (root_path == '/' && !logged_in )
+									|| root_path == 'convo'
 									? null
 									: <button className="create_set_btn_group import"
 											  onClick={() => { 

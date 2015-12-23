@@ -27,7 +27,11 @@ import Slots from '../../components/Conversation/Slots/Containers/SlotsListConta
 
 	}),
 	dispatch => ({
-
+		...bindActionCreators({
+			...learnActions,
+			...setActions,
+			pushState
+		}, dispatch)
 	})
 )
 export default class Conversation extends Component {
