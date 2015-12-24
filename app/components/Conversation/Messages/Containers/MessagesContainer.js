@@ -14,6 +14,7 @@ export default class MessagesContainer extends Component {
 		sH: null,
 		sbH: null,
 		smL: null,
+		pH: null,
 		top: 0,
 		rendered: false
 	}
@@ -22,11 +23,13 @@ export default class MessagesContainer extends Component {
 		var $scrollable = $('#msgs_scroller'), /* content */
 		    $scrollbar  = $('#scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
+		    cH = $scrollable[0].clientHeight,
 		    vH  = $viewPort[0].innerHeight - 152,
 		    sH  = $scrollable[0].scrollHeight,
 		    sbH = vH*vH/sH,
 		    top = $scrollable.scrollTop()/vH*sbH,
-		    smL = $('#scroll_wrapper_for_messages')[0].clientWidth - 37.5
+		    smL = $('#scroll_wrapper_for_messages')[0].clientWidth - 37.5,
+		    pH = vH - cH
 		this.setState({
 			$scrollable: $scrollable,
 			$scrollbar: $scrollbar,
@@ -35,7 +38,8 @@ export default class MessagesContainer extends Component {
 			vH: vH,
 			sbH: sbH,
 			top: top,
-			smL: smL
+			smL: smL,
+			pH: pH
 		})
 		setTimeout(() => {
 			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight);
@@ -54,9 +58,8 @@ export default class MessagesContainer extends Component {
 		})
 	}
 
-
 	render() {
-		const { $scrollable, H, sH, vH, sbH, top, smL } = this.state;
+		const { $scrollable, H, sH, vH, sbH, top, smL, pH } = this.state;
 		return(
 			<div id="messages_container" className={classnames({"rendered": this.state.rendered})}>
 				<div id="scroll_wrapper_for_messages" className="scroll_wrapper">
@@ -90,7 +93,7 @@ export default class MessagesContainer extends Component {
 							className="scroller">
 							<div style={{}} id="end_help">
 								<div id="end_display_help">
-									<div style={{}} id="end_display_padder">
+									<div style={{height: pH}} id="end_display_padder">
 									</div>
 									<div id="end_display_meta">
 										<h1 className="small_bottom_margin set_name">
@@ -109,7 +112,7 @@ export default class MessagesContainer extends Component {
 								</div>
 							</div>
 							<div id="msgs_div" className="msgs_holder">
-								{Array.from({length: 20}).map((a, i) => {
+								{Array.from({length: 1}).map((a, i) => {
 									return (
 										<div key={i} className="message">
 											<div className="action_hover_container">
