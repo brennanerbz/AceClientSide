@@ -112,7 +112,7 @@ export default class MessagesContainer extends Component {
 								</div>
 							</div>
 							<div id="msgs_div" className="msgs_holder">
-								{Array.from({length: 1}).map((a, i) => {
+								{Array.from({length: 10}).map((a, i) => {
 									return (
 										<div key={i} className="message">
 											<div className="action_hover_container">
