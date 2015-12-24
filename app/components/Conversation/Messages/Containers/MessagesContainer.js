@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 require('../Messages.scss');
 
-import MessagesScroller from '../Views/MessagesScroller';
+import MessagesList from '../Views/MessagesList';
+import EndDisplayHelp from '../Views/EndDisplayHelp';
 import ScrollBar from '../Views/ScrollBar';
 
 export default class MessagesContainer extends Component {
@@ -61,7 +62,13 @@ export default class MessagesContainer extends Component {
 	}
 
 	render() {
-		const { sH, vH, sbH, top, smL, pH } = this.state;
+		const { sH, vH, sbH, top, smL, pH } = this.state,
+		scrollHiderStyle = {
+			width: smL, marginRight: '17px'
+		},
+		msgsScrollerStyle = {
+			height: vH, width: window.innerWidth - 220
+		}
 		return(
 			<div id="messages_container" 
 				 className={classnames({"rendered": this.state.rendered})}>
@@ -72,11 +79,19 @@ export default class MessagesContainer extends Component {
 						scrollBarHeight={sbH}
 						top={top}
 					/>
-					<MessagesScroller 
-						scrollMarginLeft={smL}
-						viewHeight={vH}
-						paddingHeight={pH}
-					/>
+					<div style={scrollHiderStyle} 
+						 id="scroll_hider">
+						<div style={msgsScrollerStyle}
+							 onScroll={::this.setScrollBarPosition}
+							 id="msgs_scroller" 
+							 className="scroller">
+							<EndDisplayHelp 
+								paddingHeight={pH}
+							/>
+							<MessagesList 
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
