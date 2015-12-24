@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 require('../Messages.scss');
 
 export default class MessagesContainer extends Component {
@@ -12,7 +13,9 @@ export default class MessagesContainer extends Component {
 		vH: null,
 		sH: null,
 		sbH: null,
-		top: 0
+		smL: null,
+		top: 0,
+		rendered: false
 	}
 
 	componentDidMount() {
@@ -22,7 +25,8 @@ export default class MessagesContainer extends Component {
 		    vH  = $viewPort[0].innerHeight - 152,
 		    sH  = $scrollable[0].scrollHeight,
 		    sbH = vH*vH/sH,
-		    top = $scrollable.scrollTop()/vH*sbH
+		    top = $scrollable.scrollTop()/vH*sbH,
+		    smL = $('#scroll_wrapper_for_messages')[0].clientWidth - 37.5
 		this.setState({
 			$scrollable: $scrollable,
 			$scrollbar: $scrollbar,
@@ -30,11 +34,19 @@ export default class MessagesContainer extends Component {
 			sH: sH,
 			vH: vH,
 			sbH: sbH,
-			top: top
-		}) 		 
+			top: top,
+			smL: smL
+		})
+		setTimeout(() => {
+			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight);
+			this.setState({
+				rendered: true
+			})
+		}, 1) 	
 	}
 
-	setScrollBarPosition() {
+	setScrollBarPosition(e) {
+		e.preventDefault()
 		const { $scrollable, vH, sbH } = this.state,
 		top = $scrollable.scrollTop()/ vH*sbH
 		this.setState({
@@ -44,12 +56,12 @@ export default class MessagesContainer extends Component {
 
 
 	render() {
-		const { $scrollable, H, sH, vH, sbH, top } = this.state;
+		const { $scrollable, H, sH, vH, sbH, top, smL } = this.state;
 		return(
-			<div id="messages_container">
+			<div id="messages_container" className={classnames({"rendered": this.state.rendered})}>
 				<div id="scroll_wrapper_for_messages" className="scroll_wrapper">
 					<div style={{
-							marginLeft: '1185.5px',
+							marginLeft: smL + 5,
 							height: vH
 						}} 
 						className="scroll_bar">
@@ -65,7 +77,7 @@ export default class MessagesContainer extends Component {
 						</div>
 					</div>
 					<div style={{
-							width: '1186px',
+							width: smL,
 							marginRight: '17px'
 						}} 
 						id="scroll_hider">
@@ -97,9 +109,9 @@ export default class MessagesContainer extends Component {
 								</div>
 							</div>
 							<div id="msgs_div" className="msgs_holder">
-								{Array.from({length: 20}).map(a => {
+								{Array.from({length: 20}).map((a, i) => {
 									return (
-										<div className="message">
+										<div key={i} className="message">
 											<div className="action_hover_container">
 											</div>
 											<div className="message_gutter">
