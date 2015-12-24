@@ -16,6 +16,13 @@
 		top: 58px;
 	    z-index: 300;
 		border: 2px solid green;
+		opacity: 0;
+		-webkit-transition: opacity 0.05s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+		transition: opacity 0.05s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+		border: 1px solid red;
+		&.rendered {
+			opacity: 1;
+		}
 		&:hover {
 			#scroll_wrapper_for_slots {
 				.scroll_bar {

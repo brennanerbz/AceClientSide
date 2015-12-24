@@ -4,7 +4,7 @@ require('../Messages.scss');
 
 import MessagesList from '../Views/MessagesList';
 import EndDisplayHelp from '../Views/EndDisplayHelp';
-import ScrollBar from '../Views/ScrollBar';
+import ScrollBar from '../../ScrollBar/ScrollBar';
 
 export default class MessagesContainer extends Component {
 	static propTypes = {
