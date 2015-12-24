@@ -1,28 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames'
+import classnames from 'classnames';
 require('../Header.scss')
+
+import ActiveSetHeader from '../Views/ActiveSetHeader';
 
 export default class HeaderContainer extends Component {
 	static propTypes = {
+	}
+
+	state = {
+		
 	}
 
 	render() {
 		return(
 			<div id="header" className="">
 				<div id="set_header">
-					<h2 id="active_set_header" className="overflow_ellipsis">
-						<span className="star icon">Star</span>
-						<span className="name">
-							<span className="prefix">
-								Prefix
-								<img className="icon"/>
-							</span>
-							Set title
-						</span>
-						<i id="set_actions" className="">
-							Actions
-						</i>
-					</h2>
+					<ActiveSetHeader />
 				</div>
 			</div>
 		);
