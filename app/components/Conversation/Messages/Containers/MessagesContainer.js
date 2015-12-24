@@ -6,47 +6,59 @@ export default class MessagesContainer extends Component {
 	}
 
 	state = {
-		msg_scroller_height: 0,
-		scroll_height: 0,
-		handle_height: 0
+		$scrollable: null,
+		$scrollbar: null,
+		H: null,
+		vH: null,
+		sH: null,
+		sbH: null,
+		top: 0
 	}
 
 	componentDidMount() {
-		window.addEventListener('resize', ::this.computeHeight)
-		this.computeHeight()
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', ::this.computeHeight)
-	}
-
-	computeHeight() {
-		let viewport_height = window.innerHeight, 
-			scroll_bar_height = viewport_height - 180,
-			h = viewport_height / (parseInt($(this.refs.msgs_div).prop('scrollHeight'), 10) + 270),
-			handle_height = scroll_bar_height * h
+		var $scrollable = $('#msgs_scroller'), /* content */
+		    $scrollbar  = $('#scroll_handler'), /* scrollbar handle */
+		    $viewPort = $(window),
+		    vH  = $viewPort[0].innerHeight - 152,
+		    sH  = $scrollable[0].scrollHeight,
+		    sbH = vH*vH/sH,
+		    top = $scrollable.scrollTop()/vH*sbH
 		this.setState({
-			msg_scroller_height: viewport_height - 150,
-			scroll_height: scroll_bar_height,
-			handle_height: handle_height
+			$scrollable: $scrollable,
+			$scrollbar: $scrollbar,
+			$viewPort: $viewPort,
+			sH: sH,
+			vH: vH,
+			sbH: sbH,
+			top: top
+		}) 		 
+	}
+
+	setScrollBarPosition() {
+		const { $scrollable, vH, sbH } = this.state,
+		top = $scrollable.scrollTop()/ vH*sbH
+		this.setState({
+			top: top
 		})
 	}
 
+
 	render() {
-		let { msg_scroller_height, scroll_height, handle_height } = this.state;
+		const { $scrollable, H, sH, vH, sbH, top } = this.state;
 		return(
 			<div id="messages_container">
 				<div id="scroll_wrapper_for_messages" className="scroll_wrapper">
 					<div style={{
 							marginLeft: '1185.5px',
-							height: scroll_height
+							height: vH
 						}} 
 						className="scroll_bar">
 						<div style={{
 								left: '-3px',
-								height: handle_height,
-								top: '3px'
+								height: sbH,
+								top: top
 							}} 
+							id="scroll_handler"
 							className="scroll_handler">
 							<div className="scroll_inner">
 							</div>
@@ -58,9 +70,10 @@ export default class MessagesContainer extends Component {
 						}} 
 						id="scroll_hider">
 						<div style={{
-								height:  msg_scroller_height,
+								height: vH,
 								width: '1198px'
 							}} 
+							onScroll={::this.setScrollBarPosition}
 							id="msgs_scroller" 
 							className="scroller">
 							<div style={{}} id="end_help">
@@ -83,168 +96,34 @@ export default class MessagesContainer extends Component {
 									</div>
 								</div>
 							</div>
-							<div ref="msgs_div" id="msgs_div" className="msgs_holder">
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
+							<div id="msgs_div" className="msgs_holder">
+								{Array.from({length: 20}).map(a => {
+									return (
+										<div className="message">
+											<div className="action_hover_container">
+											</div>
+											<div className="message_gutter">
+												<span className="message_star_holder">
+													<img className="star" />
+												</span>
+											</div>
+											<div className="message_content">
+												<a className="message_sender">
+													message_sender
+												</a>
+												<span className="message_star_holder">
+													<img className="star" />
+												</span>
+												<span className="message_body">
+													Message body
+												</span>
+												<div className="message_actions_container">
+													Actions
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
-										</div>
-									</div>
-								</div>
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
-										</div>
-									</div>
-								</div>
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
-										</div>
-									</div>
-								</div>
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
-										</div>
-									</div>
-								</div>
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
-										</div>
-									</div>
-								</div>
-								<div className="message">
-									<div className="action_hover_container">
-									</div>
-									<div className="message_gutter">
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-									</div>
-									<div className="message_content">
-										<a className="message_sender">
-											message_sender
-										</a>
-										<span className="message_star_holder">
-											<img className="star" />
-										</span>
-										<span className="message_body">
-											Message body
-										</span>
-										<div className="message_actions_container">
-											Actions
-										</div>
-									</div>
-								</div>
+									)
+								})}
 							</div>
 						</div>
 					</div>
