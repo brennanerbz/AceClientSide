@@ -34,13 +34,15 @@
 			// TODO
 		}
 		#scroll_wrapper_for_slots {
-			// overflow: hidden;
+			overflow: hidden;
+			.scroll_handler {
+				width: 14px;
+			}
 			.scroll_bar {
 				visibility: hidden;
-			    background: #453744;
+			    background: #fff;
 			    .scroll_inner {
-			    	border: 3px solid #453744;
-			    	background: #FFFFFF;
+			    	background: #383F45;
 			    	opacity: 0.7;
 			    }
 			}
@@ -50,7 +52,6 @@
 			#slots_scroller {
 				padding: 0 0 5rem;
 			    overflow-y: scroll;
-			    // height: 1800px;
 			    width: 220px;
 			    .slots {
 			    	margin: 1rem 0 2rem;
