@@ -8,12 +8,9 @@ export default class MessageBody extends Component {
 
 	render() {
 		return (
-			<a className="message_sender">
-				message_sender
-				<span className="message_star_holder">
-					<img className="star" />
-				</span>
-			</a>
+			<div className="action_hover_container">
+				Actions
+			</div>
 		);
 	}
 }
