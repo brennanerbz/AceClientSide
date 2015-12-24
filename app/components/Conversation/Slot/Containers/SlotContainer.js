@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
+import SlotProgress from '../Views/SlotProgress';
+import SlotPreview from '../Views/SlotPreview';
+
 export default class SlotContainer extends Component {
 	static propTypes = {
 	}
@@ -14,12 +17,8 @@ export default class SlotContainer extends Component {
 			<div id="slot_wrapper">
 				<li className={classnames(`slot`)}>
 					<span className="overflow_ellipsis">
-						<span id="slot_progress">
-							0
-						</span>
-						<span id="slot_preview">
-							This is a preview of the slot, it should be the cue data
-						</span>
+						<SlotProgress/>
+						<SlotPreview/>
 					</span>
 				</li>
 			</div>
