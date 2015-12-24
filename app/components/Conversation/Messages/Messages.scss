@@ -4,6 +4,9 @@
 	.scroller {
 		overflow-x: hidden;
 	}
+	#scroll_hider {
+		overflow: hidden;
+	}
 	#msgs_scroller {
 		overflow-y: auto;
 	    outline: 0;
