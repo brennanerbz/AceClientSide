@@ -102,6 +102,7 @@ const initial_convostate = {
 
 	slots: [],
 	current_slot: {},
+	last_slot_id: 0,
 	slot_index: null,
 
 	trials: [],
@@ -112,38 +113,7 @@ const initial_convostate = {
 	trial: {},
 
 	messages: [],
-	message: {
-		sender: '', /* bot, user */
-		type: '', /* cue, format, response, feedback */
-		bundle: false,
-		first_message: false,
-		cue: {
-			censored_cue: '',
-			message: ''
-		},
-		format_type: '', /* aug, mc, fb, cp, tf */
-		format: {
-			aug: '',
-			multiple_choice: [],
-			fill_in_the_blank: '',
-			copy_answer: '',
-			true_false: ''
-		},
-		user_response_type: '', /* response, command, search */
-		user_response: {
-			response: '',
-			command: '',
-			search: ''
-		},
-		feedback: {
-			message: '',
-			praise: '',
-			feedback: ''
-		},
-		trial_id: 0,
-		slot_id: 0,
-		user_id: 0
-	},
+	
 
 	rounds: [],
 	current_round: {},
@@ -151,10 +121,115 @@ const initial_convostate = {
 		
 }
 
-function createMessage(trial) {
-	let message = Object.assign({...initial_convostate})
-	return message;
+var tempMessage = {
+	sender: '', /* bot, user */
+	type: '', /* cue, format, response, feedback */
+	bundle: false,
+	first_message: false,
+	cue: {
+		censored_cue: '',
+		message: ''
+	},
+	format_type: '', /* aug, mc, fb, cp, tf */
+	format: {
+		aug: '',
+		multiple_choice: [],
+		stem: '',
+		copy_answer: '',
+		true_false: ''
+	},
+	user_response_type: '', /* response, command, search */
+	user_response: {
+		response: '',
+		command: '',
+		search: ''
+	},
+	feedback: {
+		message: '',
+		praise: '',
+		feedback: ''
+	},
+	trial_id: 0,
+	slot_id: 0,
+	user_id: 0
 }
+
+function buildMessages(trial) {
+	let messages = [], msg,
+		m = 0, types = ['cue', 'response', 'feedback'], type;
+	while(m < 3) {
+		type = types[m]
+		msg = buildMessage(trial, type)
+		messages.push(msg)
+		m++
+	}
+	return messages;
+}
+function buildMessage(trial, type) {
+	let message = Object.assign({}, tempMessage)
+	if(type == 'cue') {
+		message.sender = 'bot'
+		if(trial.format == 'recall') {
+			message.cue.censored_cue = trial.censored_cue;
+			message.cue.message = trial.message;
+			message.format_type = 'recall';
+			message.type = 'cue'
+		} else {
+			message.format_type = trial.format;
+			message.bundle = true;
+			message.type = 'format'
+			switch(message.format_type) {
+				case 'aug':
+					message.format.aug = trial.augs[0]
+					break;
+				case 'mc':
+					message.format.multiple_choice = trial.mc_choices
+					break;
+				case 'stem':
+					message.format.stem = trial.stem
+					break;
+				case 'copy':
+					message.format.copy_answer = trial.answer
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	if(type == 'response') {
+		message.sender = 'user';
+		message.user_response_type = 'response';
+		message.user_response.response = trial.answer
+		message.type = 'response'
+	}
+	if(type == 'feedback') {
+		message.sender = 'bot';
+		message.bundle = true;
+		message.first_message = true;
+		message.feedback = {
+			message: trial.message,
+			praise: trial.praise,
+			feedback: trial.feedback
+		}
+		message.type = 'feedback'
+	}
+	message.trial_id = trial.id;
+	message.slot_id = trial.slot_id;
+	message.user_id = trial.user_id;
+ 	return message;
+}
+
+Array.prototype.flatten = function() {
+    var ret = [];
+    for(var i = 0; i < this.length; i++) {
+        if(Array.isArray(this[i])) {
+            ret = ret.concat(this[i].flatten());
+        } else {
+            ret.push(this[i]);
+        }
+    }
+    return ret;
+};
 
 export default function conversation(state = initial_convostate, action) {
 	switch(action.type) {
@@ -246,32 +321,33 @@ export default function conversation(state = initial_convostate, action) {
 				current_slot: slot,
 				slot_index: slot_index,
 				start: action.start,
-				end: action.end
+				end: action.end,
+				last_slot_id: slots.slice(-1)[0].id
 			}
 		case RECEIVE_TRIALS_SUCCESS: 
 			let trials = action.trials,
 				messages = state.messages,
 				trial,
 				message;
-			for(ts = 0; ts < trials.length; ts++) {
+			for(var ts = 0; ts < trials.length; ts++) {
 				trial = trials[ts]
-				message = createMessage(trial)
+				message = buildMessages(trial)
 				messages.push(message)
 			}
+			messages.flatten()
 			return {
 				...state,
 				isFetchingTrials: false,
 				trials: action.trials,
-				message: messages
+				messages: messages
 			}
 		case NEW_TRIAL_SUCCESS:
 			let _newtrials = state.trials.concat(action._trial),
-				_state_slots = state.slots;
-			_state_slots.map(slot => {
-				if(slot.item_id == action._trial.item_id) {
-					slot.format = action._trial.format
-				}
-			}) 
+				_messages = state.messages,
+				_message;
+			// _message = createMessage(action._trial)
+			// _messages.push(_message)
+			// _messages.flatten()
 			return {
 				...state,
 				isFetchingLearn: false,
@@ -280,7 +356,7 @@ export default function conversation(state = initial_convostate, action) {
 				isShowingCompletedRound: false,
 				trials: _newtrials,
 				current_trial: action._trial,
-				slots: _state_slots
+				messages: _messages
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
 			let _slot = state.slots.filter(slot => slot.order === action.sequence.position)[0],
@@ -296,8 +372,7 @@ export default function conversation(state = initial_convostate, action) {
 				current_sequence: action.sequence,
 				position: action.sequence.position,
 				current_slot: _slot,
-				isUpdatingState: false,
-				previous_trial: action.sequence.position !== state.position ? {} : state.previous_trial
+				isUpdatingState: false
 			}
 		case UPDATE_SLOT_SUCCESS:
 			return {
@@ -390,7 +465,7 @@ export default function conversation(state = initial_convostate, action) {
 			}
 		case CLEAR_LEARN:
 			return {
-				...state = initial_learnstate
+				...state = initial_convostate
 			}
 		case RECEIVE_SEQUENCE_FAILURE:
 		case RECEIVE_SLOTS_FAILURE:

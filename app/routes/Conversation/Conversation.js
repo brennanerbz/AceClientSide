@@ -9,7 +9,7 @@ import DocumentTitle from 'react-document-title';
 require('./Conversation.scss');
 
 /* Actions and API calls */
-import * as learnActions from '../../actions/learnv2';
+import * as convoActions from '../../actions/conversation';
 import * as setActions from '../../actions/usersets';
 
 /* Minor components */
@@ -28,7 +28,7 @@ import Slots from '../../components/Conversation/Slots/Containers/SlotsListConta
 	}),
 	dispatch => ({
 		...bindActionCreators({
-			...learnActions,
+			...convoActions,
 			...setActions,
 			pushState
 		}, dispatch)
@@ -36,6 +36,11 @@ import Slots from '../../components/Conversation/Slots/Containers/SlotsListConta
 )
 export default class Conversation extends Component {
 	static propTypes = {
+	}
+
+	componentDidMount() {
+		const { fetchLearn } = this.props;
+		fetchLearn(4, false)
 	}
 
 	render() {
