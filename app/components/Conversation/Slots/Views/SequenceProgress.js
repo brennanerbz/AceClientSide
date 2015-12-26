@@ -21,7 +21,7 @@ export default class SequenceProgress extends Component {
 			$progressBarInner = $(this.refs.progress_bar_inner),
 			containerWidth = $progressBar[0].clientWidth,
 			slotsLength = 24, // DATA
-			completedSlots = 8, // DATA
+			completedSlots = 12, // DATA
 			innerWidth = completedSlots / slotsLength * containerWidth;
 		this.setState({
 			$progressBar: $progressBar,
