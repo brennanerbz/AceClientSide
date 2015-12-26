@@ -9,6 +9,7 @@ import search from './search';
 import transfer from './transfer';
 import upload from './import'; // Need better naming convention for this view
 import error_page from './error';
+import conversation from './conversation';
 import { routerStateReducer } from 'redux-router';
 
 const reducers = combineReducers({
@@ -22,6 +23,7 @@ const reducers = combineReducers({
 	transfer,
 	upload,
 	error_page,
+	conversation,
 	router: routerStateReducer
 });
 
