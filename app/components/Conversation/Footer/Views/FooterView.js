@@ -9,8 +9,13 @@ export default class FooterView extends Component {
 	render() {
 		return(
 			<div>
-				<InputContainer />
-				<NotificationBar/>
+				<InputContainer 
+					currentTrial={this.props.currentTrial}
+					submitAnswer={this.props.submitAnswer}
+				/>
+				<NotificationBar
+					
+				/>
 			</div>
 		);
 	}

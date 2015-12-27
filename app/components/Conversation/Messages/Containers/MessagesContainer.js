@@ -69,6 +69,7 @@ export default class MessagesContainer extends Component {
 		msgsScrollerStyle = {
 			height: vH, width: window.innerWidth - 220
 		}
+		const { username, currentSlot, messages } = this.props;
 		return(
 			<div id="messages_container" 
 				 className={classnames({"rendered": this.state.rendered})}>
@@ -89,6 +90,9 @@ export default class MessagesContainer extends Component {
 								paddingHeight={pH}
 							/>
 							<MessagesList 
+								username={username}
+								currentSlot={currentSlot}
+								messages={messages}
 							/>
 						</div>
 					</div>

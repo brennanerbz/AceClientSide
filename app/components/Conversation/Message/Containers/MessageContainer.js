@@ -13,10 +13,14 @@ export default class MessageContainer extends Component {
 	}
 
 	render() {
+		const { username, message } = this.props;
 		return(
 			<div className="message">
 				<MessageGutter/>
-				<MessageContent/>
+				<MessageContent
+					username={username}
+					message={message}
+				/>
 			</div>
 		);
 	}

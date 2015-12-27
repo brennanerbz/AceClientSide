@@ -390,6 +390,7 @@ export const UPDATE_TRIAL = 'UPDATE_TRIAL';
 export const UPDATE_TRIAL_SUCCESS = 'UPDATE_TRIAL_SUCCESS';
 export const UPDATE_TRIAL_FAILURE = 'UPDATE_TRIAL_FAILURE';
 export const GRADING = 'GRADING';
+export const NEW_USER_MESSAGE = 'NEW_USER_MESSAGE';
 export function updateTrial(response) {  
 	return (dispatch, getState) => {
 		dispatch({type: GRADING})
@@ -397,27 +398,29 @@ export function updateTrial(response) {
 			current_trial = state.current_trial,
 			current_slot = state.current_slot,
 			trial_id = current_trial.id;
-		axios.put(`${api_url}/trials/${trial_id}`, 
-			response
-		).then(res => {
-			let updated_trial = res.data;
-			dispatch({type: UPDATE_TRIAL_SUCCESS, updated_trial})
-			/* TODO: Make the best decision on what to show based on accuracy, grading codes and .correct */
-			if(updated_trial.correct) {
-				current_slot['completed'] = true;
-				dispatch(updateSlot(current_slot))
-				dispatch({type: SHOW_CORRECT})
-				dispatch(nextSlot('next'))
-				return;
-			} 
-			dispatch(newTrial(null, current_slot.id))
-		})
-		.catch(() => {
-			dispatch({
-				type: UPDATE_TRIAL_FAILURE,
-				error: Error(err),
-				typeerror: err
-			})
+		dispatch({type: NEW_USER_MESSAGE, response})
+		request
+		.put(`${api_url}/trials/${trial_id}`)
+		.send(response)
+		.end((err, res) => {
+			if(res.ok) {
+				let updated_trial = res.body;
+				dispatch({type: UPDATE_TRIAL_SUCCESS, updated_trial})
+				if(updated_trial.correct) {
+					current_slot['completed'] = true;
+					dispatch(updateSlot(current_slot))
+					dispatch({type: SHOW_CORRECT})
+					dispatch(nextSlot('next'))
+					return;
+				} 
+				dispatch(newTrial(null, current_slot.id))
+			} else {
+				dispatch({
+					type: UPDATE_TRIAL_FAILURE,
+					error: Error(err),
+					typeerror: err
+				})
+			}
 		})
 	}
 }

@@ -16,7 +16,9 @@ export default class InputContainer extends Component {
 		return(
 			<div style={{height: '42px'}} id="input_container">
 				<HelpButton />
-				<InputForm />
+				<InputForm 
+					{...this.props}
+				/>
 			</div>
 		);
 	}

@@ -14,12 +14,23 @@ export default class FooterContainer extends Component {
 		// TODO: call API with POST / PUT trial
 	}
 
+	handleUserResponse(response) {
+		const { updateTrial } = this.props;
+		updateTrial(response)
+	}
+
 	render() {
+		const { currentTrial } = this.props;
 		return(
 			<div id="footer">
 				<FooterOverlay/>
 				<div id="footer_msgs">
-					<FooterView />
+					<FooterView 
+						currentTrial={currentTrial}
+						submitAnswer={(response) => {
+							::this.handleUserResponse(response)
+						}}
+					/>
 				</div>
 			</div>
 		);

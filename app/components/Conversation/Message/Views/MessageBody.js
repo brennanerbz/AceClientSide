@@ -6,10 +6,42 @@ export default class MessageBody extends Component {
 
 	}
 
+	buildCueMessage() {
+		
+	}
+
+	buildUserMessage() {
+
+	}
+
+	buildFeedbackMessage() {
+
+	}
+
+	buildFormatMessage() {
+
+	}
+
 	render() {
+		const { message } = this.props;
 		return (
 			<span className="message_body">
-				Message body
+				{
+					message.type == 'cue'
+					&& ::this.buildCueMessage(message)
+				}
+				{
+					message.type == 'response'
+					&& ::this.buildCueMessage(message)
+				}
+				{
+					message.type == 'feedback'
+					&& ::this.buildCueMessage(message)
+				}
+				{
+					message.type == 'format'
+					&& ::this.buildCueMessage(message)
+				}
 			</span>
 		);
 	}

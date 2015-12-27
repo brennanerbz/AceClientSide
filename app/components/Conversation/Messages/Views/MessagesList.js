@@ -7,11 +7,16 @@ export default class MessagesList extends Component {
 	}
 
 	render() {
+		const { username, currentSlot, messages } = this.props;
 		return(
 			<div id="msgs_div" className="msgs_holder">
-				{Array.from({length: 10}).map((a, i) => {
+				{messages.map((m, i) => {
 					return (
-						<MessageContainer key={i} />
+						<MessageContainer 
+							key={i} 
+							username={username}
+							currentSlot={currentSlot}
+							message={m}/>
 					)
 				})}
 			</div>

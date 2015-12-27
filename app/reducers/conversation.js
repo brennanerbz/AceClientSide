@@ -70,7 +70,9 @@ import {
 
 	COMPLETED_ROUND,
 	SHOW_COMPLETE_ROUND,
-	NEXT_ROUND
+	NEXT_ROUND,
+
+	NEW_USER_MESSAGE
 
 } from '../actions/learnv2';
 import _ from 'lodash';
@@ -81,15 +83,14 @@ const initial_convostate = {
 	isFetchingSequence: false,
 	isFetchingSlots: false,
 	isFetchingTrials: false,
-	isFetchingTrial: false,
-	isChangingDifficulty: false,
 	isShowingCorrect: false,
 	isShowingCompletedSequence: false,
 	isFetchingSequenceStats: false,
-	isShowingFeedback: false,
-	isShowingHint: false,
 	isUpdatingState: false,
 	isShowingCompletedRound: false,
+
+	set_name: null,
+	set_id: null,
 
 	current_sequence: {},
 	sequence_length: null,
@@ -114,7 +115,6 @@ const initial_convostate = {
 
 	messages: [],
 	
-
 	rounds: [],
 	current_round: {},
 	current_round_index: null,
@@ -202,6 +202,7 @@ function buildMessage(trial, type) {
 		message.user_response.response = trial.answer
 		message.type = 'response'
 	}
+
 	if(type == 'feedback') {
 		message.sender = 'bot';
 		message.bundle = true;
@@ -219,13 +220,14 @@ function buildMessage(trial, type) {
  	return message;
 }
 
-Array.prototype.flatten = function() {
+
+function flatten(arr) {
     var ret = [];
-    for(var i = 0; i < this.length; i++) {
-        if(Array.isArray(this[i])) {
-            ret = ret.concat(this[i].flatten());
+    for(var i = 0; i < arr.length; i++) {
+        if(Array.isArray(arr[i])) {
+            ret = ret.concat(flatten(arr[i]));
         } else {
-            ret.push(this[i]);
+            ret.push(arr[i]);
         }
     }
     return ret;
@@ -303,7 +305,9 @@ export default function conversation(state = initial_convostate, action) {
 				current_round: {},
 				current_round_index: null,
 				user_answer: null,
-				feedback: null
+				feedback: null,
+				set_name: action.sequence.set.title,
+				set_id: action.sequence.set_id
 			}
 		case RECEIVE_SLOTS_SUCCESS:
 			let slots = action.slots,
@@ -334,7 +338,7 @@ export default function conversation(state = initial_convostate, action) {
 				message = buildMessages(trial)
 				messages.push(message)
 			}
-			messages.flatten()
+			messages = flatten(messages)
 			return {
 				...state,
 				isFetchingTrials: false,
@@ -344,10 +348,15 @@ export default function conversation(state = initial_convostate, action) {
 		case NEW_TRIAL_SUCCESS:
 			let _newtrials = state.trials.concat(action._trial),
 				_messages = state.messages,
-				_message;
-			// _message = createMessage(action._trial)
-			// _messages.push(_message)
-			// _messages.flatten()
+				_message, type;
+			if(action._trial.answer == null) {
+				if(action._trial.format == 'recall') type = 'cue'
+				else type = 'format'
+			} else if(action._trial.answer !== null || action._trial.accuracy !== null) {
+				type = 'feedback'
+			}
+			_message = buildMessage(action._trial, type)
+			_messages.push(_message)
 			return {
 				...state,
 				isFetchingLearn: false,
@@ -357,6 +366,17 @@ export default function conversation(state = initial_convostate, action) {
 				trials: _newtrials,
 				current_trial: action._trial,
 				messages: _messages
+			}
+		case NEW_USER_MESSAGE:
+			let user_response = Object.assign({...action.response}, {
+					id: state.current_trial.id,
+					slot_id: state.current_slot.id,
+					user_id: state.current_trial.user_id
+				}),
+				user_message = buildMessage(user_response, 'response')
+			return {
+				...state,
+				messages: state.messages.push(user_message)
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
 			let _slot = state.slots.filter(slot => slot.order === action.sequence.position)[0],
@@ -391,6 +411,10 @@ export default function conversation(state = initial_convostate, action) {
 				isGrading: true
 			}
 		case UPDATE_TRIAL_SUCCESS:
+			let msgs = state.messages,
+				msg;
+			msg = buildMessage(action.updated_trial, 'feedback')
+			msgs.push(msg)
 			return {
 				...state,
 				trials: state.trials.map((trial) => {
@@ -399,8 +423,7 @@ export default function conversation(state = initial_convostate, action) {
 					: trial
 				}),
 				current_trial: action.updated_trial,
-				user_answer: action.updated_trial.answer,
-				feedback: action.updated_trial.feedback
+				messages: msgs
 			}
 		case SHOW_CORRECT:
 			return {

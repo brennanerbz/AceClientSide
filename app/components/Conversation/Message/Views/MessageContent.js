@@ -10,11 +10,16 @@ export default class MessageContent extends Component {
 	}
 
 	render() {
+		const { username, message } = this.props;
 		return(
 			<div className="message_content">
 				<MessageActions/>	
-				<MessageSender />
-				<MessageBody />
+				<MessageSender 
+					username={username}
+				/>
+				<MessageBody 
+					message={message}
+				/>
 			</div>
 		);
 	}
