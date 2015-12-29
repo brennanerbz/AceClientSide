@@ -1,6 +1,6 @@
 #import_page_container {
 	width: 100%;
-	max-width: 1150px;
+	max-width: 1100px;
 	padding-right: 50px;
 	padding-left: 50px;
 	display: table;
@@ -8,7 +8,42 @@
 	#escape_link {
 		top: 25px;
 		position: absolute;
-		right: 200px;
+		right: 205px;
+		display: block;
+		opacity: 0.5;
+		color: #9E9EA6;
+		text-decoration: none;
+		width: 4rem;
+		height: 4rem;
+		z-index: 1;
+		color: #9e9ea6;
+		line-height: 1.5rem;
+		border-radius: 100%;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		&:hover {
+			opacity: 1;
+			color: #555459;
+		    background: #e8e8e8;
+		    	background: #fff;
+		       	border: 1px solid #bbb;
+		       	color: #47525d!important;
+		}
+		img {
+			position: absolute;
+		    top: 0.95rem;
+		    left: 1.25rem;
+		    display: block;
+		}
+		span {
+			position: absolute;
+			top: 2.05rem;
+			left: 1.25rem;
+			width: 100%;
+			display: block;
+		}
 	}
 	#import_text {
 		width: 100%;

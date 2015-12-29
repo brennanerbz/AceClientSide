@@ -37,13 +37,19 @@ export default class ImportView extends Component {
 	}
 
 	render() {
-		const { loggedIn, pushState, importVisible } = this.props;
+		const { loggedIn, pushState, importVisible } = this.props,
+			close = require('../../assets/close.png');
 		return(
 			<DocumentTitle title='Import | Ace'>
 				<div id="import_page_container">
 					<a id="escape_link"
 						onClick={() => pushState(null, '/createset')}>
-						Escape
+						<img 
+						style={{
+							height: '19.5px'
+						}}
+						src={close}/>
+						<span>esc</span>
 					</a>
 					<ImportTextContainer
 						importVisible={importVisible}
