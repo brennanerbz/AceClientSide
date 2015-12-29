@@ -70,6 +70,7 @@ export default class MessagesContainer extends Component {
 			height: vH, width: window.innerWidth - 220
 		}
 		const { username, currentSlot, messages } = this.props;
+		// console.log(messages)
 		return(
 			<div id="messages_container" 
 				 className={classnames({"rendered": this.state.rendered})}>

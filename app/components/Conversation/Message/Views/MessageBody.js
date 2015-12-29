@@ -6,19 +6,29 @@ export default class MessageBody extends Component {
 
 	}
 
-	buildCueMessage() {
-		
+	buildCueMessage(msg) {
+		return <p>{msg.cue.censored_cue}</p>
 	}
 
-	buildUserMessage() {
-
+	buildUserMessage(msg) {
+		return <p>{msg.user_response.response}</p>
 	}
 
-	buildFeedbackMessage() {
-
+	buildFeedbackMessage(msg) {
+		return <p>{msg.feedback.feedback}</p>
 	}
 
-	buildFormatMessage() {
+	buildFormatMessage(msg) {
+		if(msg.format_type == 'mc') {
+			let mc = msg.format.multiple_choice,
+				mc_list = []
+			mc.forEach((m, i)=> {
+				mc_list.push(
+					<pre key={i}>{m}</pre>
+				)
+			})
+			return mc_list
+		}
 
 	}
 
@@ -32,15 +42,15 @@ export default class MessageBody extends Component {
 				}
 				{
 					message.type == 'response'
-					&& ::this.buildCueMessage(message)
+					&& ::this.buildUserMessage(message)
 				}
 				{
 					message.type == 'feedback'
-					&& ::this.buildCueMessage(message)
+					&& ::this.buildFeedbackMessage(message)
 				}
 				{
 					message.type == 'format'
-					&& ::this.buildCueMessage(message)
+					&& ::this.buildFormatMessage(message)
 				}
 			</span>
 		);

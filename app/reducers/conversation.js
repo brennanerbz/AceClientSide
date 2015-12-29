@@ -74,7 +74,7 @@ import {
 
 	NEW_USER_MESSAGE
 
-} from '../actions/learnv2';
+} from '../actions/conversation';
 import _ from 'lodash';
 
 const initial_convostate = {
@@ -167,7 +167,7 @@ function buildMessages(trial) {
 }
 function buildMessage(trial, type) {
 	let message = Object.assign({}, tempMessage)
-	if(type == 'cue') {
+	if(type == 'cue' || type == 'format') {
 		message.sender = 'bot'
 		if(trial.format == 'recall') {
 			message.cue.censored_cue = trial.censored_cue;
@@ -330,12 +330,10 @@ export default function conversation(state = initial_convostate, action) {
 			}
 		case RECEIVE_TRIALS_SUCCESS: 
 			let trials = action.trials,
-				messages = state.messages,
-				trial,
-				message;
+				messages = state.messages;
 			for(var ts = 0; ts < trials.length; ts++) {
-				trial = trials[ts]
-				message = buildMessages(trial)
+				let trial = trials[ts]
+				let message = buildMessages(trial)
 				messages.push(message)
 			}
 			messages = flatten(messages)
@@ -352,10 +350,9 @@ export default function conversation(state = initial_convostate, action) {
 			if(action._trial.answer == null) {
 				if(action._trial.format == 'recall') type = 'cue'
 				else type = 'format'
-			} else if(action._trial.answer !== null || action._trial.accuracy !== null) {
-				type = 'feedback'
-			}
+			} 
 			_message = buildMessage(action._trial, type)
+			console.log(_message)
 			_messages.push(_message)
 			return {
 				...state,
@@ -368,15 +365,17 @@ export default function conversation(state = initial_convostate, action) {
 				messages: _messages
 			}
 		case NEW_USER_MESSAGE:
-			let user_response = Object.assign({...action.response}, {
-					id: state.current_trial.id,
-					slot_id: state.current_slot.id,
-					user_id: state.current_trial.user_id
-				}),
-				user_message = buildMessage(user_response, 'response')
+			let user_response = action.response;
+			user_response.id = state.current_trial.id;
+			user_response.slot_id = state.current_slot.id;
+			user_response.user_id = state.current_trial.user_id
+			let user_message = buildMessage(user_response, 'response'),
+			_msgs = state.messages;
+			console.log(user_message)
+			_msgs.concat(user_message);
 			return {
 				...state,
-				messages: state.messages.push(user_message)
+				messages: _msgs
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
 			let _slot = state.slots.filter(slot => slot.order === action.sequence.position)[0],

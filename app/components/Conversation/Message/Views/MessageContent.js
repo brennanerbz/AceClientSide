@@ -16,6 +16,7 @@ export default class MessageContent extends Component {
 				<MessageActions/>	
 				<MessageSender 
 					username={username}
+					message={message}
 				/>
 				<MessageBody 
 					message={message}

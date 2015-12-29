@@ -79,6 +79,7 @@ export default class InputForm extends Component {
 						this.setState({value: e.target.value});
 					}}
 					onKeyPress={(e) => {
+						console.log(e.which)
 						if(e.which == 13 && !e.shiftKey && this.state.value.trim().length > 0) {
 							this.handleSubmit(e)
 						}

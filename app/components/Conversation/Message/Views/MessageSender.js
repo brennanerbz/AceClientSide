@@ -7,9 +7,14 @@ export default class MessageBody extends Component {
 	}
 
 	render() {
+		const { username, message } = this.props;
 		return (
 			<a className="message_sender">
-				message_sender
+				{
+					message.sender == 'bot'
+					? 'acubot'
+					: username.toLowerCase()
+				}
 				<span className="message_star_holder">
 					<img className="star" />
 				</span>

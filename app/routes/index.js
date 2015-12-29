@@ -11,6 +11,8 @@ import LoginPage from './LoginPage/LoginPage';
 import SignUp from './SignUp/SignUp';
 
 import Home from './Home/Home';
+
+import CreateView from './CreateSet/CreateView';
 import CreateSet from './CreateSet/CreateSet';
 import Import from './Import/Import';
 
@@ -49,8 +51,11 @@ const routes = (
             <Route path="studied" component={ProfileStudied}/>
         </Route>
 
-        <Route path="createset" component={CreateSet} />
-        <Route path="createset/:id" component={CreateSet}/>
+        <Route path="createset" component={CreateView}>
+            <IndexRoute component={CreateSet}/>
+            <Route path=":id" component={CreateSet}/>
+        </Route>
+        
 
         <Route path="import" component={Import}/>
 
