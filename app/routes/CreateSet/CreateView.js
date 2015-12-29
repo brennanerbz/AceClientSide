@@ -47,7 +47,9 @@ export default class CreateView extends Component {
 						{'isHidden': !import_view}
 						)}>
 
-						<ImportView/>
+						<ImportView
+							importVisible={import_view}
+						/>
 							
 					</div>
 				</VelocityComponent>

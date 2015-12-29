@@ -20,20 +20,23 @@ export default class ImportTextContainer extends Component {
 			return;
 		}
 	}
+	
 
 	render() {
-		const { noTextError } = this.state;
-		return(
+		const { noTextError } = this.state, { importVisible } = this.props;
+ 		return(
 			<div id="import_text">
 				<h2 className="heading">
 					Instantly turn your text into a study set
 				</h2>
+				
 				<LargeTextArea
 					handleTextChange={(value) => {
 						this.setState({
 							textAreaValue: value
 						});
 					}}
+					importVisible={importVisible}
 					noTextError={noTextError}
 					resetError={() => {
 						this.setState({noTextError: false})

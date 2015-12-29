@@ -6,15 +6,15 @@
 	padding: 5em;
 	z-index: 10001;
 	background: #fff;
-	box-shadow: 0 2px 4px rgba(150, 150, 150, 0.50);
+	box-shadow: 0 1px 3px rgba(150, 150, 150, 0.50);
 	-webkit-transform: translateY(-100%);
     -moz-transform: translateY(-100%);
     -ms-transform: translateY(-100%);
     transform: translateY(-100%);
-    -webkit-transition: -webkit-transform 300ms;
-    -moz-transition: -moz-transform 300ms;
-    -ms-transition: -ms-transform 300ms;
-    transition: transform 300ms;
+    -webkit-transition: -webkit-transform 200ms;
+    -moz-transition: -moz-transform 200ms;
+    -ms-transition: -ms-transform 200ms;
+    transition: transform 200ms;
 	&.isShowing {
 		-webkit-animation: slideDown 300ms;
 	    -moz-animation: slideDown 300ms;

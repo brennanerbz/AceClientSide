@@ -37,7 +37,7 @@ export default class ImportView extends Component {
 	}
 
 	render() {
-		const { loggedIn, pushState } = this.props;
+		const { loggedIn, pushState, importVisible } = this.props;
 		return(
 			<DocumentTitle title='Import | Ace'>
 				<div id="import_page_container">
@@ -45,7 +45,9 @@ export default class ImportView extends Component {
 						onClick={() => pushState(null, '/createset')}>
 						Escape
 					</a>
-					<ImportTextContainer/>
+					<ImportTextContainer
+						importVisible={importVisible}
+					/>
 					<ImportInstructionsContainer/>
 				</div>
 			</DocumentTitle>
