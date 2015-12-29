@@ -221,12 +221,15 @@ label, input {
 }
 
 input {
-	border:1px solid #ccc;
-	outline: none;
-	border-radius: 2px;
 	padding: 2px 6px;
 	height: 32px;
 	font-family: "Lato";
+}
+
+input, textarea {
+	border:1px solid #ccc;
+	outline: none;
+	border-radius: 2px;
 	&:focus {
 		border: 1px solid #498DFF;
 		box-shadow: 0 0 7px rgba(39, 128, 248, .15);

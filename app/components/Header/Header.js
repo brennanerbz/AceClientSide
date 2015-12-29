@@ -219,7 +219,7 @@ export default class Header extends Component {
 									? null
 									: <button className="create_set_btn_group import"
 											  onClick={() => { 
-											  	pushState(null, '/import') 
+											  	pushState(null, '/createset/import') 
 											  }}>
 											<img className="create_icon import" src={import_icon}/>
 											<Link className="button import create-set-button button-outline" to="">
