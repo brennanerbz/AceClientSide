@@ -32,9 +32,19 @@
 				box-shadow: 0 0 7px rgba(39, 128, 248, .15);
 				outline: none;
 			}
+			&.error {
+				// border-color: #e82110 !important;
+				// color: #e82110 !important;
+			}
 		}
 		button {
 			margin-top: 1rem;
+			&.importing {
+
+			}
+			&.disabled {
+				opacity: 0.5;
+			}
 		}
 		div {
 			&.note {

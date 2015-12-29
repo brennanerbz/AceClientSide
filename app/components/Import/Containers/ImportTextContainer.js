@@ -15,7 +15,10 @@ export default class ImportTextContainer extends Component {
 
 	handleSubmitText() {
 		const { textAreaValue } = this.state;
-		if(textAreaValue.length == 0) this.setState({noTextError: true})
+		if(textAreaValue.length == 0) { 
+			this.setState({noTextError: true})
+			return;
+		}
 	}
 
 	render() {
@@ -40,7 +43,10 @@ export default class ImportTextContainer extends Component {
 				<button 
 					onClick={::this.handleSubmitText}
 					id="import_text_btn" 
-					className={classnames("button primary large", {'importing': this.state.importing})}>
+					disabled={this.state.textAreaValue.length == 0}
+					className={classnames("button primary large", 
+						{'importing': this.state.importing},
+						{'disabled': this.state.textAreaValue.length == 0})}>
 					Import
 				</button>
 			</div>

@@ -15,6 +15,7 @@ export default class LargeTextArea extends Component {
 		return(
 			<textarea
 				id="import_textarea"
+				className={classnames({'error': noTextError})}
 				type="text"
 				autoFocus={true}
 				name="import_textarea"

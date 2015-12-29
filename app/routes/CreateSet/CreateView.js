@@ -36,9 +36,7 @@ export default class CreateView extends Component {
 
 		return(
 			<div id="create_page">
-				<VelocityComponent 
-					animation={{opacity: import_view ? 1 : 0}} 
-					duration={100}>
+				<VelocityComponent>
 					<div 
 					style={{
 						height: importHeight,
@@ -48,12 +46,9 @@ export default class CreateView extends Component {
 						{'isShowing': import_view},
 						{'isHidden': !import_view}
 						)}>
-						{
-							import_view
-							&&
-							<ImportView/>
+
+						<ImportView/>
 							
-						}
 					</div>
 				</VelocityComponent>
 				{this.props.children}
