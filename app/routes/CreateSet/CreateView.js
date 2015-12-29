@@ -36,20 +36,26 @@ export default class CreateView extends Component {
 
 		return(
 			<div id="create_page">
-				<div 
-				style={{
-					height: importHeight,
-					width: importWidth
-				}}
-				className={classnames('importView', {'slideDown': import_view})}>
-					{
-						import_view
-						&&
-						<VelocityComponent animation={{opacity: import_view ? 1 : 0}} duration={500}>
+				<VelocityComponent 
+					animation={{opacity: import_view ? 1 : 0}} 
+					duration={100}>
+					<div 
+					style={{
+						height: importHeight,
+						width: importWidth
+					}}
+					className={classnames('importView', 
+						{'isShowing': import_view},
+						{'isHidden': !import_view}
+						)}>
+						{
+							import_view
+							&&
 							<ImportView/>
-						</VelocityComponent>
-					}
-				</div>
+							
+						}
+					</div>
+				</VelocityComponent>
 				{this.props.children}
 			</div>
 		);

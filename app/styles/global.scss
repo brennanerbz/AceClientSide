@@ -224,9 +224,6 @@ input {
 	padding: 2px 6px;
 	height: 32px;
 	font-family: "Lato";
-}
-
-input, textarea {
 	border:1px solid #ccc;
 	outline: none;
 	border-radius: 2px;
@@ -791,6 +788,11 @@ $width: 70px;
 		border: 1px solid #B84428;
 		border-radius: 3px;
 		color: #fff!important;
+	}
+	&.large {
+		font-size: 13.75px;
+		height: 36px;
+		padding: 6px 22px;
 	}
 }
 :global .button-primary {

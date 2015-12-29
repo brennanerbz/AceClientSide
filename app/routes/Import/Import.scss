@@ -5,28 +5,123 @@
 	padding-left: 50px;
 	display: table;
 	margin: 0 auto;
+	#escape_link {
+		top: 25px;
+		position: absolute;
+		right: 200px;
+	}
 	#import_text {
 		width: 100%;
 		h2 {
 			font-family: "Open Sans";
 			font-weight: 600;
+			font-size: 26px;
 			color: #47525D;
 		}
 		textarea {
 			width: 100%;
 			border-radius: 2px;
-			padding: 7px 8px 7px 8px;
+			padding: 7px 8px 8px 10px;
+			margin: 1.25rem 0 0 0;
+			min-height: 275px;
+			border:1px solid #ccc;
+			outline: none;
+			border-radius: 2px;
+			&:focus {
+				border: 1px solid #498DFF;
+				box-shadow: 0 0 7px rgba(39, 128, 248, .15);
+				outline: none;
+			}
 		}
 		button {
-
+			margin-top: 1rem;
 		}
-		span {
+		div {
 			&.note {
-
+				font-size: .95rem;
+				color: #9e9ea6;
+				display: block;
+				line-height: 1rem;
+				margin-top: .25rem;
+				margin-bottom: .55rem;
 			}
 		}
 	}
 	#import_instructions {
-
+		text-align: center;
+		h3 {
+			font-family: "Open Sans";
+			font-size: 21px;
+			color: #47525D;
+			margin: 1.5rem;
+			margin-top: 0.25rem;
+		}
+		ol {
+			&#instructions_list {
+				width: 100%;
+				padding: 0;
+				margin: 0;
+				margin-top: 2.5rem;
+				.instruction_item {
+					list-style: none;
+					display: inline-block;
+					width: 33.33333%;
+					min-height: 130px;
+					padding: 0.25rem 2.5rem;
+					padding-left: 2.75rem;
+					position: relative;
+					&:first-child {
+						padding-left: 0;
+					}
+					&:last-child {
+						padding-right: 0;
+						.content {
+							.instruction_item_content {
+								padding-right: 0;
+							}
+						}
+					}
+					&:not(:first-child):not(:last-child) {
+						border-left: 1px solid #E5E5E5;
+						border-right: 1px solid #E5E5E5;
+					}
+					h4, .instruction_item_content {
+						text-align: left;
+					}
+					h4 {
+						&.heading {
+							font-size: 15.5px;
+							color: #47525D;
+							margin-bottom: 1.75rem;
+						}
+					}
+					.content {
+						display: table;
+						.instruction_item_index_circle {
+							float: left;
+							border: 2px solid #5D6871;
+							border-radius: 50%;
+							width: 35px;
+							height: 35px; 
+							position: relative;
+							.instruction_item_index {
+								margin-top: 5px;
+								font-size: 14.5px;
+								font-weight: 600;
+								color: #5D6871;
+							}
+						}
+						.instruction_item_content {
+							margin-left: 25px;
+							position: absolute;
+							padding: 0 2.5rem 0 0rem; 
+						}
+					}
+				}
+			}
+		}
 	}
 }
+
+
+

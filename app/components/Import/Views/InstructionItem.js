@@ -9,21 +9,21 @@ export default class InstructionItem extends Component {
 	render() {
 		const { instruction, index } = this.props, { heading, content } = instruction;
 		return(
-			<div className="instruction_item">
+			<li className="instruction_item">
 				<h4 className="heading">
 					{ heading.toUpperCase() }
 				</h4>
 				<div className="content">
 					<span className="instruction_item_index_circle">
 						<div className="instruction_item_index">
-							{ index }
+							{ index + 1 }
 						</div>
 					</span>
 					<span className="instruction_item_content">
 						{ content }
 					</span>
 				</div>
-			</div>
+			</li>
 		);
 	}
 }

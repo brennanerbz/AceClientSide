@@ -8,21 +8,35 @@ export default class ImportTextContainer extends Component {
 	}
 
 	state = {
-		importing: false
+		textAreaValue: '',
+		importing: false,
+		noTextError: false
 	}
 
 	handleSubmitText() {
-
+		const { textAreaValue } = this.state;
+		if(textAreaValue.length == 0) this.setState({noTextError: true})
 	}
 
 	render() {
+		const { noTextError } = this.state;
 		return(
 			<div id="import_text">
 				<h2 className="heading">
 					Instantly turn your text into a study set
 				</h2>
-				<LargeTextArea/>
-				<span className="note">Give your text some sweet spunk by using markdown</span>
+				<LargeTextArea
+					handleTextChange={(value) => {
+						this.setState({
+							textAreaValue: value
+						});
+					}}
+					noTextError={noTextError}
+					resetError={() => {
+						this.setState({noTextError: false})
+					}}
+				/>
+				<div className="note">Give your text some sweet spunk by using markdown</div>
 				<button 
 					onClick={::this.handleSubmitText}
 					id="import_text_btn" 
