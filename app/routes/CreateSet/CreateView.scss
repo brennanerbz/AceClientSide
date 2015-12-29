@@ -16,10 +16,10 @@
     -ms-transition: -ms-transform 200ms;
     transition: transform 200ms;
 	&.isShowing {
-		-webkit-animation: slideDown 300ms;
-	    -moz-animation: slideDown 300ms;
-	    -ms-animation: slideDown 300ms;
-	    animation: slideDown 300ms;
+		-webkit-animation: slideDown 450ms;
+	    -moz-animation: slideDown 450ms;
+	    -ms-animation: slideDown 450ms;
+	    animation: slideDown 450ms;
 	    overflow-y: scroll;
 	    position: fixed;
 	    -webkit-transform: translateY(0);

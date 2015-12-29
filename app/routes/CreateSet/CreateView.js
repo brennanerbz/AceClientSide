@@ -28,11 +28,17 @@ export default class CreateView extends Component {
 
 	render() {
 		let { location } = this.props, pathname = location.pathname, paths = pathname.split('/'), import_view = false,
-		importWidth, importHeight, viewPort = $(window)[0]
-		if(paths[1] == 'import') import_view = true
+		importWidth, importHeight, viewPort = $(window)[0], createChildrenWithProps;
+		if(paths[2] == 'import' || paths[1] == 'import') import_view = true
 
 		importWidth = viewPort.innerWidth
 		importHeight = viewPort.innerHeight
+
+		createChildrenWithProps = React.Children.map(this.props.children, (child) => {
+			return React.cloneElement(child, {
+				importVisible: import_view
+			})
+		})
 
 		return(
 			<div id="create_page">
@@ -53,7 +59,7 @@ export default class CreateView extends Component {
 							
 					</div>
 				</VelocityComponent>
-				{this.props.children}
+				{createChildrenWithProps}
 			</div>
 		);
 	}

@@ -10,13 +10,23 @@ export default class LargeTextArea extends Component {
 		value: ''
 	}
 
+	componentDidMount() {
+		if(this.props.importVisible) {
+			this.focusOnRender()
+		}
+	}
+
 	componentWillReceiveProps(nextProps) {
 		const { importVisible } = nextProps;
-		if(importVisible) {
-			setTimeout(() => {
-				this.refs.import_textarea.focus()
-			}, 5)
+		if(importVisible || this.props.importVisible) {
+			this.focusOnRender()
 		}
+	}
+
+	focusOnRender() {
+		setTimeout(() => {
+			this.refs.import_textarea.focus()
+		}, 10)
 	}
 
 	render() {
