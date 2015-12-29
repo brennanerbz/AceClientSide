@@ -15,7 +15,7 @@ require('./Import.scss');
 
 @connect(state => ({
 		loggedIn: state.user.logged_in,
-		import: state.import
+		isImporting: state.importView.isImporting
 	}), 
 	dispatch => ({
 		...bindActionCreators({
@@ -37,7 +37,7 @@ export default class ImportView extends Component {
 	}
 
 	render() {
-		const { loggedIn, pushState, importVisible } = this.props,
+		const { loggedIn, pushState, importVisible, isImporting, importText } = this.props,
 			close = require('../../assets/close.png');
 		return(
 			<DocumentTitle title='Import | Ace'>
@@ -53,6 +53,9 @@ export default class ImportView extends Component {
 					</a>
 					<ImportTextContainer
 						importVisible={importVisible}
+						importText={importText}
+						isImporting={isImporting}
+						pushState={pushState}
 					/>
 					<ImportInstructionsContainer/>
 				</div>

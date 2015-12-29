@@ -8,7 +8,7 @@ export default class ButtonGroup extends Component {
 	}
 
 	render() {
-        const { onSave, set, editing, pushState} = this.props;
+        const { onSave, set, editing, pushState } = this.props;
 		return(
 			<div className="CreateSetHeader-wrapper-buttongroup">
             	<div className="push-right">
@@ -31,14 +31,18 @@ export default class ButtonGroup extends Component {
                             </button>
                             : null
                         }
-                        <button
-                            style={{
-                                marginLeft: '5px'
-                            }}
-                            className="button secondary"
-                            onClick={() => pushState(null, 'createset/import')}>
-                            Import
-                        </button>
+                        {
+                            !editing
+                            &&
+                            <button
+                                style={{
+                                    marginLeft: '5px'
+                                }}
+                                className="button secondary"
+                                onClick={() => pushState(null, 'createset/import')}>
+                                Import
+                            </button>
+                        }
             			<SubSetActions right={true} createset={true} {...this.props} />	
             		</div>	            	
             	</div>
