@@ -335,6 +335,8 @@ export function createset(state = createState, action) {
           updated_association = action.association,
           asc_ref = action.ref;
           updated_associations[asc_ref].association = updated_association;
+          updated_associations[asc_ref].item = updated_association.item;
+          updated_associations[asc_ref].item_id = updated_association.item_id;
       return {
         ...state,
         associations: updated_associations

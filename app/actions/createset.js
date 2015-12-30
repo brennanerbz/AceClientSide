@@ -145,40 +145,40 @@ export const CREATE_SET = 'CREATE_SET';
 export const CREATE_SET_SUCCESS = 'CREATE_SET_SUCCESS';
 export const CREATE_SET_FAILURE = 'CREATE_SET_FAILURE';
 export function createSet(title, ...args) {
-	return async(dispatch, getState) => {
+	return (dispatch, getState) => {
 		dispatch({type: CREATE_SET})
-		try {
-			// TODO: check the method its being called whether from create page or copy
-			let user = getState().user.user,
-				set = Object.assign({..._settemplate}, {
-					creator_id: user.id,
-					title: title || 'Untitled'
-				})
-			if(args.length > 0) {
-				for(var i = 0; i < args.length; i++) {
-					let arg = args[i],
-						name = arg.name,
-						prop = arg.prop;
-					if(set.hasOwnProperty(name)) {
-						set[name] = prop
-					}
+		// TODO: check the method its being called whether from create page or copy
+		let user = getState().user.user,
+			set = Object.assign({..._settemplate}, {
+				creator_id: user.id,
+				title: title || 'Untitled'
+			})
+		if(args.length > 0) {
+			for(var i = 0; i < args.length; i++) {
+				let arg = args[i],
+					name = arg.name,
+					prop = arg.prop;
+				if(set.hasOwnProperty(name)) {
+					set[name] = prop
 				}
 			}
-			await axios.post(`${api_url}/sets/`, 
-				set
-			)
-			.then(res => set = res.data)
-			dispatch({type: CREATE_SET_SUCCESS, set})
-			if(set.title !== 'Untitled') {
-				// dispatch(updateSetSubjects())
-			}
-		} catch(err) {
-			dispatch({
-				type: CREATE_SET_FAILURE,
-				error: Error(err),
-				typeerr: err
-			})
 		}
+		request
+		.post(`${api_url}/sets/`)
+		.send(set)
+		.end((err, res) => {
+			if(res.ok) {
+				set = res.body
+				dispatch({type: CREATE_SET_SUCCESS, set})
+				dispatch(createAssignment(set.id))
+			} else {
+				dispatch({
+					type: CREATE_SET_FAILURE,
+					error: Error(err),
+					typeerr: err
+				})
+			}
+		})
 	}
 }
 
@@ -311,32 +311,34 @@ export const CREATE_ASSIGNMENT = 'CREATE_ASSIGNMENT';
 export const CREATE_ASSIGNMENT_SUCCESS = 'CREATE_ASSIGNMENT_SUCCESS';
 export const CREATE_ASSIGNMENT_FAILURE = 'CREATE_ASSIGNMENT_FAILURE';
 export function createAssignment(set_id, permission, ...args) {
-	return async(dispatch, getState) => {
+	return (dispatch, getState) => {
 		dispatch({type: CREATE_ASSIGNMENT})
-		try {
-			let user_id = getState().user.user.id,
-				assignment = Object.assign({..._assignmenttemplate}, {
-					user_id: user_id,
-					set_id: set_id,
-					permission: permission || 'nonadmin'
-				}) 
-			await axios.post(`${api_url}/assignments/`, 
-				assignment
-			)
-			.then(res => assignment = res.data)
-			dispatch({type: CREATE_ASSIGNMENT_SUCCESS, assignment})
-			if(args.length > 0 && args[0].name == 'navigate' && args[0].prop) {
-				let pushState = args[1]
-				setTimeout(() => {
-					pushState(null, `/set/${assignment.set_id}`)
-				}, 5)
+		let user_id = getState().user.user.id,
+			assignment = Object.assign({..._assignmenttemplate}, {
+				user_id: user_id,
+				set_id: set_id,
+				permission: permission || 'nonadmin'
+			}) 
+		request
+		.post(`${api_url}/assignments/`)
+		.send(assignment)
+		.end((err, res) => {
+			if(res.ok) {
+				assignment = res.body
+				dispatch({type: CREATE_ASSIGNMENT_SUCCESS, assignment})
+				if(args.length > 0 && args[0].name == 'navigate' && args[0].prop) {
+					let pushState = args[1]
+					setTimeout(() => {
+						pushState(null, `/set/${assignment.set_id}`)
+					}, 5)
+				}
+			} else {
+				dispatch({
+					type: CREATE_ASSIGNMENT_FAILURE,
+					error: Error(err)
+				})
 			}
-		} catch(err) {
-			dispatch({
-				type: CREATE_ASSIGNMENT_FAILURE,
-				error: Error(err)
-			})
-		}
+		})
 	}
 }
 

@@ -14,6 +14,8 @@ export default class TermRow extends Component {
 		total_count: 2,
 		terms: null,	
 		definitions: null,
+		term: null,
+		def: null,
 		index: null,
 		locked_in: false
 	}
@@ -44,6 +46,9 @@ export default class TermRow extends Component {
 		this.setState({total_count: nextProps.total_count})
 		if(document.activeElement == document.body) this.setState({ active_row: false })
 		if(this.props.item !== nextProps.item) this.setState({locked_in: false});
+		if(this.props.item !== undefined && this.props.item !== null) {
+			if(this.props.item.id !== nextProps.item.id) this.setState({item: nextProps.item});
+		}
 	}
 
 	saveTerm = (term) => { 
@@ -67,13 +72,14 @@ export default class TermRow extends Component {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
 	    		{name: 'target', prop: term}, 
+	    		{name: 'cue', prop: this.state.item.cue},
 	    		{name: 'association', prop: association}, 
 	    		{name: 'association_ref', prop: asc_id})
 	    }
 	}
 
 	saveDefinition = (def) => { 
-	    const { createItem, updateItem, index, item, asssociation, asc_id } = this.props;
+	    const { createItem, updateItem, index, item, association, asc_id } = this.props;
 	    if(item == undefined && true) {
 	    	createItem(index, { name: 'cue', prop: def }, {name: 'association_ref', prop: asc_id})
 	    	this.setState({
@@ -93,6 +99,7 @@ export default class TermRow extends Component {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
 	    		{name: 'cue', prop: def}, 
+	    		{name: 'target', prop: this.state.item.target},
 	    		{name: 'association', prop: association},
 	    		{name: 'association_ref', prop: asc_id}
 	    	)

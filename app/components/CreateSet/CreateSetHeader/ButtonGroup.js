@@ -8,13 +8,13 @@ export default class ButtonGroup extends Component {
 	}
 
 	render() {
-        const { onSave, set, editing, pushState } = this.props;
+        const { onSave, set, editing, pushState, assignment } = this.props;
 		return(
 			<div className="CreateSetHeader-wrapper-buttongroup">
             	<div className="push-right">
             		<div className="Button-set">
                         {
-                            editing
+                            editing && assignment !== null
                             ? 
                             <button className={classnames("button primary")}
                                     onClick={onSave}>
@@ -33,6 +33,7 @@ export default class ButtonGroup extends Component {
                         }
                         {
                             !editing
+                            && assignment == null
                             &&
                             <button
                                 style={{
