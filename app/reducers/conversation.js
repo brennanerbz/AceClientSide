@@ -121,103 +121,56 @@ const initial_convostate = {
 		
 }
 
-var tempMessage = {
-	sender: '', /* bot, user */
-	type: '', /* cue, format, response, feedback */
-	bundle: false,
-	first_message: false,
-	cue: {
-		censored_cue: '',
-		message: ''
-	},
-	format_type: '', /* aug, mc, fb, cp, tf */
-	format: {
-		aug: '',
-		multiple_choice: [],
-		stem: '',
-		copy_answer: '',
-		true_false: ''
-	},
-	user_response_type: '', /* response, command, search */
-	user_response: {
-		response: '',
-		command: '',
-		search: ''
-	},
-	feedback: {
-		message: '',
-		praise: '',
-		feedback: ''
-	},
-	trial_id: 0,
-	slot_id: 0,
-	user_id: 0
-}
 
 function buildMessages(trial) {
-	let messages = [], msg,
-		m = 0, types = ['cue', 'response', 'feedback'], type;
+	let messages = [], msg, m = 0,
+	content = false, answer = false, reply = false;
 	while(m < 3) {
-		type = types[m]
-		msg = buildMessage(trial, type)
+		if(trial.start !== null && trial.content !== null && trial.content.length > 0 && !content) {
+			msg = buildMessage(trial, 'content')
+			content = true;
+		}
+		if(trial.response_time !== null && trial.answer !== null && trial.answer.length > 0 && !answer) {
+			msg = buildMessage(trial, 'answer')
+			answer = true;
+		} 
+		if(trial.reply_displayed !== null && trial.reply !== null && trial.reply.length > 0 && !reply) {
+			msg = buildMessage(trial, 'reply')
+			reply = true;
+		}
 		messages.push(msg)
 		m++
 	}
 	return messages;
 }
 function buildMessage(trial, type) {
-	let message = Object.assign({}, tempMessage)
-	if(type == 'cue' || type == 'format') {
-		message.sender = 'bot'
-		if(trial.format == 'recall') {
-			message.cue.censored_cue = trial.censored_cue;
-			message.cue.message = trial.message;
-			message.format_type = 'recall';
-			message.type = 'cue'
-		} else {
-			message.format_type = trial.format;
-			message.bundle = true;
-			message.type = 'format'
-			switch(message.format_type) {
-				case 'aug':
-					message.format.aug = trial.augs[0]
-					break;
-				case 'mc':
-					message.format.multiple_choice = trial.mc_choices
-					break;
-				case 'stem':
-					message.format.stem = trial.stem
-					break;
-				case 'copy':
-					message.format.copy_answer = trial.answer
-					break;
-				default:
-					break;
-			}
-		}
+	var message = {
+		type: '',
+		subtype: '',
+		user: '',
+		text: '',
+		ts: ''
 	}
-	if(type == 'response') {
-		message.sender = 'user';
-		message.user_response_type = 'response';
-		message.user_response.response = trial.answer
-		message.type = 'response'
+	if(type == 'content') {
+		message.type = trial.content_type
+		message.subtype = trial.content_subtype
+		message.user = 'acubot'
+		message.text = trial.content
+		message.ts = moment(trial.start)
 	}
-
-	if(type == 'feedback') {
-		message.sender = 'bot';
-		message.bundle = true;
-		message.first_message = true;
-		message.feedback = {
-			message: trial.message,
-			praise: trial.praise,
-			feedback: trial.feedback
-		}
-		message.type = 'feedback'
+	if(type == 'answer') {
+		message.type = 'answer'
+		message.user = trial.user_id || 'user'
+		message.text = trial.answer
+		message.ts = moment(trial.response_time)
 	}
-	message.trial_id = trial.id;
-	message.slot_id = trial.slot_id;
-	message.user_id = trial.user_id;
- 	return message;
+	if(type == 'reply') {
+		message.type = 'reply'
+		message.user = 'acubot'
+		message.text = trial.reply
+		message.ts = moment(trial.reply_displayed)
+	}
+	return message;
 }
 
 
@@ -235,7 +188,6 @@ function flatten(arr) {
 
 export default function conversation(state = initial_convostate, action) {
 	switch(action.type) {
-
 		case UPDATING_STATE: 
 			return {
 				...state,
@@ -331,12 +283,15 @@ export default function conversation(state = initial_convostate, action) {
 		case RECEIVE_TRIALS_SUCCESS: 
 			let trials = action.trials,
 				messages = state.messages;
-			for(var ts = 0; ts < trials.length; ts++) {
-				let trial = trials[ts]
+			for(var m = 0; m < trials.length; m++) {
+				let trial = trials[m]
 				let message = buildMessages(trial)
 				messages.push(message)
 			}
 			messages = flatten(messages)
+			messages.forEach((m, i) => {
+				if(m == undefined) messages.splice(i)
+			})
 			return {
 				...state,
 				isFetchingTrials: false,
@@ -344,35 +299,25 @@ export default function conversation(state = initial_convostate, action) {
 				messages: messages
 			}
 		case NEW_TRIAL_SUCCESS:
-			let _newtrials = state.trials.concat(action._trial),
-				_messages = state.messages,
-				_message, type;
-			if(action._trial.answer == null) {
-				if(action._trial.format == 'recall') type = 'cue'
-				else type = 'format'
-			} 
-			_message = buildMessage(action._trial, type)
-			console.log(_message)
-			_messages.push(_message)
+			let new_trial = action._trial,
+				current_trials = state.trials.concat(new_trial),
+				msgs = state.messages,
+				msg = buildMessage(new_trial, 'content');
+			msgs.push(msg)
 			return {
 				...state,
 				isFetchingLearn: false,
 				isFetchingTrials: false,
 				isShowingCorrect: false,
 				isShowingCompletedRound: false,
-				trials: _newtrials,
-				current_trial: action._trial,
-				messages: _messages
+				trials: current_trials,
+				current_trial: new_trial,
+				messages: msgs
 			}
 		case NEW_USER_MESSAGE:
-			let user_response = action.response;
-			user_response.id = state.current_trial.id;
-			user_response.slot_id = state.current_slot.id;
-			user_response.user_id = state.current_trial.user_id
-			let user_message = buildMessage(user_response, 'response'),
-			_msgs = state.messages;
-			console.log(user_message)
-			_msgs.concat(user_message);
+			let answer_message = buildMessage(action.response, 'answer'), 
+				_msgs = state.messages;
+				_msgs.push(answer_message)
 			return {
 				...state,
 				messages: _msgs
@@ -410,10 +355,9 @@ export default function conversation(state = initial_convostate, action) {
 				isGrading: true
 			}
 		case UPDATE_TRIAL_SUCCESS:
-			let msgs = state.messages,
-				msg;
-			msg = buildMessage(action.updated_trial, 'feedback')
-			msgs.push(msg)
+			let current_msgs = state.messages,
+				reply_msg = buildMessage(action.updated_trial, 'reply')
+			current_msgs.push(reply_msg)
 			return {
 				...state,
 				trials: state.trials.map((trial) => {
@@ -422,7 +366,7 @@ export default function conversation(state = initial_convostate, action) {
 					: trial
 				}),
 				current_trial: action.updated_trial,
-				messages: msgs
+				messages: current_msgs
 			}
 		case SHOW_CORRECT:
 			return {

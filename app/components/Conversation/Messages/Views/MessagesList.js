@@ -8,9 +8,10 @@ export default class MessagesList extends Component {
 
 	render() {
 		const { username, currentSlot, messages } = this.props;
+		// console.log(messages)
 		return(
 			<div id="msgs_div" className="msgs_holder">
-				{Array.from({length: 10}).map((m, i) => {
+				{messages.map((m, i) => {
 					return (
 						<MessageContainer 
 							key={i} 

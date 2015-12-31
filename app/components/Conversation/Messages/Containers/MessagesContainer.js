@@ -23,53 +23,63 @@ export default class MessagesContainer extends Component {
 	}
 
 	componentDidMount() {
+		this.setDOMDimensions()
+	}
+
+	componentDidUpdate(prevState, prevProps) {
+		// $("#msgs_scroller").animate({ scrollTop: $('#msgs_scroller')[0].scrollHeight }, 5);
+	}
+
+	setDOMDimensions() {
 		var $scrollable = $('#msgs_scroller'), /* content */
 		    $scrollbar  = $('#scroll_wrapper_for_messages > .scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
-		    cH  = $scrollable[0].clientHeight,
+			cH  = $scrollable[0].clientHeight,
 		    vH  = $viewPort[0].innerHeight - 152,
-		    sH  = $scrollable[0].scrollHeight,
-		    sbH = vH*vH/sH,
-		    top = $scrollable.scrollTop()/vH*sbH,
 		    smL = $('#scroll_wrapper_for_messages')[0].clientWidth - 37.5,
-		    pH  = vH - cH
+		    pH  = vH - cH,
+		    sH = $scrollable[0].scrollHeight,
+			sbH = vH*vH/sH,
+			top = $scrollable.scrollTop()/vH*sbH;
 		this.setState({
 			$scrollable: $scrollable,
 			$scrollbar: $scrollbar,
 			$viewPort: $viewPort,
-			sH: sH,
-			vH: vH, 
+			cH: cH,
+			vH: vH,
+			smL: smL,
+			pH: pH,
+			sH: sH,	
 			sbH: sbH,
 			top: top,
-			smL: smL,
-			pH: pH
-		})
-		setTimeout(() => {
-			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight);
-			this.setState({
-				rendered: true
-			})
-		}, 1) 	
+			rendered: true
+		});
 	}
 
 	setScrollBarPosition(e) {
 		e.preventDefault()
-		const { $scrollable, vH, sbH } = this.state,
-		top = $scrollable.scrollTop()/ vH*sbH
+		const { $scrollable, vH } = this.state,
+		top = $scrollable.scrollTop()/ vH * (vH * vH / $scrollable[0].scrollHeight)
 		this.setState({
 			top: top
 		})
 	}
 
 	render() {
-		const { sH, vH, sbH, top, smL, pH } = this.state,
-		scrollHiderStyle = {
-			width: smL, marginRight: '17px'
-		},
-		msgsScrollerStyle = {
-			height: vH, width: window.innerWidth - 220
-		}
-		const { username, currentSlot, messages } = this.props;
+		let { vH, top, smL, pH, $scrollable } = this.state,
+			scrollHiderStyle = {
+				width: smL, marginRight: '17px'
+			},
+			msgsScrollerStyle = {
+				height: vH, width: window.innerWidth - 220
+			},
+			{ username, currentSlot, messages } = this.props, 
+			scrollHeight = 0, scrollBarHeight = 0;
+			if($scrollable !== null) {
+				scrollHeight = $scrollable[0].scrollHeight,
+				scrollBarHeight = vH * vH / scrollHeight
+			}
+			
 		return(
 			<div id="messages_container" 
 				 className={classnames({"rendered": this.state.rendered})}>
@@ -77,7 +87,7 @@ export default class MessagesContainer extends Component {
 					<ScrollBar 
 						scrollMarginLeft={smL}
 						viewHeight={vH}
-						scrollBarHeight={sbH}
+						scrollBarHeight={scrollBarHeight}
 						top={top}
 					/>
 					<div style={scrollHiderStyle} 

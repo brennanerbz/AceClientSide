@@ -51,9 +51,10 @@ export default class InputForm extends Component {
 			  	reaction_time: reaction_time,
 			  	response_time: response_time,
 			  	answer: value,
-			  	answer_clicked: false,
-			  	answer_by_letter: false,
-			  	taps: null
+			  	// answer_clicked: false,
+			  	// answer_by_letter: false,
+			  	answer_method: 'typed',
+			  	// taps: null
 			  }
 		  this.setState({
 		  	value: '',
@@ -79,7 +80,6 @@ export default class InputForm extends Component {
 						this.setState({value: e.target.value});
 					}}
 					onKeyPress={(e) => {
-						console.log(e.which)
 						if(e.which == 13 && !e.shiftKey && this.state.value.trim().length > 0) {
 							this.handleSubmit(e)
 						}

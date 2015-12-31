@@ -18,7 +18,7 @@ export default class ScrollBar extends Component {
 						height: scrollBarHeight,
 						top: top
 					}} 
-					id="scroll_handler"
+					// id="scroll_handler"
 					className="scroll_handler">
 					<div className="scroll_inner">
 					</div>

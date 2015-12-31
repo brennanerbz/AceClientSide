@@ -83,7 +83,7 @@ export function fetchSequence(assignment_id, starred) {
 				sequence = res.body
 				if(Object.keys(sequence).length !== 0 && !sequence.completed) {
 					dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
-					dispatch(fetchSlots(sequence.id))
+					dispatch(fetchSlots(sequence.id, false))
 				} else {
 					dispatch(newSequence(assignment_id, starred))
 				}
@@ -105,7 +105,7 @@ export const NEW_SEQUENCE_FAILURE = 'NEW_SEQUENCE_FAILURE';
 var _default_sequence = {
 	assignment_id: null,
 	stars: false,
-	mode: 'learn',
+	mode: 'conversation',
 	format: 'recall',
 	timing: 'off',
 	difficulty: 'intermediate',
@@ -132,7 +132,7 @@ export function newSequence(assignment_id, starred) {
 				sequence_id = res.body.id	
 				dispatch({type: RECEIVE_SEQUENCE_SUCCESS, sequence})
 				if(!getState().conversation.isFetchingSlots) {
-					dispatch(fetchSlots(sequence.id))
+					dispatch(fetchSlots(sequence.id, false))
 				}
 			} else {
 				dispatch({
@@ -307,7 +307,7 @@ export function fetchTrials() {
 		let slots = getState().conversation.slots,
 			trial = {},
 			trials = [],
-			slot_id;
+			slot_id, current_slot_id = getState().conversation.current_slot.id
 		/* Poll for the trials */
 		if(slots.length == 0) {
 			setTimeout(() => {
@@ -316,25 +316,24 @@ export function fetchTrials() {
 			return;
 		}
 		for(var t = 0; t < slots.length; t++) {
-			slot_id = slots[t].id,
-			axios.get(`${api_url}/slots/${slot_id}/trials/`)
-			.then(res => { 
-				trials = res.data.trials
-				if(trials !== undefined && trials.length > 0) {
-					dispatch({type: RECEIVE_TRIALS_SUCCESS, trials})
-					trial = trials.slice(-1)[0]
-					if(trial.slot_id == getState().conversation.current_slot.id) {
-						dispatch(newTrial(null, slot_id))
+			slot_id = slots[t].id;
+			request
+			.get(`${api_url}/slots/${slot_id}/trials/`)
+			.end((err, res) => {
+				if(res.ok) {
+					trials = res.body.trials
+					if(trials !== undefined && trials !== null && trials.length > 0) {
+						dispatch({type: RECEIVE_TRIALS_SUCCESS, trials})
 					}
+				} else {
+					dispatch({
+						type: RECEIVE_TRIALS_FAILURE,
+						error: Error(err)
+					})
 				}
 			})
-			.catch(err => {
-				dispatch({
-					type: RECEIVE_TRIALS_FAILURE,
-					error: Error(err)
-				})
-			})
 		}
+		dispatch(newTrial(null, current_slot_id))
 	}
 }
 
@@ -350,11 +349,11 @@ export function newTrial(trial, slot_id) {
 	return (dispatch, getState) => {
 		dispatch({type: NEW_TRIAL})
 		let new_trial = {},
-			state = getState().conversation,
-			s = new Date(),
-		  	start = s.toISOString().replace("T", " ").replace("Z", "");
-		new_trial['slot_id'] = slot_id || getState().current_slot.id
-		new_trial['start'] = start;
+			state = getState().conversation;
+			// s = new Date(),
+		  	// start = s.toISOString().replace("T", " ").replace("Z", "");
+		new_trial['slot_id'] = slot_id || state.current_slot.id
+		// new_trial['start'] = start;
 		/* Adjust trial object based on direct user control */
 		if(trial !== null) {
 			new_trial['help_chosen_by_user'] = true;

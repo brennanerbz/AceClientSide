@@ -7,29 +7,23 @@ export default class MessageBody extends Component {
 	}
 
 	buildCueMessage(msg) {
-		return <p>{msg.cue.censored_cue}</p>
+		return <p>{msg.text}</p>
 	}
 
 	buildUserMessage(msg) {
-		return <p>{msg.user_response.response}</p>
+		return <p>{msg.text}</p>
 	}
 
 	buildFeedbackMessage(msg) {
-		return <p>{msg.feedback.feedback}</p>
+		return <p>{msg.text}</p>
 	}
 
 	buildFormatMessage(msg) {
-		if(msg.format_type == 'mc') {
-			let mc = msg.format.multiple_choice,
-				mc_list = []
-			mc.forEach((m, i)=> {
-				mc_list.push(
-					<pre key={i}>{m}</pre>
-				)
-			})
-			return mc_list
+		if(msg.subtype == 'mc') {
+			return <p>mc</p>
+		} else {
+			return <p>{msg.text}</p>
 		}
-
 	}
 
 	render() {
@@ -37,29 +31,24 @@ export default class MessageBody extends Component {
 		return (
 			<span className="message_body">
 				{
-					message == undefined
-					? 'Hmm'
-					: null
+					message.type == 'cue'
+					&& ::this.buildCueMessage(message)
 				}
-				
+				{
+					message.type == 'answer'
+					&& ::this.buildUserMessage(message)
+				}
+				{
+					message.type == 'reply'
+					&& ::this.buildFeedbackMessage(message)
+				}
+				{
+					message.type == 'hint'
+					&& ::this.buildFormatMessage(message)
+				}
 			</span>
 		);
 	}
 }
 
-// {
-// 	message.type == 'cue'
-// 	&& ::this.buildCueMessage(message)
-// }
-// {
-// 	message.type == 'response'
-// 	&& ::this.buildUserMessage(message)
-// }
-// {
-// 	message.type == 'feedback'
-// 	&& ::this.buildFeedbackMessage(message)
-// }
-// {
-// 	message.type == 'format'
-// 	&& ::this.buildFormatMessage(message)
-// }
+

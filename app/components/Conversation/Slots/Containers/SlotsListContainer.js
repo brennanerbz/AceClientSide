@@ -107,7 +107,9 @@ export default class SlotsListContainer extends Component {
 						</div>
 					</div>
 				</div>
-				<SequenceProgress />
+				<SequenceProgress 
+					createNewSequence={this.props.createNewSequence}
+				/>
 			</div>
 		);
 	}

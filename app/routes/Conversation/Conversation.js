@@ -35,6 +35,7 @@ import Slots from '../../components/Conversation/Slots/Containers/SlotsListConta
 		username: state.user.user.username,
 		setName: state.conversation.set_name,
 		setId: state.conversation.set_id,
+		assignments: state.sets.assignments,
 
 		currentSequence: state.conversation.current_sequence,
 		slots: state.conversation.slots,
@@ -92,7 +93,9 @@ export default class Conversation extends Component {
 		return(
 			<div id="convo_ui" className="fluid_container">
 				<Header />
-				<Slots />
+				<Slots 
+					createNewSequence={() => ::this.handleNewSequence(true)}
+				/>
 				<div id="convo_ui_body">
 					<Messages 
 						username={username}

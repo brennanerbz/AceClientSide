@@ -51,10 +51,12 @@ export default class SequenceProgress extends Component {
 	}
 
 	render() {
-		const { slotsLength, completedSlots, innerWidth, renderProgress } = this.state;
+		const { slotsLength, completedSlots, innerWidth, renderProgress, newSequence } = this.state;
 		return(
 			<div id="sequence_control">
-				<button id="start_sequence_over" className="button outline tertiary">
+				<button id="start_sequence_over" 
+					  	className="button outline tertiary"
+					  	onClick={::this.props.createNewSequence}>
 					Start over
 				</button>
 				<div id="sequence_progress_count">

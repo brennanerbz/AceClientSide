@@ -11,7 +11,7 @@ export default class MessageBody extends Component {
 		return (
 			<a className="message_sender">
 				{
-					message !== undefined && message.sender == 'bot'
+					message.user == 'acubot'
 					? 'acubot'
 					: username.toLowerCase()
 				}
