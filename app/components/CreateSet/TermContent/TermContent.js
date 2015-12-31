@@ -102,6 +102,7 @@ export default class TermContent extends Component {
                             }}
                             onChange={(e) =>{
                                 this.setState({term: e.target.value});
+                                this.props.changeTerm(e.target.value)
                             }}
                             onInput={(e) => {
 
@@ -141,6 +142,8 @@ export default class TermContent extends Component {
                             }}
                             onChange={(e) =>{
                                 this.setState({definition: e.target.value});
+                                this.props.changeDef(e.target.value)
+
                             }}
                             onBlur={() => {
                                 if(this.state.definition !== null && this.state.definition.length > 0){

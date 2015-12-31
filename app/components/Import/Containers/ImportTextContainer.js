@@ -52,7 +52,7 @@ export default class ImportTextContainer extends Component {
 						this.setState({noTextError: false})
 					}}
 				/>
-				<div className="note">Give your text some sweet spunk by using markdown</div>
+				<div className="note">Text must be at least 90 characters long</div>
 				<button 
 					onClick={::this.handleSubmitText}
 					id="import_text_btn" 

@@ -46,10 +46,9 @@ export default class TermRow extends Component {
 		this.setState({total_count: nextProps.total_count})
 		if(document.activeElement == document.body) this.setState({ active_row: false })
 		if(this.props.item !== nextProps.item) this.setState({locked_in: false});
-		if(this.props.item !== undefined && this.props.item !== null) {
-			if(this.props.item.id !== nextProps.item.id) this.setState({item: nextProps.item});
-		}
-	}
+		const { item } = nextProps;
+		this.setState({item: item})
+ 	}
 
 	saveTerm = (term) => { 
 	    const { createItem, updateItem, index, item, association, asc_id } = this.props;
@@ -72,7 +71,7 @@ export default class TermRow extends Component {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
 	    		{name: 'target', prop: term}, 
-	    		{name: 'cue', prop: this.state.item.cue},
+	    		{name: 'cue', prop: this.state.def},
 	    		{name: 'association', prop: association}, 
 	    		{name: 'association_ref', prop: asc_id})
 	    }
@@ -99,7 +98,7 @@ export default class TermRow extends Component {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
 	    		{name: 'cue', prop: def}, 
-	    		{name: 'target', prop: this.state.item.target},
+	    		{name: 'target', prop: this.state.term},
 	    		{name: 'association', prop: association},
 	    		{name: 'association_ref', prop: asc_id}
 	    	)
@@ -129,6 +128,8 @@ export default class TermRow extends Component {
 						     activateRow={() => this.setState({ active_row: true })}
 						     deactivateRow={() => this.setState({ active_row: false })}
 						     focusSide={(value) => this.setState({ active_side: value })}
+						     changeDef={(def) => this.setState({def: def})}
+						     changeTerm={(term) => this.setState({term: term})}
 						     saveTerm={this.saveTerm}
 						     saveDefinition={this.saveDefinition}
 						     addRow={this.props.addRow}	

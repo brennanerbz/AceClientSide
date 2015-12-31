@@ -50,7 +50,7 @@ export default class SetListItemView extends Component {
 								&& assignment.set.finalized
 								&&
 								<button 
-									className="button outline"
+									className="button secondary"
 									onClick={this.props.handleShare}>
 									Share
 								</button>

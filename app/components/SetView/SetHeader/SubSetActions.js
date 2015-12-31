@@ -100,7 +100,10 @@ export default class SubSetActions extends Component {
 				<button onClick={() => { 
 							this.setState({more_is_open: true})
 						}} 
-						className={classnames('toggle_btn button secondary',  {'active': this.state.more_is_open})}
+						style={{
+							marginLeft: '5px'
+						}}
+						className={classnames('button secondary',  {'active': this.state.more_is_open})}
 						ref="more"				   
 						title="More actions"
 						data-placement="bottom" >
