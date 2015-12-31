@@ -114,6 +114,7 @@ const initial_convostate = {
 	trial: {},
 
 	messages: [],
+	messages_length: 0,
 	
 	rounds: [],
 	current_round: {},
@@ -296,7 +297,8 @@ export default function conversation(state = initial_convostate, action) {
 				...state,
 				isFetchingTrials: false,
 				trials: action.trials,
-				messages: messages
+				messages: messages,
+				messages_length: messages.length
 			}
 		case NEW_TRIAL_SUCCESS:
 			let new_trial = action._trial,
@@ -312,7 +314,8 @@ export default function conversation(state = initial_convostate, action) {
 				isShowingCompletedRound: false,
 				trials: current_trials,
 				current_trial: new_trial,
-				messages: msgs
+				messages: msgs,
+				messages_length: state.messages_length + 1
 			}
 		case NEW_USER_MESSAGE:
 			let answer_message = buildMessage(action.response, 'answer'), 
@@ -320,7 +323,8 @@ export default function conversation(state = initial_convostate, action) {
 				_msgs.push(answer_message)
 			return {
 				...state,
-				messages: _msgs
+				messages: _msgs,
+				messages_length: state.messages_length + 1
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
 			let _slot = state.slots.filter(slot => slot.order === action.sequence.position)[0],

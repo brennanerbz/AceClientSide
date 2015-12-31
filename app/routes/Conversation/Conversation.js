@@ -42,7 +42,9 @@ import Slots from '../../components/Conversation/Slots/Containers/SlotsListConta
 		currentSlot: state.conversation.current_slot,
 		trials: state.conversation.trials,
 		currentTrial: state.conversation.current_trial,
-		messages: state.conversation.messages
+
+		messages: state.conversation.messages,
+		messages_length: state.conversation.messages_length
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -89,7 +91,7 @@ export default class Conversation extends Component {
 	}
 
 	render() {
-		const { currentTrial, updateTrial, username, currentSlot, messages } = this.props;
+		const { currentTrial, updateTrial, username, currentSlot, messages, messages_length } = this.props;
 		return(
 			<div id="convo_ui" className="fluid_container">
 				<Header />
@@ -101,6 +103,7 @@ export default class Conversation extends Component {
 						username={username}
 						currentSlot={currentSlot}
 						messages={messages}
+						messagesLength={messages_length}
 					/>
 				</div>
 				<Footer 

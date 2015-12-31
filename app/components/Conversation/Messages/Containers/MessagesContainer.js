@@ -19,15 +19,17 @@ export default class MessagesContainer extends Component {
 		smL: null, // scrollMarginLeft
 		pH: null, // paddingHeight
 		top: 0, // top position for scrollBar
-		rendered: false // set to true once all messages have been rendered
+		rendered: false, // set to true once all messages have been rendered
 	}
 
 	componentDidMount() {
 		this.setDOMDimensions()
 	}
 
-	componentDidUpdate(prevState, prevProps) {
-		// $("#msgs_scroller").animate({ scrollTop: $('#msgs_scroller')[0].scrollHeight }, 5);
+	componentDidUpdate(prevProps, prevState) {
+		if(this.props.messagesLength > prevProps.messagesLength) {
+			$("#msgs_scroller").animate({ scrollTop: $('#msgs_scroller')[0].scrollHeight }, 5);
+		}
 	}
 
 	setDOMDimensions() {
