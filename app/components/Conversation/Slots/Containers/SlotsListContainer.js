@@ -27,7 +27,7 @@ export default class SlotsListContainer extends Component {
 
 	componentDidMount() {
 		var $scrollable = $('#slots_scroller'), /* content */
-		    $scrollbar  = $('#scroll_wrapper_for_slots > #scroll_handler'), /* scrollbar handle */
+		    $scrollbar  = $('#scroll_wrapper_for_slots > .scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
 		    cH  = $scrollable[0].clientHeight,
 		    vH  = $viewPort[0].innerHeight - 152,

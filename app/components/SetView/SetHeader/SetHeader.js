@@ -13,7 +13,7 @@ export default class SetHeader extends Component {
 	render() {
 		const image = require('../../../assets/set_profile_image.png');
 		const { title, item_count, creator_username, creator_id, id, pushState, starred } = this.props,
-		learn_route = starred ? `/learn/${id}/starred` : `/learn/${id}`
+		learn_route = starred ? `/convo/${id}/starred` : `/convo/${id}`
 		return(
 			<span className="set_header">				
 				<div className="page_header_wrapper header_info inline_info">

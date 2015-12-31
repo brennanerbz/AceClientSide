@@ -37,22 +37,29 @@ export default class MessageBody extends Component {
 		return (
 			<span className="message_body">
 				{
-					message.type == 'cue'
-					&& ::this.buildCueMessage(message)
+					message == undefined
+					? 'Hmm'
+					: null
 				}
-				{
-					message.type == 'response'
-					&& ::this.buildUserMessage(message)
-				}
-				{
-					message.type == 'feedback'
-					&& ::this.buildFeedbackMessage(message)
-				}
-				{
-					message.type == 'format'
-					&& ::this.buildFormatMessage(message)
-				}
+				
 			</span>
 		);
 	}
 }
+
+// {
+// 	message.type == 'cue'
+// 	&& ::this.buildCueMessage(message)
+// }
+// {
+// 	message.type == 'response'
+// 	&& ::this.buildUserMessage(message)
+// }
+// {
+// 	message.type == 'feedback'
+// 	&& ::this.buildFeedbackMessage(message)
+// }
+// {
+// 	message.type == 'format'
+// 	&& ::this.buildFormatMessage(message)
+// }

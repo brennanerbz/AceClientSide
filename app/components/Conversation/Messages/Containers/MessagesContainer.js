@@ -24,7 +24,7 @@ export default class MessagesContainer extends Component {
 
 	componentDidMount() {
 		var $scrollable = $('#msgs_scroller'), /* content */
-		    $scrollbar  = $('#scroll_handler'), /* scrollbar handle */
+		    $scrollbar  = $('#scroll_wrapper_for_messages > .scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
 		    cH  = $scrollable[0].clientHeight,
 		    vH  = $viewPort[0].innerHeight - 152,
@@ -70,7 +70,6 @@ export default class MessagesContainer extends Component {
 			height: vH, width: window.innerWidth - 220
 		}
 		const { username, currentSlot, messages } = this.props;
-		// console.log(messages)
 		return(
 			<div id="messages_container" 
 				 className={classnames({"rendered": this.state.rendered})}>
