@@ -11,6 +11,8 @@ import LoginPage from './LoginPage/LoginPage';
 import SignUp from './SignUp/SignUp';
 
 import Home from './Home/Home';
+
+import CreateView from './CreateSet/CreateView';
 import CreateSet from './CreateSet/CreateSet';
 import Import from './Import/Import';
 
@@ -19,6 +21,7 @@ import ProfileCreated from '../components/Profile/ProfileCreated/ProfileCreated'
 import ProfileStudied from '../components/Profile/ProfileStudied/ProfileStudied';
 
 import Learn from './Learn/Learn';
+import Conversation from './Conversation/Conversation';
 
 import SetView from './Set/Set';
 import Terms from './Set/Terms';
@@ -48,13 +51,19 @@ const routes = (
             <Route path="studied" component={ProfileStudied}/>
         </Route>
 
-        <Route path="createset" component={CreateSet} />
-        <Route path="createset/:id" component={CreateSet}/>
+        <Route path="createset" component={CreateView}>
+            <IndexRoute component={CreateSet}/>
+            <Route path=":id" component={CreateSet}/>
+        </Route>
+        
 
         <Route path="import" component={Import}/>
 
         <Route path="learn/:id" component={Learn}/>
         <Route path="learn/:id/starred" component={Learn}/>
+
+        <Route path="convo/:id" component={Conversation}/>
+        <Route path="convo/:id/starred" component={Conversation}/>
 
         <Route path="search/concepts/:query" component={Search}/>
         <Route path="search/sets/:query" component={Search}/>

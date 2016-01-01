@@ -1,13 +1,25 @@
+import {
+	IMPORT_TEXT,
+	IMPORT_TEXT_SUCCESS,
+	IMPORT_TEXT_FAILURE
+} from '../actions/import';
 
 const initial_importstate = {
-	isUploading: false
+	isImporting: false
 }
 
-export default function upload(state = initial_importstate, action) {
+export default function importView(state = initial_importstate, action) {
 	switch(action.type) {
-		case 1:
+		case IMPORT_TEXT:
 			return {
-				...state
+				...state,
+				isImporting: true
+			}
+		case IMPORT_TEXT_SUCCESS:
+		case IMPORT_TEXT_FAILURE:
+			return {
+				...state,
+				isImporting: false
 			}
 		default: 
 			return state;

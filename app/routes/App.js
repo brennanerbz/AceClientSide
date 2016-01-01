@@ -9,12 +9,14 @@ const styles = require('../styles/global.scss');
 /* Components */
 import Header from '../components/Header/Header';
 import SideNav from '../components/SideNav/SideNav';
-
 import LandingPage from './LandingPage/LandingPage';
 import Home from './Home/Home';
-
+/* Actions */
 import * as actions from '../actions/usersets';
 import * as user from '../actions/user';
+/* Velocity package */
+require('velocity-animate');
+require('velocity-animate/velocity.ui');
 
 @connect(
 	state => ({ 
@@ -109,7 +111,7 @@ export default class FlunkApp extends Component {
 			<div>
 				<Header root_path={root_path}/>
 				<div className={classnames("outer_shell", {
-					"void": root_path == '/' && !this.props.logged_in
+					"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
 				})}>
 					{::this.renderSideNav()}
 					{childrenWithProps}

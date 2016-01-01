@@ -81,6 +81,7 @@
     "textarea-autosize": "^0.4.1",
     "typed": "^0.3.3",
     "url-loader": "^0.5.7",
+    "velocity-react": "^1.1.1",
     "webpack": "^1.12.2"
   },
   "devDependencies": {

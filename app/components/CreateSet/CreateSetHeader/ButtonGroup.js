@@ -8,13 +8,13 @@ export default class ButtonGroup extends Component {
 	}
 
 	render() {
-        const { onSave, set, editing } = this.props;
+        const { onSave, set, editing, pushState, assignment } = this.props;
 		return(
 			<div className="CreateSetHeader-wrapper-buttongroup">
             	<div className="push-right">
             		<div className="Button-set">
                         {
-                            editing
+                            editing && assignment !== null
                             ? 
                             <button className={classnames("button primary")}
                                     onClick={onSave}>
@@ -30,6 +30,19 @@ export default class ButtonGroup extends Component {
                                     Create
                             </button>
                             : null
+                        }
+                        {
+                            !editing
+                            && assignment == null
+                            &&
+                            <button
+                                style={{
+                                    marginLeft: '5px'
+                                }}
+                                className="button secondary"
+                                onClick={() => pushState(null, 'createset/import')}>
+                                Import
+                            </button>
                         }
             			<SubSetActions right={true} createset={true} {...this.props} />	
             		</div>	            	

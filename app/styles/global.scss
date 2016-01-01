@@ -1,5 +1,50 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300|Lato:900,700,500,400,300);
 
+
+/* Scroll Handler */
+
+.scroll_bar {
+	>* {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	position: absolute;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background: #f9f9f9;
+	width: 8px;
+    background: #f3f3f3;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
+    .scroll_handler {
+    	position: absolute;
+    	width: 14px;
+    	.scroll_inner {
+    		width: 100%;
+    		height: 100%;
+    		border: 3px solid #fff;
+    		background: #d9d9de;
+    		-moz-border-radius: 6px;
+    		-webkit-border-radius: 6px;
+    		-khtml-border-radius: 6px;
+    		border-radius: 6px;
+    		-webkit-transition: background .5s;
+    		-moz-transition: background .5s;
+    		-ms-transition: background .5s;
+    		transition: background .5s;
+    		
+    	}
+    }
+
+}
+
+
+/* -------------- */
+
+
 /* Notification banner */
 .notify_wrapper {
 	width: 100%;
@@ -52,7 +97,7 @@
 	text-align: right;
 	.inner { 
 		position: absolute;
-		top: 0;
+		top: 5px;
 		right: 10px;
 		width: 600px;
 		padding: 4px 12px;
@@ -68,8 +113,9 @@
 			display: inline-block;
 			vertical-align: middle;
 			position: relative;
-			width: 32px;
-			height: 32px;
+			width: 34px;
+		    height: 34px;
+
 			> * {
 				position: absolute;
 				top: 0;
@@ -151,8 +197,17 @@
 
 body {
   font-family: "Lato", Helvetica, sans-serif;
-  // -webkit-font-smoothing: antialiased;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
+body > div {
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 ul {
@@ -167,12 +222,12 @@ label, input {
 }
 
 input {
-	border:1px solid #ccc;
-	outline: none;
-	border-radius: 2px;
 	padding: 2px 6px;
 	height: 32px;
 	font-family: "Lato";
+	border:1px solid #ccc;
+	outline: none;
+	border-radius: 2px;
 	&:focus {
 		border: 1px solid #498DFF;
 		box-shadow: 0 0 7px rgba(39, 128, 248, .15);
@@ -185,7 +240,7 @@ a {
 }
 
 .outer_shell {
-	width: 1020px;
+	width: 1100px;
 	margin: 0 auto;
 	&.void {
 		width: 100%;
@@ -734,6 +789,11 @@ $width: 70px;
 		border: 1px solid #B84428;
 		border-radius: 3px;
 		color: #fff!important;
+	}
+	&.large {
+		font-size: 13.75px;
+		height: 36px;
+		padding: 6px 22px;
 	}
 }
 :global .button-primary {

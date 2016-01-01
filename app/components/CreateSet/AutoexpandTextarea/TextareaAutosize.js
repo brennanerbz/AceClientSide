@@ -82,12 +82,13 @@ export default class TextareaAutosize extends Component {
 	}
 
 	render() {
-	  const { tabIndex, defSide, title } = this.props;    
+	  const { tabIndex, defSide, title, createSetTitle } = this.props;    
 	  return (
 	    <div>
 	      <textarea 
 	      		  {...this.props}
 	      		  rows="1" 
+	      		  id={createSetTitle ? 'create_set_title' : ''}
 	      		  value={this.state.title}
 	      		  onChange={(e) => { 
 	      		  	this.setState({title: e.target.value}) 

@@ -1,0 +1,97 @@
+#footer {
+	position: fixed;
+	background: #fafafa;
+	bottom: 0;
+	left: 220px;
+	right: 0rem;
+	height: 5.75rem;
+	z-index: 52;
+	border-top: 1px solid #e6e6e6;
+	#footer_overlay {
+		//TODO
+	}
+	#footer_msgs {
+		#input_container {
+			font-size: .9rem;
+		    position: absolute;
+		    bottom: 22px;
+		    left: 4pc;
+		    right: 4px;
+		    padding-right: 1rem;
+		    box-shadow: none;
+		    a {
+		    	&#primary_help {
+		    		position: absolute;
+		    		bottom: 0;
+		    		left: -44px;
+		    		background: #fff;
+		    		color: rgba(0,0,0,.35);
+		    		border: 2px solid #E0E0E0;
+		    		background-clip: padding-box;
+		    		height: 42px;
+		    		width: 44px;
+		    		line-height: 42px;
+		    		min-height: 42px!important;
+		    		max-height: 10pc!important;
+		    		padding: 0;
+		    		text-align: center;
+		    		-webkit-transition: border-color 50ms,background 50ms,color 50ms;
+		    		-moz-transition: border-color 50ms,background 50ms,color 50ms;
+		    		transition: border-color 50ms,background 50ms,color 50ms;
+		    		text-shadow: none;
+		    		border-radius: 6px 0 0 6px;
+		    	}
+		    }
+		    form {
+		    	&#input_form {
+		    		position: relative;
+	    		    margin: 0;
+	    		    textarea {
+	    		    	background: #fff;
+    		    	    width: 100%;
+    		    	    font-size: 15px;
+    		    	    line-height: 1.2rem;
+    		    	    border: 2px solid #E0E0E0;
+    		    	    border-left: none;
+    		    	    background-clip: padding-box;
+    		    	    font-family: "Lato", sans-serif;
+    		    	    margin: 0;
+    		    	    color: #3d3c40;
+    		    	    -webkit-appearance: none;
+    		    	    box-shadow: none;
+    		    	    outline: 0;
+    		    	    position: absolute;
+    		    	    bottom: 0;
+    		    	    height: 100%;
+    		    	    min-height: 42px!important;
+    		    	    padding: 9px 40px 9px 8px;
+    		    	    max-height: 10pc!important;
+    		    	    resize: none!important;
+    		    	    -webkit-transition: none;
+    		    	    -moz-transition: none;
+    		    	    transition: none;
+    		    	    border-radius: 0 6px 6px 0;
+    		    	    overflow: auto;
+    		    	    overflow-y: hidden;
+    		    	    height: 38px;
+	    		    }
+	    		    a {
+		    	    	&#answer_link {
+		    	    		position: absolute;
+	    	    		    z-index: 1;
+	    	    		    right: 25px;
+	    	    		    top: 0;
+	    	    		    width: 40px;
+	    	    		    height: 42px;
+	    	    		    line-height: 42px;
+	    	    		    text-align: center;
+	    	    		    opacity: 1;
+	    	    		    font-size: 15px;
+	    	    		    // font-weight: 600;
+		    	    	}
+		    	    }
+		    	}
+		    }
+		}
+	}
+}

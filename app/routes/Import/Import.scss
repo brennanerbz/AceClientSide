@@ -1,145 +1,185 @@
-.upload_page {
-	position: absolute;
-	top: 72.5px;
-	bottom: 0;
-	// width: 100%;
-	.upload_container {
-		// min-width: 905px!important;
-		font-family: "Lato";
-		padding-top: 0.5em;
+#import_page_container {
+	width: 100%;
+	max-width: 1100px;
+	padding-right: 50px;
+	padding-left: 50px;
+	display: table;
+	margin: 0 auto;
+	#escape_link {
+		top: 25px;
+		position: absolute;
+		right: 205px;
 		display: block;
-		position: relative;
-		padding-bottom: 4.75em;
-		// margin: 0 auto;
-		box-sizing: border-box;
-		.prompt_box {
-			float: left;
-			margin-left: 15px;
-			padding: 2em 11em;
-			border: 1px solid #e8e8e8;
-			border-radius: 3px;
-			max-width: 675px;
-			h1 {
-				font-weight: 700;
-				font-size: 28px;
-				color: #555459;
-				text-align: center;
-				margin: 0.5em 0 1.5em 0;
+		opacity: 0.5;
+		color: #9E9EA6;
+		text-decoration: none;
+		width: 4rem;
+		height: 4rem;
+		z-index: 1;
+		color: #9e9ea6;
+		line-height: 1.5rem;
+		border-radius: 100%;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		&:hover {
+			opacity: 1;
+			color: #555459;
+		    background: #EEEEEE;
+		}
+		img {
+			position: absolute;
+		    top: 0.95rem;
+		    left: 1.25rem;
+		    display: block;
+		}
+		span {
+			position: absolute;
+			top: 2.05rem;
+			left: 1.25rem;
+			width: 100%;
+			display: block;
+		}
+	}
+	#import_text {
+		width: 100%;
+		h2 {
+			font-family: "Open Sans";
+			font-weight: 600;
+			font-size: 26px;
+			color: #47525D;
+		}
+		textarea {
+			width: 100%;
+			border-radius: 2px;
+			padding: 7px 8px 8px 10px;
+			margin: 1.25rem 0 0 0;
+			min-height: 275px;
+			border:1px solid #ccc;
+			outline: none;
+			border-radius: 2px;
+			&:focus {
+				border: 1px solid #498DFF;
+				box-shadow: 0 0 7px rgba(39, 128, 248, .15);
+				outline: none;
 			}
-			.drop_box {
-				border: 1px dashed #e8e8e8;
-				border-radius: 3px;
-				padding: 2.5em 1.5em;
-				margin: 1em 0;
-				cursor: pointer;
-				img {
-					height: 55px;
-					cursor: pointer;
-					text-align: center;
-					margin: 0 auto;
-					display: table;
-					opacity: 0.5;
-					-webkit-transition: all 0.05s ease-in-out;
-					transition: all 0.05s ease-in-out;
-					&.over {
-						opacity: 0.9;
-					}
-				}
-			}
-			.day_divider {
-				margin: 1.2rem 0;
-				padding: 0;
-				min-width: 308px;
-				text-align: center;
-			    cursor: default;
-			    clear: both;
-			    position: relative;
-				hr {
-					position: absolute;
-				    border-top: 1px solid #e8e8e8;
-				    top: .75rem;
-				    right: 0;
-				    left: 0;
-				    margin: 0;
-				}
-				.day_divider_label {
-					background: #fff;
-				    padding: .05rem .75rem;
-				    display: inline-block;
-				    margin: 0 auto;
-				    position: relative;
-				    border-radius: .25rem;
-				    color: #ccc;
-				}
-			}
-			.link_container {
-				width: 100%;
-				.auto_expand_container {
-					width: 100%;
-					padding: 5px 6.5px 0 6.5px;
-					border: 1px solid #e8e8e8;
-					border-radius: 2px;
-					&.focus {
-							border: 1px solid #498DFF;
-							box-shadow: 0 0 7px rgba(39, 128, 248, .15);
-							outline: none;
-					}
-					textarea {
-						width: 100%;
-					}
-				}
-				h2 {
-					margin: 0.5em 0 1em 0;
-				}
-				button {
-					margin: 1em 0 1.5em 0;
-					width: 100%;
-				}
-			}
-			h2 {
-				font-size: 20px;
-				color: #444444;
-				margin-top: 15px;
-				text-align: center;
+			&.error {
+				// border-color: #e82110 !important;
+				// color: #e82110 !important;
 			}
 		}
-		.instructions {
-			margin-left: 700px;
-			margin-top: 1.5em;
-			max-width: 300px;
-			min-width: 275px;
-			h2 {
-				font-size: 23px;
-				font-weight: 700;
+		button {
+			margin-top: 1rem;
+			&.importing {
+				background: #DDDDE0;
+				border: #DDDDE0;
+				text-shadow: 0 1px 1px rgba(0,0,0,.1);
+				position: relative;
+			    display: inline-block;
+			    .btn_text {
+			    	margin-right: 25px;
+			    }
+				.spinner {
+					position: absolute;
+					right: 2px;
+					z-index: 2;
+					display: inline-block;
+					width: 2pc;
+					height: 2pc;
+					pointer-events: none;
+				}
+				.sk-fading-circle {
+					.sk-circle {
+						&:before {
+							background-color: #fff;
+						}
+					}
+				}
 			}
-			ul {
-				li {
-					&:not(:last-child) {
-						border-bottom: 1px solid #e8e8e8;
+			&.disabled {
+				opacity: 0.5;
+			}
+		}
+		div {
+			&.note {
+				font-size: .95rem;
+				color: #9e9ea6;
+				display: block;
+				line-height: 1rem;
+				margin-top: .25rem;
+				margin-bottom: .55rem;
+			}
+		}
+	}
+	#import_instructions {
+		text-align: center;
+		h3 {
+			font-family: "Open Sans";
+			font-size: 21px;
+			color: #47525D;
+			margin: 1.5rem;
+			margin-top: 0.25rem;
+		}
+		ol {
+			&#instructions_list {
+				width: 100%;
+				padding: 0;
+				margin: 0;
+				margin-top: 2.5rem;
+				.instruction_item {
+					list-style: none;
+					display: inline-block;
+					width: 33.33333%;
+					min-height: 130px;
+					padding: 0.25rem 2.5rem;
+					padding-left: 2.75rem;
+					position: relative;
+					&:first-child {
+						padding-left: 0;
 					}
-					padding: 1.5em 0 1em 0;
-					h2 {
-						font-weight: 400;
-						font-size: 16px;
-						text-transform: uppercase;
-					}
-					.step {
-						margin-top: 25px;
-						img {
-							float: left;
-							margin-top: 5px;
-							&#upload {
-								height: 20px;
-							}
-							&#transform {
-								height: 35px;
-							}
-							&#set {
-								height: 30px;
+					&:last-child {
+						padding-right: 0;
+						.content {
+							.instruction_item_content {
+								padding-right: 0;
 							}
 						}
-						p {
-							margin-left: 65px;
+					}
+					&:not(:first-child):not(:last-child) {
+						border-left: 1px solid #E5E5E5;
+						border-right: 1px solid #E5E5E5;
+					}
+					h4, .instruction_item_content {
+						text-align: left;
+					}
+					h4 {
+						&.heading {
+							font-size: 15.5px;
+							color: #47525D;
+							margin-bottom: 1.75rem;
+						}
+					}
+					.content {
+						display: table;
+						.instruction_item_index_circle {
+							float: left;
+							border: 2px solid #5D6871;
+							border-radius: 50%;
+							width: 35px;
+							height: 35px; 
+							position: relative;
+							.instruction_item_index {
+								margin-top: 5px;
+								font-size: 14.5px;
+								font-weight: 600;
+								color: #5D6871;
+							}
+						}
+						.instruction_item_content {
+							margin-left: 25px;
+							position: absolute;
+							padding: 0 2.5rem 0 0rem; 
 						}
 					}
 				}
@@ -147,3 +187,6 @@
 		}
 	}
 }
+
+
+

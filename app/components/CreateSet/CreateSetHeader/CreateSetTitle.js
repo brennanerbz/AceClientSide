@@ -8,12 +8,19 @@ export default class CreateSetTitle extends Component {
 		indexForTab: PropTypes.number
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(this.props.importVisible && !nextProps.importVisible) {
+			$('#create_set_title').focus()
+		}
+	}
+
 	render() {
 		const { indexForTab } = this.props;
 		return(
 			<div className="CreateSetHeader-section CreateSetHeader-section-title">
 				<div className="CreateSetHeader-textarea">
 					<AutoexpandTextarea	
+						createSetTitle={true}
 						autoFocus={this.props.shouldAutoFocus}			
 						tabIndex={indexForTab}
 						{...this.props}

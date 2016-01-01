@@ -1,0 +1,11 @@
+.fluid_container {
+	padding-left: 0px;
+	padding-right: 0px;
+	&#convo_ui {
+		width: 100%;
+		#convo_ui_body {
+			margin-top: 58px;
+			position: absolute;
+		}
+	}
+}

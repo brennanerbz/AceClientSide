@@ -20,7 +20,7 @@
     .header_container {
         z-index: 300;
         background: #fff;
-        width: 1020px;
+        width: 1100px;
         margin: 0 auto;
         min-width: 905px!important;
         padding-bottom: 10px;
@@ -30,6 +30,14 @@
             .header_logo {
                 float: none;
             }
+        }
+        &.convo {
+            padding-bottom: 25px;
+            padding-top: 9.5px;
+            width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            min-width: 1005px!important;
         }
         &.landing {
             .header {

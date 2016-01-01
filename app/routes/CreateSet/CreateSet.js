@@ -95,9 +95,11 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillMount() {
-		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in } = this.props;
+		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in, importVisible, loc } = this.props;
 		if(logged_in) {
+			// TODO: ISSUE RESIDES HERE FOR FN BUG
 			loadSetFlag()
+			if(loc.pathname.split('/')[2] == 'import') return;
 			if(Object.keys(params).length !== 0) { 
 				this.setState({ editing: true })
 				loadEditing(params.id, pushState)
@@ -233,6 +235,7 @@ export default class CreateSetPage extends Component {
 								user={this.props.user}
 								pushState={this.props.pushState}
 								shouldAutoFocus={!this.state.login_prompt_modal}
+								importVisible={this.props.importVisible}
 							/>                 
 							<div className="container">
 								<div className="CreateSetPage-list">

@@ -10,7 +10,8 @@ export default class SetListItemActionsView extends Component {
 	}
 
 	render() {
-		const more = require('../../../assets/elipses.png');
+		const more = require('../../../assets/elipses.png'),
+			 blue_more = require('../../../assets/blue_elipses.png')
 		return(
 			<div className="more_actions">
 				{
@@ -37,7 +38,7 @@ export default class SetListItemActionsView extends Component {
 								})
 							}}
 							ref="more"
-							className="button outline"
+							className="button secondary"
 							anchor_bottom={false}
 							arrow_position="top"
 							autoFocus={false}
@@ -48,7 +49,7 @@ export default class SetListItemActionsView extends Component {
 							vertical_displacement={0}
 							horizontal_displacement={0}
 						>
-							<img style={{height: '3.75px'}}  className="" src={more}/>
+							<img style={{height: '3.75px'}}  className="" src={blue_more}/>
 						</button>
 					</div>
 				}
