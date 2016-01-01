@@ -8,7 +8,6 @@ export default class SetActions extends Component {
 	render() {
 		return(
 			<i id="set_actions" className="">
-				Actions
 			</i>
 		);
 	}

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
-import SetName from './SetName';
+import SetTitle from './SetTitle';
 import SetActions from './SetActions';
 
 export default class ActiveSetHeader extends Component {
@@ -9,11 +9,20 @@ export default class ActiveSetHeader extends Component {
 	}
 
 	render() {
+		const { setTitle, currentSequence, assignments, pushState } = this.props,
+		currentSet = assignments.filter(a => a.set_id == currentSequence.set_id)[0] || {}
 		return(
 			<h2 id="active_set_header" className="overflow_ellipsis">
 				<span className="star icon">Star</span>
-				<SetName/>
-				<SetActions />
+				<SetTitle
+					pushState={pushState}
+					currentSet={currentSet}
+					currentSequence={currentSequence}
+					setTitle={setTitle}
+				/>
+				<SetActions 
+					currentSequence={currentSequence}
+				/>
 			</h2>
 		);
 	}

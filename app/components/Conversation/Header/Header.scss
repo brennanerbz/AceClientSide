@@ -1,13 +1,14 @@
 #header {
 	position: fixed;
-	z-index: 400;
+	top: 0;
+	// z-index: 400;
 	min-width: 8in;
 	width: 100%;
 	// border: 1px solid red;
 	#set_header {
 		position: relative;
 		padding: 0;
-		margin: 0 348px 0 220px;
+		margin: 0 348px 0 125px;
 		#active_set_header {
 			// border: 1px solid blue;
 			-webkit-user-select: none;

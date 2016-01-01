@@ -13,6 +13,8 @@ import Menu from '../Menu/Menu';
 import QuickLogIn from '../QuickLogIn/QuickLogIn';
 import SavingLabel from '../CreateSet/SavingLabel/SavingLabel';
 
+import ConversationHeader from '../Conversation/Header/Containers/HeaderContainer';
+
 import * as useractions from '../../actions/user';
 
 @connect(state => ({
@@ -35,6 +37,7 @@ import * as useractions from '../../actions/user';
 	isUpdatingSet: state.createset.isUpdatingSet,
 	isCreatingItem: state.createset.isCreatingItem,
 	isUpdatingItem: state.createset.isUpdatingItem
+
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -163,6 +166,13 @@ export default class Header extends Component {
 							}
 							
 							<div className="header_content">
+								{
+									root_path == 'convo'
+									&& 
+									<ConversationHeader
+
+									/>
+								}
 								{
 									root_path == 'createset'
 									&& !this.props.isLoadingSet
