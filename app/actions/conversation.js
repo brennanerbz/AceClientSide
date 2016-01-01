@@ -153,37 +153,35 @@ export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE';
 export const UPDATE_SEQUENCE_SUCCESS = 'UPDATE_SEQUENCE_SUCCESS';
 export const UPDATE_SEQUENCE_FAILURE = 'UPDATE_SEQUENCE_FAILURE';
 export function updateSequence(_sequence) {
-	return async(dispatch, getState) => {
+	return (dispatch, getState) => {
 		dispatch({type: UPDATE_SEQUENCE})
-		try {
-			let updated_sequence;
-			
-			updated_sequence = _sequence;
-			
-			for (var _seqprop in updated_sequence) {
-				if (_seqprop == 'type') {
-					delete updated_sequence[_seqprop]
-				}
+		let updated_sequence = _sequence;
+		for (var _seqprop in updated_sequence) {
+			if (_seqprop == 'type') {
+				delete updated_sequence[_seqprop]
 			}
-			dispatch({type: UPDATING_STATE})
-			await axios.put(`${api_url}/sequences/${_sequence.id}`, 
-				updated_sequence
-			).then(res => {
-				const sequence = res.data;
+		}
+		dispatch({type: UPDATING_STATE})
+		request
+		.put(`${api_url}/sequences/${updated_sequence.id}`)
+		.send(updated_sequence)
+		.end((err, res) => {
+			if(res.ok) {
+				const sequence = res.body;
 				dispatch({type: UPDATE_SEQUENCE_SUCCESS, sequence}) 
 				if(sequence.completed) {
 					dispatch({type: SHOW_COMPLETED_SEQUENCE})
 					dispatch(fetchSequenceStats(sequence.id))
 				} else {
-					dispatch(newTrial())
+					dispatch(newTrial(null, null))
 				}
-			})
-		} catch(err) {
-			dispatch({
-				type: UPDATE_SEQUENCE_FAILURE,
-				error: Error(err)
-			})
-		}
+			} else {
+				dispatch({
+					type: UPDATE_SEQUENCE_FAILURE,
+					error: Error(err)
+				})
+			}
+		})		
 	}
 }
 
@@ -268,28 +266,23 @@ export function fetchSlots(sequence_id, isPreparing) {
 export const UPDATE_SLOT = 'UPDATE_SLOT'
 export const UPDATE_SLOT_SUCCESS = 'UPDATE_SLOT_SUCCESS'
 export const UPDATE_SLOT_FAILURE = 'UPDATE_SLOT_FAILURE'
-export function updateSlot(slot) {
-	return async(dispatch, getState) => {
+export function updateSlot(_slot) {
+	return (dispatch, getState) => {
 		dispatch({type: UPDATE_SLOT})
-		try {
-			await axios.put(`${api_url}/slots/${slot.id}`, 
-				slot
-			).then(res => {
-				let slot = res.data;
+		request
+		.put(`${api_url}/slots/${_slot.id}`)
+		.send(_slot)
+		.end((err, res) => {
+			if(res.ok) {
+				const slot = res.body;
 				dispatch({type: UPDATE_SLOT_SUCCESS, slot})
-			}).then(() => {
-				if(getState().conversation.slots.filter(slot => !slot.completed).length === 0) {
-					return;
-				}
-				let slot = getState().conversation.current_slot
-				dispatch({ type: UPDATE_CURRENT_ROUND, slot })
-			})			
-		} catch(err) {
-			dispatch({
-				type: UPDATE_SLOT_FAILURE,
-				error: Error(err)
-			})
-		}
+			} else {
+				dispatch({
+					type: UPDATE_SLOT_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
 	}
 }
 
@@ -350,10 +343,7 @@ export function newTrial(trial, slot_id) {
 		dispatch({type: NEW_TRIAL})
 		let new_trial = {},
 			state = getState().conversation;
-			// s = new Date(),
-		  	// start = s.toISOString().replace("T", " ").replace("Z", "");
 		new_trial['slot_id'] = slot_id || state.current_slot.id
-		// new_trial['start'] = start;
 		/* Adjust trial object based on direct user control */
 		if(trial !== null) {
 			new_trial['help_chosen_by_user'] = true;
@@ -408,7 +398,6 @@ export function updateTrial(response) {
 				if(updated_trial.correct) {
 					current_slot['completed'] = true;
 					dispatch(updateSlot(current_slot))
-					dispatch({type: SHOW_CORRECT})
 					dispatch(nextSlot('next'))
 					return;
 				} 
@@ -551,18 +540,11 @@ export function nextSlot(dir) {
 			let state = getState().conversation,
 				current_slot = state.current_slot,
 				current_sequence = state.current_sequence,
-				slots = state.current_round,
+				slots = state.slots,
 				pos = state.slot_index,
 				next_pos = findNext(dir, slots, pos),		
 				next_slot = slots[next_pos],
 				new_pos = next_slot.order;
-			if(pos == next_pos) {
-				return;
-			}
-			// dispatch({type: MOVE_SLOT_SUCCESS, next_slot})
-			// if(next_slot.completed) {
-			// 	dispatch({type: SHOW_CORRECT})
-			// }
 			current_sequence = Object.assign({...current_sequence}, {
 				position: new_pos,
 				type: 'updating_position'

@@ -69,19 +69,18 @@ export default class MessagesContainer extends Component {
 
 	render() {
 		let { vH, top, smL, pH, $scrollable } = this.state,
+			{ username, currentSlot, messages } = this.props, 
 			scrollHiderStyle = {
 				width: smL, marginRight: '17px'
 			},
 			msgsScrollerStyle = {
 				height: vH, width: window.innerWidth - 220
 			},
-			{ username, currentSlot, messages } = this.props, 
 			scrollHeight = 0, scrollBarHeight = 0;
 			if($scrollable !== null) {
 				scrollHeight = $scrollable[0].scrollHeight,
 				scrollBarHeight = vH * vH / scrollHeight
 			}
-			
 		return(
 			<div id="messages_container" 
 				 className={classnames({"rendered": this.state.rendered})}>

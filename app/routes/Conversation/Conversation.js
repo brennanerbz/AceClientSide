@@ -65,7 +65,6 @@ export default class Conversation extends Component {
 	}	
 
 	componentDidMount() {
-	// $(window).on('keyup', ::this.handleKeyUp)
 	}
 
 	handleNewSequence(call) {
@@ -85,7 +84,6 @@ export default class Conversation extends Component {
 
 
 	componentWillUnmount() {
-		// $(window).off('keyup')
 		const { clearLearn } = this.props;
 		clearLearn()
 	}

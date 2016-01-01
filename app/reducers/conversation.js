@@ -327,16 +327,10 @@ export default function conversation(state = initial_convostate, action) {
 				messages_length: state.messages_length + 1
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
-			let _slot = state.slots.filter(slot => slot.order === action.sequence.position)[0],
-				  _correctslot;
-			if(action.sequence.completed) {
-				_correctslot = false
-			} else {
-				_correctslot = _slot.completed;
-			}
+			let _slot = state.slots
+						.filter(slot => slot.order === action.sequence.position)[0];
 			return {
 				...state,
-				isShowingCorrect: _correctslot,
 				current_sequence: action.sequence,
 				position: action.sequence.position,
 				current_slot: _slot,
