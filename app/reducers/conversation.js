@@ -334,6 +334,7 @@ export default function conversation(state = initial_convostate, action) {
 				current_sequence: action.sequence,
 				position: action.sequence.position,
 				current_slot: _slot,
+				slot_index: state.slots.indexOf(_slot),
 				isUpdatingState: false
 			}
 		case UPDATE_SLOT_SUCCESS:

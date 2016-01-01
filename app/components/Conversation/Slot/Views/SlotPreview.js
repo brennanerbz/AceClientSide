@@ -10,9 +10,10 @@ export default class SlotPreview extends Component {
 	}
 
 	render() {
+		const { slot } = this.props;
 		return(
 			<span id="slot_preview">
-				This is a preview of the slot cue...
+				{ slot.censored_cue }
 			</span>
 		);
 	}

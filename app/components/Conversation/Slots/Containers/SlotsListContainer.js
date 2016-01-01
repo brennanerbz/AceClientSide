@@ -33,7 +33,7 @@ export default class SlotsListContainer extends Component {
 		    vH  = $viewPort[0].innerHeight - 152,
 		    sH  = $scrollable[0].scrollHeight,
 		    sbH = vH*vH/sH,
-		    smL = 200,
+		    smL = 220,
 		    top = $scrollable.scrollTop()/vH*sbH;
 		this.setState({
 			$scrollable: $scrollable,
@@ -71,10 +71,11 @@ export default class SlotsListContainer extends Component {
 			},
 			slotsScrollerStyle = {
 				height: viewHeight,
-				width: 210
-			}
-		
+				width: 220
+			},
+			{ slots, currentSlotId } = this.props;
 		return(
+
 			<div id="slots_list">
 				<div id="col_slots_list_bg" className=""></div>
 				<div id="col_slots_list" className={classnames({'rendered': contentRendered})}>
@@ -101,7 +102,10 @@ export default class SlotsListContainer extends Component {
 									<h2 id="slot_header">
 										Slot header
 									</h2>
-									<SlotsList/>
+									<SlotsList
+										slots={slots}
+										currentSlotId={currentSlotId}
+									/>
 								</div>
 							</div>
 						</div>

@@ -75,22 +75,44 @@
 			    		list-style-type: none;
 			    		text-align: left;
 			    		margin: 0 1px 0 0;
-			    		width: 204px;
+			    		width: 220px;
 			    		#slot_wrapper {
 			    			width: 220px;
 			    			border-bottom: 1px solid #e6e6e6;
+			    			&.active_slot {
+			    				background: #519CFE;
+			    				color: #fff;
+			    				li {
+			    					#slot_progress {
+			    						&.circle {
+			    							border: none;
+			    						}
+			    					}
+			    				}
+			    			}
 							&:first-child {
 								border-top: 1px solid #e6e6e6;
 							}
 			    		}
 			    		li {
-			    			width: 204px;
-			    			// border: 1px solid yellow;
+			    			width: 219px;
 			    			padding: 1em;
 			    			#slot_progress {
-			    				// border: 1px solid green;
+			    				position: relative;
 			    				padding: 0.1em;
-			    				margin-right: 0.55em;
+			    				margin-right: 0.75em;
+			    				&.circle {
+			    					display: inline-flex;
+			    					width: 16px;
+			    					height: 16px;
+			    					border-radius: 50%;
+			    					background: #fff;
+			    					border: 1px solid #ccc;
+			    					&.completed_check_mark {
+			    						background: #519CFE;
+			    						border: none;
+			    					}
+			    				}
 			    			}
 			    			#slot_preview {
 			    				font-size: 13px;

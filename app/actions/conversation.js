@@ -173,7 +173,7 @@ export function updateSequence(_sequence) {
 					dispatch({type: SHOW_COMPLETED_SEQUENCE})
 					dispatch(fetchSequenceStats(sequence.id))
 				} else {
-					dispatch(newTrial(null, null))
+					dispatch(newTrial(null, getState().conversation.slots.filter(s => s.order == sequence.position)[0].id))
 				}
 			} else {
 				dispatch({
@@ -545,10 +545,16 @@ export function nextSlot(dir) {
 				next_pos = findNext(dir, slots, pos),		
 				next_slot = slots[next_pos],
 				new_pos = next_slot.order;
-			current_sequence = Object.assign({...current_sequence}, {
-				position: new_pos,
-				type: 'updating_position'
-			})
+			if(pos == slots.length - 1) {
+				current_sequence = Object.assign({...current_sequence}, {
+					completed: true
+				})
+			} else {
+				current_sequence = Object.assign({...current_sequence}, {
+					position: new_pos,
+					type: 'updating_position'
+				})
+			}
 			dispatch(updateSequence(current_sequence))
 		} catch(err) {
 			dispatch({

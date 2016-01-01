@@ -89,12 +89,14 @@ export default class Conversation extends Component {
 	}
 
 	render() {
-		const { currentTrial, updateTrial, username, currentSlot, messages, messages_length } = this.props;
+		const { currentTrial, updateTrial, username, currentSlot, messages, messages_length, slots } = this.props;
 		return(
 			<div id="convo_ui" className="fluid_container">
 				<Header />
 				<Slots 
 					createNewSequence={() => ::this.handleNewSequence(true)}
+					slots={slots}
+					currentSlotId={currentSlot.id}
 				/>
 				<div id="convo_ui_body">
 					<Messages 

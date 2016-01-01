@@ -12,11 +12,20 @@ export default class SlotsList extends Component {
 	}
 
 	render() {
+		const { slots, currentSlotId } = this.props;
+		console.log(slots)
 		return(
 			<ul id="slots_list">
 				{
-					Array.from({length: 15}).map(a => {
-						return <SlotContainer />
+					slots.map((s, i)=> {
+						return (
+							<SlotContainer 
+								slot={s}
+								index={i}
+								key={i}
+								currentSlotId={currentSlotId}
+							/>
+						)
 					})
 				}
 			</ul>

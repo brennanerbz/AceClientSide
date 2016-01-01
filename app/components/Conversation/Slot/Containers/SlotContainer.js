@@ -13,12 +13,17 @@ export default class SlotContainer extends Component {
 	}
 
 	render() {
+		const { currentSlotId, slot, index } = this.props;
 		return(
-			<div id="slot_wrapper">
+			<div className={classnames({'active_slot': slot.id == currentSlotId })} id="slot_wrapper">
 				<li className={classnames(`slot`)}>
 					<span className="overflow_ellipsis">
-						<SlotProgress/>
-						<SlotPreview/>
+						<SlotProgress
+							slotCompleted={slot.completed}
+						/>
+						<SlotPreview
+							slot={slot}
+						/>
 					</span>
 				</li>
 			</div>
