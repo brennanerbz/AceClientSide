@@ -113,6 +113,8 @@ export default class SlotsListContainer extends Component {
 				</div>
 				<SequenceProgress 
 					createNewSequence={this.props.createNewSequence}
+					completedSlots={slots.filter(s => s.completed).length}
+					slotsLength={slots.length}
 				/>
 			</div>
 		);

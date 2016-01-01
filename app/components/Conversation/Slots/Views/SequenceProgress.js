@@ -20,8 +20,8 @@ export default class SequenceProgress extends Component {
 		let $progressBar = $(this.refs.sequence_progress_bar),
 			$progressBarInner = $(this.refs.progress_bar_inner),
 			containerWidth = $progressBar[0].clientWidth,
-			slotsLength = 24, // DATA
-			completedSlots = 12, // DATA
+			slotsLength = this.props.slotsLength || 0, // DATA
+			completedSlots = this.props.completedSlots || 0, // DATA
 			innerWidth = completedSlots / slotsLength * containerWidth;
 		this.setState({
 			$progressBar: $progressBar,
@@ -32,26 +32,44 @@ export default class SequenceProgress extends Component {
 			innerWidth: innerWidth
 		});
 		setTimeout(() => {
-			this.animateProgressBar()
+			this.animateProgressBar(0, innerWidth)
 		}, 1)
 	}
 
-	animateProgressBar() {
+	componentWillReceiveProps() {
+		const { completedSlots, slotsLength } = this.props
+		var innerWidth = completedSlots / slotsLength * this.state.containerWidth,
+			previousInnerWidth = this.state.innerWidth
+		if(previousInnerWidth !== innerWidth) {
+			this.animateProgressBar(previousInnerWidth, innerWidth)
+		}
+		this.setState({
+			completedSlots: completedSlots,
+			slotsLength: slotsLength
+		});
+	}
+
+	animateProgressBar(start, end) {
 		this.setState({
 			renderProgress: true
 		});
 		$("#sequence_progress_bar > span").each(function() {
 		  $(this)
 		    .data("origWidth", $(this).width())
-		    .width(0)
+		    .width(start)
 		    .animate({
-		      width: $(this).data("origWidth") 
+		      width: end 
 		    }, 1200);
 		});
+		setTimeout(() => {
+			this.setState({
+				innerWidth: end
+			});
+		}, 1200)
 	}
 
 	render() {
-		const { slotsLength, completedSlots, innerWidth, renderProgress, newSequence } = this.state;
+		const { completedSlots, slotsLength, innerWidth, renderProgress, newSequence } = this.state;
 		return(
 			<div id="sequence_control">
 				<button id="start_sequence_over" 
