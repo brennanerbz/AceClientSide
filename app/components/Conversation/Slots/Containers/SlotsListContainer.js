@@ -26,6 +26,14 @@ export default class SlotsListContainer extends Component {
 	}
 
 	componentDidMount() {
+		this.setDOMDimensions()
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		// $('#slots_scroller').animate({scrollTop: $('#slots_scroller')[0].scrollHeight}, 5)
+	}
+
+	setDOMDimensions() {
 		var $scrollable = $('#slots_scroller'), /* content */
 		    $scrollbar  = $('#scroll_wrapper_for_slots > .scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
@@ -33,7 +41,7 @@ export default class SlotsListContainer extends Component {
 		    vH  = $viewPort[0].innerHeight - 152,
 		    sH  = $scrollable[0].scrollHeight,
 		    sbH = vH*vH/sH,
-		    smL = 220,
+		    smL = 206,
 		    top = $scrollable.scrollTop()/vH*sbH;
 		this.setState({
 			$scrollable: $scrollable,
@@ -45,35 +53,35 @@ export default class SlotsListContainer extends Component {
 			scrollBarHeight: sbH,
 			scrollMarginLeft: smL,
 			top: top,
-			shouldRenderScrollBar: sH > vH ? true : false
+			shouldRenderScrollBar: sH > vH ? true : false,
+			contentRendered: true
 		})
-		setTimeout(() => {
-			$("#slots_scroller").scrollTop($("#slots_scroller")[0].scrollHeight);
-			this.setState({
-				contentRendered: true
-			})
-		}, 1) 
 	}
 
 	setScrollBarPosition(e) {
 		e.preventDefault()
 		const { $scrollable, viewHeight, scrollBarHeight } = this.state,
-		top = $scrollable.scrollTop()/ viewHeight*scrollBarHeight
+		top = $scrollable.scrollTop()/ viewHeight * (viewHeight * viewHeight / $scrollable[0].scrollHeight)
 		this.setState({
 			top: top
 		})
 	}
 
 	render() {
-		const { viewHeight, scrollBarHeight, scrollMarginLeft, top, shouldRenderScrollBar, contentRendered } = this.state,
+		let { viewHeight, scrollMarginLeft, top, shouldRenderScrollBar, contentRendered, $scrollable } = this.state,
+			{ slots, currentSlotId } = this.props,
 			scrollHiderStyle = {
-					width: scrollMarginLeft
+					width: 220
 			},
 			slotsScrollerStyle = {
 				height: viewHeight,
 				width: 220
 			},
-			{ slots, currentSlotId } = this.props;
+			scrollHeight = 0, scrollBarHeight = 0;
+			if($scrollable !== null) {
+				scrollHeight = $scrollable[0].scrollHeight,
+				scrollBarHeight = viewHeight * viewHeight / scrollHeight
+			}
 		return(
 
 			<div id="slots_list">
@@ -83,7 +91,7 @@ export default class SlotsListContainer extends Component {
 					</div>
 					<div id="scroll_wrapper_for_slots" className="scroll_wrapper">
 						{
-							shouldRenderScrollBar
+							true
 							&&
 							<ScrollBar 
 								viewHeight={viewHeight}

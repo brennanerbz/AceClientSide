@@ -40,18 +40,22 @@
 			}
 			.scroll_bar {
 				visibility: hidden;
-			    background: #fff;
+			    background: transparent; // USED TO BE #fff 
 			    .scroll_inner {
 			    	background: #383F45;
 			    	opacity: 0.7;
 			    }
 			}
 		}
+		::-webkit-scrollbar { 
+		    display: none; 
+		}
 		.scroll_hider {
-			overflow: hidden;
+			overflow: hidden!important;
+			overflow-y:hidden;
 			#slots_scroller {
 				padding: 0 0 0rem;
-			    overflow-y: scroll;
+			    overflow-y: auto;
 			    width: 220px;
 			    .slots {
 			    	margin: 1rem 0 2rem;
@@ -75,14 +79,20 @@
 			    		list-style-type: none;
 			    		text-align: left;
 			    		margin: 0 1px 0 0;
-			    		width: 220px;
+			    		width: 204px;
 			    		#slot_wrapper {
-			    			width: 220px;
+			    			width: 219px;
 			    			border-bottom: 1px solid #e6e6e6;
+			    			&:hover {
+			    				background: #f8f8f8;
+			    			}
 			    			&.active_slot {
-			    				background: #519CFE;
+			    				background: #519CFE!important;
 			    				color: #fff;
 			    				li {
+			    					&:hover {
+			    						background: inherit;
+			    					}
 			    					#slot_progress {
 			    						&.circle {
 			    							border: none;
@@ -95,7 +105,7 @@
 							}
 			    		}
 			    		li {
-			    			width: 219px;
+			    			width: 204px;
 			    			padding: 1em;
 			    			#slot_progress {
 			    				position: relative;
