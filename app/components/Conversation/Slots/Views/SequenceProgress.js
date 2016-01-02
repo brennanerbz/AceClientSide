@@ -29,11 +29,8 @@ export default class SequenceProgress extends Component {
 			containerWidth: containerWidth,
 			slotsLength: slotsLength,
 			completedSlots: completedSlots,
-			innerWidth: innerWidth
+			innerWidth: isNaN(innerWidth) ? 0 : innerWidth
 		});
-		setTimeout(() => {
-			this.animateProgressBar(0, innerWidth)
-		}, 1)
 	}
 
 	componentWillReceiveProps() {
@@ -41,11 +38,13 @@ export default class SequenceProgress extends Component {
 		var innerWidth = completedSlots / slotsLength * this.state.containerWidth,
 			previousInnerWidth = this.state.innerWidth
 		if(previousInnerWidth !== innerWidth) {
-			this.animateProgressBar(previousInnerWidth, innerWidth)
+			if(!isNaN(previousInnerWidth) && !isNaN(innerWidth)) {
+				this.animateProgressBar(previousInnerWidth, innerWidth)
+			}
 		}
 		this.setState({
 			completedSlots: completedSlots,
-			slotsLength: slotsLength
+			slotsLength: slotsLength,
 		});
 	}
 

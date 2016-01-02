@@ -124,24 +124,40 @@ const initial_convostate = {
 
 
 function buildMessages(trial) {
-	let messages = [], msg, m = 0,
+	let messages = [], content_msg, user_msg, reply_msg, m = 0,
 	content = false, answer = false, reply = false;
-	while(m < 3) {
-		if(trial.start !== null && trial.content !== null && trial.content.length > 0 && !content) {
-			msg = buildMessage(trial, 'content')
-			content = true;
+	if(trial.start !== null) {
+		if(trial.content !== null 
+		&& trial.content.length > 0 
+		&& !content) {
+			content_msg = buildMessage(trial, 'content')
+			if(content_msg !== undefined) {
+				messages.push(content_msg)
+			}
 		}
-		if(trial.response_time !== null && trial.answer !== null && trial.answer.length > 0 && !answer) {
-			msg = buildMessage(trial, 'answer')
-			answer = true;
-		} 
-		if(trial.reply_displayed !== null && trial.reply !== null && trial.reply.length > 0 && !reply) {
-			msg = buildMessage(trial, 'reply')
-			reply = true;
-		}
-		messages.push(msg)
-		m++
+		content = true;
 	}
+	if(trial.response_time !== (null && 'None') || trial.completion !== null) {
+		if(trial.answer !== null 
+		&& trial.answer.length > 0 
+		&& !answer) {
+			user_msg = buildMessage(trial, 'answer')
+			if(user_msg !== undefined) {
+				messages.push(user_msg)
+			}
+		}
+		answer = true;
+	}
+	if(trial.reply !== null ) {
+		if(trial.reply.length > 0 
+		&& !reply) {
+			reply_msg = buildMessage(trial, 'reply')
+			if(reply_msg !== undefined) {
+				messages.push(reply_msg)
+			}
+		}
+		reply = true;
+	}	
 	return messages;
 }
 function buildMessage(trial, type) {
@@ -157,19 +173,20 @@ function buildMessage(trial, type) {
 		message.subtype = trial.content_subtype
 		message.user = 'acubot'
 		message.text = trial.content
-		message.ts = moment.utc(trial.start)
+		message.ts = trial.start
 	}
 	if(type == 'answer') {
 		message.type = 'answer'
 		message.user = trial.user_id || 'user'
 		message.text = trial.answer
-		message.ts = moment.utc(trial.response_time)
+		let isDate = moment.isDate(trial.response_time)
+		message.ts = isDate ? trial.response_time : trial.completion
 	}
 	if(type == 'reply') {
 		message.type = 'reply'
 		message.user = 'acubot'
 		message.text = trial.reply
-		message.ts = moment.utc(trial.reply_displayed)
+		message.ts = trial.reply_displayed
 	}
 	return message;
 }

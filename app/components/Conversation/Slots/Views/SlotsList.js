@@ -13,7 +13,6 @@ export default class SlotsList extends Component {
 
 	render() {
 		const { slots, currentSlotId } = this.props;
-		console.log(slots)
 		return(
 			<ul id="slots_list">
 				{

@@ -41,13 +41,13 @@
 		    		text-shadow: none;
 		    		border-radius: 6px 0 0 6px;
 		    		text-decoration: none!important;
-		    		&:hover {
-		    			background: #56B68B;
-		    			border-color: #56B68B;
-		    			color: #fff;
-		    		}
 		    		&.focused {
 		    			border-color: #D8D8D8;
+		    		}
+		    		&:hover {
+		    			background: #56B68B;
+		    			border-color: #56B68B!important;
+		    			color: #fff;
 		    		}
 		    		#question_mark {
 		    			font-family: 'Lato';

@@ -34,9 +34,10 @@ export default class MessageBody extends Component {
 		if(msg.subtype == 'mc') {
 			var mcList = msg.text.split("|"),
 				preElements = []
-			mcList.forEach(m => {
+			mcList.forEach((m, i) => {
 				preElements.push(
 				<pre 
+					key={i}
 					style={{
 						width: m._textWidth() + 15.5,
 						cursor: 'pointer'
