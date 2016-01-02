@@ -166,7 +166,8 @@ function buildMessage(trial, type) {
 		subtype: '',
 		user: '',
 		text: '',
-		ts: ''
+		ts: '',
+		slotId: ''
 	}
 	if(type == 'content') {
 		message.type = trial.content_type
@@ -186,8 +187,9 @@ function buildMessage(trial, type) {
 		message.type = 'reply'
 		message.user = 'acubot'
 		message.text = trial.reply
-		message.ts = trial.reply_displayed
+		message.ts = trial.reply_displayed || trial.completion
 	}
+	message.slotId = trial.slot_id
 	return message;
 }
 

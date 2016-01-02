@@ -1,6 +1,38 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300|Lato:900,700,500,400,300);
 
 
+/* Day Divider */
+.day_divider {
+	background: #fff;
+	margin: 1.2rem 0;
+	padding: 0;
+	font-size: .9rem;
+	line-height: 1rem;
+	font-family: "Lato",sans-serif;
+	color: #2c2d30;
+	font-weight: 600;
+	text-align: center;
+	cursor: default;
+	clear: both;
+	position: relative;
+	hr {
+		position: absolute;
+		border-top: 1px solid #e6e6e6;
+		top: .75rem;
+		right: 0;
+		left: 0;
+		margin: 0;
+	}
+	.day_divider_label {
+		background: #fff;
+		padding: .25rem .75rem;
+		display: inline-block;
+		margin: 0 auto;
+		position: relative;
+		border-radius: .25rem;
+	}
+}
+
 /* Scroll Handler */
 
 .scroll_bar {

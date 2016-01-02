@@ -91,7 +91,7 @@ export default class SlotsListContainer extends Component {
 					</div>
 					<div id="scroll_wrapper_for_slots" className="scroll_wrapper">
 						{
-							shouldRenderScrollBar
+							scrollHeight > viewHeight
 							&&
 							<ScrollBar 
 								viewHeight={viewHeight}
