@@ -65,6 +65,7 @@ export default class InputForm extends Component {
 	}
 
 	render() {
+		const { isFocused } = this.props;
 		return(
 			<form 
 				style={{height: '42px'}} 
@@ -72,11 +73,13 @@ export default class InputForm extends Component {
 				onSubmit={::this.handleSubmit}>
 				<textarea 
 					id="input" 
-					className=""
+					className={classnames({'focused': isFocused})}
 					type="text"
 					ref="input"
 					autoFocus={true}
 					value={this.state.value}
+					onFocus={::this.props.handleInputFocus}
+					onBlur={::this.props.handleInputBlur}
 					onChange={(e) => {
 						this.setState({value: e.target.value});
 					}}

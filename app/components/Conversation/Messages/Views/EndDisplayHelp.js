@@ -6,7 +6,7 @@ export default class EndDisplayHelp extends Component {
 	}
 
 	render() {
-		const { paddingHeight } = this.props;
+		const { paddingHeight, setName, setId } = this.props;
 		return(
 			<div style={{}} id="end_help">
 				<div id="end_display_help">
@@ -14,10 +14,10 @@ export default class EndDisplayHelp extends Component {
 					</div>
 					<div id="end_display_meta">
 						<h1 className="small_bottom_margin set_name">
-							<a>Set name</a>
+							<a>{setName}</a>
 						</h1>
 						<p className="small_bottom_margin set_intro">
-							This is the very beginning of the set_name thread. Welcome to the future.
+							This is the very beginning of the <a>{setName}</a> learn mode.
 						</p>
 						<ul className="end_display_actions">
 							<li>

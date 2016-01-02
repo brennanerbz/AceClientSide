@@ -9,15 +9,21 @@ export default class InputContainer extends Component {
 	}
 
 	state = {
-		
+		isFocused: true
 	}
 
 	render() {
+		const { isFocused } = this.state;
 		return(
 			<div style={{height: '42px'}} id="input_container">
-				<HelpButton />
+				<HelpButton 
+					isFocused={isFocused}
+				/>
 				<InputForm 
 					{...this.props}
+					handleInputFocus={() => this.setState({isFocused: true})}
+					handleInputBlur={() => this.setState({isFocused: false})}
+					isFocused={isFocused}
 				/>
 			</div>
 		);

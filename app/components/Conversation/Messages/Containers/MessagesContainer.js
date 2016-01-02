@@ -37,7 +37,7 @@ export default class MessagesContainer extends Component {
 		    $scrollbar  = $('#scroll_wrapper_for_messages > .scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
 			cH  = $scrollable[0].clientHeight,
-		    vH  = $viewPort[0].innerHeight - 152,
+		    vH  = $viewPort[0].innerHeight - 121,
 		    smL = $('#scroll_wrapper_for_messages')[0].clientWidth - 37.5,
 		    pH  = vH - cH,
 		    sH = $scrollable[0].scrollHeight,
@@ -69,7 +69,7 @@ export default class MessagesContainer extends Component {
 
 	render() {
 		let { vH, top, smL, pH, $scrollable } = this.state,
-			{ username, currentSlot, messages } = this.props, 
+			{ username, currentSlot, messages, setName, setId } = this.props, 
 			scrollHiderStyle = {
 				width: smL, marginRight: '17px'
 			},
@@ -99,6 +99,8 @@ export default class MessagesContainer extends Component {
 							 ref="msgs_scroller" 
 							 className="scroller">
 							<EndDisplayHelp 
+								setName={setName}
+								setId={setId}
 								paddingHeight={pH}
 							/>
 							<MessagesList 

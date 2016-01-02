@@ -9,21 +9,26 @@ export default class MessageContainer extends Component {
 	}
 
 	state = {
-		
+		isMouseOver: false
 	}
 
 	render() {
-		const { username, message, first } = this.props;
+		const { username, message, first } = this.props,
+		{isMouseOver} = this.state;
 		return(
-			<div className={classnames("message", {'first': first})}>
+			<div className={classnames("message", {'first': first})}
+				 onMouseOver={() => this.setState({isMouseOver: true})}
+				 onMouseLeave={() => this.setState({isMouseOver: false})}>
 				<MessageGutter
 					first={first}
 					message={message}
+					isMouseOver={isMouseOver}
 				/>
 				<MessageContent
 					first={first}
 					username={username}
 					message={message}
+					isMouseOver={isMouseOver}
 				/>
 			</div>
 		);

@@ -12,6 +12,7 @@ export default class FooterView extends Component {
 				<InputContainer 
 					currentTrial={this.props.currentTrial}
 					submitAnswer={this.props.submitAnswer}
+					handleFocus={this.props.handleFocus}
 				/>
 				<NotificationBar
 					

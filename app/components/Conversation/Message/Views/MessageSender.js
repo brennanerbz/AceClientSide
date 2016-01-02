@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import moment from 'moment'
 
 export default class MessageBody extends Component {
 	static propTypes = {

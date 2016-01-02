@@ -12,10 +12,11 @@ export default class HelpButton extends Component {
 	render() {
 		// add question mark icon and hover effects
 		// add bubble menu
-		const { isHovering } = this.state;
+		const { isHovering } = this.state,
+		{isFocused} = this.props;
 		return(
 			<a id="primary_help" 
-				className=""
+				className={classnames({'focused': isFocused})}
 				onMouseOver={() => this.setState({isHovering: true})}
 				onMouseLeave={() => this.setState({isHovering: false})}>
 				<span id="question_mark">

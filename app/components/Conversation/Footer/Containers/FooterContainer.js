@@ -12,6 +12,7 @@ export default class FooterContainer extends Component {
 
 	state = {
 		// TODO: call API with POST / PUT trial
+		isFocused: false
 	}
 
 	handleUserResponse(response) {
@@ -30,6 +31,7 @@ export default class FooterContainer extends Component {
 						submitAnswer={(response) => {
 							::this.handleUserResponse(response)
 						}}
+						handleFocus={() => this.setState({isFocused: true})}
 					/>
 				</div>
 			</div>

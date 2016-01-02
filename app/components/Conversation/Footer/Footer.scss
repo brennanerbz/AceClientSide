@@ -1,12 +1,12 @@
 #footer {
 	position: fixed;
-	background: #fafafa;
+	// background: #fafafa;
 	bottom: 0;
 	left: 220px;
 	right: 0rem;
-	height: 5.75rem;
+	height: 4rem;
 	z-index: 52;
-	border-top: 1px solid #e6e6e6;
+	// border-top: 1px solid #e6e6e6;
 	#footer_overlay {
 		//TODO
 	}
@@ -45,6 +45,9 @@
 		    			background: #56B68B;
 		    			border-color: #56B68B;
 		    			color: #fff;
+		    		}
+		    		&.focused {
+		    			border-color: #D8D8D8;
 		    		}
 		    		#question_mark {
 		    			font-family: 'Lato';
@@ -85,6 +88,9 @@
     		    	    overflow: auto;
     		    	    overflow-y: hidden;
     		    	    height: 38px;
+    		    	    &.focused {
+    		    	    	border-color: #D8D8D8;
+    		    	    }
 	    		    }
 	    		    a {
 		    	    	&#answer_link {

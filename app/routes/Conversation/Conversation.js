@@ -89,7 +89,7 @@ export default class Conversation extends Component {
 	}
 
 	render() {
-		const { currentTrial, updateTrial, username, currentSlot, messages, messages_length, slots } = this.props;
+		const { currentTrial, updateTrial, username, currentSlot, messages, messages_length, slots, setName, setId } = this.props;
 		return(
 			<div id="convo_ui" className="fluid_container">
 				<Header />
@@ -100,6 +100,8 @@ export default class Conversation extends Component {
 				/>
 				<div id="convo_ui_body">
 					<Messages 
+						setName={setName}
+						setId={setId}
 						username={username}
 						currentSlot={currentSlot}
 						messages={messages}
