@@ -53,7 +53,7 @@ export default class SlotsListContainer extends Component {
 			scrollBarHeight: sbH,
 			scrollMarginLeft: smL,
 			top: top,
-			shouldRenderScrollBar: sH > vH ? true : false,
+			shouldRenderScrollBar: sbH > vH,
 			contentRendered: true
 		})
 	}

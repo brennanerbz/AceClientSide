@@ -1,6 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
+String.prototype._textWidth = function(font) {
+	var f = font || '18px Lato',
+		o = $('<div>' + this + '</div>')
+			.css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font': f})
+			.appendTo($('body')),
+		w = o.width();
+
+	o.remove();
+
+	return w;
+}
+
 export default class MessageBody extends Component {
 	static propTypes = {
 
@@ -20,7 +32,20 @@ export default class MessageBody extends Component {
 
 	buildFormatMessage(msg) {
 		if(msg.subtype == 'mc') {
-			return mc
+			var mcList = msg.text.split("|"),
+				preElements = []
+			mcList.forEach(m => {
+				preElements.push(
+				<pre 
+					style={{
+						width: m._textWidth() + 15.5,
+						cursor: 'pointer'
+					}} 
+					className="special_formatting">
+					{m}
+				</pre>
+			)})
+			return preElements
 		} else {
 			return msg.text
 		}

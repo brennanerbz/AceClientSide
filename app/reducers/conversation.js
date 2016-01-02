@@ -365,7 +365,8 @@ export default function conversation(state = initial_convostate, action) {
 					: trial
 				}),
 				current_trial: action.updated_trial,
-				messages: current_msgs
+				messages: current_msgs,
+				messages_length: state.messages_length + 1
 			}
 		case SHOW_CORRECT:
 			return {

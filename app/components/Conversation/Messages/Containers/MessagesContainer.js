@@ -28,7 +28,7 @@ export default class MessagesContainer extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if(this.props.messagesLength > prevProps.messagesLength) {
-			$("#msgs_scroller").animate({ scrollTop: $('#msgs_scroller')[0].scrollHeight }, 5);
+			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight)
 		}
 	}
 
@@ -95,7 +95,8 @@ export default class MessagesContainer extends Component {
 						 id="scroll_hider">
 						<div style={msgsScrollerStyle}
 							 onScroll={::this.setScrollBarPosition}
-							 id="msgs_scroller" 
+							 id="msgs_scroller"
+							 ref="msgs_scroller" 
 							 className="scroller">
 							<EndDisplayHelp 
 								paddingHeight={pH}
