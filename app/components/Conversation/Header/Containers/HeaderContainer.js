@@ -12,6 +12,7 @@ import ActiveSetHeader from '../Views/ActiveSetHeader';
 		isFetchingLearn: state.conversation.isFetchingLearn,
 		currentSequence: state.conversation.current_sequence,
 		setTitle: state.conversation.set_name,
+		setId: state.conversation.set_id,
 		assignments: state.sets.assignments
 	}),
 	dispatch => ({

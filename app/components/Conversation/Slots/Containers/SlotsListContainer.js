@@ -80,7 +80,7 @@ export default class SlotsListContainer extends Component {
 			scrollHeight = 0, scrollBarHeight = 0;
 			if($scrollable !== null) {
 				scrollHeight = $scrollable[0].scrollHeight,
-				scrollBarHeight = viewHeight * viewHeight / scrollHeight
+				scrollBarHeight = viewHeight * viewHeight / scrollHeight + 20
 			}
 		return(
 

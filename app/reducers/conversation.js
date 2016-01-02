@@ -131,7 +131,7 @@ function buildMessages(trial) {
 		&& trial.content.length > 0 
 		&& !content) {
 			content_msg = buildMessage(trial, 'content')
-			if(content_msg !== undefined) {
+			if(content_msg !== undefined && content_msg.text !== null) {
 				messages.push(content_msg)
 			}
 		}
@@ -142,7 +142,7 @@ function buildMessages(trial) {
 		&& trial.answer.length > 0 
 		&& !answer) {
 			user_msg = buildMessage(trial, 'answer')
-			if(user_msg !== undefined) {
+			if(user_msg !== undefined && user_msg.text !== null) {
 				messages.push(user_msg)
 			}
 		}
@@ -152,7 +152,7 @@ function buildMessages(trial) {
 		if(trial.reply.length > 0 
 		&& !reply) {
 			reply_msg = buildMessage(trial, 'reply')
-			if(reply_msg !== undefined) {
+			if(reply_msg !== undefined  && reply_msg.text !== null) {
 				messages.push(reply_msg)
 			}
 		}
@@ -309,6 +309,7 @@ export default function conversation(state = initial_convostate, action) {
 			messages = flatten(messages)
 			messages.forEach((m, i) => {
 				if(m == undefined) messages.splice(i)
+				if(m.text == null || m.text.length == 0) messages.splice(i)
 			})
 			return {
 				...state,
@@ -322,7 +323,9 @@ export default function conversation(state = initial_convostate, action) {
 				current_trials = state.trials.concat(new_trial),
 				msgs = state.messages,
 				msg = buildMessage(new_trial, 'content');
-			msgs.push(msg)
+			if(msg.text !== null) {
+				msgs.push(msg)
+			}
 			return {
 				...state,
 				isFetchingLearn: false,

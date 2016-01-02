@@ -36,7 +36,7 @@ import * as useractions from '../../actions/user';
 	isCreatingSet: state.createset.isCreatingSet,
 	isUpdatingSet: state.createset.isUpdatingSet,
 	isCreatingItem: state.createset.isCreatingItem,
-	isUpdatingItem: state.createset.isUpdatingItem
+	isUpdatingItem: state.createset.isUpdatingItem,
 
 	}),
 	dispatch => ({

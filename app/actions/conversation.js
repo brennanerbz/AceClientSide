@@ -269,13 +269,17 @@ export const UPDATE_SLOT_FAILURE = 'UPDATE_SLOT_FAILURE'
 export function updateSlot(_slot) {
 	return (dispatch, getState) => {
 		dispatch({type: UPDATE_SLOT})
+		var slot = {
+			completed: _slot.completed
+		}
 		request
 		.put(`${api_url}/slots/${_slot.id}`)
-		.send(_slot)
+		.send(slot)
 		.end((err, res) => {
 			if(res.ok) {
-				const slot = res.body;
+				slot = res.body;
 				dispatch({type: UPDATE_SLOT_SUCCESS, slot})
+				dispatch(nextSlot('next'))
 			} else {
 				dispatch({
 					type: UPDATE_SLOT_FAILURE,
@@ -398,7 +402,6 @@ export function updateTrial(response) {
 				if(updated_trial.correct) {
 					current_slot['completed'] = true;
 					dispatch(updateSlot(current_slot))
-					dispatch(nextSlot('next'))
 					return;
 				} 
 				dispatch(newTrial(null, current_slot.id))

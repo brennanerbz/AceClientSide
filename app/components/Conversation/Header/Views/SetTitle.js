@@ -15,7 +15,7 @@ export default class SetTitle extends Component {
 		return(
 			<span className="name"
 				  onClick={() => {
-				  	pushState(null, `/set/${currentSet.id}`)
+				  	pushState(null, `/set/${currentSet.set_id}`)
 				  }}>
 				<span className="prefix">
 					{
