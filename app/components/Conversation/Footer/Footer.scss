@@ -40,6 +40,17 @@
 		    		transition: border-color 50ms,background 50ms,color 50ms;
 		    		text-shadow: none;
 		    		border-radius: 6px 0 0 6px;
+		    		text-decoration: none!important;
+		    		&:hover {
+		    			background: #56B68B;
+		    			border-color: #56B68B;
+		    			color: #fff;
+		    		}
+		    		#question_mark {
+		    			font-family: 'Lato';
+		    			font-weight: 600;
+		    			font-size: 17.5px;
+		    		}
 		    	}
 		    }
 		    form {

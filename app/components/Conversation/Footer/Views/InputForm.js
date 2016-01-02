@@ -42,25 +42,26 @@ export default class InputForm extends Component {
 	handleSubmit(e) {
 		e.preventDefault()
 		const { submitAnswer } = this.props,
-			  value = this.state.value,
-			  d = new Date(),
-			  response_time = d.toISOString().replace('T', " ").replace("Z", ""),
-			  reaction_time = this.state.reaction_time !== null ? this.state.reaction_time : response_time,
-			  
-			  response = {
-			  	reaction_time: reaction_time,
-			  	response_time: response_time,
-			  	answer: value,
-			  	// answer_clicked: false,
-			  	// answer_by_letter: false,
-			  	answer_method: 'typed',
-			  	// taps: null
-			  }
-		  this.setState({
-		  	value: '',
-		  	reaction_time: null
-		  });
-		  submitAnswer(response)
+		value = this.state.value,
+		d = new Date(),
+		response_time = d.toISOString().replace('T', " ").replace("Z", ""),
+		reaction_time = this.state.reaction_time !== null ? this.state.reaction_time : response_time,
+
+		response = {
+			reaction_time: reaction_time,
+			response_time: response_time,
+			answer: value,
+			// answer_clicked: false,
+			// answer_by_letter: false,
+			answer_method: 'typed',
+			// taps: null
+		}
+		if(value.length == 0) return;
+		this.setState({
+			value: '',
+			reaction_time: null
+		});
+		submitAnswer(response)
 	}
 
 	render() {
@@ -80,6 +81,14 @@ export default class InputForm extends Component {
 						this.setState({value: e.target.value});
 					}}
 					onKeyPress={(e) => {
+						if(e.which == 13 && this.state.value.trim().length == 0) {
+							if(e.shiftKey) {
+								return;
+							} else {
+								e.preventDefault()
+								return;
+							}
+						}
 						if(e.which == 13 && !e.shiftKey && this.state.value.trim().length > 0) {
 							this.handleSubmit(e)
 						}

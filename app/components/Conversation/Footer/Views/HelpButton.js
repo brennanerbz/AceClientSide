@@ -5,14 +5,34 @@ export default class HelpButton extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		isHovering: false
+	}
+
 	render() {
 		// add question mark icon and hover effects
 		// add bubble menu
+		const { isHovering } = this.state;
 		return(
-			<a id="primary_help" className="">
-				? 
-				<img className="question icon"/>
+			<a id="primary_help" 
+				className=""
+				onMouseOver={() => this.setState({isHovering: true})}
+				onMouseLeave={() => this.setState({isHovering: false})}>
+				<span id="question_mark">
+					?
+				</span>
 			</a>
 		);
 	}
 }
+
+/*
+<img 
+					style={{
+						marginBottom: '3px',
+						height: '14px',
+						opacity: '1'
+					}}
+					src={isHovering ? whiteQuestionMark : questionMark} 
+					className="question icon"/>
+					*/

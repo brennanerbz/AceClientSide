@@ -69,12 +69,14 @@ export default class SequenceProgress extends Component {
 	}
 
 	render() {
-		const { completedSlots, slotsLength, innerWidth, renderProgress, newSequence } = this.state,
+		const { completedSlots, slotsLength, innerWidth, renderProgress } = this.state,
+		{ createNewSequence } = this.props,
 		replayIcon = require('../../../../assets/replay.png')
 		return(
 			<div id="sequence_control">
 				<div id="sequence_control_wrapper">
-					<div id="start_over">
+					<div id="start_over"
+						 onClick={createNewSequence}>
 						<span className="circle" id="start_over_circle">
 							<img 
 								style={{
