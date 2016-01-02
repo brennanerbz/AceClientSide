@@ -38,7 +38,7 @@ export default class SlotsListContainer extends Component {
 		    $scrollbar  = $('#scroll_wrapper_for_slots > .scroll_handler'), /* scrollbar handle */
 		    $viewPort = $(window),
 		    cH  = $scrollable[0].clientHeight,
-		    vH  = $viewPort[0].innerHeight - 152,
+		    vH  = $viewPort[0].innerHeight - 185,
 		    sH  = $scrollable[0].scrollHeight,
 		    sbH = vH*vH/sH,
 		    smL = 206,
@@ -74,7 +74,7 @@ export default class SlotsListContainer extends Component {
 					width: 220
 			},
 			slotsScrollerStyle = {
-				height: viewHeight,
+				height: viewHeight + 35,
 				width: 220
 			},
 			scrollHeight = 0, scrollBarHeight = 0;

@@ -69,25 +69,40 @@ export default class SequenceProgress extends Component {
 	}
 
 	render() {
-		const { completedSlots, slotsLength, innerWidth, renderProgress, newSequence } = this.state;
+		const { completedSlots, slotsLength, innerWidth, renderProgress, newSequence } = this.state,
+		replayIcon = require('../../../../assets/replay.png')
 		return(
 			<div id="sequence_control">
-				<button id="start_sequence_over" 
-					  	className="button outline tertiary"
-					  	onClick={::this.props.createNewSequence}>
-					Start over
-				</button>
-				<div id="sequence_progress_count">
-					{`${completedSlots} of ${slotsLength}`}
-				</div>
-
-				<div ref="sequence_progress_bar" 
-					 id="sequence_progress_bar">
-					<span 
-						style={{width: innerWidth, opacity: renderProgress ? '1': '0' }}
-						ref="progress_bar_inner" 
-						id="progress_bar_inner">
-					</span>
+				<div id="sequence_control_wrapper">
+					<div id="start_over">
+						<span className="circle" id="start_over_circle">
+							<img 
+								style={{
+									height: '13px',
+									marginTop: '1px'
+								}}
+								src={replayIcon} 
+								className="icon" 
+								id="start_over_icon"/>
+						</span>
+						<span id="start_over_text">
+						Start Over
+						</span>
+					</div>
+					
+					<div id="progress_wrapper">
+						<div id="sequence_progress_count">
+							{`${completedSlots} of ${slotsLength}`}
+						</div>
+						<div ref="sequence_progress_bar" 
+							 id="sequence_progress_bar">
+							<span 
+								style={{width: innerWidth, opacity: renderProgress ? '1': '0' }}
+								ref="progress_bar_inner" 
+								id="progress_bar_inner">
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		);

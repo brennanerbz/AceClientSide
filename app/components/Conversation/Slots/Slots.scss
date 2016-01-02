@@ -66,10 +66,11 @@
 			    		text-align: left;
 			    		font-size: .8rem;
 			    		line-height: 1.25rem;
-			    		margin: 0 1rem .1rem;
+			    		margin: 1.85rem 1rem .1rem;
 			    		text-transform: uppercase;
 			    		font-weight: 700;
-			    		color: #ab9ba9;
+			    		color: #383F45 !important;
+			    		opacity: 0.9;
 			    		width: 165px;
 			    		position: relative;
 			    	}
@@ -134,15 +135,60 @@
 		}
 	}
 	#sequence_control {
-		width: 200px;
+		width: 219px;
 		float: left;
 		position: fixed;
+		border-top: 1px solid #e6e6e6;
 		font-family: "Lato";
 		bottom: 0;
 		text-align: center;
 		display: table;
 		margin: 0 auto;
 		margin-bottom: 1em;
+		background: #fafafa;
+		z-index: 300;
+		#sequence_control_wrapper {
+			#start_sequence_over {
+				margin-bottom: 10px;
+			}
+			#sequence_progress_count {
+				font-size: 14px;
+			}
+			#start_over {
+				width: 100%;
+				position: relative;
+				display: table;
+				padding: 0.75em;
+				border-bottom: 1px solid #e6e6e6;
+				cursor: pointer;
+				opacity: 0.7;
+				&:hover {
+					background: #f1f1f1;
+					opacity: 1;
+				}
+				span {
+					&#start_over_circle {
+						width: 30px!important;
+						height: 30px!important;
+						display: inline-block;
+						border-radius: 50%;
+						border: 1px solid #ccc !important;
+						margin-left: 1px;
+						margin-right: 10px;
+						float: left;
+					}
+					&#start_over_text {
+						position: absolute;
+						display: inline-block;
+						margin-top: 2px;
+						left: 65px;
+					}
+				}
+			}
+		}
+		#progress_wrapper {
+			padding: 1em 1em 0.35em;
+		}
 		#sequence_progress_bar {
 			height: 10px;  /* Can be anything */
 			position: relative;
