@@ -157,19 +157,19 @@ function buildMessage(trial, type) {
 		message.subtype = trial.content_subtype
 		message.user = 'acubot'
 		message.text = trial.content
-		message.ts = moment(trial.start)
+		message.ts = moment.utc(trial.start)
 	}
 	if(type == 'answer') {
 		message.type = 'answer'
 		message.user = trial.user_id || 'user'
 		message.text = trial.answer
-		message.ts = moment(trial.response_time)
+		message.ts = moment.utc(trial.response_time)
 	}
 	if(type == 'reply') {
 		message.type = 'reply'
 		message.user = 'acubot'
 		message.text = trial.reply
-		message.ts = moment(trial.reply_displayed)
+		message.ts = moment.utc(trial.reply_displayed)
 	}
 	return message;
 }

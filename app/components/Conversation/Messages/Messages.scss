@@ -80,7 +80,7 @@
 		border-right: none;
 		border-top: 1px solid transparent;
 		border-bottom: 1px solid transparent;
-		font-family: "Lato", sans-serif;
+		font-family: "Lato",sans-serif;
 		color: #2c2d30;
 		font-size: 16px;
 		line-height: 22px;
@@ -89,7 +89,13 @@
 		-ms-user-select: text;
 		user-select: text;
 		word-wrap: break-word;
-		// border: 1px solid black;
+		&.first {
+			.message_content {
+				.message_body {
+					margin-top: -3.5px;
+				}
+			}
+		}
 		.action_hover_container {
 			display: none;
 			position: absolute;
@@ -110,6 +116,20 @@
 			left: 0;
 			width: 72px;
 			padding-right: 10px;
+			.message_icon {
+				margin-top: 4px;
+				display: block;
+				img {
+					&.member_icon {
+						width: 36px;
+					    height: 36px;
+					    border-radius: .4rem;
+					    background-size: 100%;
+					    background-repeat: no-repeat;
+					    display: inline-block;
+					}
+				}
+			}
 			.star {
 				margin-top: 1px;
 			    margin-left: 4px;
@@ -126,15 +146,22 @@
 				color: #2c2d30!important;
 				line-height: 18px;
 			}
+			.timestamp {
+				color: #9e9ea6;
+				font-size: 9pt;
+				font-weight: 400;
+				margin-left: 5px;
+			}
 			.star {
 				display: inline;
 				line-height: 9pt;
 			}
 			.message_body {
 				cursor: text;
-				// color: #9e9ea6;
-				// font-style: italic;
 				display: block;
+				p {
+					margin-bottom: 0;
+				}
 			}
 		}
 	}

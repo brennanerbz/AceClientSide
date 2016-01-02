@@ -60,7 +60,7 @@
 	    		    textarea {
 	    		    	background: #fff;
     		    	    width: 100%;
-    		    	    font-size: 15px;
+    		    	    font-size: 15.5px;
     		    	    line-height: 1.2rem;
     		    	    border: 2px solid #E0E0E0;
     		    	    border-left: none;
@@ -97,8 +97,12 @@
 	    	    		    line-height: 42px;
 	    	    		    text-align: center;
 	    	    		    opacity: 1;
-	    	    		    font-size: 15px;
+	    	    		    font-size: 14px;
 	    	    		    // font-weight: 600;
+	    	    		    &.disabled {
+								color: #D9D9D9;
+								text-decoration: none;
+	    	    		    }
 		    	    	}
 		    	    }
 		    	}

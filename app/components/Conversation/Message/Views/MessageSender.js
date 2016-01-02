@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+import moment from 'moment'
 
 export default class MessageBody extends Component {
 	static propTypes = {
@@ -7,7 +8,8 @@ export default class MessageBody extends Component {
 	}
 
 	render() {
-		const { username, message } = this.props;
+		const { username, message } = this.props
+		
 		return (
 			<a className="message_sender">
 				{

@@ -97,6 +97,7 @@ export default class InputForm extends Component {
 					form="input_form"/>
 				<a 
 					id="answer_link"
+					className={classnames({'disabled': this.state.value.trim().length == 0})}
 					onClick={::this.handleSubmit}>
 					Answer
 				</a>

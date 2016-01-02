@@ -7,22 +7,22 @@ export default class MessageBody extends Component {
 	}
 
 	buildCueMessage(msg) {
-		return <p>{msg.text}</p>
+		return msg.text
 	}
 
 	buildUserMessage(msg) {
-		return <p>{msg.text}</p>
+		return msg.text
 	}
 
 	buildFeedbackMessage(msg) {
-		return <p>{msg.text}</p>
+		return msg.text
 	}
 
 	buildFormatMessage(msg) {
 		if(msg.subtype == 'mc') {
-			return <p>mc</p>
+			return mc
 		} else {
-			return <p>{msg.text}</p>
+			return msg.text
 		}
 	}
 

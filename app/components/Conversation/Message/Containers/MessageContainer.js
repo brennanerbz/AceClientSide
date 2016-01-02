@@ -13,11 +13,15 @@ export default class MessageContainer extends Component {
 	}
 
 	render() {
-		const { username, message } = this.props;
+		const { username, message, first } = this.props;
 		return(
-			<div className="message">
-				<MessageGutter/>
+			<div className={classnames("message", {'first': first})}>
+				<MessageGutter
+					first={first}
+					message={message}
+				/>
 				<MessageContent
+					first={first}
 					username={username}
 					message={message}
 				/>
