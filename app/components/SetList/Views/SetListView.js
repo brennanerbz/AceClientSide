@@ -9,7 +9,7 @@ export default class SetListView extends Component {
 	render() {
 		
 		return(
-			<ul className="set_list">
+			<ol className="set_list">
 				{
 					this.props.assignments.map((assignment, i) => {
 						return <SetListItemContainer 
@@ -20,7 +20,7 @@ export default class SetListView extends Component {
 								deleteAssignment={this.props.deleteAssignment}/>
 					})
 				}
-			</ul>
+			</ol>
 		);
 	}
 }

@@ -20,11 +20,13 @@
     .header_container {
         z-index: 300;
         background: #fff;
-        width: 1100px;
+        width: 100%;
         margin: 0 auto;
         min-width: 905px!important;
         padding-bottom: 10px;
         padding-top: 7px;
+        padding-right: 25px;
+        padding-left: 25px;
         position: relative;
         &.beta {
             .header_logo {

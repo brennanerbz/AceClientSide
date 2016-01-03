@@ -18,49 +18,45 @@ export default class SetListItemView extends Component {
 			<li className="set_item"
 				onMouseOver={this.props.mouseOver}
 				onMouseLeave={this.props.mouseLeft}>
-				<div className="set_list_item_wrapper">
-					<div className="set_list_item_icon"
-						 onClick={this.props.handleClick}>
-						<span className="file_icon">
-							<img src={section !== 'drafts' 
-								 ? set_icon_complete 
-								 : set_icon_blank} 
-								 className="icon_img"/>
-						</span>
-					</div>
-					<div className="set_list_item_details"
-						 onClick={this.props.handleClick}>
-						<div className={classnames("heading", {
-							'draft': section == 'drafts'
-						})}>
+				<div className="set_name_col">
+					<img src={section !== 'drafts' 
+						 ? set_icon_complete 
+						 : set_icon_blank} 
+						 className="icon_img"
+						 onClick={this.props.handleClick}/>
+					<div className="set_link"
+						 onClick={this.props.handleClick}
+						 className={classnames("heading", {'draft': section == 'drafts'})}>
 							{ assignment.set.title }
 							{
 								section == 'drafts'
 								&& <span className="draft_label">Draft</span>
 							}
-						</div>
-						<div className="sub_heading">
-							by {assignment.set.creator.username}
-						</div>
 					</div>
-					<div className="set_list_item_actions">
-						<div className="inner">
-							{
-								mouseIsOver 
-								&& assignment.set.finalized
-								&&
-								<button 
-									className="button secondary"
-									onClick={this.props.handleShare}>
-									Share
-								</button>
-							}
-							<SetListItemActionsView 
-								mouseIsOver={mouseIsOver}
-								assignment={assignment}
-							 	{...this.props}
-							/>
-						</div>
+				</div>
+				<div className="creator">
+					by {assignment.set.creator.username}
+				</div>
+				<div className="sharing">
+					<div className="sharers">
+						shared
+					</div>
+					<div className="sharing_actions">
+						{
+							mouseIsOver 
+							&& assignment.set.finalized
+							&&
+							<button 
+								className="button secondary"
+								onClick={this.props.handleShare}>
+								Share
+							</button>
+						}
+						<SetListItemActionsView 
+							mouseIsOver={mouseIsOver}
+							assignment={assignment}
+						 	{...this.props}
+						/>
 					</div>
 				</div>
 			</li>

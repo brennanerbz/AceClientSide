@@ -24,8 +24,18 @@ export default class SetListContainer extends Component {
 
 	render() {
 		return(
-			<div className="recent_view">
-				<SetListSections {...this.props}/>
+			<div id="browse_box">
+				<div id="browse_header">
+					<div id="browse_sort">
+						<a id="name_sorter" className="sortable_col_header bolded">Name</a>
+						<a id="creator_sorter" className="sortable_col_header">Creator</a>
+						<a id="shared_sorter" className="sortable_col_header">Shared with</a>
+					</div>
+					
+				</div>
+				<div className="recent_view">
+					<SetListSections {...this.props}/>
+				</div>
 			</div>
 		);
 	}
@@ -119,9 +129,13 @@ class SetListSections extends Component {
 					}
 					rendered_sections.push(
 						<li key={prop} className="recent_section">
-							<h1 className="recent_section_title">{
-								section_name.charAt(0).toUpperCase() + section_name.slice(1)
-							}</h1>
+							{
+								section_name !== 'drafts'
+								&&
+								<h1 className="recent_section_title">{
+									section_name.charAt(0).toUpperCase() + section_name.slice(1)
+								}</h1>
+							}
 							<SetListView 
 								pushState={this.props.pushState}
 								deleteAssignment={this.props.deleteAssignment}
