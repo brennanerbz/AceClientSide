@@ -24,10 +24,21 @@ export default class MessagesContainer extends Component {
 
 	componentDidMount() {
 		this.setDOMDimensions()
+		window.addEventListener('resize', ::this.setDOMDimensions); 
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', ::this.setDOMDimensions); 
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if(this.props.messagesLength > prevProps.messagesLength) {
+			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight)
+		}
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		if(nextState.vH !== this.state.vH) {
 			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight)
 		}
 	}
@@ -38,7 +49,7 @@ export default class MessagesContainer extends Component {
 		    $viewPort = $(window),
 			cH  = $scrollable[0].clientHeight,
 		    vH  = $viewPort[0].innerHeight - 121,
-		    smL = $('#scroll_wrapper_for_messages')[0].clientWidth - 37.5,
+		    smL = $viewPort[0].innerWidth - 238,
 		    pH  = vH - cH,
 		    sH = $scrollable[0].scrollHeight,
 			sbH = vH*vH/sH,

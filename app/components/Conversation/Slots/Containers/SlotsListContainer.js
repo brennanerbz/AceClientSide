@@ -27,7 +27,12 @@ export default class SlotsListContainer extends Component {
 
 	componentDidMount() {
 		this.setDOMDimensions()
-	}
+			window.addEventListener('resize', ::this.setDOMDimensions)
+		}
+
+		componentWillUnmount() {
+			window.removeEventListener('resize', ::this.setDOMDimensions)
+		}	
 
 	componentDidUpdate(prevProps, prevState) {
 		// $('#slots_scroller').animate({scrollTop: $('#slots_scroller')[0].scrollHeight}, 5)

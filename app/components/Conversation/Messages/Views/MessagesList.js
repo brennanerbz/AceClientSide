@@ -27,7 +27,7 @@ export default class MessagesList extends Component {
 
 			if(showSeparator) {
 				messagesList.push(
-					<div className="day_divider">
+					<div key={m.ts} className="day_divider">
 						<hr className="separator"/>
 						<div className="day_divider_label">
 							{moment(m.ts).calendar(null, {
