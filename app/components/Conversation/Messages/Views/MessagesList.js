@@ -8,9 +8,9 @@ export default class MessagesList extends Component {
 	}
 
 	render() {
-		const { username, currentSlot, messages } = this.props;
+		const { username, currentSlot, messages, renderedMesssages} = this.props;
 		var newUser = true, currentUsername = '', oldUsername = '', showSeparator = false, currentDay, oldDay,
-		messagesList = [];
+		messagesList = [], messagesLength = messages.length;
 		{messages.map((m, i) => {
 
 			currentUsername = m.user
@@ -30,7 +30,7 @@ export default class MessagesList extends Component {
 					<div key={m.ts} className="day_divider">
 						<hr className="separator"/>
 						<div className="day_divider_label">
-							{moment(m.ts).calendar(null, {
+							{moment.utc(m.ts).local().calendar(null, {
 								sameDay: '[Today]',
 							    nextDay: '[Tomorrow]',
 							    nextWeek: 'dddd',
@@ -46,6 +46,9 @@ export default class MessagesList extends Component {
 			messagesList.push(
 				<MessageContainer 
 					key={i}
+					index={i + 1}
+					messagesLength={messagesLength}
+					renderedMesssages={renderedMesssages}
 					first={newUser}
 					username={username}
 					currentSlot={currentSlot}

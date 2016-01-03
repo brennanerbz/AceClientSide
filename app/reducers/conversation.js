@@ -72,7 +72,8 @@ import {
 	SHOW_COMPLETE_ROUND,
 	NEXT_ROUND,
 
-	NEW_USER_MESSAGE
+	NEW_USER_MESSAGE,
+	FINISHED_RENDERING_MESSAGES
 
 } from '../actions/conversation';
 import _ from 'lodash';
@@ -115,6 +116,7 @@ const initial_convostate = {
 
 	messages: [],
 	messages_length: 0,
+	allMessagesRendered: false,
 	
 	rounds: [],
 	current_round: {},
@@ -450,6 +452,11 @@ export default function conversation(state = initial_convostate, action) {
 			return {
 				...state,
 				isFetchingLearn: false
+			}
+		case FINISHED_RENDERING_MESSAGES:
+			return {
+				...state,
+				allMessagesRendered: true
 			}
 		case CLEAR_LEARN:
 			return {

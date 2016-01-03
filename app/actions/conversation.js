@@ -621,4 +621,10 @@ export const UPDATING_STATE = 'UPDATING_STATE';
 export const UPDATE_CURRENT_ROUND = 'UPDATE_CURRENT_ROUND'
 
 
+export const FINISHED_RENDERING_MESSAGES = 'FINISHED_RENDERING_MESSAGES';
+export function finishedRenderingMessages() {
+	return {
+		type: FINISHED_RENDERING_MESSAGES
+	}
+}
 

@@ -22,11 +22,24 @@
 	margin-top: 5rem;
 	margin-left: 1rem;
 	min-width: 790px; 
-	opacity: 0.25;
-	-webkit-transition: opacity 0.05s cubic-bezier(0.42, 0.0, 0.58, 1.0);
-	transition: opacity 0.05s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+	opacity: 0;
+	-webkit-transform: translateY(5px);
+	-moz-transform: translateY(5px);
+	-ms-transform: translateY(5px);
+	transform: translateY(5px);
+	-moz-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
+	transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
+	-webkit-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,-webkit-transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
 	&.rendered {
-		opacity: 1
+		top: 0;
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-moz-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+		-moz-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,left 150ms ease-in-out;
+		transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,left 150ms ease-in-out;
+		-webkit-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,-webkit-transform 150ms cubic-bezier(.2,.8,.5,1) .1s,left 150ms ease-in-out;
 	}
 	div {
 		&.big_spinner {

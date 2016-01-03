@@ -71,7 +71,7 @@ export default class TermRow extends Component {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
 	    		{name: 'target', prop: term}, 
-	    		{name: 'cue', prop: this.state.def},
+	    		{name: 'cue', prop: this.state.def || this.state.item.cue},
 	    		{name: 'association', prop: association}, 
 	    		{name: 'association_ref', prop: asc_id})
 	    }
@@ -98,7 +98,7 @@ export default class TermRow extends Component {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
 	    		{name: 'cue', prop: def}, 
-	    		{name: 'target', prop: this.state.term},
+	    		{name: 'target', prop: this.state.term || this.state.item.target},
 	    		{name: 'association', prop: association},
 	    		{name: 'association_ref', prop: asc_id}
 	    	)

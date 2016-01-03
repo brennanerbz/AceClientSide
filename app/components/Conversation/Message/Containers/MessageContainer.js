@@ -12,6 +12,14 @@ export default class MessageContainer extends Component {
 		isMouseOver: false
 	}
 
+	componentDidMount() {
+		const { messagesLength, index, renderedMesssages } = this.props;
+		if(messagesLength == index) {
+			renderedMesssages() 
+		}
+	}
+
+
 	render() {
 		const { username, message, first } = this.props,
 		{isMouseOver} = this.state;

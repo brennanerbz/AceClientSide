@@ -37,10 +37,17 @@ export default class MessagesContainer extends Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.allMessagesRendered && nextProps.allMessagesRendered) {
+			this.setDOMDimensions()
+		}
+	}
+
 	componentWillUpdate(nextProps, nextState) {
 		if(nextState.vH !== this.state.vH) {
 			$("#msgs_scroller").scrollTop($("#msgs_scroller")[0].scrollHeight)
 		}
+		
 	}
 
 	setDOMDimensions() {
@@ -50,8 +57,7 @@ export default class MessagesContainer extends Component {
 			cH  = $scrollable[0].clientHeight,
 		    vH  = $viewPort[0].innerHeight - 121,
 		    smL = $viewPort[0].innerWidth - 238,
-		    pH  = vH - cH,
-		    sH = $scrollable[0].scrollHeight,
+		    sH  = $scrollable[0].scrollHeight,
 			sbH = vH*vH/sH,
 			top = $scrollable.scrollTop()/vH*sbH;
 		this.setState({
@@ -61,11 +67,10 @@ export default class MessagesContainer extends Component {
 			cH: cH,
 			vH: vH,
 			smL: smL,
-			pH: pH,
+			pH: vH - $('#end_display_meta')[0].clientHeight - 70,
 			sH: sH,	
 			sbH: sbH,
-			top: top,
-			rendered: true
+			top: top
 		});
 	}
 
@@ -78,9 +83,10 @@ export default class MessagesContainer extends Component {
 		})
 	}
 
+
 	render() {
-		let { vH, top, smL, pH, $scrollable } = this.state,
-			{ username, currentSlot, messages, setName, setId } = this.props, 
+		let { cH, vH, top, smL, pH, $scrollable, rendered } = this.state,
+			{ username, currentSlot, messages, setName, setId, allMessagesRendered } = this.props, 
 			scrollHiderStyle = {
 				width: smL, marginRight: '17px'
 			},
@@ -94,7 +100,7 @@ export default class MessagesContainer extends Component {
 			}
 		return(
 			<div id="messages_container" 
-				 className={classnames({"rendered": this.state.rendered})}>
+				 className={classnames({"rendered": allMessagesRendered})}>
 				<div id="scroll_wrapper_for_messages" className="scroll_wrapper">
 					<ScrollBar 
 						scrollMarginLeft={smL}
@@ -118,6 +124,7 @@ export default class MessagesContainer extends Component {
 								username={username}
 								currentSlot={currentSlot}
 								messages={messages}
+								renderedMesssages={this.props.finishedRenderingMessages}
 							/>
 						</div>
 					</div>

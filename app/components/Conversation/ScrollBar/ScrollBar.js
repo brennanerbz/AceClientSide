@@ -5,6 +5,10 @@ export default class ScrollBar extends Component {
 	static propTypes = {
 	}
 
+	componentDidMount() {
+		
+	}
+
 	render() {
 		const { scrollMarginLeft, viewHeight, scrollBarHeight, top } = this.props;
 		return(
@@ -18,7 +22,13 @@ export default class ScrollBar extends Component {
 						height: scrollBarHeight,
 						top: top
 					}} 
-					// id="scroll_handler"
+					onMouseDown={(e) => {
+						
+					}}
+					onMouseMove={(e) => {
+						// console.log(e.pageX)
+						// console.log(e.pageY)
+					}}
 					className="scroll_handler">
 					<div className="scroll_inner">
 					</div>

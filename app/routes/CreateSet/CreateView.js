@@ -59,7 +59,14 @@ export default class CreateView extends Component {
 							
 					</div>
 				</VelocityComponent>
-				{createChildrenWithProps}
+				<VelocityComponent runOnMount={true} animation={{ opacity: true ? 1 : 0 }} duration={500}>
+					<div>
+						<div className={classnames("fs_modal_bg", {'active': !import_view})}></div>
+						<div className={classnames({'active': !import_view}, 'fs_modal')}>
+						{createChildrenWithProps}
+						</div>
+					</div>
+				</VelocityComponent>
 			</div>
 		);
 	}
