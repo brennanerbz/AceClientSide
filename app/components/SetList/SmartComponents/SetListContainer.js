@@ -37,26 +37,28 @@ export default class SetListContainer extends Component {
 			<div id="browse_box">
 				<div id="browse_box_wrapper">
 				<div id="browse_flex">
+				<div id="browse_container_wrapper">
 				<div id="browse_container">
+				<div id="scroll_wrapper">
 				<div className="recent_view">
 					<div className="recent_header">
 						<div className="recent_header_wrapper">
-						<div style={{width: '100%'}} className="header_col">
-							<div style={{paddingLeft: '15px'}} className="header_col_content">
+						<div style={{width: '100%'}} className="col">
+							<div style={{paddingLeft: '15px'}} className="col_content">
 								Name
 							</div>
 						</div>
-						<div style={{position: 'relative', width: '216px'}} className="header_col">
-							<div className="header_col_content">
+						<div style={{position: 'relative', width: '220px'}} className="col">
+							<div className="col_content">
 							Creator
 							</div>
 						</div>
-						<div style={{textOverflow: 'ellipsis', width:'176px'}} className="header_col">
-							<div className="header_col_content">
+						<div style={{textOverflow: 'ellipsis', width:'160px'}} className="col">
+							<div className="col_content">
 							Shared with
 							</div>
 						</div>
-						<div style={{width:'104px'}} className="header_col">
+						<div style={{width:'104px'}} className="col">
 						</div>
 						</div>
 					</div>
@@ -79,6 +81,8 @@ export default class SetListContainer extends Component {
 					type={modalType}
 					set={selectedSet}
 				/>
+				</div>
+				</div>
 				</div>
 				</div>
 				</div>

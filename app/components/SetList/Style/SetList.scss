@@ -27,6 +27,11 @@
 	overflow-y: auto;
 }
 
+#browse_container_wrapper {
+	height: 100%;
+	width: 100%;
+}
+
 #browse_container {
 	bottom: 0;
 	left: 0;
@@ -34,7 +39,13 @@
 	right: 0;
 	top: 0;
 	background-color: #fff;
-	top: 49px;
+	top: 40px;
+}
+
+#scroll_wrapper {
+	// height: 100%;
+	// overflow-x: hidden;
+	// overflow-y: scroll;
 }
 
 .recent_view {
@@ -46,36 +57,109 @@
 
 .recent_header {
 	background-color: #fafafa;
-	border-bottom: 1px solid #eee;
+	// border-bottom: 1px solid #eee;
 	display: table-header-group;
-	left: 0;
+	left: 245px;
 	padding-right: 16px;
-	position: absolute;
-	right: 0;
+	position: fixed;
+	right: 25px;
 	z-index: 1;
-	top: -49px;
+	top: 65px;
+	.col {
+		color: #565656;
+	}
 }
 
-.recent_header_wrapper {
+.recent_header_wrapper, .set_item_row_wrapper {
 	color: #222;
 	display: table;
 	table-layout: fixed;
 	width: 100%;
+	// position: fixed;
 }
 
-.header_col {
+.recent_section_title {
+	background: #fafafa;
+	font-size: 15px;
 	color: #565656;
+	padding-left: 15px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.col {
 	display: table-cell;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: normal;
 	padding: 0;
 	text-align: left;
 	vertical-align: middle;
+	border-bottom: 1px solid rgba(0,0,0,0.065);
 }
 
-.header_col_content {
+.col_content {
 	height: 48px;
 	line-height: 48px;
 }
+
+.recent_view_sections {
+	display: table-row-group;
+}
+
+.set_list {
+	display: table-row-group;
+}
+
+.set_item_row {
+	display: table-row;
+	-webkit-transition: opacity .2s;
+	transition: opacity .2s;
+}
+
+.col_content_flex {
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.icon_img {
+	-webkit-flex: none;
+	flex: none;
+	height: 26px;
+	padding-left: 14px;
+	padding-right: 4px;
+}
+
+.heading {
+	-webkit-flex: 0 1 auto;
+	flex: 0 1 auto;
+	overflow: hidden;
+	padding-right: 24px;
+	padding-top: 1px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+    padding-left: 10px;
+    vertical-align: top;
+    white-space: nowrap;
+    color: #006DCB;
+    &.draft {
+    	color: #222;
+    }
+    .draft_label {
+    	margin-left: 10px;
+    	color: #E04929;
+    }
+}
+
+
+
+
+
 
 
