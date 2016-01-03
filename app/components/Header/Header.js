@@ -174,14 +174,12 @@ export default class Header extends Component {
 							}
 							<SearchBar/>
 							<GlobalActions/>
+							{
+								root_path == 'convo'
+								&& 
+								<ConversationHeader/>
+							}
 							<div className="header_content">
-								{
-									root_path == 'convo'
-									&& 
-									<ConversationHeader
-
-									/>
-								}
 								{
 									root_path == 'createset'
 									&& !this.props.isLoadingSet
