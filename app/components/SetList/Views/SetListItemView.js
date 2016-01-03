@@ -18,7 +18,7 @@ export default class SetListItemView extends Component {
 			<li className="set_item"
 				onMouseOver={this.props.mouseOver}
 				onMouseLeave={this.props.mouseLeft}>
-				<div className="set_name_col">
+				<div className="set_name_col info_col">
 					<img src={section !== 'drafts' 
 						 ? set_icon_complete 
 						 : set_icon_blank} 
@@ -34,10 +34,10 @@ export default class SetListItemView extends Component {
 							}
 					</div>
 				</div>
-				<div className="creator">
+				<div className="creator info_col">
 					by {assignment.set.creator.username}
 				</div>
-				<div className="sharing">
+				<div className="sharing info_col">
 					<div className="sharers">
 						shared
 					</div>

@@ -17,7 +17,8 @@ export default class SetListView extends Component {
 								section={this.props.section}
 								key={i} 
 								assignment={assignment}
-								deleteAssignment={this.props.deleteAssignment}/>
+								deleteAssignment={this.props.deleteAssignment}
+								openModal={this.props.openModal}/>
 					})
 				}
 			</ol>

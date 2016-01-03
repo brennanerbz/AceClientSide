@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
 require('../Style/SetList.scss');
+import Modal from '../../Modal/modal';
 import SetListView from '../Views/SetListView';
 
 export default class SetListContainer extends Component {
@@ -12,7 +13,12 @@ export default class SetListContainer extends Component {
 
 	state = {
 		assignments: null,
-		sets: null
+		sets: null,
+		modalType: null,
+		modalIsOpen: false,
+		selectedAssignment: null,
+		selectedSet: null,
+		selectedModalType: null
 	}
 
 	componentDidMount() {
@@ -23,18 +29,58 @@ export default class SetListContainer extends Component {
 	}
 
 	render() {
+		const { selectedAssignment, 
+				selectedSet, 
+				modalType, 
+				modalIsOpen } = this.state;
 		return(
 			<div id="browse_box">
-				<div id="browse_header">
-					<div id="browse_sort">
-						<a id="name_sorter" className="sortable_col_header bolded">Name</a>
-						<a id="creator_sorter" className="sortable_col_header">Creator</a>
-						<a id="shared_sorter" className="sortable_col_header">Shared with</a>
-					</div>
-					
-				</div>
+				<div id="browse_box_wrapper">
+				<div id="browse_flex">
+				<div id="browse_container">
 				<div className="recent_view">
-					<SetListSections {...this.props}/>
+					<div className="recent_header">
+						<div className="recent_header_wrapper">
+						<div style={{width: '100%'}} className="header_col">
+							<div style={{paddingLeft: '15px'}} className="header_col_content">
+								Name
+							</div>
+						</div>
+						<div style={{position: 'relative', width: '216px'}} className="header_col">
+							<div className="header_col_content">
+							Creator
+							</div>
+						</div>
+						<div style={{textOverflow: 'ellipsis', width:'176px'}} className="header_col">
+							<div className="header_col_content">
+							Shared with
+							</div>
+						</div>
+						<div style={{width:'104px'}} className="header_col">
+						</div>
+						</div>
+					</div>
+					<SetListSections 
+					openModal={(assignment, set, type) => {
+						this.setState({
+							selectedAssignment: assignment,
+							selectedSet: set,
+							modalType: type,
+							modalIsOpen: true
+						});
+					}}
+					{...this.props}/>
+				</div>
+				<Modal 
+					assignment={selectedAssignment}
+					deleteAssignment={this.props.deleteAssignment}
+					open={modalIsOpen}
+					closeModal={() => {this.setState({modalIsOpen: false})}}
+					type={modalType}
+					set={selectedSet}
+				/>
+				</div>
+				</div>
 				</div>
 			</div>
 		);
@@ -140,7 +186,8 @@ class SetListSections extends Component {
 								pushState={this.props.pushState}
 								deleteAssignment={this.props.deleteAssignment}
 								section={section_name} 
-								assignments={sections[prop]} />
+								assignments={sections[prop]} 
+								openModal={this.props.openModal}/>
 						</li>
 					)
 				}					
