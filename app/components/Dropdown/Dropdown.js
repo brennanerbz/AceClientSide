@@ -63,6 +63,16 @@ export default class BubbleDropdown extends Component {
 			})
 			return;
 		}
+		if(this.props.header_menu) {
+			this.setState({
+				dropdown_style: {
+					top: parent_pos.height + 10 + 'px',
+					left: parent_pos.right - bubble_pos.right + 'px',
+					paddingBottom: '10px'
+				}
+			})
+			return;
+		}
 		this.setState({
 			dropdown_style: {
 				top: parent_pos.height + 'px',

@@ -1,0 +1,91 @@
+#search_bar {
+	position: relative;
+	float: right;
+	margin-top: 8px;
+	margin-right: 3px;
+	form {
+		&#search_input_holder {
+			float: right;
+			height: 53px;
+			width: 240px;
+		}
+		#text_input {
+			width: 100%;
+			line-height: normal;
+			.text_input_wrapper {
+				position: absolute;
+			    right: 0;
+			    z-index: 1;
+			    input {
+			    	border: 1px solid rgba(195,195,195,.8);
+			    	font-size: 16px;
+			    	padding: 5px 6px;
+			    	width: 100%;
+			    	margin: 2px 0 5px;
+			    	height: 34px;
+			    	min-height: 34px;
+			    	line-height: normal;
+			    	box-sizing: border-box;
+			    	border-radius: 3px;
+			    	-webkit-appearance: none;
+			    	font-size: inherit;
+			    	min-height: 0px;
+			    	-webkit-transition: width 0.1s ease;
+			    	transition: width 0.1s ease;
+			    	width: 240px;
+			    	margin: 0;
+			    	&:hover {
+			    		border-color: rgba(195,195,195, 0.95);
+			    	}
+			    	&.focused {
+			    		width: 500px;
+			    		box-shadow: 0 0 5px 5px #fff;
+			    		border-color: rgba(195,195,195, 1);
+			    		// box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			    	}
+			    }
+			    label {
+			    	color: #aaa;
+			    	cursor: text;
+			    	font-size: 16px;
+			    	text-align: left;
+			    	box-sizing: border-box;
+			    	position: absolute;
+			    	padding: 8px;
+			    	left: 0;
+			    	right: 0;
+			    	top: 0;
+			    	right: 0;
+			    	-webkit-transition: color 0.2s linear 0s;
+			    	transition: color 0.2s linear 0s;
+			    	pointer-events: none;
+			    	font-size: inherit;
+		    	    padding: 5px 8px;
+			    }
+			}
+		}
+		#search_button {
+			overflow: hidden;
+			background-color: transparent;
+			background-repeat: no-repeat;
+			background-position: center -1px;
+			cursor: pointer;
+			height: 34px;
+			position: absolute;
+			right: 0;
+			width: 42px;
+			z-index: 2;
+			border: 1px solid transparent;
+			opacity: 0.5;
+			&.focused {
+				opacity: 1;
+			}
+			img {
+				position: absolute;
+				top: 9px;
+				right: 10px;
+				height: 16px;
+			}
+		}
+	}
+}

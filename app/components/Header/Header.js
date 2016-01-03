@@ -13,6 +13,9 @@ import Menu from '../Menu/Menu';
 import QuickLogIn from '../QuickLogIn/QuickLogIn';
 import SavingLabel from '../CreateSet/SavingLabel/SavingLabel';
 
+import SearchBar from './SearchBar/SearchBar';
+import GlobalActions from './GlobalActions/GlobalActions';
+
 import ConversationHeader from '../Conversation/Header/Containers/HeaderContainer';
 
 import * as useractions from '../../actions/user';
@@ -164,7 +167,13 @@ export default class Header extends Component {
 									</Link>
 								</div>
 							}
-							
+							{
+								logged_in
+								&&
+								<Avatar {...this.props}/>
+							}
+							<SearchBar/>
+							<GlobalActions/>
 							<div className="header_content">
 								{
 									root_path == 'convo'
@@ -200,6 +209,7 @@ export default class Header extends Component {
 									|| root_path == 'learn' 
 									|| (root_path == '/' && !logged_in)
 									|| root_path == 'convo'
+									|| true
 									? null
 									: <SearchBox {...this.props}/>
 								}
@@ -209,6 +219,7 @@ export default class Header extends Component {
 									|| root_path == 'learn'
 									|| (root_path == '/' && !logged_in )
 									|| root_path == 'convo'
+									|| true
 									? null
 									: <button className="create_set_btn_group"
 											  onClick={() => { 
@@ -226,6 +237,7 @@ export default class Header extends Component {
 									|| root_path == 'learn'
 									|| (root_path == '/' && !logged_in )
 									|| root_path == 'convo'
+									|| true
 									? null
 									: <button className="create_set_btn_group import"
 											  onClick={() => { 
@@ -289,11 +301,6 @@ export default class Header extends Component {
 											</button>
 										}	
 									</div>
-								}
-								{
-									logged_in
-									&&
-									<Avatar {...this.props}/>
 								}
 							</div>
 						</div>

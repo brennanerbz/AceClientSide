@@ -16,31 +16,21 @@ export default class Avatar extends Component {
 	
 	render() {
 		const { is_create_set, user, pushState } = this.props,
-			defaultAvatar = require('../../assets/defaultAvatar.png');
+			defaultAvatar = require('../../assets/message_profile_pic.png');
 		return(
-			<span style={{position: 'relative'}} 
-				  className={classnames({"active": this.state.active})}>
-				<button style={{paddingLeft: '0'}} 
-						ref="target" 
+			<span id="avatar">
+				<button ref="target" 
 					 	className="button button-borderless button-outline"
 					 	onClick={() => {
 					 		this.setState({dropdown_active: !this.state.dropdown_active})
 					 	}}>
-					<div className={classnames(
-						{'inline-avatar': is_create_set}
-						)}>
-						<a className="user_name">
-							<ViewerAvatar 
-								defaultAvatar={defaultAvatar} 
-								dimension={32} 
-								photoUrl="" />
-
-							{ !is_create_set
-							 && <span className="">
-							 {user.username}</span> }
-
-						</a>
-					</div>
+						<ViewerAvatar 
+							defaultAvatar={defaultAvatar} 
+							dimension={31} 
+							photoUrl="" />
+						 <span className="name">
+						 	<a>{user.username}</a>
+						 </span>
 				</button>
 				{
 					this.state.dropdown_active
