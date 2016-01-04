@@ -18,7 +18,7 @@ export default class ItemProgress extends Component {
 		return (
 			<span className="score negative">
 				-
-				{
+				{ 
 					_case.total_incorrect - _case.total_correct
 				}
 			</span>
@@ -43,6 +43,18 @@ export default class ItemProgress extends Component {
 			</span>
 		)
 	}
+
+	/*
+
+	$('#circle').circleProgress({
+	       value: 0.75,
+	       size: 80,
+	       fill: {
+	           gradient: ["red", "orange"]
+	       }
+	   });
+
+	 */
 
 	render() {
 		const { _case } = this.props;

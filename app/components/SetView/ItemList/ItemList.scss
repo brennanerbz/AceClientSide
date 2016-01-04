@@ -51,7 +51,9 @@
 	    -moz-user-select: text;
 	    -ms-user-select: text;
 	    user-select: text;
-	    // -webkit-font-smoothing: antialiased;
+	    display: table;
+	    table-layout: fixed;
+	    width: 100%;
 	    &:not(:first-child) {
 	    	border-top: 1px solid #eee;
 	    }
@@ -101,9 +103,23 @@
 			padding-left: 0.3em;
 			margin-left: 130px;
 			margin-right: 100px;
+			// display: table;
+			width: 100%;
 			&.not_studied {
 				margin-left: 0px;
 			}
+			.word, .definition {
+				display: table-cell;
+				float: left;
+			}
+
+			.word {
+				width: 30%;
+			}
+			.definition {
+				width: 40%;
+			}
+
 			.item_cue {
 				margin-bottom: 0;
 				font-size: 16.5px;
@@ -120,7 +136,7 @@
 		.actions {
 			padding-top: 15px;
 			position: absolute;
-			right: 0;
+			right: 25px;
 			top: -1px;
 			bottom: 0;
 			width: 100px;

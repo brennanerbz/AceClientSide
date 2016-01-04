@@ -28,9 +28,13 @@ export default class ItemContent extends Component {
 		return(
 			<div className={classnames("text", 
 				{'not_studied':  assignment.studied == null })}>
-				{::this.renderTarget(item.target)}
-				{::this.renderCue(item.cue)}
+				<span className="word">
+					{::this.renderTarget(item.target)}
+				</span>
+				<span className="definition">
+					{::this.renderCue(item.cue)}
+				</span>				
 			</div>
 		);
-	}
+	} 
 }
