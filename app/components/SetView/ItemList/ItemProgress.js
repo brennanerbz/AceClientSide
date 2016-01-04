@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
+import { circleProgress } from 'jquery-circle-progress';
 
 export default class ItemProgress extends Component {
 	static propTypes = {
@@ -44,20 +45,35 @@ export default class ItemProgress extends Component {
 		)
 	}
 
-	/*
-
-	$('#circle').circleProgress({
-	       value: 0.75,
-	       size: 80,
-	       fill: {
-	           gradient: ["red", "orange"]
-	       }
-	   });
-
-	 */
+	componentDidMount() {
+		let { item } = this.props,
+		value = Math.random().toFixed(2), color;
+		if(value <= 0.50) {
+			color = '#FF3C41'
+		}
+		if (value <= 0.70 && value > 0.50) {
+			color = '#FEB917'
+		}
+		if (value < 0.90 && value > 0.70) {
+			color = '#46BCEF'
+		} 
+		if(value >= 0.90) {
+			color = '#31B770'
+		}
+		$('.' + String(item.id)).circleProgress({
+		       value: value,
+		       size: 36,
+		       lineCap: 'round',
+		       fill: {
+		       		color: color
+		       }
+	    }).on('circle-animation-progress', function(event, progress, stepValue) {
+			$(this).find('strong').text(String(100 * stepValue).slice(0, 2).replace(".", ""))
+	    })
+	}	 
 
 	render() {
-		const { _case } = this.props;
+		const { _case, item } = this.props;
 		if(_case !== undefined) {
 			let progress_key;
 			if(_case == null || (_case.total_correct === 0 && _case.total_incorrect === 0)) {
@@ -70,27 +86,8 @@ export default class ItemProgress extends Component {
 				progress_key = 'neutral'
 			}
 			return(
-				<div className="progress">
-					{
-						progress_key == 'no_answers'
-						? ::this.renderNoAnswers(_case)
-						: null
-					}
-					{
-						progress_key == 'negative'
-						? ::this.renderNegative(_case)
-						: null
-					}
-					{
-						progress_key == 'neutral'
-						? ::this.renderNeutral(_case)
-						: null
-					}	
-					{
-						progress_key == 'positive'
-						? ::this.renderPositive(_case)
-						: null
-					}
+				<div className={classnames("circle", String(item.id))}>
+					<strong></strong>
 				</div>
 			);
 		} else {
@@ -98,3 +95,24 @@ export default class ItemProgress extends Component {
 		}
 	}
 }
+
+// {
+// 	progress_key == 'no_answers'
+// 	? ::this.renderNoAnswers(_case)
+// 	: null
+// }
+// {
+// 	progress_key == 'negative'
+// 	? ::this.renderNegative(_case)
+// 	: null
+// }
+// {
+// 	progress_key == 'neutral'
+// 	? ::this.renderNeutral(_case)
+// 	: null
+// }	
+// {
+// 	progress_key == 'positive'
+// 	? ::this.renderPositive(_case)
+// 	: null
+// }

@@ -22,7 +22,7 @@ export default class Item extends Component {
 				starred: _case.starred,
 				case: _case
 			})
-		}
+		} 
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -49,6 +49,7 @@ export default class Item extends Component {
 	}
 
 	render() {
+		const { item } = this.props;
 		return(
 			<li 
 				onMouseOver={() => this.setState({
@@ -62,6 +63,7 @@ export default class Item extends Component {
 					&&
 					<ItemProgress 
 						_case={this.state.case}
+						item={item}
 					/>
 				}
 				<ItemContent {...this.props}/>
