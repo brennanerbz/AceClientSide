@@ -17,6 +17,7 @@
     background: #fff;
     &.no_border {
         border: none!important;
+        box-shadow: none;
     }
     &.create_border {
         box-shadow: 0 1px rgba(0,0,0,.1),0 2px rgba(0,0,0,.01),0 3px rgba(0,0,0,.01);
@@ -160,7 +161,7 @@
             .header_content {
                 overflow: hidden;
                 display: inline-flex;
-                width: 850px;
+                // width: 850px;
                 div {
                     &.header_search {
                         margin-top: 3px;

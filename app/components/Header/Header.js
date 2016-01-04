@@ -167,11 +167,15 @@ export default class Header extends Component {
 									</Link>
 								</div>
 							}
+
 							{
 								logged_in
 								&&
 								<Avatar {...this.props}/>
 							}
+							
+							<SearchBar/>
+							<GlobalActions/>
 							{
 								root_path == 'convo'
 								&& 
@@ -205,7 +209,7 @@ export default class Header extends Component {
 									|| root_path == 'learn' 
 									|| (root_path == '/' && !logged_in)
 									|| root_path == 'convo'
-									// || true
+									|| true
 									? null
 									: <SearchBox {...this.props}/>
 								}
@@ -215,7 +219,7 @@ export default class Header extends Component {
 									|| root_path == 'learn'
 									|| (root_path == '/' && !logged_in )
 									|| root_path == 'convo'
-									// || true
+									|| true
 									? null
 									: <button className="create_set_btn_group"
 											  onClick={() => { 
@@ -233,7 +237,7 @@ export default class Header extends Component {
 									|| root_path == 'learn'
 									|| (root_path == '/' && !logged_in )
 									|| root_path == 'convo'
-									// || true
+									|| true
 									? null
 									: <button className="create_set_btn_group import"
 											  onClick={() => { 
@@ -321,8 +325,6 @@ export default class Header extends Component {
 
 Alternative search bar ----
 
-<SearchBar/>
-<GlobalActions/>
 
 */
 

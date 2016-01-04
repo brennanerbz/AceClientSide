@@ -1,12 +1,12 @@
 #search_bar {
 	position: relative;
 	float: right;
-	margin-top: 8px;
+	margin-top: 0px;
 	margin-right: 3px;
 	form {
 		&#search_input_holder {
 			float: right;
-			height: 53px;
+			height: 45px;
 			width: 240px;
 		}
 		#text_input {
@@ -32,7 +32,7 @@
 			    	min-height: 0px;
 			    	-webkit-transition: width 0.1s ease;
 			    	transition: width 0.1s ease;
-			    	width: 240px;
+			    	width: 250px;
 			    	margin: 0;
 			    	&:hover {
 			    		border-color: rgba(195,195,195, 0.95);

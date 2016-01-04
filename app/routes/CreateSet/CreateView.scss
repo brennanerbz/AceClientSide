@@ -1,6 +1,9 @@
 .fs_modal {
 	position: relative;
 	z-index: 299;
+	max-width: 1130px;
+	display: table;
+	margin: 0 auto;
 }
 .fs_modal_bg {
 	position: fixed;
