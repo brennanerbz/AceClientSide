@@ -3,7 +3,7 @@
 	font-family: "Lato";
 	// -webkit-font-smoothing: antialiased;
 	// -webkit-font-smoothing: subpixel-antialiased;
-	top: 35px;
+	top: 45px;
 	width: 220px;
 	float: left;
 	left: 0;
@@ -15,7 +15,7 @@
 	color: #383F45;
 	padding-top: 2rem;	
 	padding-left: 1.25em;
-	padding-right: 1em;
+	padding-right: 1.25em;
 	* {
 		-webkit-font-smoothing: antialiased;
 	}
@@ -110,7 +110,7 @@
 			overflow: hidden;
 			a {
 				padding: 0 0 0 0px;
-				color: #383F45 !important;
+				color: #2a80b9 !important;
 			    opacity: 0.6;
 				border-top-right-radius: 2px;
 			    border-bottom-right-radius: 2px;
@@ -137,7 +137,7 @@
 			    	}
 			    }
 			    span {
-			    	opacity: 0.8;
+			    	opacity: 1;
 			    }
 			    &:hover {
 			    	background: #F4FAFF;				 

@@ -1,9 +1,12 @@
 #avatar {
 	position: relative;
 	float: right;
-	margin-top: 4px;
+	margin-top: 0px;
 	margin-right: 0px;
 	line-height: 25px;
+	button {
+		padding-top: 3px;
+	}
 	span {
 		&#avatar_wrapper {
 			.avatar_img {

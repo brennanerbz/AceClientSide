@@ -13,7 +13,8 @@ export default class SetListItemView extends Component {
 				section,
 				mouseIsOver } = this.props,
 	 		  set_icon_complete = require('../../../assets/set_icon_lines.png'),
-			  set_icon_blank = require('../../../assets/set_icon_90.png')
+			  set_icon_blank = require('../../../assets/set_icon_90.png'),
+			  profilePic = require('../../../assets/message_profile_pic.png')
 		return(
 			<li className="set_item_row"
 				onMouseOver={this.props.mouseOver}
@@ -40,13 +41,16 @@ export default class SetListItemView extends Component {
 				</div>
 				<div style={{position: 'relative', width: '216px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
-					by {assignment.set.creator.username}
+						<div className="col_content_flex creator">
+						<img src={profilePic} className="creator_pic" />
+						by &nbsp; {assignment.set.creator.username}
+						</div>
 					</div>
 				</div>
 				<div style={{textOverflow: 'ellipsis', width:'176px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
 					<div className="sharers">
-						shared
+						--
 					</div>
 					</div>
 				</div>
