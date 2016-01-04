@@ -41,14 +41,14 @@ export default class SetListContainer extends Component {
 				<div id="browse_container">
 				<div id="scroll_wrapper">
 				<div className="recent_view">
-					<div className="recent_header">
+					<div style={{display: 'none'}} className="recent_header">
 						<div className="recent_header_wrapper">
 						<div style={{width: '100%'}} className="col">
-							<div style={{paddingLeft: '15px'}} className="col_content">
+							<div style={{paddingLeft: '25px'}} className="col_content">
 								Name
 							</div>
 						</div>
-						<div style={{position: 'relative', width: '220px'}} className="col">
+						<div style={{position: 'relative', width: '217px'}} className="col">
 							<div className="col_content">
 							Creator
 							</div>
@@ -180,7 +180,7 @@ class SetListSections extends Component {
 					rendered_sections.push(
 						<li key={prop} className="recent_section">
 							{
-								section_name !== 'drafts'
+								true
 								&&
 								<h1 className="recent_section_title">{
 									section_name.charAt(0).toUpperCase() + section_name.slice(1)

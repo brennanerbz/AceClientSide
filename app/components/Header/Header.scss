@@ -10,7 +10,10 @@
     transform: translateZ(0);
     z-index: 300;
     width: 100%;
-    // border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid #eee;
+    // border-bottom: 1px solid #e1e8ed;
+    // border-bottom: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 0px 1px rgba(0,0,0,.1);
     &.no_border {
         border: none!important;
     }
@@ -24,7 +27,7 @@
         margin: 0 auto;
         min-width: 905px!important;
         padding-bottom: 10px;
-        padding-top: 7px;
+        padding-top: 3px;
         padding-right: 25px;
         padding-left: 25px;
         position: relative;
@@ -156,7 +159,7 @@
             .header_content {
                 overflow: hidden;
                 display: inline-flex;
-                // width: 850px;
+                width: 850px;
                 div {
                     &.header_search {
                         margin-top: 3px;

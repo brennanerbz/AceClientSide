@@ -16,6 +16,7 @@ export default class SideNavSetListItem extends Component {
 		let path = loc.pathname.split('/')[2]
 		return(
 			<li className={classnames("sidenav_setitem", {"active": path == set.id })}>
+				<span className="active_side_border"></span>
 				<Link to={`/set/${set.id}`} className="sidenav_setitem_name">
 					<span className="overflow_ellipsis">
 						<span className="prefix_icon">

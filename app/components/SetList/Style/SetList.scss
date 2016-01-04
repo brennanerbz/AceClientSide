@@ -39,7 +39,7 @@
 	right: 0;
 	top: 0;
 	background-color: #fff;
-	top: 40px;
+	top: 0px;
 }
 
 #scroll_wrapper {
@@ -56,10 +56,9 @@
 }
 
 .recent_header {
-	background-color: #fafafa;
-	// border-bottom: 1px solid #eee;
+	background-color: #fff;
 	display: table-header-group;
-	left: 245px;
+	left: 220px;
 	padding-right: 16px;
 	position: fixed;
 	right: 25px;
@@ -67,11 +66,16 @@
 	top: 65px;
 	.col {
 		color: #565656;
+		font-size: 14.5px;
+	}
+	.col_content {
+		height: 45px;
+		line-height: 45px;
 	}
 }
 
 .recent_header_wrapper, .set_item_row_wrapper {
-	color: #222;
+	color: #3c4b5b;
 	display: table;
 	table-layout: fixed;
 	width: 100%;
@@ -79,27 +83,33 @@
 }
 
 .recent_section_title {
-	background: #fafafa;
-	font-size: 15px;
+	background: #fff;
+	font-size: 14.5px;
 	color: #565656;
-	padding-left: 15px;
-	height: 32px;
-	line-height: 32px;
+	padding-left: 25px;
+	height: 45px;
+	line-height: 45px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 0;
+
 }
 
 .col {
 	display: table-cell;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: normal;
 	padding: 0;
 	text-align: left;
 	vertical-align: middle;
 	border-bottom: 1px solid rgba(0,0,0,0.065);
+	&.isHovering {
+		border-color: #D3ECFA;
+	}
 }
 
 .col_content {
-	height: 48px;
-	line-height: 48px;
+	height: 60px;
+	line-height:60px;
 }
 
 .recent_view_sections {
@@ -114,6 +124,9 @@
 	display: table-row;
 	-webkit-transition: opacity .2s;
 	transition: opacity .2s;
+	&:hover {
+		background: #EDF7FD;
+	}
 }
 
 .col_content_flex {
@@ -131,9 +144,10 @@
 .icon_img {
 	-webkit-flex: none;
 	flex: none;
-	height: 26px;
-	padding-left: 14px;
+	height: 28px;
+	padding-left: 25px;
 	padding-right: 4px;
+	opacity: 0.55;
 }
 
 .heading {
@@ -144,16 +158,20 @@
 	padding-top: 1px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-    padding-left: 10px;
+    padding-left: 25px;
     vertical-align: top;
     white-space: nowrap;
-    color: #006DCB;
+    color: #2a80b9;
+    font-size: 16.5px;
+    // font-weight: 600;
+    letter-spacing: 0.01em;
     &.draft {
-    	color: #222;
+    	color: #3c4b5b!important;
     }
     .draft_label {
     	margin-left: 10px;
     	color: #E04929;
+    	font-weight: 400;
     }
 }
 

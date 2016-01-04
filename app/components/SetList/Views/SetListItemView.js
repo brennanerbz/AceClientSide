@@ -19,7 +19,7 @@ export default class SetListItemView extends Component {
 				onMouseOver={this.props.mouseOver}
 				onMouseLeave={this.props.mouseLeft}>
 				<div className="set_item_row_wrapper">
-				<div style={{width: '100%'}} className="col">
+				<div style={{width: '100%'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
 					<div className="col_content_flex">
 					<img src={section !== 'drafts' 
@@ -38,19 +38,19 @@ export default class SetListItemView extends Component {
 					</div>
 					</div>
 				</div>
-				<div style={{position: 'relative', width: '216px'}} className="col">
+				<div style={{position: 'relative', width: '216px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
 					by {assignment.set.creator.username}
 					</div>
 				</div>
-				<div style={{textOverflow: 'ellipsis', width:'176px'}}  className="col">
+				<div style={{textOverflow: 'ellipsis', width:'176px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
 					<div className="sharers">
 						shared
 					</div>
 					</div>
 				</div>
-				<div style={{width:'104px'}}  className="col">
+				<div style={{width:'104px'}}  className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="sharing_actions">
 						{
 							mouseIsOver 
