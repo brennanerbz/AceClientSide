@@ -145,8 +145,8 @@
 			display: inline-block;
 			vertical-align: middle;
 			position: relative;
-			width: 34px;
-		    height: 34px;
+			// width: 34px;
+		    // height: 34px;
 
 			> * {
 				position: absolute;
@@ -160,9 +160,9 @@
 				vertical-align: middle;
 			}
 			.more_actions_button {
-				position: absolute;
-				top: 0;
-				left: 0;
+				// position: absolute;
+				// top: 0;
+				// left: 0;
 			}
 		}
 	}

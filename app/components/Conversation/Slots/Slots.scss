@@ -3,7 +3,7 @@
 		height: 1800px;
 		width: 220px;
 		position: fixed;
-		top: 58px;
+		top: 50px;
 		left: 0;
 		border: 1px solid #e6e6e6;
 		background: #fff;
@@ -58,7 +58,7 @@
 			    overflow-y: auto;
 			    width: 220px;
 			    .slots {
-			    	margin: 1rem 0 2rem;
+			    	margin: 0.15rem 0 2rem;
 			    	width: inherit;
 			    }
 			    h2 {
@@ -83,13 +83,13 @@
 			    		width: 204px;
 			    		#slot_wrapper {
 			    			width: 219px;
-			    			border-bottom: 1px solid #e6e6e6;
+			    			// border-bottom: 1px solid #e6e6e6;
 			    			&:hover {
 			    				background: #f8f8f8;
 			    			}
 			    			&.active_slot {
-			    				background: #519CFE!important;
-			    				color: #fff;
+			    				// background: #519CFE!important;
+			    				// color: #fff;
 			    				li {
 			    					&:hover {
 			    						background: inherit;
@@ -97,12 +97,13 @@
 			    					#slot_progress {
 			    						&.circle {
 			    							border: none;
+			    							background: #519CFE;
 			    						}
 			    					}
 			    				}
 			    			}
 							&:first-child {
-								border-top: 1px solid #e6e6e6;
+								// border-top: 1px solid #e6e6e6;
 							}
 			    		}
 			    		li {
@@ -120,7 +121,7 @@
 			    					background: #eee;
 			    					border: 1px solid #ddd;
 			    					&.completed_check_mark {
-			    						background: #519CFE;
+			    						background: #1DB379;
 			    						border: none;
 			    					}
 			    				}
@@ -205,7 +206,7 @@
 				 border-bottom-right-radius: 8px;
 				 border-top-left-radius: 20px;
 				 border-bottom-left-radius: 20px;
-				 background: #519CFE;
+				 background: #1DB379;
 				 // border: 1px solid #5d9fd5;
 				 position: relative;
 				 overflow: hidden;

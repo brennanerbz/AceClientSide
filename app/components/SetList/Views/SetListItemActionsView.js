@@ -17,6 +17,8 @@ export default class SetListItemActionsView extends Component {
 				{
 					!this.props.mouseIsOver
 					&&
+					false
+					&&
 					<img style={
 						{
 							height: '3.75px',
@@ -26,32 +28,31 @@ export default class SetListItemActionsView extends Component {
 				}
 				{
 					this.props.mouseIsOver
+					// true
 					&&
-					<div className="more_actions_button">
-						<button
-							style={{
-								padding: '0 8px'
-							}}
-							onClick={() => {
-								this.setState({
-									show_dropdown: !this.state.show_dropdown
-								})
-							}}
-							ref="more"
-							className="button secondary"
-							anchor_bottom={false}
-							arrow_position="top"
-							autoFocus={false}
-							bubbleDropDownHidden={!this.state.show_dropdown}
-							bubbleDropDownShown={this.state.show_dropdown}
-							position="fixed"
-							show_arrow="true"
-							vertical_displacement={0}
-							horizontal_displacement={0}
-						>
-							<img style={{height: '3.75px'}}  className="" src={blue_more}/>
-						</button>
-					</div>
+					<button
+						onClick={() => {
+							this.setState({
+								show_dropdown: !this.state.show_dropdown
+							})
+						}}
+						style={{
+							padding: '7px 9px 8px'
+						}}
+						ref="more"
+						className="button outline"
+						anchor_bottom={false}
+						arrow_position="top"
+						autoFocus={false}
+						bubbleDropDownHidden={!this.state.show_dropdown}
+						bubbleDropDownShown={this.state.show_dropdown}
+						position="fixed"
+						show_arrow="true"
+						vertical_displacement={0}
+						horizontal_displacement={0}
+					>
+						<img style={{height: '3.75px'}}  className="" src={more}/>
+					</button>
 				}
 				{
 					this.state.show_dropdown 

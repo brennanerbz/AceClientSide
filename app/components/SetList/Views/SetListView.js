@@ -16,7 +16,9 @@ export default class SetListView extends Component {
 								pushState={this.props.pushState} 
 								section={this.props.section}
 								key={i} 
+								set={assignment.set}
 								assignment={assignment}
+								updateSet={this.props.updateSet}
 								deleteAssignment={this.props.deleteAssignment}
 								openModal={this.props.openModal}/>
 					})

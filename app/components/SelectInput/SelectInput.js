@@ -11,7 +11,8 @@ export default class SelectInput extends Component {
 	state = {
 		dropdown_shown: false,
 		options: [],
-		selected_item: null
+		selected_item: null,
+		isMouseOver: false
 	}
 
 	componentDidMount() {
@@ -26,16 +27,23 @@ export default class SelectInput extends Component {
 		let { custom_style } = this.props, c_style = {};
 		if(custom_style !== null) c_style = custom_style
 		return(
-			<div style={c_style} className="select_input">
+			<div style={c_style} 
+				className="select_input">
 				<HiddenElement 
 					options={this.state.options}
 				/>
 				<SelectedItem 
 					handleClick={() => {
-						this.setState({dropdown_shown: !this.state.dropdown_shown})
+						this.setState({
+							dropdown_shown: !this.state.dropdown_shown,
+							isMouseOver: false
+						})
 					}}
 					selected_item={this.state.selected_item}
 					filler_number={this.props.filler_number}
+					isMouseOver={this.state.isMouseOver}
+					isDropdownShow={this.state.dropdown_shown}
+					setMouseOver={(isOver) => this.setState({isMouseOver: isOver})}
 				/>
 				{
 					this.state.dropdown_shown
@@ -63,11 +71,14 @@ class SelectedItem extends Component {
 	}
 
 	render() {
-		const { selected_item } = this.props,
-			db_down = require('../../assets/db_arrow_down.png');
+		const { selected_item, isMouseOver, isDropdownShow } = this.props,
+			db_down = require('../../assets/db_arrow_down.png'),
+			blue_db_down = require('../../assets/dbArrowDownBlue.png')
 		return(
 			<div 
-				className="selected_item"
+				onMouseOver={() => this.props.setMouseOver(true)} 
+				onMouseLeave={() =>  this.props.setMouseOver(false)}
+				className={classnames("selected_item", {'active': isDropdownShow })}
 				onClick={() => {
 					this.props.handleClick()
 				}}>
@@ -101,7 +112,7 @@ class SelectedItem extends Component {
 					}
 				</div>
 				<div className="dropdown_arrow">
-					<img style={{height: '5.5px'}} src={db_down}/>
+					<img style={{height: '5.5px'}} src={(!isMouseOver) ? db_down : blue_db_down}/>
 				</div>
 			</div>
 		)

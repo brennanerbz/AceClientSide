@@ -11,7 +11,8 @@ export default class SetListItemView extends Component {
 	render() {
 		const { assignment, 
 				section,
-				mouseIsOver } = this.props,
+				mouseIsOver,
+				pushState } = this.props,
 	 		  set_icon_complete = require('../../../assets/set_icon_lines.png'),
 			  set_icon_blank = require('../../../assets/set_icon_90.png'),
 			  profilePic = require('../../../assets/message_profile_pic.png')
@@ -39,7 +40,7 @@ export default class SetListItemView extends Component {
 					</div>
 					</div>
 				</div>
-				<div style={{position: 'relative', width: '216px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
+				<div style={{position: 'relative', width: '210px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
 						<div className="col_content_flex creator">
 						<img src={profilePic} className="creator_pic" />
@@ -47,23 +48,33 @@ export default class SetListItemView extends Component {
 						</div>
 					</div>
 				</div>
-				<div style={{textOverflow: 'ellipsis', width:'176px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
+				<div style={{textOverflow: 'ellipsis', width:'156px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
 					<div className="sharers">
 						--
 					</div>
 					</div>
 				</div>
-				<div style={{width:'104px'}}  className={classnames("col",{'isHovering': mouseIsOver})}>
+				<div style={{width:'160px'}}  className={classnames("col",{'isHovering': true})}>
 					<div className="sharing_actions">
 						{
 							mouseIsOver 
 							&& assignment.set.finalized
 							&&
 							<button 
-								className="button secondary"
+								className="button outline share"
 								onClick={this.props.handleShare}>
 								Share
+							</button>
+						}
+						{
+							mouseIsOver 
+							&& !assignment.set.finalized
+							&&
+							<button 
+								className="button outline share"
+								onClick={() => pushState(null, `/createset/${assignment.set.id}`)}>
+								Finish
 							</button>
 						}
 						<SetListItemActionsView 

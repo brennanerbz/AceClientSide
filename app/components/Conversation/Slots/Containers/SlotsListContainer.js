@@ -112,9 +112,6 @@ export default class SlotsListContainer extends Component {
 								 style={slotsScrollerStyle}
 								 onScroll={::this.setScrollBarPosition}>
 								<div className="slots">
-									<h2 id="slot_header">
-										Slot header
-									</h2>
 									<SlotsList
 										slots={slots}
 										currentSlotId={currentSlotId}
@@ -133,3 +130,9 @@ export default class SlotsListContainer extends Component {
 		);
 	}
 }
+
+/*
+<h2 id="slot_header">
+	Slot header
+</h2>
+*/

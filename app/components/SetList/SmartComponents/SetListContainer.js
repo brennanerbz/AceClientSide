@@ -76,6 +76,7 @@ export default class SetListContainer extends Component {
 				<Modal 
 					assignment={selectedAssignment}
 					deleteAssignment={this.props.deleteAssignment}
+					updateSet={this.props.updateSet}
 					open={modalIsOpen}
 					closeModal={() => {this.setState({modalIsOpen: false})}}
 					type={modalType}
@@ -203,6 +204,7 @@ class SetListSections extends Component {
 							<SetListView 
 								pushState={this.props.pushState}
 								deleteAssignment={this.props.deleteAssignment}
+								updateSet={this.props.updateSet}
 								section={section_name} 
 								assignments={sections[prop]} 
 								openModal={this.props.openModal}/>

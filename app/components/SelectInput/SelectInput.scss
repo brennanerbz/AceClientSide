@@ -1,7 +1,7 @@
 .select_input {
 	display: inline-block;
-	width: 180px;
-	font-size: 14.5px;
+	width: 190px;
+	font-size: 15px;
 	position: relative;
 	vertical-align: bottom;
 	-webkit-user-select: none;
@@ -13,7 +13,7 @@
 		min-height: 34px;
 		line-height: normal;
 		box-sizing: border-box;
-		border-radius: 3px;
+		border-radius: 0.25em;
 		-webkit-appearance: none;
 		box-sizing: content-box;
 		min-height: 0;
@@ -21,6 +21,13 @@
 		border: 1px solid #bdc4c9;
 		cursor: pointer;
 		position: relative;
+		&:hover {
+			border-color: #2780f8;
+		}
+		&.active {
+			border-color: #2780f8;
+			box-shadow: 0 0 7px rgba(39, 128, 248, .15);
+		}
 		.select_option {
 			display: inline-block;
 			width: 100%;
@@ -39,6 +46,7 @@
 		background: #fff;
 		width: 100%;
 		border: 1px solid #bdc4c9;
+		border-radius: 0.25em;
 		left: 0;
 		right: 0;
 		max-height: 300px;

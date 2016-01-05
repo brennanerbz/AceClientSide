@@ -74,23 +74,6 @@ export default class SequenceProgress extends Component {
 		return(
 			<div id="sequence_control">
 				<div id="sequence_control_wrapper">
-					<div id="start_over"
-						 onClick={createNewSequence}>
-						<span className="circle" id="start_over_circle">
-							<img 
-								style={{
-									height: '13px',
-									marginTop: '1px'
-								}}
-								src={replayIcon} 
-								className="icon" 
-								id="start_over_icon"/>
-						</span>
-						<span id="start_over_text">
-						Start Over
-						</span>
-					</div>
-					
 					<div id="progress_wrapper">
 						<div id="sequence_progress_count">
 							{`${completedSlots} of ${slotsLength}`}
@@ -109,3 +92,28 @@ export default class SequenceProgress extends Component {
 		);
 	}
 }
+
+
+/* 
+
+Start over ---
+
+<div id="start_over"
+	 onClick={createNewSequence}>
+	<span className="circle" id="start_over_circle">
+		<img 
+			style={{
+				height: '13px',
+				marginTop: '1px'
+			}}
+			src={replayIcon} 
+			className="icon" 
+			id="start_over_icon"/>
+	</span>
+	<span id="start_over_text">
+	Start Over
+	</span>
+</div>
+
+
+*/

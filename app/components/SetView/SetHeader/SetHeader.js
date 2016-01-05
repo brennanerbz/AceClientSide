@@ -32,7 +32,7 @@ export default class SetHeader extends Component {
 					</span>
 					<span>
 						<p className="set_author">
-							{item_count} terms by 
+							{set.associations_count} terms by 
 							<a className="link creator_link"
 							   onClick={() => pushState(null, `/profile/${creator_id}`)}>
 								{creator_username}

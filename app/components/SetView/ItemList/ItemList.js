@@ -65,7 +65,7 @@ export default class ItemList extends Component {
 					<SelectInput 
 						custom_style={{
 								position: 'absolute',
-								right: '0px',
+								right: '56px',
 							    top: '-47.5px'	
 						}}
 						filler_number={this.props.total_starred}

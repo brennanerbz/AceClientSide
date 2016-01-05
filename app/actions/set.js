@@ -102,6 +102,12 @@ export const RECEIVE_ASSOCIATIONS_FAILURE = 'RECEIVE_ASSOCIATIONS_FAILURE';
 export function fetchAssociations(set_id) {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_ASSOCIATIONS})
+		if(getState().sets.isFetchingAssignments || getState().user.isFetchingUser) {
+			setTimeout(() => {
+				dispatch(fetchAssociations(set_id))
+			}, 5)
+			return;
+		}
 		let associations;
 		axios.get(`${api_url}/sets/${set_id}/associations/?start=${0}&end=${99}`)
 		.then((res) => {
@@ -131,6 +137,12 @@ export const HAS_NOT_STUDIED = 'HAS_NOT_STUDIED';
 export function fetchAssignment(set_id) {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_ASSIGNMENT})
+		if(getState().sets.isFetchingAssignments || getState().user.isFetchingUser) {
+			setTimeout(() => {
+				dispatch(fetchAssignment(set_id))
+			}, 5)
+			return;
+		}
 		let assignment = getState().sets.assignments
 			.filter(assignment => Number(assignment.set_id) === Number(set_id))
 			[0],

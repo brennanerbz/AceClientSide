@@ -20,6 +20,7 @@ export default class SetListItemContainer extends Component {
 			<SetListItemView 
 				section={this.props.section}
 				assignment={this.props.assignment}
+				pushState={this.props.pushState}
 				mouseOver={() => {
 					this.setState({hovering: true})
 				}}
