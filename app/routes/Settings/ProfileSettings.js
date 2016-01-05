@@ -7,8 +7,8 @@ export default class ProfileSettings extends Component {
 
 	render() {
 		return(
-			<div>
-			</div>
+			<article className="user_settings">
+			</article>
 		);
 	}
 }

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames'; 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 
 import userActions from '../../actions/user'
 require('./Settings.scss');
@@ -13,7 +14,8 @@ import AccountSettings from './AccountSettings';
 	}),
 	dispatch => ({
 		...bindActionCreators({
-			...userActions
+			...userActions,
+			pushState
 		}, dispatch)
 	})
 )
@@ -25,7 +27,8 @@ export default class Settings extends Component {
 		user: {},
 		password: '',
 		welcomeWords: ['Welcome', 'Hola', 'Greetings', 'Howdy', 'Buenos dias', 'Hi', 'Nice to have you', 'Hello there'],
-		welcomeWord: ''
+		welcomeWord: '',
+		activeTab: 'settings'
 	}
 
 	componentDidMount() {
@@ -64,9 +67,9 @@ export default class Settings extends Component {
 	}
 
 	render() {
-		let { user } = this.props,
+		let { user, pushState } = this.props,
 			  member_image = require('../../assets/message_profile_pic.png'),
-			  { welcomeWord } = this.state,
+			  { welcomeWord, activeTab } = this.state,
 			  settingsChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			  	return React.cloneElement(child, {
 			  		user: user,
@@ -83,10 +86,24 @@ export default class Settings extends Component {
 				</h1>
 				<div className="tabs_container">
 					<ul className="tabs_list">
-						<li className={classnames('tab_item', {'active': true})}>	
+						<li 
+						className={classnames('tab_item', {'active': activeTab == 'settings'})}
+						onClick={() => {
+							pushState(null, '/settings')
+							this.setState({
+								activeTab: 'settings'
+							})
+						}}>	
 							<a>Settings</a>
 						</li>
-						<li className={classnames('tab_item right_most', {'active': false})}>	
+						<li 
+						className={classnames('tab_item right_most', {'active':  activeTab == 'profile'})}
+						onClick={() => {
+							pushState(null, '/settings/profile')
+							this.setState({
+								activeTab: 'profile'
+							})
+						}}>	
 							<a>Profile</a>
 						</li>
 					</ul>
