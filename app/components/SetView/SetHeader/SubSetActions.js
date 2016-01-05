@@ -92,6 +92,7 @@ export default class SubSetActions extends Component {
 						closeModal={() => this.setState({ modal_open: false })}
 						type={this.state.modal_type}
 						set={this.props.set}
+						loc={this.props.loc}
 						updateSet={this.props.updateSet}
 						createSet={this.props.createSet}
 						assignment={this.props.assignment}
@@ -139,10 +140,20 @@ export default class SubSetActions extends Component {
 								more_is_open: false
 							})
 						}}
+						handleEdit={() => {
+							console.log(this.props.set.id)
+							this.props.pushState(null, `/createset/${this.props.set.id}`)
+						}}
 						handleEditPurpose={() => {
 							this.setState({
 								modal_open: true,
 								modal_type: 'textarea'
+							});
+						}}
+						handleSettings={() => {
+							this.setState({
+								modal_open: true,
+								modal_type: 'settings'
 							});
 						}}
 						handlePrivacySettings={() => {

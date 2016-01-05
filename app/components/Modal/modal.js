@@ -76,15 +76,19 @@ export default class Modal extends Component {
 	}
 
 	renderShareBody() {
-		let { set } = this.props,
+		let { set, loc } = this.props,
 			globe = require('../../assets/globe.png'),
 			lock = require('../../assets/lock.png'),
-			icon;
+			icon,
+			dev_root_path,
+			prod_root_path;
 		if(set.visibility == 'public') {
 			icon = globe
 		} else {
 			icon = lock
 		}
+		dev_root_path = 'localhost:3000'
+		prod_root_path = 'https://ace.herokuapp.com' // CHANGE THIS ROOT PATH FOR PRODUCTION
 		return (
 			<div className="modal-body share_link">
 				<h2>Link to set</h2>
@@ -95,7 +99,7 @@ export default class Modal extends Component {
 							<input readOnly={true} 
 								   ref="share_link"
 								   type="text" id="share_link" 
-								   value={`http://127.0.0.1:8080/set/${set.id}`} />
+								   value={`${dev_root_path}/set/${set.id}`} />
 							<label style={{display: 'none'}} htmlFor="share_link"></label>
 							<small className="secondary_label"></small>
 						</div>

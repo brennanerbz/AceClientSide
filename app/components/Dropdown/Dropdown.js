@@ -116,16 +116,23 @@ class BubbleDropdownContents extends Component {
 	renderSetDropdown() {
 		let finalized_actions = ['Learn', 'Edit', 'Divider', 'Delete'],
 			draft_actions = ['Finish', 'Divider', 'Delete'],
+			setview_actions = ['Edit', 'Settings', 'Divider', 'Delete'],
 			create_actions = ['Edit purpose', 'Privacy settings', 'Divider', 'Delete'],
 			actions;
 		if(this.props.assignment !== undefined) {
 			if(this.props.assignment.set.finalized) {
-				actions = finalized_actions
+				if(this.props.set_header) {
+					actions = setview_actions
+				} else {
+					actions = finalized_actions
+				}
 			} else  {
 				actions = draft_actions
 			}
 		} else {
-			if(this.props.single_set_actions) {
+			if(this.props.set_header) {
+				actions = setview_actions
+			} else if(this.props.single_set_actions) {
 				actions = create_actions
 			}		
 		}
