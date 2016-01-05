@@ -18,18 +18,40 @@ require('./Settings.scss');
 )
 export default class Settings extends Component {
 	static propTypes = {
+	} 
+
+	state = {
+		welcomeWords: ['Welcome', 'Hola', 'Greetings', 'Howdy', 'Buenos dias', 'Hi', 'Nice to have you']
 	}
 
 	render() {
-		const { user } = this.props,
+		let { user } = this.props,
+			  member_image = require('../../assets/message_profile_pic.png'),
 			  email = require('../../assets/email.png'),
 			  password = require('../../assets/password.png'),
 			  settings = require('../../assets/big_settings.png'),
 			  privacy = require('../../assets/privacy.png'),
 			  user_icon = require('../../assets/fill_user.png'),
-			  delete_icon = require('../../assets/delete.png');
+			  delete_icon = require('../../assets/delete.png'),
+			  { welcomeWords } = this.state,
+			  randomWordIndex = Math.floor(Math.random()*welcomeWords.length),
+			  welcomeWord = welcomeWords[randomWordIndex]
 		return(
 			<div className="main_content">
+				<h1 className="welcome_user">
+					<img src={member_image} className="member_image thumb_32"/>
+					{welcomeWord}, {user.first_name}
+				</h1>
+				<div className="tabs_container">
+					<ul className="tabs_list">
+						<li className={classnames('tab_item', {'active': true})}>	
+							Settings
+						</li>
+						<li className={classnames('tab_item right_most', {'active': false})}>	
+							Profile
+						</li>
+					</ul>
+				</div>
 				<article className="user_settings">
 					<section className="setting">
 						<header className="title">

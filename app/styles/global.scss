@@ -1,5 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300|Lato:900,700,500,400,300);
 
+.member_image {
+	border-radius: .4rem;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    &.thumb_32 {
+    	width: 2pc;
+    	height: 2pc;
+    }
+}
 
 
 /* Day Divider */
