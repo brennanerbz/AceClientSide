@@ -6,23 +6,24 @@ export default class SetListItemActionsView extends Component {
 	}
 
 	state = {
-		show_dropdown: false
+		show_dropdown: false,
+		isMouseOverMore: false
 	}
 
 	render() {
 		const more = require('../../../assets/elipses.png'),
-			 blue_more = require('../../../assets/blue_elipses.png')
+			 blue_more = require('../../../assets/blue_elipses.png'),
+			 { isMouseOverMore } = this.state;
 		return(
 			<div className="more_actions">
 				{
 					!this.props.mouseIsOver
 					&&
-					false
-					&&
 					<img style={
 						{
 							height: '3.75px',
-							opacity: '0.5'
+							opacity: '0.5',
+							marginLeft: '90px'
 						}
 					} className="placeholder" src={more}/>
 				}
@@ -39,6 +40,8 @@ export default class SetListItemActionsView extends Component {
 						style={{
 							padding: '7px 9px 8px'
 						}}
+						onMouseOver={() => this.setState({isMouseOverMore: true})}
+						onMouseLeave={() => this.setState({isMouseOverMore: false})}
 						ref="more"
 						className="button outline"
 						anchor_bottom={false}
@@ -51,7 +54,7 @@ export default class SetListItemActionsView extends Component {
 						vertical_displacement={0}
 						horizontal_displacement={0}
 					>
-						<img style={{height: '3.75px'}}  className="" src={more}/>
+						<img style={{height: '3.75px'}}  className="" src={isMouseOverMore ? blue_more : more}/>
 					</button>
 				}
 				{
