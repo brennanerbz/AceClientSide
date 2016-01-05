@@ -51,7 +51,8 @@ export default class SubSetActions extends Component {
 	state = {
 		modal_open: false,
 		modal_type: null,
-		more_is_open: false
+		more_is_open: false,
+		mouseIsOverMoreButton: false
 	}	
 
 
@@ -65,16 +66,17 @@ export default class SubSetActions extends Component {
 
 	render() {
 		const { set, createset } = this.props,
+			{mouseIsOverMoreButton} = this.state,
 			member_icon = require('../../../assets/profile_icon.png'),
 			share_icon = require('../../../assets/share.png'),
 			more = require('../../../assets/elipses.png'),
-			blue_more = require('../../../assets/blue_elipses.png');
+			blue_more = require('../../../assets/blue_elipses.png')
 		return(
 			<div style={secondary_actions} className="secondary_actions">
 				{
 					this.props.assignment !== null
 					&&
-					<button className={classnames('button secondary')}
+					<button className={classnames('button outline')}
 						    onClick={() => ::this.toggleModal('share')}
 						    style={{
 						    	marginLeft: '5px'
@@ -101,19 +103,27 @@ export default class SubSetActions extends Component {
 							this.setState({more_is_open: true})
 						}} 
 						style={{
-							marginLeft: '5px'
+							marginLeft: '5px',
+							width: '36px'
 						}}
-						className={classnames('button secondary',  {'active': this.state.more_is_open})}
+						onMouseOver={() => this.setState({
+							mouseIsOverMoreButton: true
+						})}
+						onMouseLeave={() => this.setState({
+							mouseIsOverMoreButton: false
+						})}
+						className={classnames('button outline',  {'active': this.state.more_is_open})}
 						ref="more"				   
 						title="More actions"
 						data-placement="bottom" >
 						<img style={
 							{
 								position: 'absolute',
-								height: '3.95px',
-								left: '8.5px'
+								height: '4.05px',
+								width: '16.25px',
+								left: '9.5px'
 							}
-						} className="share_icon" src={blue_more}/>
+						} className="share_icon" src={mouseIsOverMoreButton ? blue_more : more}/>
 				</button>
 
 				{

@@ -21,15 +21,13 @@
 		white-space: nowrap;
 		max-width: 100%;
 		cursor: pointer;
-		&.selected{
-			background: #fff;
-			z-index: 2;
-			border: 1px solid #e8e8e8;
-			background: #fff;
-			border-bottom-color: #fff;
-			color: #555459;
-			cursor: default;
+		&.active{
 			text-decoration: none;
+			border: 1px solid #e8e8e8;
+		    background: #fff;
+		    border-bottom-color: #fff;
+		    color: #555459;
+		    cursor: default;
 		}
 	}
 }

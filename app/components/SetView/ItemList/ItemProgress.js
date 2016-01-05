@@ -69,6 +69,7 @@ export default class ItemProgress extends Component {
 		       }
 	    }).on('circle-animation-progress', function(event, progress, stepValue) {
 			$(this).find('strong').text(String(100 * stepValue).slice(0, 2).replace(".", ""))
+			if(value < 0.10) $(this).find('strong').css({left: '21px'})
 	    })
 	}	 
 
