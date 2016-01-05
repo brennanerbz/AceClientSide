@@ -76,28 +76,6 @@ export default class AccountSettings extends Component {
 				</section>
 				<section className="setting">
 					<header className="title">
-						<img  src={user_icon} />
-						<h1>Change your Username</h1>
-					</header>
-					<div className="box">
-						<form className="settings">
-							<h2>Username</h2>
-							<p>You can only change your username <b>twice per hour.</b> Choose wisely.</p>
-							<label>
-								<strong>Username</strong>
-								<input 
-								type="text"
-								value={user.username}
-								onChange={(e) => changeUser('username', e.target.value)}
-								className="text" 
-								name="newUsername"/>
-							</label>
-							<button className="button primary">Update Username</button>
-						</form>
-					</div>
-				</section>
-				<section className="setting">
-					<header className="title">
 						<img  src={delete_icon} />
 						<h1>Deactivate Account</h1>
 					</header>
@@ -114,3 +92,28 @@ export default class AccountSettings extends Component {
 		);
 	}
 }
+
+/*
+<section className="setting">
+	<header className="title">
+		<img  src={user_icon} />
+		<h1>Change your Username</h1>
+	</header>
+	<div className="box">
+		<form className="settings">
+			<h2>Username</h2>
+			<p>You can only change your username <b>twice per hour.</b> Choose wisely.</p>
+			<label>
+				<strong>Username</strong>
+				<input 
+				type="text"
+				value={user.username}
+				onChange={(e) => changeUser('username', e.target.value)}
+				className="text" 
+				name="newUsername"/>
+			</label>
+			<button className="button primary">Update Username</button>
+		</form>
+	</div>
+</section>
+*/

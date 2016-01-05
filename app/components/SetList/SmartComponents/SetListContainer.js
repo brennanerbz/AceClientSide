@@ -173,7 +173,7 @@ class SetListSections extends Component {
 				})
 			} else {
 				sections[m].sort((a1, a2) => {
-					return (moment(a1.studied).isBefore(a2.studied)) ? -1 : 1
+					return (moment(a1.studied).isBefore(a2.studied)) ? 1 : -1
 				})
 			}
 		}

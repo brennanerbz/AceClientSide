@@ -126,3 +126,112 @@
 		}
 	}
 }
+
+
+
+#edit_profile_container {
+	// width: 50%;
+	padding-top: 1.5rem;
+	padding-left: 1rem;
+	#edit_profile_wrapper {
+		width: 62.5%;
+	}
+	#edit_member_image {
+		position: absolute;
+		right: 65px;
+		.member_image_wrapper {
+			cursor: pointer;
+			display: inline-block;
+			height: 2in;
+			width: 2in;
+			position: relative;
+			&:hover {
+				&:before, &:after {
+					color: #fff;
+					box-sizing: border-box;
+					position: absolute;
+				}
+				&:before {
+					display: inline-block;
+					top: 2em;
+					left: 80px;
+					z-index: 100;
+					height: 45px;
+					font-size: 25px;
+					content: "\f030";
+				    font-family: FontAwesome;
+				    font-style: normal;
+				    font-weight: normal;
+				    text-decoration: inherit;
+				}
+				&:after {
+					content: 'Change your profile picture';
+					font-family: "Lato";
+					font-weight: 600;
+					font-size: 17px;
+					text-align: center;
+					background-color: rgba(0, 0, 0, .7);
+					border: 0.25rem solid #439fe0;
+					border-radius: 0.4rem;
+					top: 0;
+					left: 0;
+					width: 2in;
+					height: 2in;
+					padding: 5.5rem 2rem 0;
+				}
+			}
+			&:before {
+				display: none;
+			}
+		}
+	}
+	label {
+		font-weight: 700;
+		margin: 0 0 .25rem;
+		display: block;
+		font-size: 1rem;
+		cursor: default;
+	}
+	input {
+		height: 38px;
+		border-radius: 0.25rem;
+		display: block;
+		font-size: 1.15rem;
+		margin: 4px 0 0 0;
+		padding: 6px;
+		width: 100%;
+		max-width: 90%;
+	}
+	.input_note {
+		font-size: .9rem;
+		line-height: 1.25rem;
+		color: #9e9ea6;
+	}
+	.col {
+		&:not(button) {
+			padding-right: 0;
+		}
+		+.col {
+			margin-left: 1.6%;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

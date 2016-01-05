@@ -38,7 +38,7 @@ export default class SetList extends Component {
 		.filter(ass => ass.set.finalized !== null)
 		.filter(a => !a.deleted)
 		.sort((a1, a2) => {
-			return (moment(a1.studied).isBefore(a2.studied)) ? -1 : 1
+			return (moment(a1.studied).isBefore(a2.studied)) ? 1 : -1
 		})
 		let id = params !== undefined ? params.id : ''
 		return(

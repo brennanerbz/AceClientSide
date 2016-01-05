@@ -1,6 +1,61 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300|Lato:900,700,500,400,300);
 
 
+/* Experimental flex CSS------ */
+.display_flex {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.flex_direction_column {
+	-ms-flex-direction: column;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+}
+
+.flex_wrap {
+	flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+}
+
+/*------------------ */
+
+
+/* Column system */
+.settings_col {
+	display: block;
+	float: left;
+	margin: 0 0 2%;
+	padding-right: 2%;
+	border-bottom: none!important;
+}
+.span_2_of_3 {
+	width: 66.13%;
+}
+
+
+/* Global margins && positioning */
+
+.top_margin {
+	margin-top: 1rem!important;
+}
+.large_top_margin {
+	margin-top: 2rem!important;
+}
+.bottom_margin {
+	margin-bottom: 1rem!important;
+}
+.very_large_bottom_margin {
+	margin-bottom: 4rem!important;
+}
+.position_relative {
+	position: relative!important;
+}
+
+/*------------------ */
+
 
 
 .member_image {
@@ -12,6 +67,10 @@
     	width: 2pc;
     	height: 2pc;
     }
+    &.thumb_192 {
+	    width: 2in;
+	    height: 2in;
+	}
 }
 
 
@@ -291,6 +350,9 @@ input {
 	border:1px solid #ccc;
 	outline: none;
 	border-radius: 2px;
+	&:hover {
+		border: 1px solid #498DFF;
+	}
 	&:focus {
 		border: 1px solid #498DFF;
 		box-shadow: 0 0 7px rgba(39, 128, 248, .15);
