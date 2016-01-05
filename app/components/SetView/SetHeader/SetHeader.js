@@ -11,13 +11,25 @@ export default class SetHeader extends Component {
 	}
 
 	render() {
-		const image = require('../../../assets/set_profile_image.png');
-		const { title, item_count, creator_username, creator_id, id, pushState, starred } = this.props,
+		const image = require('../../../assets/set_profile_image.png'),
+		lockIcon = require('../../../assets/lockIcon.png'),
+		starIcon = require('../../../assets/star.png'),
+		{ title, item_count, creator_username, creator_id, id, pushState, starred, set } = this.props,
 		learn_route = starred ? `/convo/${id}/starred` : `/convo/${id}`
 		return(
 			<span className="set_header">				
 				<div className="page_header_wrapper header_info inline_info">
-					<h1 className="page_header set_title">{title}</h1>
+					<span className="star">
+						<img style={{height: '15px'}} className="star_icon" src={starIcon}/>
+					</span>
+					<span className="title_wrapper">
+						{
+							set.visibility == 'private'
+							&&
+							<img className="set_icon lock" src={lockIcon}/>
+						}
+						<h1 className="page_header set_title">{title}</h1>
+					</span>
 					<span>
 						<p className="set_author">
 							{item_count} terms by 

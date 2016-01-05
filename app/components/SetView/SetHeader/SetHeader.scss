@@ -20,7 +20,45 @@
 	.header_info {
 		padding-left: 0px;
 		vertical-align: middle;
+		&:hover {
+			.star {
+				visibility: visible;
+			}
+		}
+		.star {
+			visibility: hidden;
+		    color: #9e9ea6;
+		    opacity: 1;
+		    -moz-opacity: 1;
+		    -khtml-opacity: 1;
+		    display: block;
+		    position: absolute;
+		    top: 3px;
+		    left: -28px;
+		    padding: 0 .3rem;
+		    text-shadow: none;
+		    font-size: 1.1rem;
+		}
+		.title_wrapper {
+			display: table;
+			margin-bottom: 10px;
+			&:hover {
+				.set_icon {
+					opacity: 1;
+				}
+			}
+			.set_icon {
+				opacity: 0.5;
+			}
+		}
+		.set_icon {
+			display: table-cell;
+			height: 14.25px;
+			width: 12px;
+			margin-right: 5px;
+		}
 		.set_title {
+			display: table-cell;
 			font-size: 1.65em;
 			font-family: "Lato";
 			font-weight: 700;

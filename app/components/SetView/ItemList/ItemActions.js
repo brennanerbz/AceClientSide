@@ -17,21 +17,25 @@ export default class ItemActions extends Component {
 	}
 
 	render() {
-		const star = require('../../../assets/star.png'),
-			  gold_star = require('../../../assets/gold_star.png'),
+		let star = require('../../../assets/star.png'),
+		    gold_star = require('../../../assets/gold_star.png'),
+		    gold_star_fill = require('../../../assets/goldStarFill.png'),
+		    icon,
 			{ mouseIsOver, starred } = this.props;
+		icon = star;
+		if(this.state.mouseIsOverActions) {
+			icon = gold_star
+		}
+		if(starred) {
+			icon = gold_star_fill
+		} 
 		return(
 			<div className="actions">
 				<div className="icons">
 					{
 						!mouseIsOver
 						&&
-						<img className="placeholder" 
-							src={
-								starred
-								? gold_star
-								: star
-							} />
+						<img className="placeholder" src={icon}/>
 					}
 					{
 						mouseIsOver
@@ -51,14 +55,7 @@ export default class ItemActions extends Component {
 										mouseIsOverActions: false
 									})
 								}}>
-							<img 
-								src={
-									this.state.mouseIsOverActions || starred
-									?
-									gold_star
-									:
-									star
-								}/>
+							<img src={icon}/>
 						</button>
 					}
 				</div>
