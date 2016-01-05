@@ -1,9 +1,15 @@
+.settings_page {
+	padding-top: 80px;
+	padding-left: 225px;
+}
+
 .welcome_user {
 	font-weight: 600;
 	color: #555459;
-	font-size: 2rem;
+	font-size: 1.8rem;
 	line-height: 2.5rem;
 	letter-spacing: -1px;
+	margin-bottom: 1.75rem;
 	.member_image {
 		margin-right: 1rem;
 		margin-top: 0px;
@@ -13,6 +19,10 @@
 .user_settings {
 	font-family: "Lato";
 	padding-bottom: 65px;
+	margin-top: -1px;
+	border-top: 1px solid #e8e8e8;
+	padding-top: 10px;
+	position: relative;
 	section {
 		&.setting {
 			clear: both;
@@ -21,12 +31,13 @@
 			min-width: 550px;
 			max-width: 830px;
 			padding: 8px 0;
+			margin-top: 10px;
 			&:not(:first-child) {
-				margin-top: 40px;
+				margin-top: 20px;
 			}
 			header {
 				float: left;
-				display: block;
+				display: none; // COULD CHANGE 
 				img {
 					height: 35px;
 					margin: 10px auto 0 auto;
@@ -44,31 +55,37 @@
 			}
 			.box {
 				clear: none;
-				margin: 0 16px 0 130px;
+				margin: 0 16px 0 0px;
 				overflow: hidden;
-				padding: 16px;
+				padding: 0px;
 				min-height: 100px;
 				background: #fff;
 				border-radius: 3px;
-				border: 1px solid #e8e8e8;
+				border-bottom: 1px solid #eee;
+				padding-bottom: 35px;
+				// border: 1px solid #e8e8e8;
 				form {
 					clear: none;
-					width: 100%;
+					width: 50%;
 					h2 {
-						color: #111;
-						font-size: 24px;
+						color: #3c4b5b;
+						font-size: 1.25rem;
+					    line-height: 1.5rem;
+					    margin-bottom: .5rem;
 						padding: 4px 8px;
+						font-weight: 600;
 					}
 					button {
 						margin: 8px;
 					}
 					p {
-						color: #555;
-					    font-size: 14.5px;
+						color: #555459;
+					    // font-size: 15px;
 					    padding: 4px 8px;
+					    padding-bottom: 0;
+					    margin-bottom: 0;
 					    +label {
-					    	border-top: 1px solid #eee;
-				    	    margin-top: 16px;
+				    	    // margin-top: 16px;
 				    	    padding-top: 16px;
 					    }
 					}
@@ -78,23 +95,33 @@
 			    	    padding-top: 0px;
 			    	    strong {
 			    	    	display: block;
-			    	    	font-size: 13px;
+			    	    	font-size: 0.97rem;
 			    	    	margin: 4px 0 0 0;
 			    	    }
 			    	    input {
 			    	    	&.text {
-			    	    		border-radius: 3px;
+			    	    		height: 38px;
+			    	    		border-radius: 0.25rem;
 			    	    		display: block;
-			    	    		font-size: 14px;
+			    	    		font-size: 1.15rem;
 			    	    		margin: 4px 0 0 0;
-			    	    		padding: 4px;
-			    	    		width: 220px;
+			    	    		padding: 6px;
+			    	    		width: 100%;
 			    	    		max-width: 90%;
 			    	    	}
 			    	    }
 					}
+					#deactivate {
+						width: 100%;
+						margin-bottom: 10px;
+					}
 				}
 				
+			}
+			.reset_password {
+					color: #555459;
+				    // font-size: 15px;
+				    padding: 4px 9px 0 9px;
 			}
 		}
 	}
