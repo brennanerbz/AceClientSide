@@ -40,6 +40,58 @@ export function fetchSet(set_id) {
 	}
 }
 
+var set_update_values = {
+	source_id: null,
+	targets_lang_id: null,
+	cues_lang_id: null,
+	title: null,
+	description: null,
+	has_images: null,
+	official: null,
+	visibility: null,
+	editability: null,
+	finalized: null
+}
+
+export const UPDATE_SET = 'UPDATE_SET';
+export const UPDATE_SET_SUCCESS = 'UPDATE_SET_SUCCESS';
+export const UPDATE_SET_FAILURE = 'UPDATE_SET_FAILURE';
+export function updateSet(_set, ...args) {
+	return (dispatch, getState) => {
+		dispatch({type: UPDATE_SET})
+		let set = Object.assign({}, set_update_values);
+		for(var key in set) {
+			if(_set[key]) {
+				set[key] = _set[key]
+			}
+		}
+		if(args !== null && args.length > 0) {
+			for(var i = 0; i < args.length; i++) {
+				let arg = args[i],
+					name = arg.name,
+					prop = arg.prop;
+				if(set.hasOwnProperty(name)) {
+					set[name] = prop
+				}
+			}
+		}
+		request
+		.put(`${api_url}/sets/${_set.id}`)
+		.send(set)
+		.end((err, res) => {
+			if(res.ok) {
+				set = res.body
+				dispatch({type: UPDATE_SET_SUCCESS, set})	
+			} else {
+				dispatch({
+					type: UPDATE_SET_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
+	}
+}
+
 /*
 @params set_id
 GET /sets/<id>/associations/?start=0&end=99
@@ -154,7 +206,7 @@ export function createAssignment(set_id, permission) {
 */
 export const UPDATE_ASSIGNMENT_SUCCESS = 'UPDATE_ASSIGNMENT_SUCCESS';
 export const UPDATE_ASSIGNMENT_FAILURE = 'UPDATE_ASSIGNMENT_FAILURE';
-export function updateAssignent(id) {
+export function updateAssignment(id) {
 	return async(dispatch, getState) => {
 		try {
 			await axios.put(`${api_url}/assignments${id}`).then((res) => {
@@ -167,6 +219,30 @@ export function updateAssignent(id) {
 				error: Error(err)
 			})
 		}
+	}
+}
+
+export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
+export const DELETE_ASSIGNMENT_SUCCESS = 'DELETE_ASSIGNMENT_SUCCESS';
+export const DELETE_ASSIGNMENT_FAILURE = 'DELETE_ASSIGNMENT_FAILURE';
+export function deleteAssignment(assignment_id, pushState) {
+	return (dispatch, getState) => {
+		dispatch({ type: DELETE_ASSIGNMENT })
+		request
+		.put(`${api_url}/assignments/${assignment_id}`)
+		.send({deleted: true})
+		.end((err, res) => {
+			if(res.ok) {
+				let deletedSet = res.body;
+				dispatch({type: DELETE_ASSIGNMENT_SUCCESS, deletedSet})
+				pushState(null, '/')
+			} else {
+				dispatch({
+					type: DELETE_ASSIGNMENT_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
 	}
 }
 

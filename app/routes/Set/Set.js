@@ -109,7 +109,10 @@ export default class Set extends Component {
 							?
 							<div className="">
 								<SetHeader 
+									loc={this.props.loc}
 									assignment={this.props.assignment}
+									updateSet={this.props.updateSet}
+									deleteAssignment={this.props.deleteAssignment}
 									creator_id={this.props.creator_id}
 									creator_username={this.props.creator_username} 
 									id={this.props.id}

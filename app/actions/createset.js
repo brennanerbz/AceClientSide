@@ -391,19 +391,22 @@ export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
 export const DELETE_ASSIGNMENT_SUCCESS = 'DELETE_ASSIGNMENT_SUCCESS';
 export const DELETE_ASSIGNMENT_FAILURE = 'DELETE_ASSIGNMENT_FAILURE';
 export function deleteAssignment(assignment_id, pushState) {
-	return async(dispatch, getState) => {
+	return (dispatch, getState) => {
 		dispatch({ type: DELETE_ASSIGNMENT })
-		try {
-			await axios.delete(`${api_url}/assignments/${assignment_id}`).then(res => {
+		request
+		.put(`${api_url}/assignments/${assignment_id}`)
+		.send({deleted: true})
+		.end((err, res) => {
+			if(res.ok) {
 				dispatch({type: DELETE_ASSIGNMENT_SUCCESS})
 				pushState(null, '/')
-			})
-		} catch(err) {
-			dispatch({
-				type: DELETE_ASSIGNMENT_FAILURE,
-				error: Error(err)
-			})
-		}
+			} else {
+				dispatch({
+					type: DELETE_ASSIGNMENT_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
 	}
 }
 

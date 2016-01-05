@@ -96,7 +96,7 @@ class SetListSections extends Component {
 
 	render() {
 		const { assignments } = this.props,
-				sections = this.computeSections(assignments)
+				sections = this.computeSections(assignments.filter(a => !a.deleted)) // FILTER DELETED ASSIGNMENTS
 		return(
 			<ul className="recent_view_sections">				
 				{ 
@@ -127,23 +127,25 @@ class SetListSections extends Component {
 
 		for(var i = 0; i < assignments.length; i++) {
 			assignment = assignments[i];
-			study_date = moment.utc(assignment.studied)
+			study_date = assignment.studied !== null 
+			? moment.utc(assignment.studied).format() 
+			: moment.utc(assignment.creation).format()
 			diff = today_date.diff(study_date, 'days')
 			if(assignment.set.finalized == null) {
 				sections.drafts.push(assignment)
 			}
-			else if(moment(today_date).isSame(study_date), 'day') {
+			else if(diff == 0) {
 				sections.today.push(assignment)
 			}
-			else if(diff === 1) {
+			else if(diff == 1) {
 				sections.yesterday.push(assignment)
-			} else if (1 < diff <= 6) {
+			} else if (1 < diff && diff <= 6) {
 				sections.this_week.push(assignment)
-			} else if (6 < diff <= 13) {
+			} else if (6 < diff && diff <= 13) {
 				sections.last_week.push(assignment) 
-			} else if (13 < diff <= 20) {
+			} else if (13 < diff && diff <= 20) {
 				sections.two_weeks_ago.push(assignment)
-			} else if (20 < diff <= 26) {
+			} else if (20 < diff && diff <= 26) {
 				sections.three_weeks_ago.push(assignment)
 			}
 			
@@ -163,7 +165,19 @@ class SetListSections extends Component {
 				})
 			}, [])
 		}
-		return sections;
+		for(var m in sections) {
+			if(m == 'drafts') {
+				sections[m].sort((a1, a2) => {
+					return (moment(a1.creation).isBefore(a2.creation)) ? 1 : -1
+				})
+			} else {
+				sections[m].sort((a1, a2) => {
+					return (moment(a1.studied).isBefore(a2.studied)) ? -1 : 1
+				})
+			}
+		}
+		console.log(sections)
+ 		return sections;
 	}
 
 	renderSections(sections) {

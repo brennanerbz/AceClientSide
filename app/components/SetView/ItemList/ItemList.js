@@ -21,7 +21,7 @@ export default class ItemList extends Component {
 				message: `Study # * terms only`,
 				img: require('../../../assets/star.png'),
 				value: true
-			}
+			} 
 		],
 		active_option_index: 0
 	}

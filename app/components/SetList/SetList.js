@@ -85,7 +85,7 @@ export default class SetList extends Component {
 	render() {	
 		const { sets, isFetching } = this.props;
 		sets.sort((set1, set2) => {
-			return (moment(set1.creation).isBefore(set2.creation)) ? 1 : -1
+			return (moment(set2.creation).isBefore(set1.creation)) ? 1 : -1
 		})		
 		return(
 			<div>				

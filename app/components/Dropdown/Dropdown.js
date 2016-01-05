@@ -45,7 +45,7 @@ export default class BubbleDropdown extends Component {
 			this.setState({
 				dropdown_style: {
 					top: parent_pos.height + 10 + 'px',
-					left: bubble_pos.right - parent_pos.right + 'px',
+					left: bubble_pos.right - parent_pos.right - 20 + 'px',
 					paddingTop: '0',
 					paddingBottom: '0'
 				}
@@ -158,7 +158,7 @@ class BubbleDropdownContents extends Component {
 								{
 									action !== 'Divider'
 									&&
-									<a className="">
+									<a className={classnames({'danger': action == 'Delete'})}>
 										<SpriteDiv
 											name={action.toLowerCase()}
 											text={action}

@@ -27,6 +27,14 @@ import {
 	UPDATE_ASSIGNMENT_SUCCESS,
 	UPDATE_ASSIGNMENT_FAILURE,
 
+	DELETE_ASSIGNMENT,
+	DELETE_ASSIGNMENT_SUCCESS,
+	DELETE_ASSIGNMENT_FAILURE,
+
+	UPDATE_SET,
+	UPDATE_SET_SUCCESS,
+	UPDATE_SET_FAILURE,
+
 	FETCH_CASES_SUCCESS,
 	FETCH_CASES_FAILURE,
 	UPDATE_CASE_SUCCESS,
@@ -88,6 +96,13 @@ export default function setView(state = initial_setstate, action) {
 				creator_username: set.creator.username,
 				creator_pic: set.creator.profile_picture,
 				subjects: subjects
+			}
+		case UPDATE_SET_SUCCESS:
+			return {
+				...state,
+				set: action.set,
+				title: action.set.title,
+				purpose: action.set.description
 			}
 		case RECEIVE_ASSOCIATIONS_SUCCESS:
 			let items = [];
