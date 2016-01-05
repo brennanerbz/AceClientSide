@@ -3,16 +3,17 @@ import classnames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// import usersettings from './'
+import userActions from '../../actions/user'
 require('./Settings.scss');
 
+import AccountSettings from './AccountSettings';
 
 @connect(state => ({
 		user: state.user.user
 	}),
 	dispatch => ({
 		...bindActionCreators({
-			// ...usersettings
+			...userActions
 		}, dispatch)
 	})
 )
@@ -21,21 +22,59 @@ export default class Settings extends Component {
 	} 
 
 	state = {
-		welcomeWords: ['Welcome', 'Hola', 'Greetings', 'Howdy', 'Buenos dias', 'Hi', 'Nice to have you']
+		user: {},
+		password: '',
+		welcomeWords: ['Welcome', 'Hola', 'Greetings', 'Howdy', 'Buenos dias', 'Hi', 'Nice to have you', 'Hello there'],
+		welcomeWord: ''
+	}
+
+	componentDidMount() {
+		let { user } = this.props,
+		{ welcomeWords } = this.state,
+		randomWordIndex = Math.floor(Math.random()*welcomeWords.length),
+		welcomeWord = welcomeWords[randomWordIndex]
+		this.setState({
+			user: user,
+			welcomeWord: welcomeWord
+		})
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const { user } = nextProps;
+		this.setState({
+			user: user
+		})
+	}
+
+	changeUser(key, value) {
+		const { user } = this.props;
+		user[key] = value
+		this.setState({
+			user: user
+		});
+	}
+
+	updateUser() {
+		const { user, password } = this.state,
+		{ updateUser } = this.props;
+		updateUser(user, password)
+		this.setState({
+			password: ''
+		})
 	}
 
 	render() {
 		let { user } = this.props,
 			  member_image = require('../../assets/message_profile_pic.png'),
-			  email = require('../../assets/email.png'),
-			  password = require('../../assets/password.png'),
-			  settings = require('../../assets/big_settings.png'),
-			  privacy = require('../../assets/privacy.png'),
-			  user_icon = require('../../assets/fill_user.png'),
-			  delete_icon = require('../../assets/delete.png'),
-			  { welcomeWords } = this.state,
-			  randomWordIndex = Math.floor(Math.random()*welcomeWords.length),
-			  welcomeWord = welcomeWords[randomWordIndex]
+			  { welcomeWord } = this.state,
+			  settingsChildrenWithProps = React.Children.map(this.props.children, (child) => {
+			  	return React.cloneElement(child, {
+			  		user: user,
+			  		enterPassword: (password) => this.setState({password: password}),
+			  		changeUser: (key, value) => ::this.changeUser(key, value),
+			  		updateUser: () => ::this.updateUser()
+			  	})
+			  })
 		return(
 			<div className="main_content settings_page">
 				<h1 className="welcome_user">
@@ -52,97 +91,7 @@ export default class Settings extends Component {
 						</li>
 					</ul>
 				</div>
-				<article className="user_settings">
-					<section className="setting">
-						<header className="title">
-							<img  src={email} />
-							<h1>Change Email</h1>
-						</header>
-						<div className="box">
-							<form className="settings">
-								<h2>Email Address</h2>
-								<p>Your email is currently <strong>{user.email}</strong></p>
-								<label>
-									<strong>New Email</strong>
-									<input className="text" name="newEmail"/>
-								</label>
-								<label>
-									<strong>Ace Password</strong>
-									<input className="text" type="password" name="currentPassword"/>
-								</label>
-								<button className="button primary">Update Email</button>
-							</form>
-							<p className="reset_password">
-								If you forgot your password, you can <a>reset your password</a>.
-							</p>
-						</div>
-					</section>
-					<section className="setting">
-						<header className="title">
-							<img  src={password} />
-							<h1>Change your Password</h1>
-						</header>
-						<div className="box">
-							<form className="settings">
-								<h2>Password</h2>
-								<label>
-									<strong>Current Password</strong>
-									<input className="text" name="currentPassword"/>
-								</label>
-								<label>
-									<strong>New Password</strong>
-									<input className="text" type="password" name="newPassword"/>
-								</label>
-								<label>
-									<strong>Confirm New Password</strong>
-									<input className="text" type="password" name="confirmPassword"/>
-								</label>
-								<button className="button primary">Update Password</button>
-							</form>
-							<p className="reset_password">
-								If you forgot your password, you can <a>reset your password</a>.
-							</p>
-						</div>
-					</section>
-					<section className="setting">
-						<header className="title">
-							<img  src={user_icon} />
-							<h1>Change your Username</h1>
-						</header>
-						<div className="box">
-							<form className="settings">
-								<h2>Username</h2>
-								<p>You can only change your username <b>twice per hour.</b> Choose wisely.</p>
-								<label>
-									<strong>New Username</strong>
-									<input className="text" name="currentPassword"/>
-								</label>
-								<label>
-									<strong>Ace Password</strong>
-									<input className="text" type="password" name="newPassword"/>
-								</label>
-								<button className="button primary">Update Username</button>
-							</form>
-							<p className="reset_password">
-								If you forgot your password, you can <a>reset your password</a>.
-							</p>
-						</div>
-					</section>
-					<section className="setting">
-						<header className="title">
-							<img  src={delete_icon} />
-							<h1>Deactivate Account</h1>
-						</header>
-						<div className="box">
-							<form className="settings">
-								<h2>Deactivate your account</h2>
-								<p id="deactivate">Your material and files will be kept safe if your account is ever reactivated. </p>
-								<button className="button danger">Deactivate {user.username}</button>
-							</form>
-						</div>
-					</section>
-					
-				</article>
+				{ settingsChildrenWithProps }
 			</div>
 		);
 	}

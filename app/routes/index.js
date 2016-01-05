@@ -28,7 +28,11 @@ import Terms from './Set/Terms';
 import Info from './Set/Info';
 
 import Search from './Search/Search';
+
 import Settings from './Settings/Settings';
+import AccountSettings from './Settings/AccountSettings';
+import ProfileSettings from './Settings/ProfileSettings';
+
 import ErrorPage from './ErrorPage/ErrorPage';
 
 import fillStore from '../utils/fillStore'; 
@@ -69,7 +73,10 @@ const routes = (
         <Route path="search/sets/:query" component={Search}/>
         <Route path="search/users/:query" component={Search}/>
 
-        <Route path="settings" component={Settings} requireAuth/>
+        <Route path="settings" component={Settings} requireAuth>
+            <IndexRoute component={AccountSettings}/>
+            <Route path="profile" component={ProfileSettings}/>
+        </Route>
 
         <Route path="*" component={ErrorPage}/>
     </Route>
