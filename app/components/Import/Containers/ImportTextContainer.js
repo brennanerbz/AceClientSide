@@ -15,7 +15,8 @@ export default class ImportTextContainer extends Component {
 
 	handleSubmitText() {
 		const { textAreaValue, pushState } = this.state, { importText } = this.props;
-		if(textAreaValue.length == 0) { 
+		console.log(textAreaValue)
+		if(textAreaValue == undefined || textAreaValue.length == 0) { 
 			this.setState({noTextError: true})
 			return;
 		}
@@ -37,9 +38,9 @@ export default class ImportTextContainer extends Component {
  		return(
 			<div id="import_text">
 				<h2 className="heading">
-					Instantly turn your text into a study set
+					Instantly transform your text into questions
 				</h2>
-				
+				<label>Text snippet</label>
 				<LargeTextArea
 					handleTextChange={(value) => {
 						this.setState({
@@ -56,11 +57,9 @@ export default class ImportTextContainer extends Component {
 				<button 
 					onClick={::this.handleSubmitText}
 					id="import_text_btn" 
-					disabled={this.state.textAreaValue.length == 0}
 					className={classnames("button primary large ", 
-						{'importing': importing},
-						{'disabled': textAreaValue.length == 0})}>
-					<span className="btn_text">Import</span>
+						{'importing': importing})}>
+					<span className="button_label">Transform text</span>
 					{
 						importing
 						&&

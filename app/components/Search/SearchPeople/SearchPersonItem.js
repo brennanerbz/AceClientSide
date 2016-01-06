@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 
 export default class SearchPersonItem extends Component {
 	static propTypes = {
@@ -6,28 +7,40 @@ export default class SearchPersonItem extends Component {
 
 	render() {
 		const user_pic = require('../../../assets/profile_pic.png'),
-			  default_pic = require('../../../assets/empty_account_3.png'),
+			  randomBgNum = Math.floor(Math.random() * 5),
+			  backgroundPatternUrl = require(`../../../assets/backgroundPattern${randomBgNum + 1}.png`),
 			  { user, pushState } = this.props;
 		return(
 			<li className="user_list_item">
 				<div className="right">
 				</div>
-				<a className="member_image_wrapper">	
-					<img src="" className="member_image thumb_48"/>
+				<a onClick={() => pushState(null, `/profile/${user.id}`)} className="member_image_wrapper">	
+					<img src={backgroundPatternUrl} className="member_image thumb_48"/>
 				</a>
 				<div className="user_list_info">
-					<a className="user_list_name">Brennan Erbz</a>
+					<a onClick={() => pushState(null, `/profile/${user.id}`)} className="user_list_username">
+						{user.username}
+					</a>
+					{
+						user.show_real_name
+						&&
+						<span className="user_list_fullname">{user.first_name}&nbsp;{user.last_name}</span>
+					}
 					<ul className="user_list_meta text_small text_muted">
-						<li>
-							<span>
-								<span className="octicon school"></span>
-								Villanova University
-							</span>
-						</li>
+						{
+							user.school !== null && user.school !== undefined
+							&&
+							<li>
+								<span>
+									<span className="octicon school"></span>
+									{user.school}
+								</span>
+							</li>
+						}
 						<li>
 							<span>
 								<span className="octicon clock"></span>
-								Joined on December 18, 2015
+								Joined on {moment(user.creation).format('MMMM Do YYYY')}
 							</span>
 						</li>
 					</ul>
@@ -38,11 +51,12 @@ export default class SearchPersonItem extends Component {
 }
 
 /*
+
 <li className="search_user_item">
 	<div className="user_pic_container">
 		<img src={user.profile_pic !== null ?  default_pic : user.profile_picture } 
 			 className="user_pic"
-			 onClick={() => pushState(null, `/profile/${user.id}`)}/>
+			 />
 	</div>
 	<div className="user_content">
 		<h4 className="username"

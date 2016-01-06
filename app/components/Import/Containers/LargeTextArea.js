@@ -17,9 +17,12 @@ export default class LargeTextArea extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { importVisible } = nextProps;
-		if(importVisible || this.props.importVisible) {
+		const { importVisible, noTextError } = nextProps;
+		if((!this.props.importVisible && importVisible) || this.props.importVisible) {
 			this.focusOnRender()
+		}
+		if(noTextError) {
+			this.refs.import_textarea.focus()
 		}
 	}
 

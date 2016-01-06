@@ -121,7 +121,6 @@ export function searchUsers(user, page_index) {
 			request
 			.get(`${api_url}/users/search/?search=${user}&start=${index}`)
 			.end((err, res) => {
-				console.log(res.body)
 				count = res.body.total_users_count
 				users = res.body.users
 				dispatch({type: RECEIVE_USERS_SUCCESS, users, count, query, index})

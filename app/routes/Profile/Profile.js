@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import DocumentTitle from 'react-document-title';
-
+import moment from 'moment';
 
 import * as profileactions from '../../actions/profile';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
@@ -35,6 +35,7 @@ fetchUser(concurrent)
 	sets: state.sets.sets,
 	profilestate: state.profile,
 	loggedInUser: state.user.user,
+	userOnPage: state.profile.user,
 	username: state.profile.username,
 	full_name: state.profile.full_name,
 	school: state.profile.school,
@@ -124,7 +125,7 @@ export default class Profile extends Component {
 	}
 
 	render() {
-		const { school, pushState, loggedInUser, params, isFetchingProfile } = this.props,
+		const { school, pushState, loggedInUser, params, userOnPage, isFetchingProfile } = this.props,
 		{ studiedSets, createdSets } = this.state;
 		var profileChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
@@ -134,7 +135,9 @@ export default class Profile extends Component {
 			})
 		}),
 		userProfilePic = require('../../assets/message_profile_pic.png'),
-		searchIcon = require('../../components/Header/assets/SearchIcon.png')
+		searchIcon = require('../../components/Header/assets/SearchIcon.png'),
+		randomBgNum = Math.floor(Math.random() * 5),
+		backgroundPatternUrl = require(`../../assets/backgroundPattern${randomBgNum + 1}.png`);
 		return(
 			<DocumentTitle title={`${this.props.username} | Ace`}>
 				<div className="main_content profile_view">
@@ -151,26 +154,40 @@ export default class Profile extends Component {
 								}} 
 								style={{cursor: loggedInUser.id == params.id ? 'pointer' : 'default' }}
 								className="member_image_wrapper">
-									<img src={userProfilePic} className="member_image thumb_215"/>
+									<img src={backgroundPatternUrl} className="member_image thumb_215"/>
 								</span>
 								<h1 className="member_card_names">
-									<span className="member_card_username">Brennan Erbeznik</span>
-									<span className="member_card_fullname">@brennanerbz</span>
+									<span className="member_card_username">{userOnPage.username}</span>
+									{
+										userOnPage.show_real_name
+										&&
+										<span className="member_card_fullname">{userOnPage.first_name}&nbsp;{userOnPage.last_name}</span>
+									}
 								</h1>
 								<ul className="member_card_details">
-									<li className="member_card_detail">	
-										<span className="octicon organization">
-										</span>
-										Villanova University
-									</li>
-									<li className="member_card_detail">	
-										<span className="octicon location">
-										</span>
-										Venice, CA
-									</li>
+									{
+										userOnPage.school !== null && userOnPage.school !== undefined
+										&&
+										<li className="member_card_detail">	
+											<span className="octicon organization">
+											</span>
+											{userOnPage.school}
+										</li>
+									}
+									{
+										userOnPage.location !== null && userOnPage.location !== undefined
+										&&
+										<li className="member_card_detail">	
+											<span className="octicon location">
+											</span>
+											{userOnPage.location}
+										</li>
+									}
 									<li className="member_card_detail">	
 										<span className="octicon joined"></span>
-										<span className="join_label">Joined on December 14, 2015</span>
+										<span className="join_label">
+											Joined on {moment(userOnPage.creation).format('MMMM Do YYYY')}
+										</span>
 									</li>
 								</ul>
 								<div className="member_card_stats">

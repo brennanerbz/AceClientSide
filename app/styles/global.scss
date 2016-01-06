@@ -917,9 +917,17 @@ $width: 70px;
 		color: #fff!important;
 	}
 	&.large {
-		font-size: 13.75px;
-		height: 36px;
-		padding: 6px 22px;
+		padding: 14px 2pc 1pc;
+		font-size: 20px;
+	}
+	.button_label {
+		position: relative;
+		z-index: 3;
+		-webkit-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		-moz-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		-ms-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		-o-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
 	}
 }
 :global .button-primary {
