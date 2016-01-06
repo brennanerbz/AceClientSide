@@ -10,6 +10,7 @@ require('./Settings.scss');
 import AccountSettings from './AccountSettings';
 
 @connect(state => ({
+		location: state.router.location,
 		user: state.user.user
 	}),
 	dispatch => ({
@@ -32,14 +33,14 @@ export default class Settings extends Component {
 	}
 
 	componentDidMount() {
-		let { user, updateUser } = this.props,
+		let { user, location } = this.props,
 		{ welcomeWords } = this.state,
 		randomWordIndex = Math.floor(Math.random()*welcomeWords.length),
 		welcomeWord = welcomeWords[randomWordIndex]
-		console.log(updateUser)
 		this.setState({
 			user: user,
-			welcomeWord: welcomeWord
+			welcomeWord: welcomeWord,
+			activeTab: location.pathname.indexOf('profile') == -1 ? 'settings' : 'profile'
 		})
 	}
 
