@@ -170,6 +170,9 @@
 	padding-left: 35px;
 	padding-right: 4px;
 	opacity: 0.70;
+	&.profile {
+		padding-left: 0;
+	}
 }
 
 .heading {
@@ -186,7 +189,7 @@
     color: #2a80b9;
     // color: #555459;
     font-size: 17.5px;
-    // font-weight: 600;
+    font-weight: 600;
     letter-spacing: 0.01em;
     &:hover {
     	text-decoration: underline;

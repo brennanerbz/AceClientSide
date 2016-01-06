@@ -177,7 +177,6 @@ class SetListSections extends Component {
 				})
 			}
 		}
-		console.log(sections)
  		return sections;
 	}
 
@@ -195,7 +194,7 @@ class SetListSections extends Component {
 					rendered_sections.push(
 						<li key={prop} className="recent_section">
 							{
-								true
+								!this.props.profile
 								&&
 								<h1 className="recent_section_title">{
 									section_name.charAt(0).toUpperCase() + section_name.slice(1)
@@ -207,7 +206,8 @@ class SetListSections extends Component {
 								updateSet={this.props.updateSet}
 								section={section_name} 
 								assignments={sections[prop]} 
-								openModal={this.props.openModal}/>
+								openModal={this.props.openModal}
+								profileView={this.props.profile}/>
 						</li>
 					)
 				}					

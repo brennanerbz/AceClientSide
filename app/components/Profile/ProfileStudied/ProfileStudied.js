@@ -10,7 +10,7 @@ export default class ProfileStudied extends Component {
 	}
 
 	render() {
-		let sets = this.props.studied_sets,
+		let sets = this.props.studiedSets,
 			length = this.props.studiedset_count,
 			{ profilestate, pushState } = this.props,
 			username = profilestate.username;

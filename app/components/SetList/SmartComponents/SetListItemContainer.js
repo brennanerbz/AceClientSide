@@ -56,6 +56,7 @@ export default class SetListItemContainer extends Component {
 				handleDelete={() => {
 					this.props.openModal(assignment, set, 'confirm')
 				}}
+				profileView={this.props.profileView}
 			/>
 		);
 	}

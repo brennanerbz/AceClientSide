@@ -10,6 +10,9 @@ export default class Main extends Component {
 	render() {
 	    let recent_icon = require('../../assets/recent_light.png'),
 	    	sets = require('../../assets/files_light.png'),
+	    	homeIcon = require('../../assets/homeIcon.png'),
+	    	profileIcon = require('../../assets/profileIcon.png'),
+	    	settingsIcon = require('../../assets/settingsIcon.png'),
 	    	settings = require('../../assets/settings_icon.png'),
 	    	{ root_path, user_id, params } = this.props;
 		return(
@@ -25,9 +28,9 @@ export default class Main extends Component {
 						<Link to="/" className="sidenav_setitem_name">
 							<span className="overflow_ellipsis">
 								<span className="prefix_icon">
-									<img src={recent_icon} className="set_icon  home_icon"/>
+									<img src={homeIcon} className="set_icon  home_icon"/>
 								</span>
-								Recent
+								Home
 							</span>
 						</Link>
 					</li>
@@ -37,9 +40,9 @@ export default class Main extends Component {
 						<Link to={`/profile/${user_id}`} className="sidenav_setitem_name">
 							<span className="overflow_ellipsis">
 								<span className="prefix_icon">
-									<img src={sets} className="set_icon"/>
+									<img src={profileIcon} className="set_icon"/>
 								</span>
-								Sets
+								Profile
 							</span>
 						</Link>
 					</li>
@@ -47,8 +50,8 @@ export default class Main extends Component {
 						{"active": root_path == 'settings'})}>
 						<Link to="/settings" className="sidenav_setitem_name">
 							<span className="overflow_ellipsis">
-								<span className="prefix_icon">
-									<img src={settings} className="set_icon"/>
+								<span style={{marginRight: '0.4em'}} className="prefix_icon">
+									<img src={settingsIcon} className="set_icon"/>
 								</span>
 								Settings
 							</span>

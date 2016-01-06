@@ -20,7 +20,8 @@ export default class SetListView extends Component {
 								assignment={assignment}
 								updateSet={this.props.updateSet}
 								deleteAssignment={this.props.deleteAssignment}
-								openModal={this.props.openModal}/>
+								openModal={this.props.openModal}
+								profileView={this.props.profileView}/>
 					})
 				}
 			</ol>

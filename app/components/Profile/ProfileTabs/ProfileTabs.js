@@ -10,7 +10,7 @@ export default class ProfileTabs extends Component {
 		return(
 			<div style={{
 				marginTop: '-1px',
-				borderBottom: '1px solid #bdc4c9'
+				borderBottom: '1px solid #e8e8e8'
 			}} className="tabs_container">
 				<ul style={{
 					marginBottom: '-1px'

@@ -110,7 +110,7 @@
 			overflow: hidden;
 			a {
 				padding: 0 0 0 0px;
-				color: #2a80b9 !important;
+				color: #555459 !important;
 			    opacity: 0.6;
 				border-top-right-radius: 2px;
 			    border-bottom-right-radius: 2px;
@@ -118,6 +118,9 @@
 			    border-top-left-radius: 0;
 			    background-clip: padding-box;
 			    text-decoration: none!important;
+			    &:hover {
+			    	color: #2a80b9!important;
+			    }
 			    &:not([href]) {
 			    	cursor: pointer;
 			    }
@@ -153,6 +156,7 @@
 			a {
 				opacity: 1;
 				font-weight: 600;
+				color: #2a80b9!important;
 				span {
 					opacity: 1;
 				}
@@ -176,9 +180,9 @@
 		cursor: pointer;		
 		&:hover {
 			opacity: 1;
-			border-bottom: 1px solid #4E5665;	
+			border-bottom: 1px solid #2a80b9;	
 			text-decoration: none;
-			color: #4E5665;
+			color: #2a80b9!important;
 		}
 	}
 	.page_footer {

@@ -12,7 +12,7 @@ export default class ProfileCreated extends Component {
 	}
 
 	render() {
-		let sets = this.props.created_sets,
+		let sets = this.props.createdSets,
 			length = this.props.createdset_count,
 			{ profilestate, pushState } = this.props,
 			username = profilestate.username;

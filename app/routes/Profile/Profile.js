@@ -34,6 +34,7 @@ fetchUser(concurrent)
 	isFetchingProfile: state.profile.isFetchingProfile,
 	sets: state.sets.sets,
 	profilestate: state.profile,
+	loggedInUser: state.user.user,
 	username: state.profile.username,
 	full_name: state.profile.full_name,
 	school: state.profile.school,
@@ -54,7 +55,9 @@ export default class Profile extends Component {
 	}
 
 	state = {
-		current_tab: ''
+		current_tab: '',
+		studiedSets: [],
+		createdSets: []
 	}
 
 	componentWillMount() {
@@ -65,11 +68,24 @@ export default class Profile extends Component {
 		fetchProfilePage(params.id)
 	}
 
+	componentDidMount() {
+		const { studied_sets, created_sets  } = this.props;
+		this.setState({
+			studiedSets: studied_sets,
+			createdSets: created_sets
+		});
+	}
+
 	componentWillReceiveProps(nextProps) {
-		const { params, fetchProfilePage } = this.props;
+		const { params, fetchProfilePage } = this.props,
+		{ studied_sets, created_sets } = nextProps;
 		if(params.id !== nextProps.params.id) {
 			fetchProfilePage(nextProps.params.id)
 		}
+		this.setState({
+			studiedSets: studied_sets,
+			createdSets: created_sets
+		});
 	}
 
 	componentWillUnmount() {
@@ -77,13 +93,48 @@ export default class Profile extends Component {
 		clearProfile()
 	}
 
+	filterSets(e) {
+		let { studiedSets, createdSets, current_tab } = this.state, input = e.target.value,
+		matchedSets
+		if(input.length == 0) { 
+			this.setState({
+				studiedSets: this.props.studied_sets,
+				createdSets: this.props.created_sets
+			})
+			return;
+		}
+		if(current_tab == 'studied') matchedSets = studiedSets
+		else matchedSets = createdSets
+		matchedSets = matchedSets
+		.map(set => {
+			var m = set.set.title.toLowerCase().match(input)
+			if(m !== null && m[0].length > 0) return set;
+			else return null;
+		})
+		.filter(set => set !== null)
+		if(current_tab == 'studied') {
+			this.setState({
+				studiedSets: matchedSets
+			})
+		} else {
+			this.setState({
+				createdSets: matchedSets
+			})
+		}
+	}
+
 	render() {
-		const { school, pushState, params, isFetchingProfile } = this.props;
+		const { school, pushState, loggedInUser, params, isFetchingProfile } = this.props,
+		{ studiedSets, createdSets } = this.state;
 		var profileChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
+				studiedSets: studiedSets,
+				createdSets: createdSets,
 				...this.props
 			})
-		})
+		}),
+		userProfilePic = require('../../assets/message_profile_pic.png'),
+		searchIcon = require('../../components/Header/assets/SearchIcon.png')
 		return(
 			<DocumentTitle title={`${this.props.username} | Ace`}>
 				<div className="main_content profile_view">
@@ -92,21 +143,73 @@ export default class Profile extends Component {
 						?
 						<LoadingSpinner/>
 						:
-						<div>
-							<header className="profile_header">
-								<ProfilePic/>
-								<ProfileName {...this.props}/>
-							</header>
-							<nav className="profile_tabs">
+						<div className="columns profilecols">
+							<div style={{width: '22%'}} className="column span_1_of_4">
+								<span 
+								onClick={() => {
+									if(loggedInUser.id == params.id) pushState(null, '/settings/profile')
+								}} 
+								style={{cursor: loggedInUser.id == params.id ? 'pointer' : 'default' }}
+								className="member_image_wrapper">
+									<img src={userProfilePic} className="member_image thumb_215"/>
+								</span>
+								<h1 className="member_card_names">
+									<span className="member_card_username">@brennanerbz</span>
+									<span className="member_card_fullname">Brennan Erbeznik</span>
+								</h1>
+								<ul className="member_card_details">
+									<li className="member_card_detail">	
+										<span className="octicon organization">
+										</span>
+										Villanova
+									</li>
+									<li className="member_card_detail">	
+										<span className="octicon location">
+										</span>
+										Venice, CA
+									</li>
+									<li className="member_card_detail">	
+										<span className="octicon joined"></span>
+										<span className="join_label">Joined on...</span>
+									</li>
+								</ul>
+								<div className="member_card_stats">
+									<a className="member_card_stat">
+										<strong>72</strong>
+										<span className="text_muted">Terms</span>
+									</a>
+									<a className="member_card_stat">
+										<strong>12</strong>
+										<span className="text_muted">Sets</span>
+									</a>
+									<a className="member_card_stat">
+										<strong>2</strong>
+										<span className="text_muted">Starred</span>
+									</a>
+								</div>
+							</div>
+							<div className="column span_3_of_4">
+								<nav className="profile_tabs">
 								<ProfileTabs tab={this.state.current_tab}
 										     changeTabs={(tab) => { 
 										     	this.setState({current_tab: tab})
 										     	pushState(null, `/profile/${params.id}/${tab}`)
 										     }}/>
-							</nav>
-							<article className="profile_setlist_container">
-								{ profileChildrenWithProps }
-							</article> 
+								</nav>
+								<article className="profile_setlist_container">
+									<div className="set_filter_container">
+										<span className="filter">
+										<img className="search_icon" src={searchIcon} />
+										<input onChange={::this.filterSets} className="set_filter" type="text" placeholder="Search sets"/>
+										</span>
+									</div>
+									<span className="new_set">
+										<button onClick={() => pushState(null, '/createset')} className="button primary">New study set</button>
+										<button style={{marginLeft: '5px'}} onClick={() => pushState(null, '/createset/import')} className="button outline">Import</button>
+									</span>
+									{ profileChildrenWithProps }
+								</article> 
+							</div>
 						</div>
 					}
 				</div>

@@ -15,6 +15,7 @@ export default class SetListItemView extends Component {
 				pushState } = this.props,
 	 		  set_icon_complete = require('../../../assets/set_icon_lines.png'),
 			  set_icon_blank = require('../../../assets/set_icon_90.png'),
+			  playfulSetIcon = require('../../../assets/playfulSetIcon.png'),
 			  profilePic = require('../../../assets/message_profile_pic.png')
 		return(
 			<li className="set_item_row"
@@ -27,7 +28,7 @@ export default class SetListItemView extends Component {
 					<img src={section !== 'drafts' 
 						 ? set_icon_complete 
 						 : set_icon_blank} 
-						 className="icon_img"
+						 className={classnames("icon_img", {'profile': this.props.profileView})}
 						 onClick={this.props.handleClick}/>
 					<div onClick={this.props.handleClick}
 						 className={classnames("heading", {'draft': section == 'drafts'})}>
@@ -42,10 +43,14 @@ export default class SetListItemView extends Component {
 				</div>
 				<div style={{position: 'relative', width: '210px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
 					<div className="col_content">
-						<div className="col_content_flex creator">
-						<img src={profilePic} className="creator_pic" />
-						by &nbsp; {assignment.set.creator.username}
-						</div>
+						{
+							!this.props.profileView
+							&&
+							<div className="col_content_flex creator">
+							<img src={profilePic} className="creator_pic" />
+								by &nbsp; {assignment.set.creator.username}
+							</div>
+						}
 					</div>
 				</div>
 				<div style={{textOverflow: 'ellipsis', width:'156px'}} className={classnames("col",{'isHovering': mouseIsOver})}>
@@ -55,7 +60,7 @@ export default class SetListItemView extends Component {
 					</div>
 					</div>
 				</div>
-				<div style={{width:'160px'}}  className={classnames("col",{'isHovering': true})}>
+				<div style={{width: this.props.profileView ? '120px' : '160px'}}  className={classnames("col",{'isHovering': true})}>
 					<div className="sharing_actions">
 						{
 							mouseIsOver 
