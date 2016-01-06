@@ -62,7 +62,7 @@ export default class SearchPaging extends Component {
 		if(prev_index === 0 && page === 1) p_active = false 
 		else p_active = true
 		if(result_count > 10) {
-			page_count = Math.ceil((result_count + 10 - 1) / 10)
+			page_count = Math.ceil((result_count) / 10)
 		} else {
 			page_count = 1
 		}

@@ -63,10 +63,11 @@ export default class Search extends Component {
 	}
 
 	scrollTop() {
-		window.scrollTo(0, 0)
+		document.body.scrollTop = 0
+		$(".search_page").scrollTop($(".search_page")[0].scrollHeight)
 	}
 	    
-	componentWillMount() {
+	componentDidMount() {
 		const { loc, 
 				params,
 				searching, 

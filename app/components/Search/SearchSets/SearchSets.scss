@@ -2,17 +2,122 @@
 	display: block;
 	position: relative;
 	width: 100%;
-	padding-top: 1.5em;
+	padding-top: 1.15em;
+	padding-left: 0.25rem;
 	h2 {
 		letter-spacing: 0.01em;
 		display: inline-block;
-		font-size: 14.5px;
+		font-size: 15.5px;
 	    color: #888;
 		padding: 0;
+		font-weight: 600;
+		margin-bottom: 0;
 	}
 	.sets_list {
 		width: 100%;
-		.search_set_item {
+		position: relative;
+		.set_list_item {
+			position: relative;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			list-style: none;
+			border-bottom: 1px solid #eee;
+			.set_list_stats {
+				margin-top: 6px;
+				float: right;
+				font-size: 15px;
+				font-weight: 600;
+				margin-right: 45px;
+				color: #888;
+				.set_list_stat_item {
+					margin-left: 8px;
+					display: inline-block;
+					color: #888!important;
+					text-decoration: none;
+					.octicon {
+						font-size: 16px;
+						color: #888;
+						font-family: FontAwesome;
+						margin-right: 5px;
+						&.star {
+							&:before {
+								content: '\f005'
+							}
+						}
+					}
+				}
+			}
+			.set_list_icon {
+				float: left;
+				img {
+					height: 38px;
+					opacity: 0.6;
+				}
+			}
+			.set_list_details {
+				// float: left;
+				display: block;
+				margin-left: 70px;
+			}
+			.set_list_name {
+				margin: 0 0 0px;
+				font-size: 19.75px;
+				line-height: 1.2;
+				font-weight: 600;
+				a {
+					word-wrap: break-word;
+				}
+				.item_count {
+					margin-left: 8px;
+					display: inline;
+					font-size: 14.75px;
+					color: #888;
+				}
+			}
+			.set_list_creator {
+				margin-top: 0px;
+				margin-bottom: 0;
+				font-size: 14.5px;
+				a {
+					color: #00ab6b!important;
+				}
+			}
+			.set_list_description {
+				max-width: 550px;
+				margin-top: 8px;
+				margin-bottom: 0;
+				font-size: 14.5px;
+				color: #666;
+			}
+			.set_list_meta {
+				display: block;
+				margin-top: 8px;
+				margin-bottom: 0;
+				font-size: 13px;
+				color: #888;
+			}
+			.activity_graph {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: -1;
+				.bars {
+					position: absolute;
+					bottom: 0;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+/*
+
+
+.search_set_item {
 			width: 100%!important;
 			border-top: 1px solid transparent;
 			border-bottom: 1px solid #e5e5e5;
@@ -68,5 +173,5 @@
 				}
 			}
 		}
-	}
-}
+
+		*/

@@ -30,7 +30,7 @@ export default class SearchSets extends Component {
 						{
 							searching 
 							? "Searching"
-							: `About ${result_count} results for '${query}'`
+							: `We found ${result_count} sets for you`
 						}
 					</h2>
 				}

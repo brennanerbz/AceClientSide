@@ -37,9 +37,9 @@ var initial_searchstate = {
 
 function pages(index) {
 	let page,
-		prev_index = index > 9 ? Number(index) - 9 : 0,
-		next_index = Number(index) + 9;
-	if(index < 9) page = 1
+		prev_index = index > 10 ? Number(index) - 10 : 0,
+		next_index = Number(index) + 10;
+	if(index < 10) page = 1
 	else page = Math.ceil(index / 10) + 1
 	return {
 		page: page,
