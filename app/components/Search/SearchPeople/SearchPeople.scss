@@ -11,55 +11,55 @@
 	}
 	.people_list {
 		margin-top: 1em;
-		.search_user_item {
-			display: table;
-			margin-bottom: 0px!important;
-			&:first-child {
-				margin-top: -20px;
+		.user_list_item {
+			border-bottom: 1px solid #f1f1f1;
+			padding: 0 0 20px 58px;
+			margin: 0 0 20px;
+			position: relative;
+			.member_image {
+				position: absolute;
+				left: 0;
+				top: 0;
 			}
-			.user_pic_container {
-				display: table-cell;
-				position: relative;
-				opacity: 0.9;
-				padding-right: 25px;
-				img {
-					&.user_pic {
-						cursor: pointer;
-						padding-top: 30px;
-						height: 85px;	
-						opacity: 0.6;
-					}
-				}				
-				&:hover {
-					opacity: 1;
-				}
-			}
-			.user_content {
-				display: table-cell;
-				position: relative;
-				margin-left: 10px;
-				border-bottom: 1px solid #f3f3f3;
-				padding-bottom: 10px;
-				width: 100%;
-				.username {
-					color: #006FC8;
-					font-size: 19px;
-					padding-bottom: 0;
+			.user_list_info {
+				padding: 0;
+				min-height: 48px;
+				font-size: 18px;
+				line-height: 20px;
+				font-weight: 600;
+				.user_list_name {
 					margin-bottom: 0;
-					cursor: pointer;
-					&:hover { 
-						text-decoration: underline;
-					}
-				}				
-				.fullname {
-					color: #696969;
-					display: block;
-					font-size: 14px;
-					padding-bottom: 10px;
 				}
-				.user_stats {
-					color: #C0C0C0;
-					font-size: 13.5px;
+			}
+			.user_list_meta {
+				margin: 8px 0 0;
+				list-style-type: none;
+				overflow: hidden;
+				font-weight: 400;
+				&.text_small {
+					font-size: 14px;
+				}
+				&.text_muted {
+					color: #767676;
+				}
+				li {
+					float: left;
+					margin-right: 10px;
+					.octicon {
+						font-family: FontAwesome;
+						color: #767676;
+						margin-right: 5px;
+						&.school {
+							&:before {
+								content: '\f19d'
+							}
+						}
+						&.clock {
+							&:before {
+								content: '\f017'
+							}
+						}
+					}
 				}
 			}
 		}

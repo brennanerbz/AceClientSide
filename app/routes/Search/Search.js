@@ -64,6 +64,7 @@ export default class Search extends Component {
 
 	scrollTop() {
 		document.body.scrollTop = 0
+		window.scrollTo(0,0)
 		$(".search_page").scrollTop($(".search_page")[0].scrollHeight)
 	}
 	    
