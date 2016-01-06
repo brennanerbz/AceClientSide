@@ -146,7 +146,7 @@
 	}
 	#edit_member_image {
 		position: absolute;
-		right: 65px;
+		right: 60px;
 		.member_image_wrapper {
 			cursor: pointer;
 			display: inline-block;
@@ -219,6 +219,7 @@
 		font-size: .9rem;
 		line-height: 1.25rem;
 		color: #9e9ea6;
+		margin-bottom: 0!important;
 	}
 	.col {
 		&:not(button) {

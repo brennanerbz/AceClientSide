@@ -16,8 +16,8 @@
 
 .profile_view {
 	padding-top: 90px;
-	padding-left: 240px;
-	width: 98%;
+	padding-left: 230px;
+	width: 99%;
 	h1 {
 		&.member_card_names {
 			font-size: 1.8em;
@@ -72,17 +72,17 @@
 						}
 						&.organization {
 							&:before {
-								content: '\f037'
+								content: '\f19d'
 							}
 						}
 						&.location {
 							&:before {
-								content: '\f060'
+								content: '\f124'
 							}
 						}
 						&.joined {
 							&:before {
-								content: '\f046'
+								content: '\f017'
 							}
 						}
 					}
@@ -125,6 +125,27 @@
 			.text_muted {
 				color: #767676;
 			}
+		}
+	}
+	.new_user_tip {
+		padding: 8px 16px;
+		margin-bottom: 20px;
+		background: #f1f6fb;
+		color: #244f79;
+		border: 1px solid #d0e5f8;
+		border-radius: 0.25em;
+		background: #edf7fd;
+		border: 1px solid #d3ecfa;
+		border-radius: 6px;
+		font-size: 16px;
+		p {
+			margin-top: 0.7rem;
+			margin-bottom: 0.7rem;
+		}
+		button {
+			float: right;
+			margin-left: 30px;
+			margin-top: 1rem;
 		}
 	}
 	nav {

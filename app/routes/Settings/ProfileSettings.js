@@ -83,6 +83,18 @@ export default class ProfileSettings extends Component {
 					</p>
 				</div>
 				<div className="profile_row">
+					<p style={{marginTop: '-5px'}} className="settings_col span_1_of_1">
+						<label for="username">School</label>
+						<input 
+						type="text" 
+						name="username" 
+						placeholder="School" 
+						value={user.school}
+						onChange={(e) => changeUser('username', e.target.value)}/>
+						<span className="input_note">Where do you currently attend?</span>
+					</p>
+				</div>
+				<div className="profile_row">
 					<p className="settings_col top_margin bottom_margin span_2_of_3">
 						<button className="button primary">Save changes</button>
 					</p>

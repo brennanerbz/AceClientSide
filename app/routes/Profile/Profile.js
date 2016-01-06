@@ -94,17 +94,17 @@ export default class Profile extends Component {
 	}
 
 	filterSets(e) {
-		let { studiedSets, createdSets, current_tab } = this.state, input = e.target.value,
+		let { current_tab } = this.state, { studied_sets, created_sets } = this.props, input = e.target.value,
 		matchedSets
 		if(input.length == 0) { 
 			this.setState({
-				studiedSets: this.props.studied_sets,
-				createdSets: this.props.created_sets
+				studiedSets: studied_sets,
+				createdSets: created_sets
 			})
 			return;
 		}
-		if(current_tab == 'studied') matchedSets = studiedSets
-		else matchedSets = createdSets
+		if(current_tab == 'studied') matchedSets = studied_sets
+		else matchedSets = created_sets
 		matchedSets = matchedSets
 		.map(set => {
 			var m = set.set.title.toLowerCase().match(input)
@@ -154,14 +154,14 @@ export default class Profile extends Component {
 									<img src={userProfilePic} className="member_image thumb_215"/>
 								</span>
 								<h1 className="member_card_names">
-									<span className="member_card_username">@brennanerbz</span>
-									<span className="member_card_fullname">Brennan Erbeznik</span>
+									<span className="member_card_username">Brennan Erbeznik</span>
+									<span className="member_card_fullname">@brennanerbz</span>
 								</h1>
 								<ul className="member_card_details">
 									<li className="member_card_detail">	
 										<span className="octicon organization">
 										</span>
-										Villanova
+										Villanova University
 									</li>
 									<li className="member_card_detail">	
 										<span className="octicon location">
@@ -170,7 +170,7 @@ export default class Profile extends Component {
 									</li>
 									<li className="member_card_detail">	
 										<span className="octicon joined"></span>
-										<span className="join_label">Joined on...</span>
+										<span className="join_label">Joined on December 14, 2015</span>
 									</li>
 								</ul>
 								<div className="member_card_stats">
@@ -189,6 +189,14 @@ export default class Profile extends Component {
 								</div>
 							</div>
 							<div className="column span_3_of_4">
+								{
+									loggedInUser.id == params.id 
+									&&
+									<div className="new_user_tip">
+										<button onClick={() => pushState(null, '/settings/profile')} className="button primary">Edit profile</button>
+										<p><strong>Pro tip:</strong>&nbsp;updating your profile with your name, school and a profile picture helps other Ace users get to know you.</p>
+									</div>
+								}
 								<nav className="profile_tabs">
 								<ProfileTabs tab={this.state.current_tab}
 										     changeTabs={(tab) => { 
@@ -204,7 +212,7 @@ export default class Profile extends Component {
 										</span>
 									</div>
 									<span className="new_set">
-										<button onClick={() => pushState(null, '/createset')} className="button primary">New study set</button>
+										<button onClick={() => pushState(null, '/createset')} className="button primary">New</button>
 										<button style={{marginLeft: '5px'}} onClick={() => pushState(null, '/createset/import')} className="button outline">Import</button>
 									</span>
 									{ profileChildrenWithProps }
