@@ -136,6 +136,14 @@
 	#edit_profile_wrapper {
 		width: 62.5%;
 	}
+	.member_image_upload {
+		height: 2.21in;
+		width: 2.5in!important;
+		border: none;
+		cursor: pointer;
+		z-index: 100;
+		padding: 0;
+	}
 	#edit_member_image {
 		position: absolute;
 		right: 65px;
@@ -145,6 +153,11 @@
 			height: 2in;
 			width: 2in;
 			position: relative;
+			input[type='text'] {
+				&.member_image_upload {
+					opacity: 0;
+				}
+			}
 			&:hover {
 				&:before, &:after {
 					color: #fff;
@@ -155,7 +168,7 @@
 					display: inline-block;
 					top: 2em;
 					left: 80px;
-					z-index: 100;
+					z-index: 2;
 					height: 45px;
 					font-size: 25px;
 					content: "\f030";

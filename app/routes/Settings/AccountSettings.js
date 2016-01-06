@@ -39,7 +39,7 @@ export default class AccountSettings extends Component {
 								className="text" 
 								name="newEmail"/>
 							</label>
-							<button className="button primary">Update Email</button>
+							<button onClick={updateUser} className="button primary">Update Email</button>
 						</form>
 					</div>
 				</section>

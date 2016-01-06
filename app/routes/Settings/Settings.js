@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 
-import userActions from '../../actions/user'
+import * as userActions from '../../actions/user'
 require('./Settings.scss');
 
 import AccountSettings from './AccountSettings';
@@ -32,10 +32,11 @@ export default class Settings extends Component {
 	}
 
 	componentDidMount() {
-		let { user } = this.props,
+		let { user, updateUser } = this.props,
 		{ welcomeWords } = this.state,
 		randomWordIndex = Math.floor(Math.random()*welcomeWords.length),
 		welcomeWord = welcomeWords[randomWordIndex]
+		console.log(updateUser)
 		this.setState({
 			user: user,
 			welcomeWord: welcomeWord
@@ -66,6 +67,7 @@ export default class Settings extends Component {
 		})
 	}
 
+
 	render() {
 		let { user, pushState } = this.props,
 			  member_image = require('../../assets/message_profile_pic.png'),
@@ -75,7 +77,8 @@ export default class Settings extends Component {
 			  		user: user,
 			  		enterPassword: (password) => this.setState({password: password}),
 			  		changeUser: (key, value) => ::this.changeUser(key, value),
-			  		updateUser: () => ::this.updateUser()
+			  		updateUser: () => ::this.updateUser(),
+			  		uploadUserPhoto: (file) => this.props.uploadUserPhoto(file)
 			  	})
 			  })
 		return(

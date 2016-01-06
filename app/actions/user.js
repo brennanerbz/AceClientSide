@@ -135,7 +135,63 @@ export function fetchUser() {
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE'
+export function updateUser(udpatedUser) {
+	return (dispatch, getState) => {
+		dispatch({type: REQUEST_USER})
+		request
+		.put(`${api_url}/users/${updatedUser.id}`)
+		.send(udpatedUser)
+		.end((err, res) => {
+			if(res.ok) {
+				user = {}
+				user = Object.assign({...res.body})
+				delete user['password']
+				dispatch({type: RECEIVE_USER_SUCCESS, user})
+				dispatch({type: REQUEST_ASSIGNMENTS })
+				request
+				.get(`${api_url}/users/${user.id}/assignments/`) 
+				.end((err, res) => {
+					if(res.ok) {
+						let assignments = res.body.assignments;
+						dispatch({type: RECEIVE_ASSIGNMENTS_SUCCESS, assignments })
+					}
+				})
+				return true
+			}
+			else {
+				dispatch({
+					type: RECEIVE_USER_FAILURE,
+					error: Error(err)
+				})
+				return false;
+			}
+		})
+	}
+}
 
+export const UPLOAD_USER_PHOTO = 'UPLOAD_USER_PHOTO'
+export const UPLOAD_USER_PHOTO_SUCCESS = 'UPLOAD_USER_PHOTO_SUCCESS'
+export const UPLOAD_USER_PHOTO_FAILURE = 'UPLOAD_USER_PHOTO_FAILURE'
+export function uploadUserPhoto(file) {
+	return (dispatch, getState) => {
+		dispatch({type: UPLOAD_USER_PHOTO})
+		var req = request
+		.put(`${api_url}/users/${getState().user.user.id}`)
+		req.attach(file)
+		.end((err, res) => {
+			if(res.ok) {
+				let user = res.body
+				dispatch({type: UPLOAD_USER_PHOTO_SUCCESS, user})
+			}
+			else {
+				dispatch({
+					type: UPLOAD_USER_PHOTO_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
+	}
+}
 
 
 export const LOGIN_USER = 'LOGIN_USER';
