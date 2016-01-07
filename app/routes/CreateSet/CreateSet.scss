@@ -230,9 +230,10 @@
 }
 
 .TermRow .TermRow-counter {
-    color: #555;
+    color: #555!important;
     display: block!important;
-    font: 14px/16px "Helvetica Neue",arial,sans-serif;
+    font-size: 14px;
+    // font: 14px/16px "Helvetica Neue",arial,sans-serif;
     height: 16px!important;
     left: -45px!important;
     position: absolute!important;
@@ -250,15 +251,15 @@
 	position: absolute;
 	right: 0;
 	top: 9px;
-	color: #666;
+	color: #666!important;
 	text-decoration: none;
-	font-size: 20px;
+	font-size: 24px;
 	cursor: pointer;
 }
 
 
 .TermRow .TermRow-control:hover {
-	color: black;
+	color: #CB5234!important;
 }
 
 .TermContent {
