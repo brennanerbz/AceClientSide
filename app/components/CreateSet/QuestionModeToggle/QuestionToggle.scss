@@ -3,6 +3,12 @@
 	visibility: hidden!important;
 }
 
+.input_note {
+	font-size: .9rem;
+	line-height: 1.25rem;
+	color: #9e9ea6;
+}
+
 label {
 	&.checkbox {
 		padding-left: 1.5rem;
@@ -46,6 +52,20 @@ label {
 				margin-left: -25px;
 			}
 		}
+		.toggle_secondary_label {
+			.toggle_off_label {
+				display: none;
+			}
+			.toggle_on_label {
+				display: block;
+			}
+		}
+	}
+	&.orange {
+		.toggle_button {
+			background: #ff8b00;
+			color: #fff
+		}
 	}
 	.toggle_button {
 		background: #e8e8e8;
@@ -85,6 +105,18 @@ label {
 		    -webkit-transition: 70ms ease-out;
 		    -moz-transition: 70ms ease-out;
 		    transition: 70ms ease-out;
+		}
+	}
+	.toggle_secondary_label {
+		display: inline-block;
+		color: #555459;
+		font-size: 1rem;
+		cursor: pointer;
+		.toggle_off_label {
+			display: block;
+		}
+		.toggle_on_label {
+			display: none;
 		}
 	}
 }
