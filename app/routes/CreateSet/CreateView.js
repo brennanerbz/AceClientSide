@@ -42,32 +42,24 @@ export default class CreateView extends Component {
 
 		return(
 			<div id="create_page">
-				<VelocityComponent>
-					<div 
-					style={{
-						height: importHeight,
-						width: importWidth
-					}}
-					className={classnames('importView', 
-						{'isShowing': import_view},
-						{'isHidden': !import_view}
-						)}>
-
-						<ImportView
-							importVisible={import_view}
-						/>
-							
+				<div 
+				className={classnames('importView', 
+					{'isShowing': import_view},
+					{'isHidden': !import_view}
+					)}>
+				</div>
+				<div>
+					<div className={classnames({'active': !import_view})}>
+					{createChildrenWithProps}
 					</div>
-				</VelocityComponent>
-				<VelocityComponent runOnMount={true} animation={{ opacity: true ? 1 : 0 }} duration={500}>
-					<div>
-						<div className={classnames("fs_modal_bg", {'active': !import_view})}></div>
-						<div className={classnames({'active': !import_view}, 'fs_modal')}>
-						{createChildrenWithProps}
-						</div>
-					</div>
-				</VelocityComponent>
+				</div>
 			</div>
 		);
 	}
 }
+
+/*
+<ImportView
+	importVisible={import_view}
+/>
+*/

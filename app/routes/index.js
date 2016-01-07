@@ -55,13 +55,9 @@ const routes = (
             <Route path="studied" component={ProfileStudied}/>
         </Route>
 
-        <Route path="createset" component={CreateView}>
-            <IndexRoute component={CreateSet}/>
+        <Route path="createset" component={CreateSet}>
             <Route path=":id" component={CreateSet}/>
         </Route>
-        
-
-        <Route path="import" component={Import}/>
 
         <Route path="learn/:id" component={Learn}/>
         <Route path="learn/:id/starred" component={Learn}/>

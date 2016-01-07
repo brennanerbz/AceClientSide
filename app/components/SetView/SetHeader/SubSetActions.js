@@ -142,7 +142,6 @@ export default class SubSetActions extends Component {
 							})
 						}}
 						handleEdit={() => {
-							console.log(this.props.set.id)
 							this.props.pushState(null, `/createset/${this.props.set.id}`)
 						}}
 						handleEditPurpose={() => {

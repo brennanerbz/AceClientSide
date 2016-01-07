@@ -243,9 +243,6 @@ export default class CreateSetHeader extends Component {
 	              }
 	            </div>
 
-	            <ButtonGroup onSave={::this.handleSave}
-	            		     {...this.props}
-	            />	                        
 	          </div>	              
 	        </div>
 		)
@@ -253,3 +250,6 @@ export default class CreateSetHeader extends Component {
 }
 
 
+// <ButtonGroup onSave={::this.handleSave}
+// 		     {...this.props}
+// />	   

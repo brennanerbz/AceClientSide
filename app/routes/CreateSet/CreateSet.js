@@ -13,6 +13,7 @@ import * as transfer from '../../actions/transfer';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 /* Components */
+import ButtonGroup from '../../components/CreateSet/CreateSetHeader/ButtonGroup';
 import TermRows from '../../components/CreateSet/TermRows/TermRows';
 import CreateSetHeader from '../../components/CreateSet/CreateSetHeader/CreateSetHeader';
 import SavingLabel from '../../components/CreateSet/SavingLabel/SavingLabel';
@@ -82,8 +83,8 @@ export default class CreateSetPage extends Component {
 
 	state = {
 		editing: false,
-		login_prompt_modal: false,
-		modal_type: 'log_in'
+		isModalOpen: false,
+		modalType: ''
 	}
 
 	subPoll = {}
@@ -203,7 +204,32 @@ export default class CreateSetPage extends Component {
 		return(
 			<DocumentTitle title="Create | Ace">
 				<div>
-					
+					<Modal 
+						open={this.state.isModalOpen}
+						closeModal={() => this.setState({ isModalOpen: false })}
+						type={this.state.modalType}
+						set={this.props.set}
+						loc={this.props.loc}
+						updateSet={this.props.updateSet}
+						createSet={this.props.createSet}
+						assignment={this.props.assignment}
+						deleteAssignment={this.props.deleteAssignment}
+						pushState={this.props.pushState}
+					/>
+					<ButtonGroup
+						toggleModal={(type) => {
+							this.setState({
+								isModalOpen: true,
+								modalType: type
+							})
+						}}
+						rendered={rendered}
+						set={this.props.set}
+						assignment={this.props.assignment}
+						editing={this.props.editing}
+						loc={this.props.loc}
+						pushState={this.props.pushState}
+					/>
 					<div className={classnames("CreateSetPage", {"rendered": rendered })}>
 					{
 						isLoadingSet
