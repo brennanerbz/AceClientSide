@@ -1,0 +1,23 @@
+.language_select {
+	.language_select_button {
+		font-size: 0.9em;
+		color: #9e9ea6!important;
+		padding: 0px 15px;
+		font-weight: 600;
+		text-decoration: none!important;
+		position: absolute;
+		top: 2px;
+		&:hover {
+			color: #3D9EE3!important;
+		}
+		.octicon {
+			font-family: FontAwesome;
+			margin-left: 5px;
+			&.caret_down {
+				&:before {
+					content: '\f0d7'
+				}
+			}
+		}
+	}
+}

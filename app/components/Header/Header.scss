@@ -15,6 +15,10 @@
     // border-bottom: 1px solid rgba(0,0,0,0.05);
     box-shadow: 0 0px 1px rgba(0,0,0,.1);
     background: #fff;
+    &.no_background {
+        max-width: 300px;
+        background: transparent!important;
+    }
     &.no_border {
         border: none!important;
         box-shadow: none;
@@ -159,9 +163,9 @@
                 }
             }
             .header_content {
-                overflow: hidden;
-                display: inline-flex;
-                width: 850px;
+                // overflow: hidden;
+                display: flex;
+                // width: 850px;
                 div {
                     &.header_search {
                         margin-top: 3px;

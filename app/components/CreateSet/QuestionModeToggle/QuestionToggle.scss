@@ -25,13 +25,15 @@ label {
 
 .toggle {
 	display: inline-block;
-	margin: 0 0 1rem;
+	// margin: 0 0 1rem;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 	height: 27px;
-	margin-bottom: .5rem;
+	margin-top: 1rem;
+	margin-bottom: 1.75rem;
+	margin-left: 0.95rem;
 	&.checked {
 		.toggle_button {
 			background: #2ab27b;

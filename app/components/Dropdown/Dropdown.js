@@ -73,6 +73,16 @@ export default class BubbleDropdown extends Component {
 			})
 			return;
 		}
+		if(this.props.languageSelect) {
+			this.setState({
+				dropdown_style: {
+					top: parent_pos.height + 5 + 'px',
+					left: parent_pos.left - bubble_pos.left + 'px',
+					paddingBottom: '0px'
+				}
+			});
+			return;
+		}
 		this.setState({
 			dropdown_style: {
 				top: parent_pos.height + 'px',
@@ -113,6 +123,26 @@ class BubbleDropdownContents extends Component {
 		
 	}
 
+	renderLanguageSelect() {
+		let languages = ['English', 'Spanish', 'Japanese', 'Swahili', 'Chinese'];
+		return (
+			<ul>
+				{languages.map(language => {
+					return (
+					<li>
+						<a>
+							<SpriteDiv
+								name={language.toLowerCase()}
+								text={language}
+							/>
+						</a>
+					</li>
+				)})}
+			</ul>
+			
+		)
+	}
+
 	renderSetDropdown() {
 		let finalized_actions = ['Learn', 'Edit', 'Divider', 'Delete'],
 			draft_actions = ['Finish', 'Divider', 'Delete'],
@@ -134,7 +164,7 @@ class BubbleDropdownContents extends Component {
 				actions = setview_actions
 			} else if(this.props.single_set_actions) {
 				actions = create_actions
-			}		
+			} 
 		}
 		return(
 			<ul className="set_actions_list">
@@ -238,6 +268,10 @@ class BubbleDropdownContents extends Component {
 				{
 					(this.props.set_list_item || this.props.single_set_actions)
 					&& ::this.renderSetDropdown()
+				}
+				{
+					this.props.languageSelect
+					&& ::this.renderLanguageSelect()
 				}
 				{
 					this.props.show_arrow

@@ -186,11 +186,14 @@
     padding-left: 35px;
     vertical-align: top;
     white-space: nowrap;
-    color: #2a80b9;
-    // color: #555459;
+    // color: #2a80b9;
+    color: #3c4b5b !important;
     font-size: 17.5px;
     font-weight: 600;
     letter-spacing: 0.01em;
+    &:nth-child(2) {
+    	text-decoration: none;
+    }
     &:hover {
     	text-decoration: underline;
     	.draft_label {

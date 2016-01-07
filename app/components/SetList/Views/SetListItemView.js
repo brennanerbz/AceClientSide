@@ -15,7 +15,8 @@ export default class SetListItemView extends Component {
 				pushState } = this.props,
 	 		  set_icon_complete = require('../../../assets/set_icon_lines.png'),
 			  set_icon_blank = require('../../../assets/set_icon_90.png'),
-			  playfulSetIcon = require('../../../assets/playfulSetIcon.png'),
+			  setIconSlack = require('../../../assets/setIconSlack.png'),
+			  playfulSetIcon = require('../../../assets/setIconGreen.png'),
 			  profilePic = require('../../../assets/message_profile_pic.png')
 		return(
 			<li className="set_item_row"

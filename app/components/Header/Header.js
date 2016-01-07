@@ -132,6 +132,9 @@ export default class Header extends Component {
 				:
 				<div className={classnames("header_positioner beta", 
 					{
+						'no_background' : root_path == 'createset'
+					},
+					{
 					'no_border': (root_path == 'createset' 
 					|| root_path == 'import'
 					|| root_path == '/' && !logged_in)
@@ -170,6 +173,7 @@ export default class Header extends Component {
 
 							{
 								logged_in
+								&& root_path !== 'createset'
 								&&
 								<Avatar {...this.props}/>
 							}
@@ -190,7 +194,7 @@ export default class Header extends Component {
 								&& 
 								<ConversationHeader/>
 							}
-							<div className="header_content">
+							<div className="header_content display_flex">
 								{
 									root_path == 'createset'
 									&& !this.props.isLoadingSet

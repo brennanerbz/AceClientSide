@@ -70,10 +70,13 @@
 	.subject_list {
 		padding-top: 15px;
 		display: inline-flex;
+		position: relative;
 		.edit_link {
 			cursor: pointer!important;
 			margin-top: -2px;
 			margin-left: 10px;
+			position: absolute;
+			right: -30px;
 			a {
 				font-size: 14px;
 				color: #2A80AA;
@@ -83,6 +86,9 @@
 		li {
 			font-size: 14px;
 			color: #9e9ea6!important;
+			p {
+				margin-bottom: 0;
+			}
 			&:not(:first-child) {
 				margin-left: 4px;
 			}
@@ -92,7 +98,7 @@
 .CreateSetHeader-wrapper {
 	border-radius: 4px;
 	color: black;
-	padding-bottom: 20px;
+	padding-bottom: 0px;
 	position: relative;
 	// z-index: 101;
 	width: 100%;
@@ -111,7 +117,7 @@
 }
 
 .CreateSetHeader-section-title .CreateSetHeader-textarea .AutoExpandTextArea {
-	font-size: 31px;
+	font-size: 34px;
 	margin-bottom: -29px;
 }
 
@@ -159,7 +165,7 @@
 // /*List*/
 
 .CreateSetPage-list {
-	padding-top: 10px;
+	padding-top: 15px;
 	padding-bottom: 66px;
 	position: relative;
 }
@@ -302,7 +308,23 @@
 	position: relative;
 	padding-top: 7px;
     padding-left: 7px;
-    overflow-y: hidden;
+    // overflow-y: hidden;
+    p {
+    	display: inline;
+    	margin-left: 5px;
+    }
+    .flip_button_wrapper {
+    	margin-right: 10px;
+    	position: absolute;
+    	right: 0px;
+    	top: -6px;
+    	button {
+    		img {
+    			height: 15px;
+    			width: 15px;
+    		}
+    	}
+    }
 }
 .TermContent-side.word-side {
 	border-right: 1px solid #DFDFDF;
@@ -345,22 +367,7 @@
 	resize: none;
 	border: none;
 }
-textarea {
-	&#create_set_title {
-		::-webkit-input-placeholder {
-		    color: #232323!important;
-		}
-		:-moz-placeholder {
-		    color: #232323!important;
-		}
-		::-moz-placeholder {
-		    color: #232323!important;
-		}
-		:-ms-input-placeholder {
-		    color: #232323!important;
-		}
-	}
-}
+
 .Autocomplete-textarea {
 	width: 100%;
 }
@@ -417,9 +424,9 @@ hr.CreateSetBreak {
 // /*Button group*/
 .CreateSetHeader-wrapper-buttongroup {
 	position: absolute;
-	// z-index: 101;
+	z-index: 501;
 	right: 15px;
-	top: 105px;
+	top: -20px;
 }
 .push-right {
     display: inline-block;
@@ -436,6 +443,8 @@ hr.CreateSetBreak {
 .Button-set .button {
 	vertical-align: middle;
 }
+
+
 
 .button-circle {
 	width: 37px;
@@ -551,6 +560,7 @@ textarea:hover:ms-input-placeholder {
 	position: relative;
 	margin-top: -20px!important;
 	padding-top: 0!important;
+	margin-bottom: 15px;
 	.textarea_note {
 		font-size: 1rem;
 		font-weight: 400;

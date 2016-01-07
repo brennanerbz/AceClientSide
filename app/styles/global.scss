@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300|Lato:900,700,500,400,300);
 
+.right {
+	float: right;
+}
 
 /* Experimental flex CSS------ */
 .display_flex {
@@ -901,7 +904,7 @@ $width: 70px;
 	}
 	&.primary {
 		background: #2ab27b;
-		letter-spacing: 0.0075em!important;
+		letter-spacing: 0.0045em!important;
 	}
 	&.secondary {
 	    background: #3aa3e3!important;
@@ -929,6 +932,18 @@ $width: 70px;
 		-o-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
 		transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
 	}
+	.new_label {
+		background: #EB4D5C;
+		border-radius: 0.25em;
+		color: #fff;
+		padding: 0.20em 0.5em;
+		font-size: 12px;
+		margin-left: 10px;
+		font-weight: 600;
+		text-shadow: 0 1px 1px rgba(0,0,0,.1);
+		// padding-left: 0.5em;
+		// padding-right: 0.5em;
+	}
 }
 :global .button-primary {
 	background-color: #52B78A;	
@@ -940,8 +955,8 @@ $width: 70px;
 }
 :global .button-small {
 	font-size: 14px !important;
-	height: 32px;
-	padding: 0px 10px;
+	// height: 32px;
+	padding: 0px 10px!important;
 	line-height: 32px;
 	font-size: 14px!important;
 }
@@ -1508,7 +1523,7 @@ textarea:hover:ms-input-placeholder {
 			border-top-left-radius: .5rem;
 			background-clip: padding-box;
 			h3 {
-				font-weight: 400;
+				font-weight: 600;
 			    font-size: 1.25rem;
 			    line-height: 1.3rem;
 			    margin: .3rem 0;
@@ -1520,7 +1535,7 @@ textarea:hover:ms-input-placeholder {
 		.modal-title {
 			box-sizing: content-box;
 			font-size: 18px;
-			font-weight: normal;
+			font-weight: 600;
 			line-height: normal;
 			background: none;
 			margin: 0;

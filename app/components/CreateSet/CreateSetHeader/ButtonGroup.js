@@ -14,6 +14,23 @@ export default class ButtonGroup extends Component {
             	<div className="push-right">
             		<div className="Button-set">
                         {
+                            !editing
+                            && assignment == null
+                            &&
+                            <button
+                                style={{
+                                    marginLeft: '5px',
+                                    marginRight: '5px'
+                                }}
+                                className="button outline"
+                                onClick={() => pushState(null, 'createset/import')}>
+                                Import
+                                <span className="new_label">
+                                    New!
+                                </span>
+                            </button>
+                        }
+                        {
                             editing && assignment !== null
                             ? 
                             <button className={classnames("button primary")}
@@ -30,19 +47,6 @@ export default class ButtonGroup extends Component {
                                     Create
                             </button>
                             : null
-                        }
-                        {
-                            !editing
-                            && assignment == null
-                            &&
-                            <button
-                                style={{
-                                    marginLeft: '5px'
-                                }}
-                                className="button secondary"
-                                onClick={() => pushState(null, 'createset/import')}>
-                                Import
-                            </button>
                         }
             			<SubSetActions right={true} createset={true} {...this.props} />	
             		</div>	            	

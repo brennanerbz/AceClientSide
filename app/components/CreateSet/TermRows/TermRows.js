@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
 import TermRow from '../TermRow/TermRow';
+import LanguageSelect from '../LanguageSelect/LanguageSelect';
 
 export default class TermRows extends Component {
 	static propTypes = {
@@ -9,6 +10,10 @@ export default class TermRows extends Component {
 		addRow: PropTypes.func,
 		resize: PropTypes.func,
 		adjustScroll: PropTypes.func,
+	}
+
+	state = {
+		isHoveringOverSwitch: false
 	}
 
 	componentDidMount = () => {
@@ -34,7 +39,10 @@ export default class TermRows extends Component {
 	} 
 
 	render() {
-	  const { associations_order, associations, items } = this.props;
+	  const { associations_order, associations, items } = this.props,
+	  {isHoveringOverSwitch} = this.state,
+	  flipSwitchIcon = require('../../../assets/flipSwitchIcon.png'),
+	  flipSwitchIconActive = require('../../../assets/flipSwitchIconActive.png')
 	  return(
 				<div className="TermRows"
 					 ref="term_rows">
@@ -44,9 +52,26 @@ export default class TermRows extends Component {
 				            <div className="TermContent-wrap">
 				              <div className="TermContent-side word-side">
 				                <p>Terms</p>
+				                <LanguageSelect
+				                	termSide={true}
+				                />
+				                <span className="flip_button_wrapper right">
+				                	<button 
+				                	style={{
+				                		padding: '7px 9.5px 8px'
+				                	}}
+				                	onMouseOver={() => this.setState({isHoveringOverSwitch: true})}
+				                	onMouseLeave={() => this.setState({isHoveringOverSwitch: false})}
+				                	className="button outline">
+				                		<img src={isHoveringOverSwitch ? flipSwitchIconActive : flipSwitchIcon}/>
+				                	</button>
+				                </span>
 				              </div>
 				              <div className="TermContent-side def-side">
 				                <p>Definitions</p>
+				                <LanguageSelect
+				                	termSide={false}
+				                />
 				              </div>
 				            </div>
 				          </div>

@@ -23,6 +23,7 @@ export default class SearchSetItem extends Component {
 
 	render() {
 		let set_icon = require('../../../assets/set_icon_lines.png'),
+		playfulSetIcon = require('../../../assets/setIconGreen.png'),
 			  { set, pushState, query } = this.props;
 		return(
 			<li className="set_list_item public_source">

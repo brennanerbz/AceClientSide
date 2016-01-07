@@ -105,6 +105,7 @@ export default class SubSetActions extends Component {
 						}} 
 						style={{
 							marginLeft: '5px',
+							height: '36px',
 							width: '36px'
 						}}
 						onMouseOver={() => this.setState({

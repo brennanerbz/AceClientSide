@@ -239,7 +239,7 @@ export default class CreateSetPage extends Component {
 								importVisible={this.props.importVisible}
 							/>   
 							<QuestionModeToggle 
-
+								subjects={this.props.subjects}
 							/>              
 							<div className="container">
 								<div className="CreateSetPage-list">
@@ -264,6 +264,7 @@ export default class CreateSetPage extends Component {
 										rendered={rendered}
 										finishedRendering={this.props.finishedRendering}
 									/>
+									<button className="top_margin right button primary large">Create study set</button>
 								</div>
 							</div>
 						</div>

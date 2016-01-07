@@ -212,7 +212,7 @@ export default class CreateSetHeader extends Component {
 									  onChange={(event) => this.setState({subjects: event.target.value})}
 									  autoFocus={true}/>
 							<div style={{ marginTop: '3.5px'}} className="button_group">
-								<button className="button button-outline button-small"
+								<button className="button outline button-small"
 										onClick={() => {
 											this.setState({
 												subjects: subjects,
