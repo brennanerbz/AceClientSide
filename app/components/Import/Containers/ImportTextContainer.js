@@ -15,7 +15,6 @@ export default class ImportTextContainer extends Component {
 
 	handleSubmitText() {
 		const { textAreaValue, pushState } = this.state, { importText } = this.props;
-		console.log(textAreaValue)
 		if(textAreaValue == undefined || textAreaValue.length == 0) { 
 			this.setState({noTextError: true})
 			return;
@@ -57,7 +56,7 @@ export default class ImportTextContainer extends Component {
 				<button 
 					onClick={::this.handleSubmitText}
 					id="import_text_btn" 
-					className={classnames("button primary large ", 
+					className={classnames("button primary large", 
 						{'importing': importing})}>
 					<span className="button_label">Transform text</span>
 					{

@@ -29,19 +29,32 @@ export default class ImportView extends Component {
 	}
 
 	state = {
-		
+		rendered: false
 	}
 
 	componentDidMount() {
-		
+		if(this.props.importVisible) {
+			setTimeout(() => {
+				this.setState({rendered: true})
+			}, 15)
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.importVisible) {
+			this.setState({rendered: true})
+		} else if(!nextProps.importVisible) {
+			this.setState({rendered: false})
+		}
 	}
 
 	render() {
 		const { loggedIn, pushState, importVisible, isImporting, importText } = this.props,
+			{ rendered } = this.state;
 			close = require('../../assets/close.png');
 		return(
 			<DocumentTitle title='Import | Ace'>
-				<div id="import_page_container">
+				<div id="import_page_container" className={classnames({'rendered': rendered})}>
 					<a id="escape_link"
 						onClick={() => pushState(null, '/createset')}>
 						<img 
