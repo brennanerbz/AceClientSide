@@ -25,7 +25,7 @@ export default class ButtonGroup extends Component {
                     {
                         editing && assignment !== null
                         ? 
-                        <button className={classnames("button primary")}
+                        <button className={classnames("button primary button-small")}
                                 onClick={onSave}>
                                 Done
                         </button>
@@ -34,7 +34,7 @@ export default class ButtonGroup extends Component {
                     {
                         !editing
                         ? 
-                        <button className={classnames("button primary")}
+                        <button className={classnames("button primary button-small")}
                                 onClick={onSave}>
                                 Create 
                         </button>
@@ -49,7 +49,7 @@ export default class ButtonGroup extends Component {
                                 marginLeft: '5px',
                                 marginRight: '0px'
                             }}
-                            className="button outline"
+                            className="button outline button-small"
                             onClick={() => toggleModal('import')}>
                             Import
                             <span className="new_label">
@@ -60,7 +60,7 @@ export default class ButtonGroup extends Component {
                     {
                         this.props.assignment !== null
                         &&
-                        <button className={classnames('button outline')}
+                        <button className={classnames('button outline button-small')}
                                 onClick={() => toggleModal('share')}
                                 style={{
                                     marginLeft: '5px'
@@ -76,8 +76,8 @@ export default class ButtonGroup extends Component {
                             }} 
                             style={{
                                 marginLeft: '5px',
-                                height: '36px',
-                                width: '36px'
+                                height: '34px',
+                                width: '34px'
                             }}
                             onMouseOver={() => this.setState({
                                 mouseIsOverMoreButton: true
@@ -85,7 +85,7 @@ export default class ButtonGroup extends Component {
                             onMouseLeave={() => this.setState({
                                 mouseIsOverMoreButton: false
                             })}
-                            className={classnames('button outline',  {'active': this.state.moreMenuIsOpen})}
+                            className={classnames('button outline button-small',  {'active': this.state.moreMenuIsOpen})}
                             ref="more"                 
                             title="More actions"
                             data-placement="bottom" >
@@ -94,7 +94,7 @@ export default class ButtonGroup extends Component {
                                     position: 'absolute',
                                     height: '4.05px',
                                     width: '16.25px',
-                                    left: '9.5px'
+                                    left: '7.5px'
                                 }
                             } className="share_icon" src={mouseIsOverMoreButton ? blue_more : more}/>
                     </button>

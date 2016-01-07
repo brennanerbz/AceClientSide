@@ -68,7 +68,10 @@
 .position_relative {
 	position: relative!important;
 }
-
+.full_width {
+	width: 100%!important;
+	max-width: 100%!important;
+}
 .small {
 	font-size: .9rem;
 }
@@ -372,6 +375,11 @@ input {
 	border:1px solid #ccc;
 	outline: none;
 	border-radius: 0.25em;
+	-webkit-transition: box-shadow 70ms ease-out,border-color 70ms ease-out;
+	-moz-transition: box-shadow 70ms ease-out,border-color 70ms ease-out;
+	transition: box-shadow 70ms ease-out,border-color 70ms ease-out;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	&:hover {
 		border: 1px solid #498DFF;
 	}
@@ -384,20 +392,20 @@ input {
 
 label {
 	select {
-		&:before {
+		&:after {
 			font-family: FontAwesome;
-			content: '\f017d';
-			// position: absolute;
-			// right: 22px;
-			// bottom: 22px;
+			content: '\f0d7';
+			position: absolute;
+			right: 22px;
+			bottom: 22px;
 			font-size: 20px;
 			pointer-events: none;
 		}
 	}
 	&.small {
-		&:before {
-			// right: 14px;
-			// bottom: 14px;
+		&:after {
+			right: 14px;
+			bottom: 14px;
 			font-size: 20px;
 		}
 	}
@@ -884,6 +892,19 @@ $width: 70px;
 }
 
 
+.new_label {
+	background: #EB4D5C;
+	border-radius: 0.25em;
+	color: #fff;
+	padding: 0.20em 0.5em;
+	font-size: 12px;
+	margin-left: 10px;
+	font-weight: 600;
+	text-shadow: 0 1px 1px rgba(0,0,0,.1);
+	// padding-left: 0.5em;
+	// padding-right: 0.5em;
+}
+
 
 // Buttons
 :global .button {
@@ -1005,18 +1026,6 @@ $width: 70px;
 		-ms-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
 		-o-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
 		transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
-	}
-	.new_label {
-		background: #EB4D5C;
-		border-radius: 0.25em;
-		color: #fff;
-		padding: 0.20em 0.5em;
-		font-size: 12px;
-		margin-left: 10px;
-		font-weight: 600;
-		text-shadow: 0 1px 1px rgba(0,0,0,.1);
-		// padding-left: 0.5em;
-		// padding-right: 0.5em;
 	}
 }
 :global .button-primary {
@@ -1597,7 +1606,7 @@ textarea:hover:ms-input-placeholder {
 			border-top-left-radius: .5rem;
 			background-clip: padding-box;
 			h3 {
-				font-weight: 600;
+				font-weight: 900;
 			    font-size: 1.25rem;
 			    line-height: 1.3rem;
 			    margin: .3rem 0;
@@ -1609,7 +1618,7 @@ textarea:hover:ms-input-placeholder {
 		.modal-title {
 			box-sizing: content-box;
 			font-size: 18px;
-			font-weight: 600;
+			font-weight: 900;
 			line-height: normal;
 			background: none;
 			margin: 0;

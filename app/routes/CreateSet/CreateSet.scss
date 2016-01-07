@@ -25,7 +25,7 @@
 	display: table;
 	margin: 0 auto;
 	opacity: 0;
-	z-index: 1;
+	// z-index: 1;
 	-webkit-transform: translateY(5px);
 	-moz-transform: translateY(5px);
 	-ms-transform: translateY(5px);
@@ -137,7 +137,7 @@
     font-weight: 900!important;
    	// font-size: 1.65em;
    	font-size: 34px;
-   	color: #232323;
+   	color: #565656;
    	width: 80%;
    	.isNotFocused {
    		textarea {
