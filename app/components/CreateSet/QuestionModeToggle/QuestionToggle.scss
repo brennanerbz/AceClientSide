@@ -1,0 +1,90 @@
+.hidden {
+	display: none!important;
+	visibility: hidden!important;
+}
+
+label {
+	&.checkbox {
+		padding-left: 1.5rem;
+		cursor: pointer;
+		min-height: 24px;
+	}
+	input {
+		margin: -2px .4rem 0 -1.5rem;
+		vertical-align: middle;
+		float: none;
+		width: auto;
+	}
+}
+
+.toggle {
+	display: inline-block;
+	margin: 0 0 1rem;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	height: 27px;
+	margin-bottom: .5rem;
+	&.checked {
+		.toggle_button {
+			background: #2ab27b;
+			color: #fff;
+			padding: .1rem 2rem .1rem 1rem;
+			.toggle_off_text {
+				visibility: hidden;
+			}
+			.toggle_on_text {
+				visibility: visible;
+				-webkit-transform: translateY(-100%);
+				-moz-transform: translateY(-100%);
+				-ms-transform: translateY(-100%);
+				transform: translateY(-100%);
+			}
+			.toggle_handle {
+				left: 100%;
+				margin-left: -25px;
+			}
+		}
+	}
+	.toggle_button {
+		background: #e8e8e8;
+		color: #9e9ea6;
+		display: inline-block;
+		border-radius: 1rem;
+		margin-right: 0.5rem;
+		padding: .1rem 1rem .1rem 2rem;
+		font-size: 0.9rem;
+		font-weight: 700;
+		-webkit-transition: 70ms ease-out;
+		-moz-transition: 70ms ease-out;
+		transition: 70ms ease-out;
+		cursor: pointer;
+		position: relative;
+		text-align: center;
+		overflow: hidden;
+		height: 27px;
+		line-height: 23px;
+		float: left;
+		.toggle_off_text {
+			visibility: visible;
+		}
+		.toggle_on_text {
+			visibility: hidden;
+		}
+		.toggle_handle {
+			background: #fff;
+			display: inline-block;
+			width: 23px;
+			height: 23px;
+			border-radius: 1rem;
+			position: absolute;
+			left: 0;
+			top: 0;
+			margin: 2px;
+		    -webkit-transition: 70ms ease-out;
+		    -moz-transition: 70ms ease-out;
+		    transition: 70ms ease-out;
+		}
+	}
+}

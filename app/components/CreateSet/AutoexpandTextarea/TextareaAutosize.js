@@ -22,7 +22,7 @@ export default class TextareaAutosize extends Component {
 	}
 
 	state = {
-		title: '',
+		title: 'Untitled',
 		blurred: false
 	}
 
@@ -39,6 +39,7 @@ export default class TextareaAutosize extends Component {
 	    node.addEventListener(RESIZED, this.props.onResize);
 	  }	  
 	  if(title !== undefined) this.setState({ title: title }) 
+	  // if(title == undefined || title.length == 0) this.setState({title: 'Untitled'});
 	  let length;
 	  if(this.state.title !== undefined 
 	     && !this.state.blurred) {
@@ -84,7 +85,6 @@ export default class TextareaAutosize extends Component {
 	render() {
 	  const { tabIndex, defSide, title, createSetTitle } = this.props;    
 	  return (
-	    <div>
 	      <textarea 
 	      		  {...this.props}
 	      		  rows="1" 
@@ -111,7 +111,6 @@ export default class TextareaAutosize extends Component {
 	              ref={`textarea${tabIndex}`}>
 	              {this.props.children}
 	      </textarea>
-	    </div>
 	  );
 	}
 }

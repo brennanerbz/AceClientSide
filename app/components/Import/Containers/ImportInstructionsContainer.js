@@ -19,7 +19,7 @@ export default class ImportInstructionsView extends Component {
 			},
 			{
 				heading: 'practice',
-				content: 'Practice the questions in Learn mode with Acubot'
+				content: 'Practice the questions in Learn mode'
 			}
 		]
 	}

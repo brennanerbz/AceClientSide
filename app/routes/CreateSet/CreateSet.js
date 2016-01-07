@@ -16,6 +16,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TermRows from '../../components/CreateSet/TermRows/TermRows';
 import CreateSetHeader from '../../components/CreateSet/CreateSetHeader/CreateSetHeader';
 import SavingLabel from '../../components/CreateSet/SavingLabel/SavingLabel';
+import QuestionModeToggle from '../../components/CreateSet/QuestionModeToggle/QuestionModeToggle';
 import Modal from '../../components/Modal/modal';
 
 @connect(state => ({
@@ -137,7 +138,7 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log('nextProps set', '\n', nextProps.set)
+		// console.log('nextProps set', '\n', nextProps.set)
 		if(this.props.set == null && nextProps.set !== null) {
 			// if(localStorage.getItem('set_id') == null && !this.state.editing) {
 			// 	localStorage.setItem('set_id', nextProps.set.id)
@@ -236,7 +237,10 @@ export default class CreateSetPage extends Component {
 								pushState={this.props.pushState}
 								shouldAutoFocus={!this.state.login_prompt_modal}
 								importVisible={this.props.importVisible}
-							/>                 
+							/>   
+							<QuestionModeToggle 
+
+							/>              
 							<div className="container">
 								<div className="CreateSetPage-list">
 									<TermRows

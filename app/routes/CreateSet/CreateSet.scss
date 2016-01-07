@@ -125,10 +125,29 @@
     position: relative;
     width: 100%;
     font-family: 'Lato';
-    font-weight: 700!important;
-   	font-size: 1.65em;
-   	color: #555459;
+    font-weight: 900!important;
+   	// font-size: 1.65em;
+   	font-size: 34px;
+   	color: #232323;
    	width: 80%;
+   	.isNotFocused {
+   		textarea {
+   			&#create_set_title {
+   				::-webkit-input-placeholder {
+   				    color: #232323!important;
+   				}
+   				:-moz-placeholder {
+   				    color: #232323!important;
+   				}
+   				::-moz-placeholder {
+   				    color: #232323!important;
+   				}
+   				:-ms-input-placeholder {
+   				    color: #232323!important;
+   				}
+   			}
+   		}
+   	}
 }
 .CreateSetHeader-section-purpose {
 	font-family: 'Lato';
@@ -326,6 +345,22 @@
 	resize: none;
 	border: none;
 }
+textarea {
+	&#create_set_title {
+		::-webkit-input-placeholder {
+		    color: #232323!important;
+		}
+		:-moz-placeholder {
+		    color: #232323!important;
+		}
+		::-moz-placeholder {
+		    color: #232323!important;
+		}
+		:-ms-input-placeholder {
+		    color: #232323!important;
+		}
+	}
+}
 .Autocomplete-textarea {
 	width: 100%;
 }
@@ -337,6 +372,20 @@
 	overflow: hidden;
 	resize: none;
 	border: none;
+	&#create_set_title {
+		::-webkit-input-placeholder {
+		    color: #232323!important;
+		}
+		:-moz-placeholder {
+		    color: #232323!important;
+		}
+		::-moz-placeholder {
+		    color: #232323!important;
+		}
+		:-ms-input-placeholder {
+		    color: #232323!important;
+		}
+	}
 }
 
 .AutoExpandTextArea-textarea, .AutoExpandTextArea-sizer {
@@ -387,8 +436,6 @@ hr.CreateSetBreak {
 .Button-set .button {
 	vertical-align: middle;
 }
-
-
 
 .button-circle {
 	width: 37px;

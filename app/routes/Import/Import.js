@@ -34,9 +34,7 @@ export default class ImportView extends Component {
 
 	componentDidMount() {
 		if(this.props.importVisible) {
-			setTimeout(() => {
-				this.setState({rendered: true})
-			}, 15)
+			this.setState({rendered: true})
 		}
 	}
 

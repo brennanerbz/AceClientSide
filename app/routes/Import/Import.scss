@@ -1,8 +1,8 @@
 #import_page_container {
 	width: 100%;
 	max-width: 1100px;
-	padding-right: 50px;
-	padding-left: 50px;
+	padding-right: 55px;
+	padding-left: 55px;
 	padding-top: 0px;
 	display: table;
 	margin: 0 auto;
@@ -76,8 +76,8 @@
 			color: #555459;
 		}
 		h2 {
-			font-weight: 600;
-			font-size: 33px;
+			font-weight: 900;
+			font-size: 32px;
 			color: #2c2d30;
 			text-decoration: none;
 			margin-bottom: 0.75em;
@@ -153,10 +153,11 @@
 	#import_instructions {
 		text-align: center;
 		h3 {
-			font-family: "Open Sans";
+			// font-family: "Open Sans";
 			font-size: 21px;
 			color: #47525D;
 			margin: 1.5rem;
+			font-weight: 900;
 			margin-top: 0.25rem;
 		}
 		ol {
@@ -194,15 +195,19 @@
 					h4 {
 						&.heading {
 							font-size: 15.5px;
-							color: #47525D;
+							// color: #47525D;
+							cursor: default;
+							text-decoration: none;
+							color: #2c2d30;
 							margin-bottom: 1.75rem;
+							font-weight: 700;
 						}
 					}
 					.content {
 						display: table;
 						.instruction_item_index_circle {
 							float: left;
-							border: 2px solid #5D6871;
+							border: 2px solid #2c2d30;;
 							border-radius: 50%;
 							width: 35px;
 							height: 35px; 
@@ -211,13 +216,14 @@
 								margin-top: 5px;
 								font-size: 14.5px;
 								font-weight: 600;
-								color: #5D6871;
+								color: #2c2d30;
 							}
 						}
 						.instruction_item_content {
 							margin-left: 25px;
 							position: absolute;
 							padding: 0 2.5rem 0 0rem; 
+							font-size: 16.5px;
 						}
 					}
 				}

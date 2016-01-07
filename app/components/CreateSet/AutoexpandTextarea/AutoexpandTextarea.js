@@ -7,6 +7,8 @@ export default class AutoexpandTextarea extends Component {
 		
 	}
 
+	
+
 	render(){		
 		// console.log(this.props.autoFocus)
  		return(

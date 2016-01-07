@@ -37,7 +37,7 @@ export default class ImportTextContainer extends Component {
  		return(
 			<div id="import_text">
 				<h2 className="heading">
-					Instantly transform your text into questions
+					Transform your text into questions
 				</h2>
 				<label>Text snippet</label>
 				<LargeTextArea

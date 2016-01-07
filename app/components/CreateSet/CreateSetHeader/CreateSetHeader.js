@@ -26,7 +26,7 @@ export default class CreateSetHeader extends Component {
 			item_error_message: false
 		}
 	}
-	componentWillMount() {
+	componentDidMount() {
 		const { title, subjects } = this.props;
 		if(title !== undefined && title.length > 0) this.setState({title: title});
 		if(subjects !== undefined && subjects.length > 0) this.setState({subjects: subjects})
