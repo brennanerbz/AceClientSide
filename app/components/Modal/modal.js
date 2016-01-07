@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 require('./modal.scss')
+require('../../routes/Import/Import.scss')
 
 import SignUpForm from '../../routes/LandingPage/SignUpForm';
 
@@ -276,6 +277,49 @@ export default class Modal extends Component {
 		)
 	}
 
+	renderImportForm() {
+		return(
+			<div className="modal-body">
+				<form className="no_bottom_margin" id="text_import_snippet">
+					<p>
+						<label 
+						id="text_snippet_subject_select_label" 
+						className="select small right no_right_padding">
+							<select 
+							name="subject_type"
+							id="text_snippet_subject_select"
+							className="small no_top_margin">
+								<option value="auto">Auto Detect Subject</option>
+								<option value="acc">Accounting</option>
+							</select>
+						</label>
+						<input 
+						type="text" 
+						id="text_snippet_title_input"
+						className="small"
+						value=""
+						placeholder="Title (optional)"/>
+					</p>
+					<p>
+						<textarea 
+						name="content"
+						wrap="virtual"
+						id="text_snippet_textarea"
+						className="text_snippet_textarea full_width text_snippet"/>
+						<span className="input_note">Your text will be automatically transformed into practice questions</span>
+					</p>
+					<div id="import_to_set_div">
+						<div className="small_bottom_margin">
+						</div>
+						<p className="no_bottom_margin">
+
+						</p>
+					</div>
+				</form>
+			</div>
+		)
+	}
+
 	componentWillUnmount() {
 		$(this.refs.modal).modal('hide')
 	}
@@ -355,8 +399,16 @@ export default class Modal extends Component {
 								type == 'thank_you'
 								&& 'Thank you for signing up!'
 							}
+							{
+								type == 'import'
+								&& 'Transform text into questions'
+							}
 						</h3>
 					</div>
+					{
+						type == 'import'
+						&& ::this.renderImportForm()
+					}
 					{
 						type !== null && type == 'share'
 						? ::this.renderShareBody()
@@ -437,6 +489,10 @@ export default class Modal extends Component {
 											type == 'share'
 											? 'Done'
 											: null
+										}
+										{
+											type == 'import'
+											&& 'Transform text'
 										}
 								</button>
 							}

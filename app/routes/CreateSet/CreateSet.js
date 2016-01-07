@@ -200,7 +200,7 @@ export default class CreateSetPage extends Component {
 	}	
 
 	render() {
-		const { isLoadingSet, rendered } = this.props;
+		const { isLoadingSet, rendered, editing } = this.props;
 		return(
 			<DocumentTitle title="Create | Ace">
 				<div>
@@ -290,7 +290,18 @@ export default class CreateSetPage extends Component {
 										rendered={rendered}
 										finishedRendering={this.props.finishedRendering}
 									/>
-									<button className="top_margin right button primary large">Create study set</button>
+									<button className="top_margin right button primary large">
+										{
+											editing && this.props.assignment !== null
+											&&
+											'Done'
+										}
+										{
+											!editing 
+											&&
+											'Create study set'
+										}
+									</button>
 								</div>
 							</div>
 						</div>

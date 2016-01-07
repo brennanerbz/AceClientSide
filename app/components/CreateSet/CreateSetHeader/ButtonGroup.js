@@ -36,7 +36,7 @@ export default class ButtonGroup extends Component {
                         ? 
                         <button className={classnames("button primary")}
                                 onClick={onSave}>
-                                Create
+                                Create 
                         </button>
                         : null
                     }

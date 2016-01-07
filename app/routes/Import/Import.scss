@@ -1,3 +1,49 @@
+/* --------- Import Modal --------- */
+form {
+	&#text_import_snippet {
+		margin: 0 0 24px;
+		p {
+			line-height: 1.5rem!important;
+			label {
+				min-width: 8rem;
+				margin: 0;
+				font-weight: 600;
+				font-size: 0.9rem;
+				display: inline-block;
+				text-align: center;
+				color: #555459;
+				select {
+					position: relative;
+					&.small {
+						font-size: 1rem;
+						padding: 0.45rem 0.7rem 0.55rem;
+						padding-right: 2.5rem;
+					}
+					&#text_snippet_subject_select {
+						&:before {
+							    bottom: 18px!important;
+						}
+					}
+				}
+				&#text_snippet_subject_select_label {
+					width: 36%;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------*/
+
 #import_page_container {
 	width: 100%;
 	max-width: 1100px;
