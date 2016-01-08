@@ -9,7 +9,7 @@
 	.landing_page_container {
 		width: 100%;
 		font-family: "Lato";
-		padding-top: 2em;
+		padding-top: 3.5em;
 		display: block;
 		position: relative;
 		padding-bottom: 9.5em;
@@ -67,7 +67,7 @@
 							padding-bottom: 0;
 							line-height: 1.4;
 						    font-size: 38px;
-						    font-weight: 300;
+						    font-weight: 400;
 							@media screen and (max-width: 720px) {
 								padding-top: 0.5em;
 								font-size: 31px;
@@ -75,7 +75,7 @@
 						}
 						h2 {
 							line-height: 36px;
-							font-size: 24px;
+							font-size: 26px;
 							font-weight: 100;
 							@media screen and (max-width: 720px) {
 								padding-top: 1em;
@@ -353,7 +353,7 @@
 					        font-size: 32px;
 						}
 						.header {
-							font-weight: 300;
+							font-weight: 400;
 							font-size: 31px;
 							line-height: 44px;
 							margin: 12px auto 12px;
@@ -413,10 +413,10 @@
 		padding-top: 1.5em;
 		padding-bottom: 3.5em;
 		width: 380px;
-		font-weight: 300;
+		font-weight: 400;
 		font-family: "Lato";
 		.start_now {
-			font-weight: 300;
+			font-weight: 400;
 			font-family: "Lato";
 		}
 		@media screen and (max-width: 767px) {

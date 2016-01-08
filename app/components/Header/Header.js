@@ -10,7 +10,7 @@ import Notifications from './Notifications/Notifications';
 import SearchBox from './SearchBox/SearchBox';
 import Avatar from '../Avatar/Avatar';
 import Menu from '../Menu/Menu';
-import QuickLogIn from '../QuickLogIn/QuickLogIn';
+import QuickLogIn from './LogIn/LogIn';
 import SavingLabel from '../CreateSet/SavingLabel/SavingLabel';
 
 import SearchBar from './SearchBar/SearchBar';
@@ -210,10 +210,7 @@ export default class Header extends Component {
 								}
 								{
 									root_path == '/' && !logged_in 
-									&& <LandingLinks 
-										pushState={pushState}
-										popout={() => this.setState({popover: true})}
-									/>
+									&& <QuickLogIn/>
 								}
 								{
 									root_path == 'createset' 
@@ -316,15 +313,7 @@ export default class Header extends Component {
 								}
 							</div>
 						</div>
-						{
-							this.state.popover
-							&&
-							<div className="popout log_in">
-								<QuickLogIn closePopout={() => this.setState({ popover: false })} />
-								<span className="popover_blackout">
-								</span>
-							</div>
-						}
+						
 					</div>
 				</div>
 			}
@@ -333,30 +322,9 @@ export default class Header extends Component {
 	}
 }
 
+
+
 /*
-
-Alternative search bar ----
-
-
-*/
-
-class LandingLinks extends Component {
-	static propTypes = {
-
-	}
-
-	render() {
-		const { pushState } = this.props;
-		return(
-			<ul className="nav_links">
-				<li className="sign_in_link" onClick={this.props.popout}>
-					<a>Sign in</a>
-				</li>
-			</ul>
-		);
-	}
-}
-
 
 // {  
 // 	loc.pathname.indexOf('/learn') !== -1 || loc.pathname == '/createset'
@@ -367,6 +335,15 @@ class LandingLinks extends Component {
 // 	</span>						
 // }
 
+{
+	this.state.popover
+	&&
+	<div className="popout log_in">
+		<QuickLogIn closePopout={() => this.setState({ popover: false })} />
+		<span className="popover_blackout">
+		</span>
+	</div>
+}
 // <Menu learn={true}
 // 	  bounding={true}
 // 	  isOpen={this.state.isSetMenuOpen}
@@ -374,3 +351,5 @@ class LandingLinks extends Component {
 // 	  rect={::this.findSetMenuPos}
 // 	  choices={this.state.choices}
 // 	  onSelect={(choice) => ::this.handleSelect(choice)} />
+
+*/

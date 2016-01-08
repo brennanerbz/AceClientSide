@@ -156,7 +156,7 @@ export default class LandingPage extends Component {
 						<div className="page_content_panel">
 							<div className="page_intro_txt">
 								<h1>A study app that works for you</h1>
-								<h2>Be the first to try Acuit beta, an app that instantly turns your notes, files and links into practice questions.
+								<h2>Be the first to try Acuit beta, an app that instantly turns your notes into practice questions.
 								</h2>
 							</div>
 							<div className="page_register_form">

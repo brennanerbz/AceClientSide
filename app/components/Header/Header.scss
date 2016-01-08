@@ -29,9 +29,9 @@
         width: 100%;
         margin: 0 auto;
         min-width: 905px!important;
-        // padding-bottom: 10px;
-        // padding-top: 7px;
-        line-height: 55px;
+        padding-bottom: 10px;
+        padding-top: 7px;
+        // line-height: 55px;
         padding-right: 25px;
         padding-left: 25px;
         position: relative;
@@ -44,44 +44,75 @@
             min-width: 1005px!important;
         }
         &.landing {
+            max-width: 1050px;
             .header {
                 .header_logo {
                     .site-logo {
                         .site_icon {
-                            width: 95px!important;
+                            width: 120px!important;
+                            margin-top: 12px;
                         }
                     }
                 }
                 .header_content {
                     float: right;
                     ul {
-                        &.nav_links {
+                        &.nav_log_in {
                             list-style-type: none;
                             float: right;
-                            line-height: 55px;
                             padding: 0;
-                            margin: 0 20px 0 0;
+                            margin: 0 20px 31px 0;
                             li {
                                 display: inline-block;
-                                &:hover {
-                                    a {
-                                        background: #E6E6E6;
-                                        opacity: 1;
-                                    }
+                                margin-left: 9px;
+                                &.password {
+                                    position: relative;
                                 }
                             }
+                            label {
+                                display: block!important;
+                                font-size: 13px;
+                                font-weight: 700;
+                                margin: 0 0 .05rem;
+                                color: #777F86;
+                            }
                             a {
-                                color: #404B55!important;
                                 text-decoration: none;
-                                display: inline-block;
-                                font-size: 15px;
+                                display: block;
+                                font-size: 13px;
                                 font-weight: 600;
-                                margin-left: 9px;
-                                position: relative;
-                                line-height: 0.95em;
-                                padding: 8px 7px 9px;
-                                border-radius: 5px;
+                                position: absolute;
                                 opacity: .8;
+                                color: #555459!important;
+                                &:hover {
+                                    color: #3aa3e3!important;
+                                }
+                            }
+                            input {
+                                // height: 31px;
+                            }
+                            button {
+                                &.disabled {
+                                    opacity: 0.8;
+                                }
+                            }
+                            #keep_wrapper {
+                                position: absolute;
+                                width: 100%;
+                                input {
+                                    position: absolute;
+                                    top: 4.5px;
+                                    height: 12.5px;
+                                }
+                                a {
+                                    display: inline!important;
+                                    margin-top: -5px;
+                                    position: absolute;
+                                    width: 100%;
+                                    top: 5.5px;
+                                    left: 20px;
+                                    color: #555459!important;
+                                }
                             }
                         }
                     }
@@ -126,7 +157,7 @@
             
             .header_logo {
                 float: left;
-                margin-top: -3px;
+                margin-top: 3px;
                 position: relative;
                 .site-logo {
                     position: relative;
@@ -143,7 +174,7 @@
             .header_user {
                 color: #555;
                 // margin-left: 50px;
-                // margin-top: 3px;
+                margin-top: 3px;
                 display: block;
                 position: absolute;
                 right: 20px;
