@@ -15,8 +15,8 @@ import Home from './Home/Home';
 import * as actions from '../actions/usersets';
 import * as user from '../actions/user';
 /* Velocity package */
-require('velocity-animate');
-require('velocity-animate/velocity.ui');
+// require('velocity-animate');
+// require('velocity-animate/velocity.ui');
 
 @connect(
 	state => ({ 
