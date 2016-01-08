@@ -1,0 +1,50 @@
+#loading_zone {
+	background: #fff;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	resize: vertical;
+	overflow: auto;
+	opacity: 0;
+	margin-bottom: 5rem;
+	-webkit-transform: translateY(5px);
+	-moz-transform: translateY(5px);
+	-ms-transform: translateY(5px);
+	transform: translateY(5px);
+	-moz-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
+	transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
+	-webkit-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,-webkit-transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
+	&.rendered {
+		top: 0;
+		opacity: 1;
+		z-index: 100000;
+		-webkit-transform: translateY(0);
+		-moz-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+		-moz-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,left 150ms ease-in-out;
+		transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,left 150ms ease-in-out;
+		-webkit-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,-webkit-transform 150ms cubic-bezier(.2,.8,.5,1) .1s,left 150ms ease-in-out;
+	}
+	#loading_welcome {
+		resize: vertical;
+		overflow: auto;
+		position: relative;
+		display: table;
+		margin: 0 auto;
+		text-align: center;
+		h3 {
+			color: #4D384B;
+			font-weight: 900;
+			font-size: 34px;
+		}
+		p {
+			color: #4D384B;
+			font-weight: 400;
+			font-size: 22px;
+		}
+	}
+}

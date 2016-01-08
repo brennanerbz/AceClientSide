@@ -1,0 +1,12 @@
+.main_app {
+	opacity: 0;
+	-moz-transition: opacity 500ms cubic-bezier(.2,.8,.5,1) .1s;
+	transition: opacity 500ms cubic-bezier(.2,.8,.5,1) .1s;
+	-webkit-transition: opacity 500ms cubic-bezier(.2,.8,.5,1) .1s;
+	&.rendered {
+		opacity: 1;
+		-moz-transition: opacity 500ms cubic-bezier(.2,.8,.5,1) .1s;
+		transition: opacity 500ms cubic-bezier(.2,.8,.5,1) .1s;
+		-webkit-transition: opacity 500ms cubic-bezier(.2,.8,.5,1) .1s;
+	}
+}

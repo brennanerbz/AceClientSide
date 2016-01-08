@@ -6,11 +6,13 @@ import { pushState } from 'redux-router';
 import classnames from 'classnames';
 /* Styles */
 const styles = require('../styles/global.scss');
+require('./App.scss')
 /* Components */
 import Header from '../components/Header/Header';
 import SideNav from '../components/SideNav/SideNav';
 import LandingPage from './LandingPage/LandingPage';
 import Home from './Home/Home';
+import LoadingZone from '../components/LoadingZone/LoadingZone';
 /* Actions */
 import * as actions from '../actions/usersets';
 import * as user from '../actions/user';
@@ -22,7 +24,8 @@ import * as user from '../actions/user';
 	state => ({ 
 		router: state.router,
 		logged_in: state.user.logged_in,
-		showing_error: state.error_page.show_error
+		showing_error: state.error_page.show_error,
+		showLoadingZone: state.user.showLoadingZone
 	 }),
 	dispatch => ({
 		...bindActionCreators({
@@ -102,40 +105,46 @@ export default class FlunkApp extends Component {
 		let route = this.props.router.location.pathname,
 			count = route.match(/\//g).length,
 			regex = count >= 2 ? /\/(.*?)\// : /\/(.*)/,
-			root_path;
+			root_path,
+			{ showLoadingZone } = this.props;
 		route !== '/' ? root_path = regex.exec(route)[1] : root_path = '/'
 		var childrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, { root_path: root_path })
 		})
 		return( 
 			<div>
-				<Header root_path={root_path}/>
-				<div className={classnames("outer_shell", {
-					"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
-				})}>
-					{::this.renderSideNav()}
-					{childrenWithProps}
-				</div>
-				<div className="notify_wrapper">
-					<span id="notify" 
-						  className={classnames(
-						  	{
-						  		'hide': !this.state.show_notification
-						  	},
-						  	{
-						  		'success': this.state.success_msg
-						  	},
-						  	{
-						  		'error': this.state.error_msg
-						  	}
-						  	)}>
-						<span className="notify_msg">
-							{
-								this.state.error_msg 
-								&& 'Apologies, trouble connecting to Acuit. Hang on tight.'
-							}
+				<LoadingZone
+					rendered={showLoadingZone}
+				/>
+				<div className={classnames('main_app', {'rendered': !showLoadingZone})}>
+					<Header root_path={root_path}/>
+					<div className={classnames("outer_shell", {
+						"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
+					})}>
+						{::this.renderSideNav()}
+						{childrenWithProps}
+					</div>
+					<div className="notify_wrapper">
+						<span id="notify" 
+							  className={classnames(
+							  	{
+							  		'hide': !this.state.show_notification
+							  	},
+							  	{
+							  		'success': this.state.success_msg
+							  	},
+							  	{
+							  		'error': this.state.error_msg
+							  	}
+							  	)}>
+							<span className="notify_msg">
+								{
+									this.state.error_msg 
+									&& 'Apologies, trouble connecting to Acuit. Hang on tight.'
+								}
+							</span>
 						</span>
-					</span>
+					</div>
 				</div>
 			</div>
 		);

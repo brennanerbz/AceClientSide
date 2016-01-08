@@ -16,7 +16,9 @@ import {
 
 	LOGOUT_USER,
 	LOGOUT_USER_SUCCESS,
-	LOGOUT_USER_FAILURE
+	LOGOUT_USER_FAILURE,
+
+	HIDE_LOADING_ZONE
 
 } from '../actions/user';
 
@@ -26,6 +28,7 @@ var _userinitialstate = {
 	token: null,
 	user: {},
 	logged_in: false,
+	showLoadingZone: false,
 	showLogInEmailError: false,
 	showLogInPasswordError: false
 }
@@ -34,17 +37,20 @@ export default function user(state = _userinitialstate, action) {
 		case FETCH_TOKEN:
 			return {
 				...state,
-				isFetchingToken: true
+				isFetchingToken: true,
+				showLoadingZone: true
 			}
 		case REQUEST_USER:
 			return {
 				...state,
-				isFetchingUser: true
+				isFetchingUser: true,
+				showLoadingZone: true
 			}
 		case FETCH_TOKEN_SUCCESS: 
 			return {
 				...state,
-				isFetchingToken: false
+				isFetchingToken: false,
+				showLoadingZone: true
 			}
 		case RECEIVE_USER_SUCCESS:
 			return {
@@ -84,7 +90,13 @@ export default function user(state = _userinitialstate, action) {
 				...state,
 				isFetchingToken: false,
 				showLogInEmailError: action.emailError,
-				showLogInPasswordError: action.passwordError
+				showLogInPasswordError: action.passwordError,
+				showLoadingZone: false
+			}
+		case HIDE_LOADING_ZONE:
+			return {
+				...state,
+				showLoadingZone: false
 			}
 		case LOGOUT_USER_FAILURE:
 		case CREATE_USER_FAILURE:

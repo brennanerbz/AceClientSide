@@ -306,6 +306,13 @@ export function signUpWaitList(user_info, pushState) {
 	}
 }
 
+export const HIDE_LOADING_ZONE = 'HIDE_LOADING_ZONE'
+export function hideLoadingZone() {
+	return {
+		type: HIDE_LOADING_ZONE
+	}
+}
+
 
 
 

@@ -97,7 +97,6 @@ export default class LogInPage extends Component {
 										 	position: 'absolute',
 										 	left: '-25px',
 										 	top: '3.5px'
-
 										 }}>
 										<img src={error_icon} 
 											style={
