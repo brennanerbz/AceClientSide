@@ -25,7 +25,9 @@ var _userinitialstate = {
 	isFetchingToken: false,
 	token: null,
 	user: {},
-	logged_in: false
+	logged_in: false,
+	showLogInEmailError: false,
+	showLogInPasswordError: false
 }
 export default function user(state = _userinitialstate, action) {
 	switch(action.type) {
@@ -80,7 +82,9 @@ export default function user(state = _userinitialstate, action) {
 		case FETCH_TOKEN_FAILURE:
 			return {
 				...state,
-				isFetchingToken: false
+				isFetchingToken: false,
+				showLogInEmailError: action.emailError,
+				showLogInPasswordError: action.passwordError
 			}
 		case LOGOUT_USER_FAILURE:
 		case CREATE_USER_FAILURE:

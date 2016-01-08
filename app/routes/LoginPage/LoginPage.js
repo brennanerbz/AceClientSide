@@ -12,6 +12,8 @@ import * as useractions from '../../actions/user';
 @connect(state => ({
 	user: state.user.user,
 	logged_in: state.user.logged_in,
+	showLogInEmailError: state.user.showLogInEmailError,
+	showLogInPasswordError: state.user.showLogInPasswordError,
 	router: state.router
 	}), 
 	dispatch => ({
@@ -27,12 +29,35 @@ export default class LogInPage extends Component {
 
 	state = {
 		email: null,
-		password: null
+		emailError: false,
+		password: null,
+		passwordError: false
+	}
+
+	componentDidMount() {
+		const { showLogInEmailError, showLogInPasswordError } = this.props;
+		if(showLogInEmailError) {
+			this.setState({
+				emailError: true
+			});
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const { showLogInEmailError, showLogInPasswordError } = nextProps;
+		this.setState({
+			emailError: showLogInEmailError,
+			passwordError: showLogInPasswordError
+		});
+		if(showLogInEmailError) {
+			$(this.refs.email).focus() 
+		}
+		if(!showLogInEmailError && showLogInPasswordError) $(this.refs.password).focus()
 	}
 
 	handleLogIn() {
-		const { logIn } = this.props;
-		logIn(this.state.email, this.state.password)
+		const { logIn, pushState, getToken } = this.props;
+		getToken(this.state.email, this.state.password, pushState, true)
 		this.setState({
 			email: null,
 			password: null
@@ -44,7 +69,9 @@ export default class LogInPage extends Component {
 			  account = require('../../assets/empty_account_2.png'),
 			  g_icon = require('../../assets/google_logo.png'),
 			  f_icon = require('../../assets/facebook_logo.png'),
-			  { pushState, router } = this.props;
+			  error_icon = require('../../assets/error_icon.png'),
+			  { pushState, router } = this.props,
+			  { emailError, passwordError } = this.state;
 		return(
 			<div className="sign_in_page_container">
 				<div className="sign_in_page">
@@ -62,29 +89,67 @@ export default class LogInPage extends Component {
 								  	e.preventDefault()
 								  	::this.handleLogIn()
 								  }}>
-								<input className=""
+								{
+									emailError
+									&&
+									<div className="error"
+										 style={{
+										 	position: 'absolute',
+										 	left: '-25px',
+										 	top: '3.5px'
+
+										 }}>
+										<img src={error_icon} 
+											style={
+												{
+													height: '14.5px',
+													marginTop: '0'
+												}
+											}
+											/>
+									</div>
+								}
+								<input className={classnames({'error': this.state.emailError})}
 									   placeholder="Email"
+									   ref="email"
 									   type="text"
 									   autoFocus={true}
 									   value={this.state.email}
 									   onChange={(e) => {
 									   	this.setState({
-									   		email: e.target.value
+									   		email: e.target.value,
+									   		emailError: false
 									   	});
 									   }}
-									   onKeyDown={(e) => {
-									   	if(e.which == 13) {
-									   		::this.handleLogIn()
-									   	}
-									   }}
 									   />
-								<input className=""
+								{
+									passwordError
+									&&
+									<div className="error"
+										 style={{
+										 	position: 'absolute',
+										 	left: '-25px',
+										 	top: '40.5px'
+										 }}>
+										<img src={error_icon} 
+											style={
+												{
+													height: '14.5px',
+													marginTop: '0'
+												}
+											}
+											/>
+									</div>
+								}
+								<input className={classnames({'error': this.state.passwordError})}
 									   type="password"
+									   ref="password"
 									   placeholder="Password"
 									   value={this.state.password}
 									   onChange={(e) => {
 									   	this.setState({
-									   		password: e.target.value
+									   		password: e.target.value,
+									   		passwordError: false
 									   	});
 									   }}
 									   onKeyDown={(e) => {
@@ -99,6 +164,7 @@ export default class LogInPage extends Component {
 									    }}>
 									Log In 
 								</button>
+								<a style={{fontSize: '14.5px'}}>Forgot password?</a>
 							</form>
 						</div>
 						<div className="backup">

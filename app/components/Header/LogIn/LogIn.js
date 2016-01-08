@@ -37,7 +37,7 @@ export default class QuickLogIn extends Component {
 	submitLogIn() {
 		this.setState({isLoggingIn: true})
 		const { getToken, pushState, replaceState} = this.props;
-		getToken(this.state.email, this.state.password, replaceState)
+		getToken(this.state.email, this.state.password, pushState)
 		setTimeout(() => {
 			this.setState({
 				isLoggingIn: false,
@@ -76,7 +76,9 @@ export default class QuickLogIn extends Component {
 					ref="email"
 					type="text"
 					onChange={(e) => {
-						this.setState({email: e.target.value})
+						this.setState({
+							email: e.target.value
+						})
 					}}/>
 					<div id="keep_wrapper">
 						<input id="keep_logged_in" type="checkbox"/>

@@ -9,7 +9,6 @@ require('../LoginPage/LoginPage.scss')
 require('../LandingPage/LandingPage.scss')
 import SignUpForm from '../LandingPage/SignUpForm';
 
-
 @connect(state => ({
 	user: state.user.user,
 	logged_in: state.user.logged_in,
@@ -36,7 +35,18 @@ export default class SignUp extends Component {
 							 onClick={() => pushState(null, '/')}>
 							<img src={brand_logo}/>
 						</div>
-						<SignUpForm shouldAutoFocus={true} />
+						<div 
+						style={{
+							marginLeft: '25px'
+						}} 
+						className="header">
+							<h4
+							style={{
+								marginBottom: '2px'
+							}}
+							>Sign Up</h4>
+						</div>
+						<SignUpForm style={{paddingTop: '0'}} shouldAutoFocus={true} />
 						<div className="backup">
 							Already have an account? &nbsp;
 							<a className="link"

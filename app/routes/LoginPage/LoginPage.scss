@@ -16,20 +16,25 @@
 			}
 			.header {
 				h4 {
-					font-family: "Open Sans";
+					font-family: "Lato";
 					font-size: 28px;
-					font-weight: 300;
+					font-weight: 600;
 					margin-bottom: 20px;
 					text-align: left;
 				}
 			}
 			.sign_in {
 				margin-bottom: 20px;
+				position: relative;
 				input, button {
 					width: 100%
 				}
 				input {
 					margin-bottom: 10px;
+					&.error {
+						border-color: #e82110 !important;
+						color: #e82110 !important;
+					}
 				}
 				button {
 					display: block;

@@ -39,7 +39,7 @@ export function checkCookies() {
 export const FETCH_TOKEN = 'FETCH_TOKEN'
 export const FETCH_TOKEN_FAILURE = 'FETCH_TOKEN_FAILURE'
 export const FETCH_TOKEN_SUCCESS = 'FETCH_TOKEN_SUCCESS'
-export function getToken(email, password, replaceState) {
+export function getToken(email, password, pushState, logInPage) {
 	return(dispatch, getState) => {
 		if(getState().user.isFetchingToken) return;
 		dispatch({type: FETCH_TOKEN})
@@ -48,14 +48,22 @@ export function getToken(email, password, replaceState) {
 		.get(`${api_url}/token`)
 		.auth(email, password)
 		.end((err, res) => {
+			let emailError = false, passwordError = false;
 			if(err) {
 				document.cookie = "__fid=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 				document.cookie = "__ftkn=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				dispatch({type: FETCH_TOKEN_FAILURE})
+				if(!logInPage) {
+					emailError = true;
+					pushState(null, '/login')
+				} else {
+					emailError = true
+					passwordError = true
+				}
+				dispatch({type: FETCH_TOKEN_FAILURE, emailError, passwordError})
 			} else {
 				token = res.body.token
 				dispatch({type: FETCH_TOKEN_SUCCESS, token})
-				dispatch(logIn(token, replaceState))
+				dispatch(logIn(token, pushState))
 			}
 		})
 	}
@@ -197,7 +205,7 @@ export function uploadUserPhoto(file) {
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
-export function logIn(token, replaceState) {
+export function logIn(token, pushState) {
 	return (dispatch, getState) => {
 		dispatch({type: LOGIN_USER})
 		request
@@ -210,7 +218,7 @@ export function logIn(token, replaceState) {
 				document.cookie = '__fid' + '=' + user.id + ";" 
 				document.cookie = "__ftkn" + "=" + token + ";"
 				dispatch({type: LOGIN_USER_SUCCESS, user}) 
-				replaceState(null, '/')
+				pushState(null, '/')
 			}
 			else {
 				dispatch({
