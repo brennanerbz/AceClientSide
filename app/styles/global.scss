@@ -1516,18 +1516,14 @@ textarea:hover:ms-input-placeholder {
 	letter-spacing: 0.01em;
 	&.fade {
 		top: -100%;
-		-webkit-transition: opacity .15s linear,top .15s ease-out;
-		-moz-transition: opacity .15s linear,top .15s ease-out;
-		-o-transition: opacity .15s linear,top .15s ease-out;
-		transition: opacity .15s linear,top .15s ease-out;
-	}
-	&.fade {
+		-webkit-transition: opacity .10s linear,top .15s ease-out;
+		-moz-transition: opacity .10s linear,top .15s ease-out;
+		-o-transition: opacity .10s linear,top .15s ease-out;
+		transition: opacity .10s linear,top .15s ease-out;
 		&.in {
-			top: 3.5%;
+			top: 3.75%;
+			opacity: 1;	
 		}
-	}
-	&.in {
-		opacity: 1;		
 	}
 	p {
 		line-height: 1.5rem;

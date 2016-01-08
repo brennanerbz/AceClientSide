@@ -144,16 +144,12 @@ export default class LandingPage extends Component {
 
 	render() {
 		const logo = require('../../assets/brand_logo.png'),
-			  hero_image_bg = require('../../assets/hero_background_img.png');
+			  hero_image_bg = require('../../assets/hero_background_img.png'),
+			  slackLogo = require('../../assets/slackLogo.png')
 		return(		
 			<div className="landing_page">
 				<div className="landing_page_container landing_beta">
 					<div className="page_promo_wrapper">
-						<div className="page_header_logo_wrapper">
-							<div className="page_header_logo">
-								<img style={{ width: '150px' }}  className="logo" src={logo}/>
-							</div>
-						</div>
 						<div className="main_img_wrapper">
 							<img className="hero_img" src={hero_image_bg}/>
 						</div>
@@ -168,7 +164,8 @@ export default class LandingPage extends Component {
 									notify={(email) => {
 										::this.handleNotify(email)
 									}}
-									beta={true} 
+									beta={false} 
+									last_call={false}
 									onWaitlist={this.state.on_waitlist}
 									shouldAutoFocus={true }
 								/>
@@ -190,7 +187,7 @@ export default class LandingPage extends Component {
 						notify={(email) => {
 							::this.handleNotify(email)
 						}}
-						beta={true} 
+						beta={false} 
 						onWaitlist={this.state.on_waitlist}
 						shouldAutoFocus={false} 
 						last_call={true} />

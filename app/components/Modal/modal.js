@@ -18,7 +18,9 @@ export default class Modal extends Component {
 	}
 
 	componentDidMount() {
-		
+		$(this.refs.modal).on('hidden.bs.modal', (e) => {
+			this.props.closeModal()
+		})
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -37,11 +39,6 @@ export default class Modal extends Component {
 			$(this.refs.modal).on('hidden.bs.modal', (e) => {
 				this.setState({type: null, dynamic: false})
 			})
-		}
-		if(nextProps.type == 'import') {
-			setTimeout(() => {
-				this.refs.importModal.focus()
-			}, 300)
 		}
 	}
 
@@ -287,13 +284,6 @@ export default class Modal extends Component {
 		)
 	}
 
-	renderImportForm() {
-		return(
-			<ImportModal 
-				{...this.props}
-			/>
-		)
-	}
 
 	componentWillUnmount() {
 		$(this.refs.modal).modal('hide')
@@ -311,7 +301,7 @@ export default class Modal extends Component {
 				 aria-hidden="true">
 				<div className={classnames({"sign_up": type == 'log_in'}, "modal-dialog")} role="document">
 					<div className={classnames("modal-content", {
-						"no_shadow": true
+						"no_shadow": false
 					})}>
 					<div className={classnames("modal-header", 
 						{ "settings": type == 'settings' },
@@ -374,15 +364,6 @@ export default class Modal extends Component {
 							{
 								type == 'thank_you'
 								&& 'Thank you for signing up!'
-							}
-							{
-								type == 'import'
-								&& 'Transform text into questions'
-							}
-							{
-								type == 'import'
-								&& 
-								
 							}
 						</h3>
 					</div>

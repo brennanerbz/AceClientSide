@@ -19,6 +19,8 @@ import CreateSetHeader from '../../components/CreateSet/CreateSetHeader/CreateSe
 import SavingLabel from '../../components/CreateSet/SavingLabel/SavingLabel';
 import QuestionModeToggle from '../../components/CreateSet/QuestionModeToggle/QuestionModeToggle';
 import Modal from '../../components/Modal/modal';
+import ImportModal from '../../components/Modal/ImportModal';
+
 
 @connect(state => ({
 	/* Router state */
@@ -204,18 +206,35 @@ export default class CreateSetPage extends Component {
 		return(
 			<DocumentTitle title="Create | Ace">
 				<div>
-					<Modal 
-						open={this.state.isModalOpen}
-						closeModal={() => this.setState({ isModalOpen: false })}
-						type={this.state.modalType}
-						set={this.props.set}
-						loc={this.props.loc}
-						updateSet={this.props.updateSet}
-						createSet={this.props.createSet}
-						assignment={this.props.assignment}
-						deleteAssignment={this.props.deleteAssignment}
-						pushState={this.props.pushState}
-					/>
+					{
+						this.state.modalType !== 'import'
+						?
+						<Modal 
+							open={this.state.isModalOpen}
+							closeModal={() => this.setState({ 
+								isModalOpen: false,
+								modalType: ''
+							})}
+							type={this.state.modalType}
+							set={this.props.set}
+							loc={this.props.loc}
+							updateSet={this.props.updateSet}
+							createSet={this.props.createSet}
+							assignment={this.props.assignment}
+							deleteAssignment={this.props.deleteAssignment}
+							pushState={this.props.pushState}
+							import={this.state.modalType == 'import'}
+						/>
+						:
+						<ImportModal 
+							open={this.state.isModalOpen}
+							closeModal={() => this.setState({
+								isModalOpen: false,
+								modalType: ''
+							})}
+							type={this.state.modalType}
+						/>
+					}
 					<ButtonGroup
 						toggleModal={(type) => {
 							this.setState({

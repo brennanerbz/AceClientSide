@@ -5,30 +5,59 @@ export default class ImportModal extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		type: ''
+	}
+
 	handleSnippetSubmit() {
 		
+	}
+
+	componentDidMount() {
+		if(this.props.open) {
+			$(this.refs.importModal).modal()
+		}
+		$(this.refs.importModal).on('hidden.bs.modal', (e) => {
+			this.props.closeModal()
+		})
+		$(this.refs.importModal).on('shown.bs.modal', (e) => {
+			this.refs.importModalTextArea.focus()
+		})
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.open && nextProps.open) {
+			$(this.refs.importModal).modal()
+		}
+	}
+
+	componentWillUnmount() {
+		// $(this.refs.importModal).modal('hide')
+		this.props.closeModal()
 	}
 
 	render() {
 		return(
 			<div 
+			ref="importModal"
 			className="modal fade"
-			id="myModal" 
+			id="importModal" 
 			role="dialog" 
 			aria-labelledby="myModalLabel"
 			aria-hidden="true">
-				<div className="modal-dialog">
+				<div className="modal-dialog" role="document">
+					<div className="modal-content">
 					<div className="modal-header">
 						<button 
 						type="button" 
 						className="close"
 						data-dismiss="modal"
+						data-target="#importModal"
 						onClick={this.props.closeModal}>
 							<span aria-hidden="true">&times;</span>
 							<span className="sr-only">Close</span>
 						</button>
-					</div>
-					<h3 className="modal-title">
+						<h3 className="modal-title" id='myModalLabel'>
 						Transform text into questions
 						<span 
 						style={{
@@ -38,7 +67,8 @@ export default class ImportModal extends Component {
 							New!
 						</span>
 					</h3>
-				</div>
+					</div>
+					
 				<div className="modal-body">
 					<form className="no_bottom_margin" id="text_import_snippet">
 						<p>
@@ -62,7 +92,7 @@ export default class ImportModal extends Component {
 						</p>
 						<p>
 							<textarea 
-							ref="importModal"
+							ref="importModalTextArea"
 							autoFocus={true}
 							name="content"
 							wrap="virtual"
@@ -76,14 +106,20 @@ export default class ImportModal extends Component {
 				<div className="modal-footer">
 					<button 
 					className="button outline"
+					data-dismiss="modal"
+					data-target="#importModal"
 					onClick={this.props.closeModal}>
 						Cancel
 					</button>
 					<button 
 					className="button primary"
+					data-dismiss="modal"
+					data-target="#importModal"
 					onClick={::this.handleSnippetSubmit}>
 						Transform text
 					</button>
+					</div>
+					</div>
 				</div>
 			</div>	
 		);

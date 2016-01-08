@@ -130,14 +130,13 @@ export default class Header extends Component {
 				root_path == 'login' || root_path == 'signup'
 				? null
 				:
-				<div className={classnames("header_positioner beta", 
+				<div className={classnames("header_positioner", 
 					{
 						'no_background' : root_path == 'createset'
 					},
 					{
 					'no_border': (root_path == 'createset' 
-					|| root_path == 'import'
-					|| root_path == '/' && !logged_in)
+					|| root_path == 'import')
 					},
 					{
 						'create_border': this.state.show_border && root_path == 'createset' 
@@ -153,7 +152,7 @@ export default class Header extends Component {
 							"landing": root_path == '/' && !logged_in
 						}, 
 						{
-							'beta': true
+							'beta': false
 						},
 						{
 							'convo': root_path == 'convo'
@@ -161,7 +160,7 @@ export default class Header extends Component {
 						)}>				
 						<div className='header'>
 							{
-								logged_in
+								true
 								&&
 								<div className="header_logo">
 									<Link className="site-logo" to="/">						
@@ -308,10 +307,10 @@ export default class Header extends Component {
 										{
 											!logged_in
 											&&
-											<button className="button sign_in_button primary"
+											<a className="log_in"
 											 		onClick={() => this.setState({ popover: true })}>
 											 		Log in
-											</button>
+											</a>
 										}	
 									</div>
 								}
@@ -358,13 +357,11 @@ class LandingLinks extends Component {
 	render() {
 		const { pushState } = this.props;
 		return(
-			<div className="wrapper sign_in_wrapper">
-				<div className="sign_in">
-					<button className="button sign_in" onClick={this.props.popout}>
-						<a>Sign in</a>
-					</button>
-				</div>
-			</div>
+			<ul className="nav_links">
+				<li className="sign_in_link" onClick={this.props.popout}>
+					<a>Sign in</a>
+				</li>
+			</ul>
 		);
 	}
 }

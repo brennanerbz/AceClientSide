@@ -7,16 +7,15 @@
 		-webkit-font-smoothing: antialiased;
 	}
 	.landing_page_container {
-		max-width: 1020px !important;
 		width: 100%;
 		font-family: "Lato";
-		padding-top: 0em;
+		padding-top: 2em;
 		display: block;
 		position: relative;
 		padding-bottom: 9.5em;
 		margin: 0 auto;
 		box-sizing: border-box;
-		max-width: 1015px;
+		max-width: 1050px;
 		padding-left: 0.1rem;
 		padding-right: 0.1rem;
 		&.landing_beta {
@@ -26,9 +25,8 @@
 				margin-top: -50px;
 			}
 			.page_promo_wrapper {
-				max-width: 990px;
+				max-width: 1050px;
 				text-align: center;
-				// margin: 0 auto;
 				.page_header_logo_wrapper {
 					max-width: 240px;
 					margin: 0 auto 30px auto;
@@ -38,7 +36,7 @@
 				}
 				.main_img_wrapper {
 					margin: 0 auto;
-					max-width: 700px;
+					max-width: 800px;
 					img {
 						width: 100%;
 						@media screen and (max-width: 720px) {
@@ -47,7 +45,7 @@
 					}
 				}
 				.page_content_panel {
-					font-family: "Open Sans";
+					font-family: "Lato";
 					.page_intro_txt {
 						text-align: left;
 						display: inline-block;
@@ -109,7 +107,7 @@
 			top: 12.5em;
 			left: 1rem;
 			h1 {
-				font-family: "Open Sans";
+				font-family: "Lato";
 				font-size: 30px;
 				font-weight: 300;
 			}
@@ -123,7 +121,7 @@
 					font-size: 1.18rem;
 					color: #777777;
 					margin-top: 15px;
-					font-family: "Open Sans";
+					font-family: "Lato";
 					font-weight: 400;
 					.underline {
 						border-bottom: 1px solid #e8e8e8;
@@ -166,7 +164,7 @@
 		.leading_question {
 			display: block;
 			font-size: 19px;
-			font-family: "Open Sans";
+			font-family: "Lato";
 		}
 		img {
 			height: 15.5px;
@@ -188,7 +186,7 @@
 	}
 	.features_container {
 		width: 100%;
-		max-width: 990px;
+		max-width: 975px;
 	    box-sizing: border-box;
 		@media screen and (max-width: 767px) {
 		    padding: 60px 30px 30px 30px;
@@ -348,7 +346,7 @@
 						    margin: 0;
 						    width: 100%;
 						    line-height: 1.4;
-						    font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
+						    font-family: "Lato","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
 						    font-size: 32px;
 						    font-weight: 300;
 						    color: #d0d4d9;
@@ -401,7 +399,7 @@
 		h3 {
 			font-size: 30px;
 			line-height: 2.5rem;
-			font-family: "Open Sans";
+			font-family: "Lato";
 			font-weight: 300;
 		}
 		img {
@@ -417,10 +415,10 @@
 		padding-bottom: 3.5em;
 		width: 380px;
 		font-weight: 300;
-		font-family: "Open Sans";
+		font-family: "Lato";
 		.start_now {
 			font-weight: 300;
-			font-family: "Open Sans";
+			font-family: "Lato";
 		}
 		@media screen and (max-width: 767px) {
 			width: 98.5%;

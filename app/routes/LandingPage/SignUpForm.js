@@ -123,12 +123,12 @@ export default class SignUpForm extends Component {
 				<button style={{
 					fontSize: '16px',
 					fontWeight: '600',
-					background: '#1C93F4',
-					borderColor: '#007BE8',
+					// background: '#1C93F4',
+					// borderColor: '#007BE8',
 					height: '36px'
 				}}className="button primary"
 					    onClick={::this.handleSubmit}>
-					   	Sign up for Beta
+					   	Sign up
 				</button>
 			</form>
 		)
@@ -244,21 +244,17 @@ export default class SignUpForm extends Component {
 						&&
 						<div className="message">
 							{
-								!this.props.last_call
-								?
+								!this.props.last_call && false
+								&&
 								<div>
 									<h4>Sign Up</h4>
 									<p>It's free.</p>
-								</div>
-								:
-								<div>
-									<h4 className="start_now">Ready to give it a try?</h4>
 								</div>
 							}
 						</div>
 					}
 					{
-						this.props.beta 
+						!this.props.beta 
 						&&
 						<div className="message">
 							{

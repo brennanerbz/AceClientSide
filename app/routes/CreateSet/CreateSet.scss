@@ -25,6 +25,7 @@
 	display: table;
 	margin: 0 auto;
 	opacity: 0;
+	margin-bottom: 5rem;
 	// z-index: 1;
 	-webkit-transform: translateY(5px);
 	-moz-transform: translateY(5px);
@@ -428,14 +429,15 @@ hr.CreateSetBreak {
 // /*Button group*/
 .CreateSetHeader-wrapper-buttongroup {
 	position: absolute;
-	height: 100%;
+	height: 65px;
+	width: 300px!important;
 	top: 0;
-	left: 0;
+	right: 0;
 	bottom: 0;
 	width: 100%;
 	overflow: visible;
 	opacity: 0;
-	// z-index: 2;
+	z-index: 301;
 	-webkit-transform: translateY(5px);
 	-moz-transform: translateY(5px);
 	-ms-transform: translateY(5px);
@@ -460,7 +462,7 @@ hr.CreateSetBreak {
 	vertical-align: top;
 	position: absolute;
 	right: 35px;
-	top: 10px;
+	top: 8.5px;
 	// z-index: 3;
 }
 .Button-set .button {
