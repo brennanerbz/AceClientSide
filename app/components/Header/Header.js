@@ -345,15 +345,6 @@ class LandingLinks extends Component {
 
 	}
 
-	/*
-	<li onClick={() => pushState(null, '/createset')}>
-		<a>Create study set</a>
-	</li>
-	<li onClick={() => pushState(null, '/import')}>
-		<a>Import</a>
-	</li>
-	*/
-
 	render() {
 		const { pushState } = this.props;
 		return(

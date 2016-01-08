@@ -110,7 +110,7 @@ export default class SignUpForm extends Component {
 					onChange={(e) => {
 						this.setState({password: e.target.value})
 					}}
-					onInput={(e) => {
+					onKeyDown={(e) => {
 						if(e.which == 13) {
 							::this.handleSubmit()
 						}
