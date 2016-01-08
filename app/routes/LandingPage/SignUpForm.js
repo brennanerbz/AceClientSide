@@ -78,6 +78,7 @@ export default class SignUpForm extends Component {
 					ref="first_name" 
 					placeholder="First name" 
 					type="text"
+					tabIndex={-1}
 					autoFocus={this.props.shouldAutoFocus}
 					value={this.state.first_name}
 					onChange={(e) => {

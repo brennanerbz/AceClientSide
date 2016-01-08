@@ -89,7 +89,10 @@
                                 }
                             }
                             input {
-                                // height: 31px;
+                                font-size: 14.75px;
+                                &#sign_in_email {
+                                    min-width: 185px;
+                                }
                             }
                             button {
                                 &.disabled {

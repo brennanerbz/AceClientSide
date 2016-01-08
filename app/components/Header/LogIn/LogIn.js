@@ -72,6 +72,7 @@ export default class QuickLogIn extends Component {
 					<input 
 					id="sign_in_email" 
 					className="" 
+					tabIndex={1}
 					ref="email"
 					type="text"
 					onChange={(e) => {
@@ -88,6 +89,7 @@ export default class QuickLogIn extends Component {
 					id="sign_in_password" 
 					className="" 
 					type="password"
+					tabIndex={2}
 					onChange={(e) => {
 						this.setState({password: e.target.value})
 					}}

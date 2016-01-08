@@ -84,7 +84,9 @@ export default class QuickLogIn extends Component {
 						<input 
 							placeholder="Email" 
 							ref="email" 
+							id="email"
 							type="text"
+							tabIndex={1}
 							autoFocus={true} 
 							value={this.state.email}
 							onFocus={() => this.setState({focused: true})}
@@ -100,6 +102,7 @@ export default class QuickLogIn extends Component {
 						<input 
 							type="password" 
 							placeholder="Password"  
+							tabIndex={2}
 							value={this.state.password}
 							onFocus={() => this.setState({focused: true})} 
 							onBlur={() => this.setState({focused: false})}
