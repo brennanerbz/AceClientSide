@@ -33,7 +33,7 @@ export default class CreateSetHeader extends Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		const { title } = this.props,
-			  { subjects } = nextProps;
+			  { subjects, fullErrorMessage, itemErrorMessage } = nextProps;
 		if(this.refs.submit_subjects !== undefined) {
 			$(this.refs.submit_subjects).tooltip({
 				delay: { show: 1500, hide: 50},
@@ -55,6 +55,7 @@ export default class CreateSetHeader extends Component {
 		if(nextProps.associations !== null && nextProps.associations.length > 1) this.setState({item_error_message: false});
 	}
 	handleTitleChange = (title) => {
+		console.log(title)
 		this.setState({
 			title: title
 		});
@@ -68,44 +69,17 @@ export default class CreateSetHeader extends Component {
 				setTitleFlag } = this.props,
 			    _title = this.state.title;
 		setTitleFlag(true)
-		if(id == null && _title.length > 2) {
+		if(id == null && _title.length > 0) {
 			createSet(_title)
 			return;
 		}                                                                       
-		if((set && title) !== null && _title !== title) {
-			updateSet(set, {name: "title", prop: _title})
+		if(id !== null) {
+			if(_title.length == 0) {
+				updateSet(set, {name: "title", prop: ''})
+			} else {
+				updateSet(set, {name: "title", prop: _title})
+			}
 			return;
-		}
-	}
-	handleSave() {
-		const { createSet,
-				updateSet,
-				createAssignment,
-				assignment,
-			    title,
-			    items,
-			    associations,
-			    pushState,
-			    set } = this.props;
-		if(title.length === 0 && (associations == null  || Object.keys(associations).length < 1)) {
-			this.setState({ full_error_message: true });
-			return;
-		}
-		if(associations == null || Object.keys(associations).length < 1) {
-			this.setState({item_error_message: true})
-			return;
-		}
-		if(set !== null && assignment == null) {
-			createAssignment(set.id, 'admin', {name: 'navigate', prop: true}, pushState)
-			updateSet(set, {name: 'finalized', prop: true})
-			// createSequence
-			// createSlots
-			return;
-			
-		}
-		if((set && assignment) !== null) {
-			if(set.finalized == null) updateSet(set, {name: 'finalized', prop: true})
-			pushState(null, `/set/${set.id}`)
 		}
 	}
 

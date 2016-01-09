@@ -26,8 +26,9 @@ export default class LoadingZone extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { logged_in, assignments } = nextProps;
-		if(logged_in) {
+		const { logged_in, assignments, user } = nextProps;
+		console.log(user)
+		if(logged_in && user.creation !== undefined) {
 			setTimeout(() => {
 				this.props.hideLoadingZone()
 			}, 750)
@@ -35,7 +36,7 @@ export default class LoadingZone extends Component {
 	}
 
 	render() {
-		const { rendered } = this.props,
+		const { rendered, logged_in } = this.props,
 		backgroundBgLarge = require('../../assets/backgroundPatternLarge.png');
 		return(
 			<div 
@@ -43,7 +44,7 @@ export default class LoadingZone extends Component {
 				// backgroundImage: `url(${backgroundBgLarge})`
 			}}
 			id="loading_zone" 
-			className={classnames("display_flex", {'rendered': rendered})}>
+			className={classnames("display_flex", {'rendered': rendered}, {'loggedIn': logged_in})}>
 				<div id="loading_welcome">
 					<h3>Loading...</h3>
 					<p>You're awesome</p>

@@ -1,5 +1,4 @@
 #loading_zone {
-	// background: #fff;
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -9,7 +8,7 @@
 	resize: vertical;
 	overflow: auto;
 	opacity: 0;
-	z-index: -1;
+	z-index: 1;
 	background-image: url('../../assets/backgroundPatternLarge.png')!important;
 	background-size: 1920px!important;
 	background-repeat: no-repeat;
@@ -21,10 +20,14 @@
 	-moz-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
 	transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
 	-webkit-transition: opacity 150ms cubic-bezier(.2,.8,.5,1) .1s,-webkit-transform 150ms cubic-bezier(.2,.8,.5,1) .1s,top 0s linear 150ms;
+	&.loggedIn {
+		display: none;
+	}
 	&.rendered {
 		top: 0;
 		opacity: 1;
 		z-index: 100000;
+		display: flex;
 		-webkit-transform: translateY(0);
 		-moz-transform: translateY(0);
 		-ms-transform: translateY(0);

@@ -86,7 +86,10 @@ export default class CreateSetPage extends Component {
 	state = {
 		editing: false,
 		isModalOpen: false,
-		modalType: ''
+		modalType: '',
+		fullErrorMessage: false,
+		titleErrorMessage: false,
+		itemErrorMessage: false
 	}
 
 	subPoll = {}
@@ -146,6 +149,44 @@ export default class CreateSetPage extends Component {
 			// if(localStorage.getItem('set_id') == null && !this.state.editing) {
 			// 	localStorage.setItem('set_id', nextProps.set.id)
 			// }
+		}
+		if(nextProps.title.length > 0 && Object.keys(nextProps.items).length >= 2) this.setState({fullErrorMessage: false})
+		if(nextProps.title.length > 0) this.setState({titleErrorMessage: false})
+		if(Object.keys(nextProps.items).length >= 2) this.setState({titleErrorMessage: false})
+	}
+
+	handleSave() {
+		const { createSet,
+				updateSet,
+				createAssignment,
+				assignment,
+			    title,
+			    items,
+			    associations,
+			    pushState,
+			    set } = this.props;
+		setTimeout(() => {
+			this.setState({
+				fullErrorMessage: false,
+				titleErrorMessage: false,
+				itemErrorMessage: false
+			})
+		}, 3500)
+		if(title.length == 0 && Object.keys(items).length < 2) {
+			this.setState({ fullErrorMessage: true });
+			return;
+		}
+		if(title.length == 0 && Object.keys(items).length >= 2) {
+			this.setState({ titleErrorMessage: true })
+			return;
+		}
+		if(title.length > 0 && Object.keys(items).length < 2) {
+			this.setState({ itemErrorMessage: true })
+			return;
+		}
+		if((set && assignment) !== null) {
+			if(set.finalized == null) updateSet(set, {name: 'finalized', prop: true})
+			pushState(null, `/set/${set.id}`)
 		}
 	}
 
@@ -248,6 +289,7 @@ export default class CreateSetPage extends Component {
 						editing={this.props.editing}
 						loc={this.props.loc}
 						pushState={this.props.pushState}
+						handleSave={::this.handleSave}
 					/>
 					<div className={classnames("CreateSetPage", {"rendered": rendered })}>
 					{
@@ -282,6 +324,8 @@ export default class CreateSetPage extends Component {
 								pushState={this.props.pushState}
 								shouldAutoFocus={!this.state.login_prompt_modal}
 								importVisible={this.props.importVisible}
+								fullErrorMessage={this.state.fullErrorMessage}
+								itemErrorMessage={this.state.itemErrorMessage}
 							/>   
 							<QuestionModeToggle 
 								subjects={this.props.subjects}
@@ -309,7 +353,9 @@ export default class CreateSetPage extends Component {
 										rendered={rendered}
 										finishedRendering={this.props.finishedRendering}
 									/>
-									<button className="top_margin right button primary large">
+									<button 
+									onClick={::this.handleSave}
+									className="top_margin right button primary large">
 										{
 											editing && this.props.assignment !== null
 											&&
@@ -325,6 +371,33 @@ export default class CreateSetPage extends Component {
 							</div>
 						</div>
 					}
+					</div>
+					<div className={classnames("notify_wrapper", {'show': this.state.itemErrorMessage || !this.state.fullErrorMessage || !this.state.titleErrorMessage})}>
+						<span id="notify" 
+						className={classnames({'hide': !this.state.itemErrorMessage && !this.state.fullErrorMessage && !this.state.titleErrorMessage}, "error")}>
+							{
+								this.state.fullErrorMessage
+								&&
+								<span className="notify_msg">
+									To create a set, you need a title and at least two items!
+								</span>
+							}
+							{
+								this.state.titleErrorMessage
+								&&
+								<span className="notify_msg">
+									You need a title!
+								</span>
+							}
+							{
+								this.state.itemErrorMessage
+								&&
+								<span className="notify_msg">
+									You need to create at least two items!
+								</span>
+							}
+							
+						</span>
 					</div>
 				</div>
 			</DocumentTitle>

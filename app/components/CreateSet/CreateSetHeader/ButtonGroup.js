@@ -13,7 +13,7 @@ export default class ButtonGroup extends Component {
     }
 
 	render() {
-        const { onSave, set, editing, pushState, assignment, rendered, toggleModal } = this.props,
+        const { handleSave, set, editing, pushState, assignment, rendered, toggleModal } = this.props,
         { mouseIsOverMoreButton } = this.state,
         member_icon = require('../../../assets/profile_icon.png'),
         share_icon = require('../../../assets/share.png'),
@@ -26,7 +26,7 @@ export default class ButtonGroup extends Component {
                         editing && assignment !== null
                         ? 
                         <button className={classnames("button primary button-small")}
-                                onClick={onSave}>
+                                onClick={handleSave}>
                                 Done
                         </button>
                         : null
@@ -35,7 +35,7 @@ export default class ButtonGroup extends Component {
                         !editing
                         ? 
                         <button className={classnames("button primary button-small")}
-                                onClick={onSave}>
+                                onClick={handleSave}>
                                 Create 
                         </button>
                         : null
