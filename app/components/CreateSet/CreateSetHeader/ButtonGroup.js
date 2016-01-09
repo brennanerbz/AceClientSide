@@ -25,7 +25,7 @@ export default class ButtonGroup extends Component {
                     {
                         editing && assignment !== null
                         ? 
-                        <button className={classnames("button primary button-small")}
+                        <button className={classnames("button primary ")}
                                 onClick={handleSave}>
                                 Done
                         </button>
@@ -34,7 +34,7 @@ export default class ButtonGroup extends Component {
                     {
                         !editing
                         ? 
-                        <button className={classnames("button primary button-small")}
+                        <button className={classnames("button primary ")}
                                 onClick={handleSave}>
                                 Create 
                         </button>
@@ -49,7 +49,7 @@ export default class ButtonGroup extends Component {
                                 marginLeft: '5px',
                                 marginRight: '0px'
                             }}
-                            className="button outline button-small"
+                            className="button outline "
                             onClick={() => toggleModal('import')}>
                             Import
                             <span className="new_label">
@@ -60,7 +60,7 @@ export default class ButtonGroup extends Component {
                     {
                         this.props.assignment !== null
                         &&
-                        <button className={classnames('button outline button-small')}
+                        <button className={classnames('button outline ')}
                                 onClick={() => toggleModal('share')}
                                 style={{
                                     marginLeft: '5px'

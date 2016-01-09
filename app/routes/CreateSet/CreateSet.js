@@ -106,7 +106,7 @@ export default class CreateSetPage extends Component {
 	componentWillMount() {
 		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in, importVisible, loc, user } = this.props;
 		if(logged_in) {
-			// TODO: ISSUE RESIDES HERE FOR FN BUG
+			// localStorage.clear()
 			loadSetFlag()
 			if(loc.pathname.split('/')[2] == 'import') return;
 			if(Object.keys(params).length !== 0) { 
@@ -114,6 +114,14 @@ export default class CreateSetPage extends Component {
 				loadEditing(params.id, pushState)
 				return; 
 			} else {
+				let refreshId = localStorage.getItem('set_id')
+				if(refreshId !== null) {
+					this.setState({ editing: true })
+					loadEditing(Number(refreshId), pushState)
+					pushState(null, `/createset/${refreshId}`)
+					localStorage.clear()
+					return;
+				}
 				if(!user.editing_last_draft) return;
 				let asgns = this.props.assignments
 				.filter(a => a.set.finalized == null)
@@ -152,11 +160,10 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// console.log('nextProps set', '\n', nextProps.set)
 		if(this.props.set == null && nextProps.set !== null) {
-			// if(localStorage.getItem('set_id') == null && !this.state.editing) {
-			// 	localStorage.setItem('set_id', nextProps.set.id)
-			// }
+			if(localStorage.getItem('set_id') == null && !this.props.editing) {
+				localStorage.setItem('set_id', nextProps.set.id)
+			}
 		}
 		if(nextProps.editing && nextProps.set.finalized == null && !this.state.clickedToContinue) {
 			this.setState({
