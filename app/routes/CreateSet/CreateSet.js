@@ -164,6 +164,13 @@ export default class CreateSetPage extends Component {
 				showAutosavePrompt: true
 			})
 		}
+		if(this.props.set !== null && nextProps.set == null) {
+			this.setState({
+				editing: false,
+				showAutosavePrompt: false,
+				clickedToContinue: false
+			});
+		}
 		if(nextProps.title.length > 0 && Object.keys(nextProps.items).length >= 2) this.setState({fullErrorMessage: false})
 		if(nextProps.title.length > 0) this.setState({titleErrorMessage: false})
 		if(Object.keys(nextProps.items).length >= 2) this.setState({titleErrorMessage: false})
@@ -179,6 +186,7 @@ export default class CreateSetPage extends Component {
 			    associations,
 			    updateUserDraftStatus,
 			    pushState,
+			    newSequence,
 			    set } = this.props;
 		setTimeout(() => {
 			this.setState({
@@ -201,6 +209,7 @@ export default class CreateSetPage extends Component {
 		}
 		if((set && assignment) !== null) {
 			if(set.finalized == null) updateSet(set, {name: 'finalized', prop: true})
+			newSequence(assignment.id, false)
 			updateUserDraftStatus(false)
 			pushState(null, `/set/${set.id}`)
 		}
@@ -356,7 +365,7 @@ export default class CreateSetPage extends Component {
 									</p>
 									<button 
 									onClick={() => {
-										this.props.deleteAssignment(assignment.id, pushState)
+										this.props.deleteAssignment(assignment.id, pushState, true)
 									}}
 									className="button danger">
 									Discard it

@@ -400,16 +400,42 @@ export function deleteAssignment(assignment_id, pushState, discardedAutoSave) {
 		.send({deleted: true})
 		.end((err, res) => {
 			if(res.ok) {
-				dispatch({type: DELETE_ASSIGNMENT_SUCCESS})
-				pushState(null, '/')
+				localStorage.clear()
 				if(getState().createset.set.finalized == null) {
 					dispatch(updateUserDraftStatus(false))
 				}
+				if(discardedAutoSave) {
+					pushState(null, '/createset')
+				} else {
+					pushState(null, '/')
+				}
+				dispatch({type: DELETE_ASSIGNMENT_SUCCESS})
 			} else {
 				dispatch({
 					type: DELETE_ASSIGNMENT_FAILURE,
 					error: Error(err)
 				})
+			}
+		})
+	}
+}
+
+export function newSequence(assignment_id, starred) {
+	return (dispatch, getState) => {
+		dispatch({type: REQUEST_LEARN})
+		let new_sequence = Object.assign({..._default_sequence}, {
+			assignment_id: assignment_id,
+			stars: starred
+		})
+		var sequence_id, sequence;
+		request
+		.post(`${api_url}/sequences/`)
+		.send(new_sequence)
+		.end(function (err, res) {
+			if(res.ok) {
+				console.log('success')
+			} else {
+				console.log('error')
 			}
 		})
 	}

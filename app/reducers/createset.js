@@ -18,6 +18,7 @@ import {
   UPDATE_ASSIGNMENT_SUCCESS,
   UPDATE_ASSIGNMENT_FAILURE,
 
+  DELETE_ASSIGNMENT,
   DELETE_ASSIGNMENT_SUCCESS,
 
   GET_TERM_SUGGESTIONS,
@@ -259,11 +260,15 @@ export function createset(state = createState, action) {
         ...state,
         assignment: action.assignment
       }
-    case DELETE_ASSIGNMENT_SUCCESS:
+    case DELETE_ASSIGNMENT:
       return {
         ...state,
-        assignment: null,
-        deleted: true
+        isLoadingSet: true
+      }
+    case DELETE_ASSIGNMENT_SUCCESS:
+      return {
+        ...state = createState,
+        isLoadingSet: false
       }
     case CREATE_ITEM:
       return {
