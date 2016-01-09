@@ -1,5 +1,5 @@
 #loading_zone {
-	background: #fff;
+	// background: #fff;
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -9,6 +9,10 @@
 	resize: vertical;
 	overflow: auto;
 	opacity: 0;
+	z-index: -1;
+	background-image: url('../../assets/backgroundPatternLarge.png')!important;
+	background-size: 1920px!important;
+	background-repeat: no-repeat;
 	margin-bottom: 5rem;
 	-webkit-transform: translateY(5px);
 	-moz-transform: translateY(5px);

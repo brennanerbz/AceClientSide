@@ -30,14 +30,20 @@ export default class LoadingZone extends Component {
 		if(logged_in) {
 			setTimeout(() => {
 				this.props.hideLoadingZone()
-			}, 1000)
+			}, 750)
 		}
 	}
 
 	render() {
-		const { rendered } = this.props;
+		const { rendered } = this.props,
+		backgroundBgLarge = require('../../assets/backgroundPatternLarge.png');
 		return(
-			<div id="loading_zone" className={classnames("display_flex", {'rendered': rendered})}>
+			<div 
+			style={{
+				// backgroundImage: `url(${backgroundBgLarge})`
+			}}
+			id="loading_zone" 
+			className={classnames("display_flex", {'rendered': rendered})}>
 				<div id="loading_welcome">
 					<h3>Loading...</h3>
 					<p>You're awesome</p>
