@@ -22,6 +22,12 @@ import {
 
 } from '../actions/user';
 
+import {
+	UPDATE_USER_DRAFT_STATUS,
+	UPDATE_USER_DRAFT_STATUS_SUCCESS,
+	UPDATE_USER_DRAFT_STATUS_FAILURE
+} from '../actions/createset';
+
 var _userinitialstate = {
 	isFetchingUser: false,
 	isFetchingToken: false,
@@ -83,7 +89,8 @@ export default function user(state = _userinitialstate, action) {
 			return {
 				...state,
 				isFetchingUser: false,
-				logged_in: false
+				logged_in: false,
+				showLoadingZone: false
 			}
 		case FETCH_TOKEN_FAILURE:
 			return {
@@ -97,6 +104,11 @@ export default function user(state = _userinitialstate, action) {
 			return {
 				...state,
 				showLoadingZone: false
+			}
+		case UPDATE_USER_DRAFT_STATUS_SUCCESS:
+			return {
+				...state,
+				user: action.user
 			}
 		case LOGOUT_USER_FAILURE:
 		case CREATE_USER_FAILURE:

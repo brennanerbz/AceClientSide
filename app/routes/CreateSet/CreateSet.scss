@@ -635,7 +635,35 @@ textarea:hover:ms-input-placeholder {
 	}
 }
 
-
+#autosave_prompt {
+	padding: 8px 16px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	background: #f1f6fb;
+	color: #244f79;
+	border: 1px solid #d0e5f8;
+	border-radius: 0.25em;
+	background: #edf7fd;
+	border: 1px solid #d3ecfa;
+	border-radius: 6px;
+	font-size: 16px;
+	overflow: auto;
+	// max-width: 469px;
+	// position: absolute;
+	// right: 10px;
+	// top: 50px;
+	// z-index: 100;
+	p {
+		display: inline;
+		margin: 0.35em 0 0 0;
+		padding: 0;
+	}
+	button {
+		max-height: 36px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+}
 
 
 

@@ -89,7 +89,9 @@ export default class CreateSetPage extends Component {
 		modalType: '',
 		fullErrorMessage: false,
 		titleErrorMessage: false,
-		itemErrorMessage: false
+		itemErrorMessage: false,
+		showAutosavePrompt: false,
+		clickedToContinue: false
 	}
 
 	subPoll = {}
@@ -102,7 +104,7 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillMount() {
-		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in, importVisible, loc } = this.props;
+		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in, importVisible, loc, user } = this.props;
 		if(logged_in) {
 			// TODO: ISSUE RESIDES HERE FOR FN BUG
 			loadSetFlag()
@@ -112,6 +114,7 @@ export default class CreateSetPage extends Component {
 				loadEditing(params.id, pushState)
 				return; 
 			} else {
+				if(!user.editing_last_draft) return;
 				let asgns = this.props.assignments
 				.filter(a => a.set.finalized == null)
 				if(asgns == undefined || asgns.length === 0) return;
@@ -141,6 +144,11 @@ export default class CreateSetPage extends Component {
 		this.subPoll = setInterval(() => {
 			::this.subjectPoll()
 		}, 2500)
+		if(this.props.editing && this.props.set.finalized == null) {
+			this.setState({
+				showAutosavePrompt: true
+			})
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -149,6 +157,11 @@ export default class CreateSetPage extends Component {
 			// if(localStorage.getItem('set_id') == null && !this.state.editing) {
 			// 	localStorage.setItem('set_id', nextProps.set.id)
 			// }
+		}
+		if(nextProps.editing && nextProps.set.finalized == null && !this.state.clickedToContinue) {
+			this.setState({
+				showAutosavePrompt: true
+			})
 		}
 		if(nextProps.title.length > 0 && Object.keys(nextProps.items).length >= 2) this.setState({fullErrorMessage: false})
 		if(nextProps.title.length > 0) this.setState({titleErrorMessage: false})
@@ -163,6 +176,7 @@ export default class CreateSetPage extends Component {
 			    title,
 			    items,
 			    associations,
+			    updateUserDraftStatus,
 			    pushState,
 			    set } = this.props;
 		setTimeout(() => {
@@ -186,6 +200,7 @@ export default class CreateSetPage extends Component {
 		}
 		if((set && assignment) !== null) {
 			if(set.finalized == null) updateSet(set, {name: 'finalized', prop: true})
+			updateUserDraftStatus(false)
 			pushState(null, `/set/${set.id}`)
 		}
 	}
@@ -243,7 +258,8 @@ export default class CreateSetPage extends Component {
 	}	
 
 	render() {
-		const { isLoadingSet, rendered, editing } = this.props;
+		const { isLoadingSet, rendered, editing, set, user, assignment, pushState } = this.props,
+		{ showAutosavePrompt } = this.state;
 		return(
 			<DocumentTitle title="Create | Ace">
 				<div>
@@ -329,7 +345,36 @@ export default class CreateSetPage extends Component {
 							/>   
 							<QuestionModeToggle 
 								subjects={this.props.subjects}
-							/>              
+							/>   
+							{
+								showAutosavePrompt
+								&&
+								<div className="display_flex" id="autosave_prompt">
+									<p className="autosave_message">
+										This set was saved for you.
+									</p>
+									<button 
+									onClick={() => {
+										this.props.deleteAssignment(assignment.id, pushState)
+									}}
+									className="button danger">
+									Discard it
+									</button>
+									<p className="autosave_message">
+										or
+									</p>
+									<button 
+									onClick={() => {
+										this.setState({
+											showAutosavePrompt: false,
+											clickedToContinue: true
+										})
+									}}
+									className="button outline">
+										Continue
+									</button>
+								</div>  
+							}
 							<div className="container">
 								<div className="CreateSetPage-list">
 									<TermRows

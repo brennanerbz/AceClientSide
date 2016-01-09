@@ -326,6 +326,7 @@ export function createAssignment(set_id, permission, ...args) {
 			if(res.ok) {
 				assignment = res.body
 				dispatch({type: CREATE_ASSIGNMENT_SUCCESS, assignment})
+				dispatch(updateUserDraftStatus(true))
 				if(args.length > 0 && args[0].name == 'navigate' && args[0].prop) {
 					let pushState = args[1]
 					setTimeout(() => {
@@ -390,7 +391,7 @@ export function updateAssignment(...args) {
 export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
 export const DELETE_ASSIGNMENT_SUCCESS = 'DELETE_ASSIGNMENT_SUCCESS';
 export const DELETE_ASSIGNMENT_FAILURE = 'DELETE_ASSIGNMENT_FAILURE';
-export function deleteAssignment(assignment_id, pushState) {
+export function deleteAssignment(assignment_id, pushState, discardedAutoSave) {
 	return (dispatch, getState) => {
 		dispatch({ type: DELETE_ASSIGNMENT })
 		request
@@ -400,11 +401,37 @@ export function deleteAssignment(assignment_id, pushState) {
 			if(res.ok) {
 				dispatch({type: DELETE_ASSIGNMENT_SUCCESS})
 				pushState(null, '/')
+				if(getState().createset.set.finalized == null) {
+					dispatch(updateUserDraftStatus(false))
+				}
 			} else {
 				dispatch({
 					type: DELETE_ASSIGNMENT_FAILURE,
 					error: Error(err)
 				})
+			}
+		})
+	}
+}
+
+export const UPDATE_USER_DRAFT_STATUS = 'UPDATE_USER_DRAFT_STATUS';
+export const UPDATE_USER_DRAFT_STATUS_SUCCESS = 'UPDATE_USER_DRAFT_STATUS_SUCCESS';
+export const UPDATE_USER_DRAFT_STATUS_FAILURE = 'UPDATE_USER_DRAFT_STATUS_FAILURE';
+export function updateUserDraftStatus(status) {
+	return(dispatch, getState) => {
+		let updatedUserStatus = {
+			editing_last_draft: status
+		},
+		user = getState().user.user
+		request
+		.put(`${api_url}/users/${user.id}`)
+		.send(updatedUserStatus)
+		.end((err, res) => {
+			if(res.ok) {
+				let user = res.body;
+				dispatch({type: UPDATE_USER_DRAFT_STATUS_SUCCESS, user})
+			} else {
+				dispatch({type: UPDATE_USER_DRAFT_STATUS_FAILURE})
 			}
 		})
 	}
