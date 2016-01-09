@@ -71,6 +71,7 @@ export default class Header extends Component {
 
 	handleScroll() {
 		const node = document.body;
+		console.log(node.scrollTop)
 		if(node.scrollTop > 50) {
 			this.setState({
 				show_border: true

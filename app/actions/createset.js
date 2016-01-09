@@ -170,6 +170,7 @@ export function createSet(title, ...args) {
 			if(res.ok) {
 				set = res.body
 				dispatch({type: CREATE_SET_SUCCESS, set})
+				localStorage.setItem('set_id', set.id)
 				dispatch(createAssignment(set.id))
 			} else {
 				dispatch({

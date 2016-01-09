@@ -106,7 +106,6 @@ export default class CreateSetPage extends Component {
 	componentWillMount() {
 		const { params, transfer, loadEditing, loadSetFlag, pushState, logged_in, importVisible, loc, user } = this.props;
 		if(logged_in) {
-			// localStorage.clear()
 			loadSetFlag()
 			if(loc.pathname.split('/')[2] == 'import') return;
 			if(Object.keys(params).length !== 0) { 
@@ -117,9 +116,9 @@ export default class CreateSetPage extends Component {
 				let refreshId = localStorage.getItem('set_id')
 				if(refreshId !== null) {
 					this.setState({ editing: true })
+					localStorage.clear()
 					loadEditing(Number(refreshId), pushState)
 					pushState(null, `/createset/${refreshId}`)
-					localStorage.clear()
 					return;
 				}
 				if(!user.editing_last_draft) return;
@@ -160,11 +159,6 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(this.props.set == null && nextProps.set !== null) {
-			if(localStorage.getItem('set_id') == null && !this.props.editing) {
-				localStorage.setItem('set_id', nextProps.set.id)
-			}
-		}
 		if(nextProps.editing && nextProps.set.finalized == null && !this.state.clickedToContinue) {
 			this.setState({
 				showAutosavePrompt: true

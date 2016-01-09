@@ -66,6 +66,7 @@ export default class Conversation extends Component {
 	}	
 
 	componentDidMount() {
+		$('body').addClass('chat')
 	}
 
 	handleNewSequence(call) {
@@ -83,10 +84,10 @@ export default class Conversation extends Component {
 		}
 	}
 
-
 	componentWillUnmount() {
 		const { clearLearn } = this.props;
 		clearLearn()
+		$('body').removeClass('chat')
 	}
 
 	render() {

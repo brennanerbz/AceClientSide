@@ -26,7 +26,7 @@ export default class TermRows extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		const { associations_length } = this.props;
-		if(nextProps.associations_length > associations_length) this.scrollToBottom()
+		if(nextProps.associations_length > associations_length && nextProps.associations_length > 5) this.scrollToBottom()
 	}
 
 	handleResize = () => {
