@@ -19,6 +19,9 @@ import * as user from '../actions/user';
 /* Velocity package */
 // require('velocity-animate');
 // require('velocity-animate/velocity.ui');
+require('ladda/dist/ladda-themeless.min.css');
+require('ladda/dist/ladda.min.js');
+require('ladda/dist/spin.min.js');
 
 @connect(
 	state => ({ 

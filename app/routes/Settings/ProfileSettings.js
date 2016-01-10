@@ -1,13 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames'; 
 import FileInput from 'react-file-input'
+// var ladda = require('ladda');
+import LaddaButton from 'react-ladda';
 
 export default class ProfileSettings extends Component {
 	static propTypes = {
 	}
 
 	state = {
-		dataURI: null
+		dataURI: null,
+		loading: false
 	}
 
 	handleUploadPhoto(e) {
@@ -23,6 +26,20 @@ export default class ProfileSettings extends Component {
 	    	this.props.uploadUserPhoto(dataURI)
 	    }
 	    reader.readAsDataURL(file);
+	}
+
+
+	handleSaveProfileChanges() {
+		this.setState({
+			loading: true
+		});
+		const { updateUser } = this.props;
+		updateUser()
+		setTimeout(() => {
+			this.setState({
+				loading: false
+			});
+		}, 1500)
 	}
 
 	render() {
@@ -96,11 +113,15 @@ export default class ProfileSettings extends Component {
 				</div>
 				<div className="profile_row">
 					<p className="settings_col top_margin bottom_margin span_2_of_3">
-						<button 
-						onClick={updateUser}
-						className="button primary ">
+						<LaddaButton 
+						onClick={::this.handleSaveProfileChanges}
+						loading={this.state.loading}
+						className="button primary"
+						buttonStyle="expand-right"
+						spinnerSize={28}
+						spinnerColor="#fff">
 						Save changes
-						</button>
+						</LaddaButton>
 					</p>
 				</div>
 				</div>

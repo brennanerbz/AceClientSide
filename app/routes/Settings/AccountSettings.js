@@ -1,8 +1,54 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames'; 
+import LaddaButton from 'react-ladda';
 
 export default class AccountSettings extends Component {
 	static propTypes = {
+	}
+
+	state = {
+		emailLoading: false,
+		passwordLoading: false,
+		deactivateLoading: false
+	}
+
+	handleEmailChange() {
+		this.setState({
+			emailLoading: true
+		});
+		// const { updateUser } = this.props;
+		// updateUser()
+		setTimeout(() => {
+			this.setState({
+				emailLoading: false
+			});
+		}, 1500)
+	}
+
+	handlePasswordChange() {
+		this.setState({
+			passwordLoading: true
+		});
+		// const { updateUser } = this.props;
+		// updateUser()
+		setTimeout(() => {
+			this.setState({
+				passwordLoading: false
+			});
+		}, 1500)
+	}
+
+	handleDeactivateAccount() {
+		this.setState({
+			deactivateLoading: true
+		});
+		// const { updateUser } = this.props;
+		// updateUser()
+		setTimeout(() => {
+			this.setState({
+				deactivateLoading: false
+			});
+		}, 1500)
 	}
 
 	render() {
@@ -21,7 +67,9 @@ export default class AccountSettings extends Component {
 						<h1>Change Email</h1>
 					</header>
 					<div className="box">
-						<form className="settings">
+						<form 
+						onSubmit={(e) => e.preventDefault()}
+						className="settings">
 							<h2>Email Address</h2>
 							<p>Your email is <strong>{user.email}</strong></p>
 							<label>
@@ -39,7 +87,16 @@ export default class AccountSettings extends Component {
 								className="text" 
 								name="newEmail"/>
 							</label>
-							<button onClick={updateUser} className="button primary">Update Email</button>
+							<LaddaButton 
+							onClick={::this.handleEmailChange}
+							loading={this.state.emailLoading}
+							className="button primary"
+							buttonStyle="expand-right"
+							spinnerSize={28}
+							spinnerColor="#fff">
+								Update Email
+							</LaddaButton>
+
 						</form>
 					</div>
 				</section>
@@ -49,7 +106,9 @@ export default class AccountSettings extends Component {
 						<h1>Change your Password</h1>
 					</header>
 					<div className="box">
-						<form className="settings">
+						<form 
+						onSubmit={(e) => e.preventDefault()}
+						className="settings">
 							<h2>Password</h2>
 							<label>
 								<strong>Current Password</strong>
@@ -67,7 +126,15 @@ export default class AccountSettings extends Component {
 								type="password" 
 								name="newPassword"/>
 							</label>
-							<button className="button primary">Save Password</button>
+							<LaddaButton 
+							onClick={::this.handlePasswordChange}
+							loading={this.state.passwordLoading}
+							className="button primary"
+							buttonStyle="expand-right"
+							spinnerSize={28}
+							spinnerColor="#fff">
+								Save Password
+							</LaddaButton>
 						</form>
 						<p className="reset_password">
 							If you forgot your password, you can <a>reset your password</a>.
@@ -83,7 +150,15 @@ export default class AccountSettings extends Component {
 						<form className="settings">
 							<h2>Deactivate your account</h2>
 							<p id="deactivate">Your material and files will be kept safe if your account is ever reactivated. </p>
-							<button className="button danger">Deactivate {user.username}</button>
+							<LaddaButton 
+							onClick={::this.handleDeactivateAccount}
+							loading={this.state.deactivateLoading}
+							className="button danger"
+							buttonStyle="expand-right"
+							spinnerSize={28}
+							spinnerColor="#fff">
+							Deactivate {user.username}
+							</LaddaButton>
 						</form>
 					</div>
 				</section>
