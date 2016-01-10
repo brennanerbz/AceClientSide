@@ -59,10 +59,11 @@ export default class Item extends Component {
 					mouseIsOver: false
 				})}>
 				{
-					this.props.studied !== null
+					this.props.studied !== false
 					&&
 					<ItemProgress 
 						_case={this.state.case}
+						studied={this.props.studied}
 						item={item}
 					/>
 				}

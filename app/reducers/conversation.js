@@ -460,7 +460,22 @@ export default function conversation(state = initial_convostate, action) {
 			}
 		case CLEAR_LEARN:
 			return {
-				...state = initial_convostate
+				...state = initial_convostate,
+				slots: [],
+				current_slot: {},
+				last_slot_id: 0,
+				slot_index: null,
+
+				trials: [],
+				previous_trial: {},
+				user_answer: null,
+				feedback: null,
+				current_trial: {},
+				trial: {},
+
+				messages: [],
+				messages_length: 0,
+				allMessagesRendered: false,
 			}
 		case RECEIVE_SEQUENCE_FAILURE:
 		case RECEIVE_SLOTS_FAILURE:

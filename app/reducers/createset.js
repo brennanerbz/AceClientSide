@@ -93,7 +93,7 @@ export var createState = {
   creator_username: '',
 
   order: 1,
-  last_index: 1,
+  last_index: 4,
   associations: {
     asc_0: {
       order: 1,
@@ -102,13 +102,25 @@ export var createState = {
     asc_1: {
       order: 2,
       index: 1
+    },
+    asc_2: {
+      order: 3,
+      index: 2
+    },
+    asc_3: {
+      order: 4,
+      index: 3
+    },
+    asc_4: {
+      order: 5,
+      index: 4
     }
   },
   items: {},
   associations_order: [
-    'asc_0', 'asc_1'
+    'asc_0', 'asc_1', 'asc_2', 'asc_3', 'asc_4'
   ],
-  associations_length: 2,
+  associations_length: 5,
 
   current_item: null,
   current_association: null,
@@ -313,7 +325,7 @@ export function createset(state = createState, action) {
       return {
         ...state,
         associations: associations,
-        order: state.order + 1,
+        order: order + 1,
         associations_order: associations_order,
         associations_length: associations_order.length
       }
@@ -428,7 +440,7 @@ export function createset(state = createState, action) {
       return {
         ...state = createState,
         order: 1,
-        last_index: 1,
+        last_index: 4,
         associations: {
           asc_0: {
             order: 1,
@@ -437,13 +449,25 @@ export function createset(state = createState, action) {
           asc_1: {
             order: 2,
             index: 1
+          },
+          asc_2: {
+            order: 3,
+            index: 2
+          },
+          asc_3: {
+            order: 4,
+            index: 3
+          },
+          asc_4: {
+            order: 5,
+            index: 4
           }
         },
         items: {},
         associations_order: [
-          'asc_0', 'asc_1'
+          'asc_0', 'asc_1', 'asc_2', 'asc_3', 'asc_4'
         ],
-        associations_length: 2,
+        associations_length: 5,
         cleared: true
       }
     case LOADING_SET: 

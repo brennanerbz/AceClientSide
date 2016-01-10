@@ -420,9 +420,21 @@ export function deleteAssignment(assignment_id, pushState, discardedAutoSave) {
 	}
 }
 
+var _default_sequence = {
+	assignment_id: null,
+	stars: false,
+	mode: 'conversation',
+	format: 'recall',
+	timing: 'off',
+	difficulty: 'intermediate',
+	adapation: true,
+	chances: true,
+	loop: true,
+	reverse_cue: false,
+	difficulty_chosen_by_user: false
+}
 export function newSequence(assignment_id, starred) {
 	return (dispatch, getState) => {
-		dispatch({type: REQUEST_LEARN})
 		let new_sequence = Object.assign({..._default_sequence}, {
 			assignment_id: assignment_id,
 			stars: starred

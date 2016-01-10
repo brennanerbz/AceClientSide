@@ -7,47 +7,14 @@ export default class ItemProgress extends Component {
 	static propTypes = {
 	}
 
-	renderNoAnswers(_case) {
-		return (
-			<span className="no_answers_yet">
-				No answers yet
-			</span>
-		)
+	state = {
+		renderedProgressCircle: false
 	}
 
-	renderNegative(_case) {
-		return (
-			<span className="score negative">
-				-
-				{ 
-					_case.total_incorrect - _case.total_correct
-				}
-			</span>
-		)
-	}
-
-	renderNeutral(_case) {
-		return (
-			<span className="score neutral">
-				{0}
-			</span>
-		)
-	}
-
-	renderPositive(_case) {
-		return (
-			<span className="score positive">
-				+
-				{
-					_case.total_correct - _case.total_incorrect
-				}
-			</span>
-		)
-	}
-
-	componentDidMount() {
-		let { item } = this.props,
-		value = Math.random().toFixed(2), color;
+	renderProgressCircle(_case, item) {
+		let value = _case.hypothesis.forecast !== false ? (_case.hypothesis.forecast[0][1] - 0.5) *2 : 0,
+		start_value = value !== 0 ? (_case.hypothesis.storage_strength - 0.5) *2 : 0,
+		color;
 		if(value <= 0.50) {
 			color = '#FF3C41'
 		}
@@ -61,39 +28,42 @@ export default class ItemProgress extends Component {
 			color = '#31B770'
 		}
 		$('.' + String(item.id)).circleProgress({
+			   animationStartValue: start_value > 0 ? start_value : 0,
 		       value: value,
 		       size: 36,
 		       lineCap: 'round',
+		       animation: {duration: 2500},
 		       fill: {
 		       		color: color
 		       }
 	    }).on('circle-animation-progress', function(event, progress, stepValue) {
 			$(this).find('strong').text(String(100 * stepValue).slice(0, 2).replace(".", ""))
-			if(value < 0.10) $(this).find('strong').css({left: '22px'})
+			if(value < 0.10) $(this).find('strong').css({left: '23px'})
 	    })
-	}	 
+	    this.setState({
+	    	renderedProgressCircle: true
+	    });
+	}
+
+	componentDidMount() {
+		let { _case, item } = this.props;
+		if(_case !== null) this.renderProgressCircle(_case, item)
+	}	
+
+	componentWillReceiveProps(nextProps) {
+		let { _case, item } = nextProps
+		if(_case !== null && !this.state.renderedProgressCircle) {
+			this.renderProgressCircle(_case, item)
+		}
+	} 
 
 	render() {
 		const { _case, item } = this.props;
-		if(_case !== undefined) {
-			let progress_key;
-			if(_case == null || (_case.total_correct === 0 && _case.total_incorrect === 0)) {
-				progress_key = 'no_answers'
-			} else if (_case.total_correct < _case.total_incorrect) {
-				progress_key = 'negative'
-			} else if (_case.total_correct > _case.total_incorrect) {
-				progress_key = 'positive'
-			} else if(_case.total_correct === _case.total_incorrect) {
-				progress_key = 'neutral'
-			}
-			return(
-				<div className={classnames("circle", String(item.id))}>
-					<strong></strong>
-				</div>
-			);
-		} else {
-			return;
-		}
+		return(
+			<div className={classnames("circle", String(item.id))}>
+				<strong></strong>
+			</div>
+		);
 	}
 }
 

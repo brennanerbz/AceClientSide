@@ -90,6 +90,7 @@ export default class ItemList extends Component {
 									 association={asc}
 									 item={asc.item} 
 									 _case={_case}
+									 studied={this.props.assignment.studied !== null ? true : false}
 									 updateCase={this.props.updateCase}
 									 pushState={pushState}
 									 isFetchingSupplemental={isFetchingSupplemental}

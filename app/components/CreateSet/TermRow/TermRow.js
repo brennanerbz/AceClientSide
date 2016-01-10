@@ -11,7 +11,7 @@ export default class TermRow extends Component {
 		is_mouse_over: false, 
 		active_row: false,
 		active_side: 0, /* 0 = 'term' & 1 = 'definition' */
-		total_count: 2,
+		total_count: 5,
 		terms: null,	
 		definitions: null,
 		term: null,
