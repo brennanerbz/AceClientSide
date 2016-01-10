@@ -10,6 +10,9 @@ import {
 	CREATE_ASSIGNMENT_SUCCESS
 } from '../actions/createset';
 
+import {
+	IMPORT_TEXT_SUCCESS
+} from '../actions/import';
 
 let init_state = {
 	isFetchingAssignments: false,
@@ -55,6 +58,17 @@ export default function sets(state = init_state, action) {
 				...state,
 				assignments: assignments,
 				sets: sets
+			}
+		case IMPORT_TEXT_SUCCESS:
+			let a = state.assignments, s = state.sets;
+			a.push(action.assignment)
+			a.forEach(a => {
+				s.push(a.set)
+			})
+			return {
+				...state,
+				assignments: a,
+				sets: s
 			}
 		case RECEIVE_ASSINGMENTS_FAILURE:
 		default:

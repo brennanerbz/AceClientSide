@@ -29,7 +29,7 @@ export default class TermRow extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		const { association, item, index, total_count, able_to_spark } = this.props;
 		this.setState({
 			index: index,

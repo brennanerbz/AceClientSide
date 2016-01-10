@@ -53,9 +53,10 @@ export default class CreateSetHeader extends Component {
 		/* ---------------------- */
 		if(nextProps.title.length > 0) this.setState({ full_error_message: false });
 		if(nextProps.associations !== null && nextProps.associations.length > 1) this.setState({item_error_message: false});
+		/* Import */
+		if(this.state.title == '' && nextProps.title !== undefined) this.setState({title: nextProps.title})
 	}
 	handleTitleChange = (title) => {
-		console.log(title)
 		this.setState({
 			title: title
 		});

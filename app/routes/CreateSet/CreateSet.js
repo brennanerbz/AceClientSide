@@ -159,7 +159,7 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.editing && nextProps.set.finalized == null && !this.state.clickedToContinue) {
+		if(nextProps.editing && (nextProps.set.finalized == null || nextProps.set.finalized == false) && !this.state.clickedToContinue) {
 			this.setState({
 				showAutosavePrompt: true
 			})
@@ -174,6 +174,13 @@ export default class CreateSetPage extends Component {
 		if(nextProps.title.length > 0 && Object.keys(nextProps.items).length >= 2) this.setState({fullErrorMessage: false})
 		if(nextProps.title.length > 0) this.setState({titleErrorMessage: false})
 		if(Object.keys(nextProps.items).length >= 2) this.setState({titleErrorMessage: false})
+
+		/* Import */
+		const { params, loadEditing, pushState } = this.props;
+		if(params.id == undefined && nextProps.params.id !== undefined) {
+			this.setState({ editing: true })
+			loadEditing(Number(nextProps.params.id), pushState)
+		} 
 	}
 
 	handleSave() {

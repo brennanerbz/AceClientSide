@@ -7,8 +7,8 @@ export default class TermContent extends Component {
 	}
 
     state = {
-        term: null,
-        definition: null,
+        term: '',
+        definition: '',
         triggered: false,
         asc_id: null
     }
@@ -21,6 +21,7 @@ export default class TermContent extends Component {
     }
 
     trigger(node1, node2) {
+        console.log('trigger fingers')
         $(node1).add(node2).trigger('input')
     }
 
@@ -61,7 +62,7 @@ export default class TermContent extends Component {
            this.setState({triggered: true}); 
         }
 
-        if(this.state.asc_id !== nextProps.asc_id) {
+        if(this.state.asc_id !== nextProps.asc_id || (this.state.asc_id == null && nextProps.asc_id !== null)) {
             this.setState({
                 asc_id: nextProps.asc_id
             })
@@ -76,6 +77,23 @@ export default class TermContent extends Component {
                     term: nextProps.association.item.target,
                     definition: nextProps.association.item.cue
                 });
+            }
+        }
+        if(nextProps.association !== undefined && nextProps.association !== null) {
+            /* Import */
+            if(nextProps.association.item !== undefined) {
+                if(this.state.term == '' && nextProps.association.item.target !== null) {
+                    this.setState({term: nextProps.association.item.target});
+                    setTimeout(() => {
+                        this.trigger(term_node, def_node)
+                    }, 100)                    
+                }
+                if(this.state.definition == ''  && nextProps.association.item.cue !== null) {
+                    this.setState({definition: nextProps.association.item.cue});
+                    setTimeout(() => {
+                        this.trigger(term_node, def_node)
+                    }, 100)
+                }
             }
         }
     } 
