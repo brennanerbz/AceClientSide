@@ -70,7 +70,7 @@ export default class Settings extends Component {
 
 
 	render() {
-		let { user, pushState } = this.props,
+		let { user, pushState, location } = this.props,
 			  member_image = require('../../assets/message_profile_pic.png'),
 			  { welcomeWord, activeTab } = this.state,
 			  settingsChildrenWithProps = React.Children.map(this.props.children, (child) => {
@@ -85,8 +85,12 @@ export default class Settings extends Component {
 		return(
 			<div className="main_content settings_page">
 				<h1 className="welcome_user">
-					<img src={member_image} className="member_image thumb_32"/>
-					{welcomeWord}, {user.first_name}
+					<span className="octicon user"></span>
+					{
+						location.pathname == '/settings'
+						? 'Account Settings'
+						: 'Edit Profile '
+					} 
 				</h1>
 				<div className="tabs_container">
 					<ul className="tabs_list">
@@ -117,3 +121,8 @@ export default class Settings extends Component {
 		);
 	}
 }
+
+/*
+<img src={member_image} className="member_image thumb_32"/>
+{welcomeWord}, {user.first_name}
+*/

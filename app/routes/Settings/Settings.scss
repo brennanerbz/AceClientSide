@@ -14,6 +14,18 @@
 		margin-right: 1rem;
 		margin-top: 0px;
 	}
+	.octicon {
+		font-family: FontAwesome;
+		&.user {
+			&:before {
+				margin-right: 10px;
+				font-size: 25px;
+				color: #888!important;
+				opacity: 0.6;
+				content: '\f013'
+			}
+		}
+	}
 }
 
 .user_settings {

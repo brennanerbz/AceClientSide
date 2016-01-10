@@ -143,35 +143,22 @@ export function fetchUser() {
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE'
-export function updateUser(udpatedUser) {
+export function updateUser(updatedUser, password) {
 	return (dispatch, getState) => {
-		dispatch({type: REQUEST_USER})
 		request
 		.put(`${api_url}/users/${updatedUser.id}`)
-		.send(udpatedUser)
+		.send(updatedUser)
 		.end((err, res) => {
 			if(res.ok) {
-				user = {}
-				user = Object.assign({...res.body})
+				let user = res.body;
 				delete user['password']
-				dispatch({type: RECEIVE_USER_SUCCESS, user})
-				dispatch({type: REQUEST_ASSIGNMENTS })
-				request
-				.get(`${api_url}/users/${user.id}/assignments/`) 
-				.end((err, res) => {
-					if(res.ok) {
-						let assignments = res.body.assignments;
-						dispatch({type: RECEIVE_ASSIGNMENTS_SUCCESS, assignments })
-					}
-				})
-				return true
+				dispatch({type: UPDATE_USER_SUCCESS, user})
 			}
 			else {
 				dispatch({
-					type: RECEIVE_USER_FAILURE,
+					type: UPDATE_USER_FAILURE,
 					error: Error(err)
 				})
-				return false;
 			}
 		})
 	}

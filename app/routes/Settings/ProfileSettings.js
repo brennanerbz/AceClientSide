@@ -96,7 +96,11 @@ export default class ProfileSettings extends Component {
 				</div>
 				<div className="profile_row">
 					<p className="settings_col top_margin bottom_margin span_2_of_3">
-						<button className="button primary">Save changes</button>
+						<button 
+						onClick={updateUser}
+						className="button primary ">
+						Save changes
+						</button>
 					</p>
 				</div>
 				</div>

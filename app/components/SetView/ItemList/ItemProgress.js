@@ -30,7 +30,7 @@ export default class ItemProgress extends Component {
 		$('.' + String(item.id)).circleProgress({
 			   animationStartValue: start_value > 0 ? start_value : 0,
 		       value: value,
-		       size: 36,
+		       size: 38,
 		       lineCap: 'round',
 		       animation: {duration: 2500},
 		       fill: {
@@ -38,7 +38,7 @@ export default class ItemProgress extends Component {
 		       }
 	    }).on('circle-animation-progress', function(event, progress, stepValue) {
 			$(this).find('strong').text(String(100 * stepValue).slice(0, 2).replace(".", ""))
-			if(value < 0.10) $(this).find('strong').css({left: '23px'})
+			if(value < 0.10) $(this).find('strong').css({left: '24.5px'})
 	    })
 	    this.setState({
 	    	renderedProgressCircle: true
