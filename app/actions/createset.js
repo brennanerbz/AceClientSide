@@ -22,6 +22,7 @@ export function fetchSet(user_id, set_id, pushState) {
 			}
 			let set = {}, items = {}, associations = {}, associations_order = [],
 			assignment = await getState().sets.assignments.filter(assign => assign.set_id == set_id)[0]
+			console.log(assignment)
 			await axios.get(`${api_url}/sets/${set_id}`).then(res => { 
 				set = res.data 
 			})
@@ -65,39 +66,18 @@ export const LOAD_EDITING = 'LOAD_EDITING';
 export const LOAD_EDITING_SUCCESS = 'LOAD_EDITING_SUCCESS';
 export const LOAD_EDITING_FAILURE = 'LOAD_EDITING_FAILURE';
 export function loadEditing(set_id, pushState) {
-	return async(dispatch, getState) => {
+	return (dispatch, getState) => {
 		dispatch({ type: LOAD_EDITING, true })
 		try {
-			let transferState = getState().transfer,
-				user = getState().user.user,
+			if(getState().user.isFetchingUser || getState().sets.isFetchingAssignments) {
+				setTimeout(() => {
+					dispatch(loadEditing(set_id, pushState))
+				}, 250)
+				return;
+			}
+			let user = getState().user.user,
 				set, assignment, items = {}, associations = {}, associations_order = [];
-			if(transferState.set !== null && transferState.set !== undefined) {
-				if(transferState.set.id == set_id) {
-					set = transferState.set
-					assignment = transferState.assignment
-					transferState.associations.forEach(asc => {
-						let root_asc_name = 'asc_' + i
-						items[asc.item_id] = asc.item
-						associations[root_asc_name] = {
-							association: asc,
-							item: asc.item,
-							item_id: asc.item_id,
-							order: i + 1,
-							index: i
-						}
-						associations_order.push(root_asc_name)
-					})
-					if(set.editability == 'creator' && set.creator_id !== user.id) {
-						pushState(null, '/error')
-						return;
-					}
-					setTimeout(() => {
-						dispatch({ type: LOAD_EDITING_SUCCESS, set, assignment, items, associations, associations_order })
-					}, 50)
-				}
-			} else {
 				dispatch(fetchSet(user.id, set_id, pushState))
-			}	
 		} catch(err) {
 			pushState(null, '/error')
 			dispatch({

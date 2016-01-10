@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames'; 
 import LaddaButton from 'react-ladda';
+import Modal from '../../components/Modal/modal';
+
 
 export default class AccountSettings extends Component {
 	static propTypes = {
@@ -9,6 +11,7 @@ export default class AccountSettings extends Component {
 	state = {
 		emailLoading: false,
 		passwordLoading: false,
+		deactivateModalOpen: false,
 		deactivateLoading: false
 	}
 
@@ -42,11 +45,13 @@ export default class AccountSettings extends Component {
 		this.setState({
 			deactivateLoading: true
 		});
-		// const { updateUser } = this.props;
-		// updateUser()
+		// const { updateUser } = this.props,
+		// deactivatedUser = { deactivated: true }
+		// updateUser(deactivatedUser)
 		setTimeout(() => {
 			this.setState({
-				deactivateLoading: false
+				deactivateLoading: false,
+				deactivateModalOpen: false
 			});
 		}, 1500)
 	}
@@ -61,6 +66,14 @@ export default class AccountSettings extends Component {
 		{ user, enterPassword, changeUser, updateUser } = this.props;
 		return(
 			<article className="user_settings">
+				<Modal 
+					open={this.state.deactivateModalOpen}
+					closeModal={() => this.setState({deactivateModalOpen: false})}
+					deactivateAccount={true}
+					handleDeactivateAccount={::this.handleDeactivateAccount}
+					deactivateLoading={this.state.deactivateLoading}
+					type="confirm"
+				/>
 				<section className="setting">
 					<header className="title">
 						<img  src={email} />
@@ -147,18 +160,16 @@ export default class AccountSettings extends Component {
 						<h1>Deactivate Account</h1>
 					</header>
 					<div className="box">
-						<form className="settings">
+						<form 
+						onSubmit={(e) => e.preventDefault()}
+						className="settings">
 							<h2>Deactivate your account</h2>
 							<p id="deactivate">Your material and files will be kept safe if your account is ever reactivated. </p>
-							<LaddaButton 
-							onClick={::this.handleDeactivateAccount}
-							loading={this.state.deactivateLoading}
-							className="button danger"
-							buttonStyle="expand-right"
-							spinnerSize={28}
-							spinnerColor="#fff">
-							Deactivate {user.username}
-							</LaddaButton>
+							<button 
+							onClick={() => this.setState({deactivateModalOpen: true})}
+							className="button danger">
+								Deactivate account
+							</button>
 						</form>
 					</div>
 				</section>

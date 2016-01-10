@@ -123,7 +123,7 @@ export default class CreateSetPage extends Component {
 				}
 				if(!user.editing_last_draft) return;
 				let asgns = this.props.assignments
-				.filter(a => a.set.finalized == null)
+				.filter(a => a.set.finalized == null || a.set.finalized == false)
 				if(asgns == undefined || asgns.length === 0) return;
 				let sorted_asgns = asgns
 				.sort((a, b) => {

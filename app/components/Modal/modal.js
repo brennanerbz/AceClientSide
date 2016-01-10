@@ -5,6 +5,8 @@ require('../../routes/Import/Import.scss')
 
 import SignUpForm from '../../routes/LandingPage/SignUpForm';
 import ImportModal from './ImportModal';
+import LaddaButton from 'react-ladda';
+
 
 export default class Modal extends Component {
 	static propTypes = {
@@ -40,11 +42,14 @@ export default class Modal extends Component {
 				this.setState({type: null, dynamic: false})
 			})
 		}
+		if(this.props.open && !nextProps.open) {
+			$(this.refs.modal).modal('hide')
+		}
 	}
 
-	shouldComponentUpdate(nextProps) {
-		return !(!nextProps.open && !this.props.open)
-	}
+	// shouldComponentUpdate(nextProps) {
+	// 	return !(!nextProps.open && !this.props.open)
+	// }
 	
 	componentDidUpdate(prevProps) {
 		if((!prevProps.open && this.props.open) ) {
@@ -226,7 +231,16 @@ export default class Modal extends Component {
 	renderConfirmBody() {
 		return (
 			<div className="modal-body">
-				<p>Are you sure you want to delete this set permanently?</p>
+				{
+					!this.props.deactivateAccount
+					&&
+					<p>Are you sure you want to delete this set permanently?</p>
+				}
+				{
+					this.props.deactivateAccount
+					&&
+					<p>Are you sure you want to deactivate your account?</p>
+				}
 			</div>
 		)
 	}
@@ -290,7 +304,7 @@ export default class Modal extends Component {
 	}
 
 	render() {
-		const { assignment, pushState, deleteAssignment, set } = this.props,
+		const { assignment, pushState, deleteAssignment, set, deactivateAccount} = this.props,
 			  { type, dynamic } = this.state;
 		return(
 			<div ref="modal" 
@@ -349,8 +363,13 @@ export default class Modal extends Component {
 								: null
 							}
 							{
-								type == 'confirm'
+								type == 'confirm' && !deactivateAccount
 								? 'Delete set'
+								: null
+							}
+							{
+								type == 'confirm' && deactivateAccount
+								? 'Deactivate account'
 								: null
 							}
 							{
@@ -455,7 +474,7 @@ export default class Modal extends Component {
 								</button>
 							}
 							{
-								type == 'confirm'
+								type == 'confirm' && !deactivateAccount
 								?
 								<button className="button button-danger" 
 										data-dismiss="modal"
@@ -466,6 +485,21 @@ export default class Modal extends Component {
 									Delete set
 								</button>
 								: null
+							}
+							{
+								type == 'confirm' && deactivateAccount
+								&&
+								<LaddaButton
+									onClick={() => {
+										this.props.handleDeactivateAccount()
+									}}
+									loading={this.props.deactivateLoading}
+									className="button danger"
+									buttonStyle="expand-right"
+									spinnerSize={30}
+									spinnerColor="#fff">
+								Yes, deactivate account
+								</LaddaButton>
 							}
 						</div>
 					}

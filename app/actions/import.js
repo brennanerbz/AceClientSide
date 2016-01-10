@@ -16,16 +16,22 @@ export const IMPORT_TEXT_FAILURE = 'IMPORT_TEXT_FAILURE';
 export function importText(text, pushState) {
 	return(dispatch, getState) => {
 		dispatch({type: IMPORT_TEXT})
-		let set;
+		let assignment, 
+		user = getState().user.user, 
+		importData = { 
+			creator_id: user.id,
+			text: text,
+			subjects: ['Psychology']
+		};
 		request
-		.post(`${api_url}/import`)
-		.send(text)
+		.post(`${api_url}/content/from-text`)
+		.send(importData)
 		.end((err, res) => {
 			if(res.ok) {
-				set = res.body;
-				dispatch({type: IMPORT_TEXT_SUCCESS, set})
+				assignment = res.body;
+				dispatch({type: IMPORT_TEXT_SUCCESS, assignment})
 				setTimeout(() => {
-					pushState(null, `/createset/${set.id}`)
+					pushState(null, `/createset/${assignment.set_id}`)
 				}, 500)
 			} else {
 				dispatch({

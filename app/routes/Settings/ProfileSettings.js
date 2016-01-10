@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames'; 
 import FileInput from 'react-file-input'
-// var ladda = require('ladda');
 import LaddaButton from 'react-ladda';
 
 export default class ProfileSettings extends Component {

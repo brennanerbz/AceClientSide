@@ -1,16 +1,46 @@
 import React, { Component, PropTypes } from 'react';
 import ScrollBar from '../Conversation/ScrollBar/ScrollBar';
+import LaddaButton from 'react-ladda';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
+
+import * as importActions from '../../actions/import'
+
+@connect(state => ({
+		// importingText: state.import.importingText
+	}),
+	dispatch => ({
+		...bindActionCreators({
+			...importActions,
+			pushState
+		}, dispatch)
+	})
+)
 export default class ImportModal extends Component {
 	static propTypes = {
 	}
 
 	state = {
-		type: ''
+		importingText: false,
+		type: '',
+		text: ''
 	}
 
 	handleSnippetSubmit() {
-		
+		this.setState({
+			importingText: true
+		});
+		const { importText, pushState } = this.props,
+		{ text } = this.state;
+		importText(text, pushState)
+		setTimeout(() => {
+			this.setState({
+				importingText: false
+			});
+			$(this.refs.importModal).modal('hide')
+		}, 5500)
 	}
 
 	componentDidMount() {
@@ -94,6 +124,7 @@ export default class ImportModal extends Component {
 							<textarea 
 							ref="importModalTextArea"
 							autoFocus={true}
+							onChange={(e) => this.setState({text: e.target.value})}
 							name="content"
 							wrap="virtual"
 							id="text_snippet_textarea"
@@ -111,13 +142,15 @@ export default class ImportModal extends Component {
 					onClick={this.props.closeModal}>
 						Cancel
 					</button>
-					<button 
+					<LaddaButton 
+					onClick={::this.handleSnippetSubmit}
+					loading={this.state.importingText}
 					className="button primary"
-					data-dismiss="modal"
-					data-target="#importModal"
-					onClick={::this.handleSnippetSubmit}>
+					buttonStyle="expand-right"
+					spinnerSize={28}
+					spinnerColor="#fff">
 						Transform text
-					</button>
+					</LaddaButton>
 					</div>
 					</div>
 				</div>
