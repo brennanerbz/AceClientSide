@@ -216,7 +216,7 @@ export default class CreateSetPage extends Component {
 		}
 		if((set && assignment) !== null) {
 			localStorage.clear()
-			if(set.finalized == null) updateSet(set, {name: 'finalized', prop: true})
+			if(set.finalized == null || set.finalized == false) updateSet(set, {name: 'finalized', prop: true})
 			newSequence(assignment.id, false)
 			updateUserDraftStatus(false)
 			pushState(null, `/set/${set.id}`)

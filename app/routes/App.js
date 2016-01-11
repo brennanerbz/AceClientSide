@@ -13,6 +13,7 @@ import SideNav from '../components/SideNav/SideNav';
 import LandingPage from './LandingPage/LandingPage';
 import Home from './Home/Home';
 import LoadingZone from '../components/LoadingZone/LoadingZone';
+import ImportModal from '../components/Modal/ImportModal';
 /* Actions */
 import * as actions from '../actions/usersets';
 import * as user from '../actions/user';
@@ -49,7 +50,8 @@ export default class FlunkApp extends Component {
 		show_notification: false,
 		error_msg: false,
 		error_type: 0,
-		success_msg: false
+		success_msg: false,
+		openImportModal: false
 	}
 
 	onlinePoll = {}
@@ -120,10 +122,17 @@ export default class FlunkApp extends Component {
 					rendered={showLoadingZone}
 				/>
 				<div className={classnames('main_app', {'rendered': !showLoadingZone})}>
-					<Header root_path={root_path}/>
+					<Header 
+					root_path={root_path}
+					openImportModal={() => this.setState({openImportModal: true})}/>
 					<div className={classnames("outer_shell", {
 						"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
 					})}>
+						<ImportModal
+						open={this.state.openImportModal}
+						closeModal={() => this.setState({openImportModal: false})}
+						type="import"
+						/>
 						{::this.renderSideNav()}
 						{childrenWithProps}
 					</div>

@@ -9,7 +9,7 @@ import { pushState } from 'redux-router';
 import * as importActions from '../../actions/import'
 
 @connect(state => ({
-		// importingText: state.import.importingText
+		isImporting: state.importState.isImporting
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -23,24 +23,14 @@ export default class ImportModal extends Component {
 	}
 
 	state = {
-		importingText: false,
 		type: '',
 		text: ''
 	}
 
 	handleSnippetSubmit() {
-		this.setState({
-			importingText: true
-		});
 		const { importText, pushState } = this.props,
 		{ text } = this.state;
 		importText(text, pushState)
-		setTimeout(() => {
-			this.setState({
-				importingText: false
-			});
-			$(this.refs.importModal).modal('hide')
-		}, 5500)
 	}
 
 	componentDidMount() {
@@ -59,10 +49,15 @@ export default class ImportModal extends Component {
 		if(!this.props.open && nextProps.open) {
 			$(this.refs.importModal).modal()
 		}
+		if(this.props.isImporting && !nextProps.isImporting) {
+			this.setState({
+				text: ''
+			});
+			$(this.refs.importModal).modal('hide')
+		}
 	}
 
 	componentWillUnmount() {
-		// $(this.refs.importModal).modal('hide')
 		this.props.closeModal()
 	}
 
@@ -127,6 +122,7 @@ export default class ImportModal extends Component {
 							onChange={(e) => this.setState({text: e.target.value})}
 							name="content"
 							wrap="virtual"
+							value={this.state.text}
 							id="text_snippet_textarea"
 							className="text_snippet_textarea full_width text_snippet"
 							placeholder="Copy and Paste any piece of text (from your class notes, slides, an article or website, etc...)"/>
@@ -144,7 +140,7 @@ export default class ImportModal extends Component {
 					</button>
 					<LaddaButton 
 					onClick={::this.handleSnippetSubmit}
-					loading={this.state.importingText}
+					loading={this.props.isImporting}
 					className="button primary"
 					buttonStyle="expand-right"
 					spinnerSize={28}
