@@ -280,6 +280,7 @@ export function createset(state = createState, action) {
     case DELETE_ASSIGNMENT_SUCCESS:
       return {
         ...state = createState,
+        subjects: [],
         isLoadingSet: false
       }
     case CREATE_ITEM:
