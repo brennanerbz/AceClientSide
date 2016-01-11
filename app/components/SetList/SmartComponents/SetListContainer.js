@@ -132,7 +132,7 @@ class SetListSections extends Component {
 			? moment.utc(assignment.studied).format() 
 			: moment.utc(assignment.creation).format()
 			diff = today_date.diff(study_date, 'days')
-			if(assignment.set.finalized == null) {
+			if(assignment.set.finalized == null || assignment.set.finalized == false) {
 				sections.drafts.push(assignment)
 			}
 			else if(diff == 0) {

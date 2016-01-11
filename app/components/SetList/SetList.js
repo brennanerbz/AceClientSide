@@ -61,7 +61,7 @@ export default class SetList extends Component {
 					                  key={'day' + i}
 					                  {...this.props}/>)
 			}
-			if(_sets[i].finalized !== null) {
+			if(_sets[i].finalized !== null || _sets[i].finalized == false) {
 				rows.push(<SetListItem set={_sets[i]}
 									   draft={false}							   
 									   setActiveRow={this.setActiveRow}

@@ -60,13 +60,13 @@ export default class TermRow extends Component {
 	    	return;
 	    }
 	    if(item !== undefined 
-	    	&& (item.target == null || item.target.toLowerCase().trim() !== term.toLowerCase().trim() )
+	    	&& (item.target == null || item.target !== term )
 	    	&& (item.finalized == null || item.finalized == false)) {
 	    	updateItem(item, {name: 'target', prop: term})
 	    	return;
 	    }
 	    if(item !== undefined
-	    	&& item.target.toLowerCase().trim() !== term.toLowerCase().trim()
+	    	&& item.target !== term
 	    	&& item.finalized) {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 
@@ -87,13 +87,13 @@ export default class TermRow extends Component {
 	    	return;
 	    }
 	    if(item !== undefined 
-	    	&& (item.cue == null || item.cue.toLowerCase().trim() !== def.toLowerCase().trim())
+	    	&& (item.cue == null || item.cue !== def)
 	    	&& (item.finalized == null || item.finalized == false)) {
 	    	updateItem(item, {name: 'cue', prop: def})
 	    	return;
 	    }
 	    if(item !== undefined
-	    	&& item.cue.toLowerCase().trim() !== def.toLowerCase().trim()
+	    	&& item.cue !== def
 	    	&& item.finalized) {
 	    	createItem(index, 
 	    		{name: 'child', prop: item}, 

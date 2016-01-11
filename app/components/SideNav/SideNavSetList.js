@@ -35,7 +35,7 @@ export default class SetList extends Component {
 			return (moment(set1.creation).isBefore(set2.creation)) ? -1 : 1
 		})
 		assignments = assignments
-		.filter(ass => ass.set.finalized !== null)
+		.filter(ass => ass.set.finalized !== null || ass.set.finalized == false)
 		.filter(a => !a.deleted)
 		.sort((a1, a2) => {
 			return (moment(a1.studied).isBefore(a2.studied)) ? 1 : -1
