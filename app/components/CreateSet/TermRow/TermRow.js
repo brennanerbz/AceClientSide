@@ -61,7 +61,7 @@ export default class TermRow extends Component {
 	    }
 	    if(item !== undefined 
 	    	&& (item.target == null || item.target.toLowerCase().trim() !== term.toLowerCase().trim() )
-	    	&& item.finalized == null) {
+	    	&& (item.finalized == null || item.finalized == false)) {
 	    	updateItem(item, {name: 'target', prop: term})
 	    	return;
 	    }
@@ -88,7 +88,7 @@ export default class TermRow extends Component {
 	    }
 	    if(item !== undefined 
 	    	&& (item.cue == null || item.cue.toLowerCase().trim() !== def.toLowerCase().trim())
-	    	&& item.finalized == null) {
+	    	&& (item.finalized == null || item.finalized == false)) {
 	    	updateItem(item, {name: 'cue', prop: def})
 	    	return;
 	    }

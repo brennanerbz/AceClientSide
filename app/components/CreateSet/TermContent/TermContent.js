@@ -11,7 +11,8 @@ export default class TermContent extends Component {
         definition: '',
         triggered: false,
         asc_id: null,
-        item_id: null
+        item_id: null,
+        hasBeenActive: false
     }
 
     loadItem(item) {
@@ -20,13 +21,6 @@ export default class TermContent extends Component {
             if(item.cue !== null) this.setState({ definition: item.cue })
             if(item.id !== null) this.setState({item_id: item.id})
         }
-        // } else if (item == undefined) {
-        //     this.setState({
-        //         term: '',
-        //         definition: '',
-        //         item_id: null
-        //     });
-        // }
     }
 
     trigger(node1, node2) {
@@ -92,23 +86,39 @@ export default class TermContent extends Component {
                     }, 100)  
             }
         } 
-
-        if(nextProps.association !== undefined && nextProps.association !== null) {
-            if(nextProps.association.item !== undefined) {
-                if(this.state.term == '' && this.state.term.length == 0 && nextProps.association.item.target !== null) {
-                    this.setState({term: nextProps.association.item.target});
-                    setTimeout(() => {
-                        this.trigger(term_node, def_node)
-                    }, 100)                    
-                }
-                if(this.state.definition == '' && this.state.term.length == 0 && nextProps.association.item.cue !== null) {
-                    this.setState({definition: nextProps.association.item.cue});
-                    setTimeout(() => {
-                        this.trigger(term_node, def_node)
-                    }, 100)
-                }
-            }
+        if(!this.state.hasBeenActive) {
+           if(nextProps.association !== undefined && nextProps.association !== null) {
+               if(nextProps.association.item !== undefined) {
+                   if(this.state.term == '' && this.state.term.length == 0 && nextProps.association.item.target !== null) {
+                       this.setState({term: nextProps.association.item.target});
+                       setTimeout(() => {
+                           this.trigger(term_node, def_node)
+                       }, 100)                    
+                   }
+                   if(this.state.definition == '' && this.state.term.length == 0 && nextProps.association.item.cue !== null) {
+                       this.setState({definition: nextProps.association.item.cue});
+                       setTimeout(() => {
+                           this.trigger(term_node, def_node)
+                       }, 100)
+                   }
+               }
+           } 
         }
+        // if((this.state.item_id == null && nextProps.item !== undefined)) {
+        //     this.setState({
+        //         item_id: nextProps.item_id
+        //     });
+        // } else if(this.state.item_id !== null && nextProps.item == undefined) {
+        //     this.setState({
+        //         item_id: null
+        //     });
+        // } else if(this.state.item_id !== null && nextProps.item !== undefined) {
+        //     if(this.state.item_id !== nextProps.item_id) {
+        //         this.setState({
+        //             item_id: nextProps.item_id
+        //         });
+        //     }
+        // }
 
         /*
         if(this.state.item_id == null && nextProps.item !== undefined) {
@@ -176,13 +186,20 @@ export default class TermContent extends Component {
                             onChange={(e) =>{
                                 this.setState({term: e.target.value});
                                 this.props.changeTerm(e.target.value)
+                                if(!this.state.hasBeenActive) {
+                                    this.setState({hasBeenActive: true})
+                                }
                             }}
                             onInput={(e) => {
 
                             }}
                             onBlur={() => {
-                                if(this.state.term !== '' && this.state.term.length > 0) {
-                                    this.props.saveTerm(this.state.term) 
+                                if(this.state.hasBeenActive) {
+                                    this.props.saveTerm(this.state.term)
+                                } else {
+                                    if(this.state.term !== '' && this.state.term.length > 0) {
+                                        this.props.saveTerm(this.state.term) 
+                                    }
                                 }
                                 this.props.deactivateRow()
                             }}
@@ -216,11 +233,17 @@ export default class TermContent extends Component {
                             onChange={(e) =>{
                                 this.setState({definition: e.target.value});
                                 this.props.changeDef(e.target.value)
-
+                                if(!this.state.hasBeenActive) {
+                                    this.setState({hasBeenActive: true})
+                                }
                             }}
                             onBlur={() => {
-                                if(this.state.definition !== '' && this.state.definition.length > 0){
-                                   this.props.saveDefinition(this.state.definition) 
+                                if(this.state.hasBeenActive) {
+                                    this.props.saveDefinition(this.state.definition)
+                                } else {
+                                    if(this.state.definition !== '' && this.state.definition.length > 0){
+                                       this.props.saveDefinition(this.state.definition) 
+                                    }
                                 }
                                 this.props.deactivateRow()
                             }}
