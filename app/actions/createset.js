@@ -22,7 +22,6 @@ export function fetchSet(user_id, set_id, pushState) {
 			}
 			let set = {}, items = {}, associations = {}, associations_order = [],
 			assignment = await getState().sets.assignments.filter(assign => assign.set_id == set_id)[0]
-			console.log(assignment)
 			await axios.get(`${api_url}/sets/${set_id}`).then(res => { 
 				set = res.data 
 			})
@@ -34,6 +33,7 @@ export function fetchSet(user_id, set_id, pushState) {
 				let root_asc_name = 'asc_' + i
 				items[asc.item_id] = asc.item
 				associations[root_asc_name] = {
+					id: asc.id,
 					association: asc,
 					item: asc.item,
 					item_id: asc.item_id,

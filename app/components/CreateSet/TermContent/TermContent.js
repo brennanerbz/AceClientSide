@@ -60,6 +60,7 @@ export default class TermContent extends Component {
            this.trigger(term_node, def_node)
            this.setState({triggered: true}); 
         }
+        // if the current state doesn't equal the incoming props, then change to the props with loadItem
 
         if(this.state.asc_id !== nextProps.asc_id) {
             this.setState({
@@ -82,10 +83,13 @@ export default class TermContent extends Component {
                 setTimeout(() => {
                     this.trigger(term_node, def_node)
                 }, 100)
-            }
-        } 
+            } 
+        }
+        
+        //Is there a general rule that can be applied to all updates / changes? 
+        // How do we check that there has been a change and either fill the content with incoming or empty string?
+        
         if(nextProps.association !== undefined && nextProps.association !== null) {
-            /* Import */
             if(nextProps.association.item !== undefined) {
                 if(this.state.term == null && nextProps.association.item.target !== null) {
                     this.setState({term: nextProps.association.item.target});
@@ -101,6 +105,7 @@ export default class TermContent extends Component {
                 }
             }
         }
+
     } 
     render() {
         const { active_row, index } = this.props;

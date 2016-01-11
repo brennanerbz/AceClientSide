@@ -96,23 +96,18 @@ export var createState = {
   last_index: 4,
   associations: {
     asc_0: {
-      order: 1,
       index: 0
     },
     asc_1: {
-      order: 2,
       index: 1
     },
     asc_2: {
-      order: 3,
       index: 2
     },
     asc_3: {
-      order: 4,
       index: 3
     },
     asc_4: {
-      order: 5,
       index: 4
     }
   },
@@ -202,7 +197,6 @@ export function createset(state = createState, action) {
       else if(incoming_asc_order.length > 1) {
         next_order = incoming_associations[incoming_asc_order.slice(-1)[0]].order + 1 
       }
-      // console.log(incoming_asc_order.length)
       return {
         ...state,
         editing: true,
@@ -217,7 +211,7 @@ export function createset(state = createState, action) {
         associations_order: incoming_asc_order,
         associations_length: incoming_asc_order.length,
         order: next_order,
-        last_index: incoming_asc_order.length,
+        last_index: incoming_asc_order.length - 1,
         deleted: false,
         subjects: _subjects,
         isLoadingSet: false
@@ -381,9 +375,8 @@ export function createset(state = createState, action) {
           ascs = Object.assign({}, state.associations),
           new_asc = 'asc_' + Number(state.last_index + 1) 
       asc_order.push(new_asc)
-      ascs[new_asc] = {
-        index: state.last_index + 1,
-      }
+      ascs[new_asc] = {}
+      ascs[new_asc]['index'] = state.last_index + 1
       return {
         ...state,
         activeRow: asc_order.indexOf(new_asc),
@@ -444,23 +437,18 @@ export function createset(state = createState, action) {
         last_index: 4,
         associations: {
           asc_0: {
-            order: 1,
             index: 0
           },
           asc_1: {
-            order: 2,
             index: 1
           },
           asc_2: {
-            order: 3,
             index: 2
           },
           asc_3: {
-            order: 4,
             index: 3
           },
           asc_4: {
-            order: 5,
             index: 4
           }
         },
@@ -472,12 +460,14 @@ export function createset(state = createState, action) {
         cleared: true
       }
     case LOADING_SET: 
+
       return {
         ...state,
         isLoadingSet: true,
         cleared: false
       }
     case LOADED_VIEW:
+
       return {
         ...state,
         isLoadingSet: false

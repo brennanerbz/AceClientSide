@@ -276,7 +276,7 @@ export default class CreateSetPage extends Component {
 	}	
 
 	render() {
-		const { isLoadingSet, rendered, editing, set, user, assignment, pushState } = this.props,
+		const { isLoadingSet, rendered, editing, set, user, assignment, pushState, associations } = this.props,
 		{ showAutosavePrompt } = this.state;
 		return(
 			<DocumentTitle title="Create | Ace">
