@@ -52,7 +52,7 @@ export default class TextareaAutosize extends Component {
 	  if (this.getValue(nextProps) !== this.getValue(this.props)) {
 	    this.dispatchEvent(UPDATE, true);
 	  }
-	  if(this.state.title == '' && nextProps.title !== undefined && nextProps.title !== null && nextProps.title.length > 0) this.setState({title: nextProps.title})
+	  // if(this.state.title == '' && nextProps.title !== undefined && nextProps.title !== null && nextProps.title.length > 0) this.setState({title: nextProps.title})
 	}
 
 	componentWillUnmount() {

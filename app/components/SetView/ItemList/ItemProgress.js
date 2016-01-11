@@ -12,8 +12,8 @@ export default class ItemProgress extends Component {
 	}
 
 	renderProgressCircle(_case, item) {
-		let value = _case.hypothesis.forecast !== false ? (_case.hypothesis.forecast[0][1] - 0.5) *2 : 0,
-		start_value = value !== 0 ? (_case.hypothesis.storage_strength - 0.5) *2 : 0,
+		let value = _case.hypothesis.forecast !== false ? _case.hypothesis.forecast[0][1] : 0,
+		start_value = value !== 0 ? _case.hypothesis.storage_strength : 0,
 		color;
 		if(value <= 0.50) {
 			color = '#FF3C41'

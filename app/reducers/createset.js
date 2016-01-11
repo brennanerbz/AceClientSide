@@ -96,18 +96,23 @@ export var createState = {
   last_index: 4,
   associations: {
     asc_0: {
+      order: 1,
       index: 0
     },
     asc_1: {
+      order: 2,
       index: 1
     },
     asc_2: {
+      order: 3,
       index: 2
     },
     asc_3: {
+      order: 4,
       index: 3
     },
     asc_4: {
+      order: 5,
       index: 4
     }
   },
@@ -437,18 +442,23 @@ export function createset(state = createState, action) {
         last_index: 4,
         associations: {
           asc_0: {
+            order: 1,
             index: 0
           },
           asc_1: {
+            order: 2,
             index: 1
           },
           asc_2: {
+            order: 3,
             index: 2
           },
           asc_3: {
+            order: 4,
             index: 3
           },
           asc_4: {
+            order: 5,
             index: 4
           }
         },

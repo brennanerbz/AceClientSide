@@ -7,17 +7,26 @@ export default class TermContent extends Component {
 	}
 
     state = {
-        term: null,
-        definition: null,
+        term: '',
+        definition: '',
         triggered: false,
-        asc_id: null
+        asc_id: null,
+        item_id: null
     }
 
     loadItem(item) {
         if(item !== undefined && item !== null) {
             if(item.target !== null) this.setState({ term: item.target })
             if(item.cue !== null) this.setState({ definition: item.cue })
+            if(item.id !== null) this.setState({item_id: item.id})
         }
+        // } else if (item == undefined) {
+        //     this.setState({
+        //         term: '',
+        //         definition: '',
+        //         item_id: null
+        //     });
+        // }
     }
 
     trigger(node1, node2) {
@@ -60,20 +69,18 @@ export default class TermContent extends Component {
            this.trigger(term_node, def_node)
            this.setState({triggered: true}); 
         }
-        // if the current state doesn't equal the incoming props, then change to the props with loadItem
-
         if(this.state.asc_id !== nextProps.asc_id) {
             this.setState({
                 asc_id: nextProps.asc_id
             })
             if(nextProps.association.item_id == undefined) {
                 this.setState({
-                    term: null,
-                    definition: null
+                    term: '',
+                    definition: ''
                 })
                 setTimeout(() => {
-                    this.trigger(term_node, def_node)
-                }, 100)
+                        this.trigger(term_node, def_node)
+                    }, 100)  
             }
             if(nextProps.association.item_id !== undefined) {
                 this.setState({
@@ -81,23 +88,20 @@ export default class TermContent extends Component {
                     definition: nextProps.association.item.cue
                 });
                 setTimeout(() => {
-                    this.trigger(term_node, def_node)
-                }, 100)
-            } 
-        }
-        
-        //Is there a general rule that can be applied to all updates / changes? 
-        // How do we check that there has been a change and either fill the content with incoming or empty string?
-        
+                        this.trigger(term_node, def_node)
+                    }, 100)  
+            }
+        } 
+
         if(nextProps.association !== undefined && nextProps.association !== null) {
             if(nextProps.association.item !== undefined) {
-                if(this.state.term == null && nextProps.association.item.target !== null) {
+                if(this.state.term == '' && this.state.term.length == 0 && nextProps.association.item.target !== null) {
                     this.setState({term: nextProps.association.item.target});
                     setTimeout(() => {
                         this.trigger(term_node, def_node)
                     }, 100)                    
                 }
-                if(this.state.definition == null && nextProps.association.item.cue !== null) {
+                if(this.state.definition == '' && this.state.term.length == 0 && nextProps.association.item.cue !== null) {
                     this.setState({definition: nextProps.association.item.cue});
                     setTimeout(() => {
                         this.trigger(term_node, def_node)
@@ -105,6 +109,47 @@ export default class TermContent extends Component {
                 }
             }
         }
+
+        /*
+        if(this.state.item_id == null && nextProps.item !== undefined) {
+            this.setState({
+                item_id: nextProps.item.id
+            });
+            if(nextProps.item.target !== null) {
+                this.setState({term: nextProps.item.target})
+            } else {
+                this.setState({term: ''})
+            }
+            if(nextProps.item.cue !== null) {
+                this.setState({definition: nextProps.item.cue})
+            } else {
+                this.setState({definition: ''})
+            }
+        } else if(this.state.item_id !== null && nextProps.item == undefined) {
+            this.setState({
+                item_id: null,
+                term: '',
+                definition: ''
+            });
+        } else if(this.state.item_id !== null && nextProps.item !== undefined) {
+            if(this.state.item_id !== nextProps.item_id) {
+                this.setState({
+                    item_id: nextProps.item_id
+                });
+                if(nextProps.item.target !== null) {
+                    this.setState({term: nextProps.item.target})
+                } else {
+                    this.setState({term: ''})
+                }
+                if(nextProps.item.cue !== null) {
+                    this.setState({definition: nextProps.item.cue})
+                } else {
+                    this.setState({definition: ''})
+                }
+            }
+        }
+        */
+            
 
     } 
     render() {
@@ -136,7 +181,7 @@ export default class TermContent extends Component {
 
                             }}
                             onBlur={() => {
-                                if(this.state.term !== null && this.state.term.length > 0) {
+                                if(this.state.term !== '' && this.state.term.length > 0) {
                                     this.props.saveTerm(this.state.term) 
                                 }
                                 this.props.deactivateRow()
@@ -174,7 +219,7 @@ export default class TermContent extends Component {
 
                             }}
                             onBlur={() => {
-                                if(this.state.definition !== null && this.state.definition.length > 0){
+                                if(this.state.definition !== '' && this.state.definition.length > 0){
                                    this.props.saveDefinition(this.state.definition) 
                                 }
                                 this.props.deactivateRow()
