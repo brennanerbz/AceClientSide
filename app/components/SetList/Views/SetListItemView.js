@@ -61,7 +61,12 @@ export default class SetListItemView extends Component {
 					</div>
 					</div>
 				</div>
-				<div style={{width: this.props.profileView ? '120px' : '160px'}}  className={classnames("col",{'isHovering': true})}>
+				<div 
+				style={{
+					width: this.props.profileView ? '120px' : '160px',
+					position: 'relative'
+				}}  
+				className={classnames("col",{'isHovering': true})}>
 					<div className="sharing_actions">
 						{
 							mouseIsOver 

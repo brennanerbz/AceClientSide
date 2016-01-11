@@ -235,7 +235,7 @@ export default class Header extends Component {
 											  	pushState(null, '/createset') 
 											  }}>
 											<img className="create_icon" src={create_icon}/>
-											<a className="button create-set-button button-outline">
+											<a className="create-set-button button-outline">
 															Create study set					
 											</a>	
 									  </button>
@@ -251,9 +251,12 @@ export default class Header extends Component {
 									: <button className="create_set_btn_group import"
 											  onClick={this.props.openImportModal}>
 											<img className="create_icon import" src={import_icon}/>
-											<a className="button import create-set-button button-outline">
+											<a className="import create-set-button button-outline">
 															Import					
 											</a>	
+											<span className="new_label">
+											    New!
+											</span>
 									  </button>
 								}
 								{ !fetchingLearn && root_path == 'learn' ? 

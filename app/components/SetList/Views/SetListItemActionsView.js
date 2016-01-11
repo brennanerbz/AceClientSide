@@ -42,7 +42,7 @@ export default class SetListItemActionsView extends Component {
 						}}
 						onMouseOver={() => this.setState({isMouseOverMore: true})}
 						onMouseLeave={() => this.setState({isMouseOverMore: false})}
-						ref="more"
+						ref={`${this.props.assignment.id}`}
 						className="button outline"
 						anchor_bottom={false}
 						arrow_position="top"
@@ -62,7 +62,7 @@ export default class SetListItemActionsView extends Component {
 					&&
 					<BubbleDropDown 
 						set_list_item={true}
-						target_node={this.refs.more}
+						target_node={this.refs[`${this.props.assignment.id}`]}
 						pushState={this.props.pushState}
 						hideDropdown={() => {
 							this.setState({show_dropdown: false})

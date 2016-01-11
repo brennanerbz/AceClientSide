@@ -55,7 +55,7 @@ export default class BubbleDropdown extends Component {
 		if(this.props.set_list_item || this.props.single_set_actions) {
 			this.setState({
 				dropdown_style: {
-					top: parent_pos.height + 10 + 'px',
+					top: parent_pos.height + 23 + 'px',
 					left: parent_pos.right - bubble_pos.right + 'px',
 					paddingTop: '0',
 					paddingBottom: '0'
