@@ -35,6 +35,7 @@ import {
 	UPDATE_SET_SUCCESS,
 	UPDATE_SET_FAILURE,
 
+	FETCH_CASES,
 	FETCH_CASES_SUCCESS,
 	FETCH_CASES_FAILURE,
 	UPDATE_CASE_SUCCESS,
@@ -46,6 +47,7 @@ import {
 } from '../actions/set';
 
 const initial_setstate = {
+	isFetchingInstances: false,
 	isFetchingSet: false,
 	set: {},
 	assignment: {},
@@ -56,6 +58,8 @@ const initial_setstate = {
 	creator_pic: null,
 	member_count: null,
 	item_count: null,
+	start: 0,
+	end: 0,
 	associations: [],
 	items: [],
 	isFetchingSupplemental: false,
@@ -105,32 +109,35 @@ export default function setView(state = initial_setstate, action) {
 				purpose: action.set.description
 			}
 		case RECEIVE_ASSOCIATIONS_SUCCESS:
-			let items = [];
-			action.associations.forEach(acc => {
-				items.push(acc.item)
+			let items = state.items, current_associations = state.associations;
+			action.associations.forEach(a => {
+				current_associations.push(a)
+				items.push(a.item)
 			})
 			return {
 				...state,
-				associations: action.associations,
+				associations: current_associations,
 				items: items,
 				item_count: items.length,
-				isFetchingSet: false
+				isFetchingSet: false,
+				start: action.end + 1,
+				end: state.set.associations_count
 			}
 		case RECEIVE_ASSIGNMENT_SUCCESS:
 			let assignment = action.assignment,
 				_associations = [],
 				_items = [];
-			assignment.set.associations.associations.forEach(asc => { 
-				_associations.push(asc) 
-				_items.push(asc.item)
-			})
+			// assignment.set.associations.associations.forEach(asc => { 
+			// 	_associations.push(asc) 
+			// 	_items.push(asc.item)
+			// })
 			return {
 				...state,
 				assignment: assignment,
-				associations: _associations,
-				items: _items,
-				item_count: _items.length,
-				isFetchingSet: false
+				// associations: _associations,
+				// items: _items,
+				// item_count: _items.length,
+				// isFetchingSet: false
 			}
 		case HAS_NOT_STUDIED:
 			return {
@@ -142,6 +149,11 @@ export default function setView(state = initial_setstate, action) {
 				...state,
 				isFetchingSet: false
 			}
+		case FETCH_CASES:
+			return {
+				...state,
+				isFetchingInstances: true
+			}
 		case FETCH_CASES_SUCCESS:
 			let total_starred = 0;
 			for(var c = 0; c < action.cases.length; c++) {
@@ -149,7 +161,7 @@ export default function setView(state = initial_setstate, action) {
 			}
 			return {
 				...state,
-				isFetchingSupplemental: false,
+				isFetchingInstances: false,
 				cases: action.cases,
 				total_starred: total_starred
 			}
@@ -165,7 +177,10 @@ export default function setView(state = initial_setstate, action) {
 			}
 		case CLEAR_SETVIEW:
 			return {
-				...state = initial_setstate
+				...state = initial_setstate,
+				associations: [],
+				items: [],
+				cases: []
 			}
 		case SELECT_STARRED_ITEMS:
 			return {

@@ -304,6 +304,14 @@
                                 .search-icon, .sk-fading-circle {
                                     height: 16px;
                                     opacity: 1;
+                                    color: #fff;
+                                }
+                                .sk-fading-circle {
+                                    .sk-circle {
+                                        &:before {
+                                            background-color: #fff!important;
+                                        }
+                                    }
                                 }
                             }
                         }

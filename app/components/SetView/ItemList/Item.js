@@ -26,8 +26,8 @@ export default class Item extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { _case, association, isFetchingSupplemental } = nextProps;
-		if(!isFetchingSupplemental && _case !== null && _case !== undefined) {
+		const { _case, association, isFetchingInstances } = nextProps;
+		if(!isFetchingInstances && _case !== null && _case !== undefined) {
 			this.setState({
 				case: _case,
 				starred: _case.starred
@@ -49,7 +49,7 @@ export default class Item extends Component {
 	}
 
 	render() {
-		const { item } = this.props;
+		const { item,  isFetchingInstances } = this.props;
 		return(
 			<li 
 				onMouseOver={() => this.setState({
@@ -59,13 +59,43 @@ export default class Item extends Component {
 					mouseIsOver: false
 				})}>
 				{
-					this.props.studied !== false
+					this.props.studied
+					&& 
+					!isFetchingInstances
 					&&
 					<ItemProgress 
-						_case={this.state.case}
+						_case={this.props._case}
 						studied={this.props.studied}
 						item={item}
 					/>
+				}
+				{
+					this.props.studied
+					&&
+					isFetchingInstances
+					&&
+					<div 
+					style={{
+						margin: '1px 0px',
+						marginLeft: '10px',
+						width: '35px',
+						height: '35px',
+						position: 'absolute',
+					}} 
+					className="sk-fading-circle">
+					  <div className="sk-circle1 sk-circle"></div>
+					  <div className="sk-circle2 sk-circle"></div>
+					  <div className="sk-circle3 sk-circle"></div>
+					  <div className="sk-circle4 sk-circle"></div>
+					  <div className="sk-circle5 sk-circle"></div>
+					  <div className="sk-circle6 sk-circle"></div>
+					  <div className="sk-circle7 sk-circle"></div>
+					  <div className="sk-circle8 sk-circle"></div>
+					  <div className="sk-circle9 sk-circle"></div>
+					  <div className="sk-circle10 sk-circle"></div>
+					  <div className="sk-circle11 sk-circle"></div>
+					  <div className="sk-circle12 sk-circle"></div>
+					</div>
 				}
 				<ItemContent {...this.props}/>
 				<ItemActions

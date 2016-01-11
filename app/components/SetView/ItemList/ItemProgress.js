@@ -37,7 +37,11 @@ export default class ItemProgress extends Component {
 		       		color: color
 		       }
 	    }).on('circle-animation-progress', function(event, progress, stepValue) {
-			$(this).find('strong').text(String(100 * stepValue).slice(0, 2).replace(".", ""))
+	    	if(stepValue !== 1.0) {
+	    		$(this).find('strong').text(String(100 * stepValue).slice(0, 2).replace(".", ""))
+	    	} else {
+	    		$(this).find('strong').text(String(100 * stepValue).slice(0, 3).replace(".", ""))
+	    	}
 			if(value < 0.10) $(this).find('strong').css({left: '24.5px'})
 	    })
 	    this.setState({
@@ -54,6 +58,9 @@ export default class ItemProgress extends Component {
 		let { _case, item } = nextProps
 		if(_case !== null && !this.state.renderedProgressCircle) {
 			this.renderProgressCircle(_case, item)
+		}
+		if(_case !== null && _case.id !== this.props._case.id) {
+			// this.renderProgressCircle(_case, item)
 		}
 	} 
 

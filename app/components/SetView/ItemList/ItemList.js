@@ -41,7 +41,7 @@ export default class ItemList extends Component {
 	}
 
 	render() {
-		const { item_count, items, associations, cases, assignment, pushState, set, user, isFetchingSupplemental } = this.props;
+		const { item_count, items, associations, cases, assignment, pushState, set, user, isFetchingSupplemental} = this.props;
 		let sorted_asssociations = associations.sort((a, b) => {
 			return a.order - b.order
 		}),
@@ -94,6 +94,7 @@ export default class ItemList extends Component {
 									 updateCase={this.props.updateCase}
 									 pushState={pushState}
 									 isFetchingSupplemental={isFetchingSupplemental}
+									 isFetchingInstances={this.props.isFetchingInstances}
 						/>
 					})}
 				</ul>

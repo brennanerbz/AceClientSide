@@ -24,18 +24,27 @@ export function fetchSet(set_id) {
 		dispatch({type: REQUEST_SET})
 		let set,
 			user = getState().user.user;
-		axios.get(`${api_url}/sets/${set_id}`).then((res) => { 
-			set = res.data
-			dispatch({
-				type: RECEIVE_SET_SUCCESS,
-				set
-			})
-		}).catch((err) => {
-			dispatch({
-				type: RECEIVE_SET_FAILURE,
-				error: Error(err),
-				err: err
-			})
+		request
+		.get(`${api_url}/sets/${set_id}`)
+		.end((err, res) => {
+			if(res.ok) {
+				set = res.body
+				dispatch({
+					type: RECEIVE_SET_SUCCESS,
+					set
+				})
+				let endCount = set.associations_count;
+				if(endCount > 100) {
+					endCount = 100
+				}
+				dispatch(fetchAssociations(set.id, 0, endCount))
+			} else {
+				dispatch({
+					type: RECEIVE_SET_FAILURE,
+					error: Error(err),
+					err: err
+				})
+			}
 		})
 	}
 }
@@ -99,7 +108,7 @@ GET /sets/<id>/associations/?start=0&end=99
 export const REQUEST_ASSOCIATIONS = 'REQUEST_ASSOCIATIONS';
 export const RECEIVE_ASSOCIATIONS_SUCCESS = 'RECEIVE_ASSOCIATIONS_SUCCESS';
 export const RECEIVE_ASSOCIATIONS_FAILURE = 'RECEIVE_ASSOCIATIONS_FAILURE';
-export function fetchAssociations(set_id) {
+export function fetchAssociations(set_id, start, end) {
 	return (dispatch, getState) => {
 		dispatch({type: REQUEST_ASSOCIATIONS})
 		if(getState().sets.isFetchingAssignments || getState().user.isFetchingUser) {
@@ -109,12 +118,14 @@ export function fetchAssociations(set_id) {
 			return;
 		}
 		let associations;
-		axios.get(`${api_url}/sets/${set_id}/associations/?start=${0}&end=${99}`)
+		axios.get(`${api_url}/sets/${set_id}/associations/?start=${start}&end=${end}`)
 		.then((res) => {
 			associations = res.data.associations
 			dispatch({
 				type: RECEIVE_ASSOCIATIONS_SUCCESS,
-				associations
+				associations,
+				start,
+				end
 			})
 		}).catch(err => {
 			dispatch({
@@ -149,13 +160,13 @@ export function fetchAssignment(set_id) {
 			assignment_id;
 		if(assignment !== undefined) {
 			assignment_id = assignment.id
-			dispatch(fetchCases(assignment_id))
 			request
 			.get(`${api_url}/assignments/${assignment_id}`)
 			.end((err, res) => {
 				if(res.ok) {
 					assignment = res.body
 					dispatch({type: RECEIVE_ASSIGNMENT_SUCCESS, assignment})
+					dispatch(fetchCases(assignment.id))
 				}
 				else {
 					dispatch({
@@ -259,10 +270,12 @@ export function deleteAssignment(assignment_id, pushState) {
 }
 
 
+export const FETCH_CASES = 'FETCH_CASES';
 export const FETCH_CASES_SUCCESS = 'FETCH_CASES_SUCCESS';
 export const FETCH_CASES_FAILURE = 'FETCH_CASES_FAILURE';
 export function fetchCases(assignment_id) {
 	return (dispatch, getState) => {
+		dispatch({type: FETCH_CASES})
 		let cases;
 		request
 		.get(`${api_url}/assignments/${assignment_id}/instances`)

@@ -18,6 +18,7 @@ export default class Terms extends Component {
 					total_starred={this.props.total_starred}
 					updateCase={this.props.updateCase}
 					isFetchingSupplemental={this.props.isFetchingSupplemental}
+					isFetchingInstances={this.props.isFetchingInstances}
 					id={this.props.id}
 					item_count={this.props.item_count}
 					items={this.props.items}

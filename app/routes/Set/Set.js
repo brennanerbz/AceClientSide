@@ -25,6 +25,7 @@ import Tabs from '../../components/SetView/Tabs/Tabs';
 	user: state.user.user,
 	isFetching: state.setView.isFetchingSet,
 	isFetchingSupplemental: state.setView.isFetchingSupplemental,
+	isFetchingInstances: state.setView.isFetchingInstances,
 	set: state.setView.set,
 	assignment: state.setView.assignment,
 	creator_id: state.setView.set.creator_id,
@@ -58,7 +59,7 @@ export default class Set extends Component {
 	componentWillMount() {
 		const { params, fetchSet, fetchAssociations, fetchAssignment } = this.props;
 		fetchSet(params.id)
-		fetchAssociations(params.id)
+		// fetchAssociations(params.id)
 		fetchAssignment(params.id)
 	}
 
@@ -66,7 +67,7 @@ export default class Set extends Component {
 		if(this.props.params.id !== nextProps.params.id) {
 			this.props.clearSetView()
 			this.props.fetchSet(nextProps.params.id)
-			this.props.fetchAssociations(nextProps.params.id)
+			// this.props.fetchAssociations(nextProps.params.id)
 			this.props.fetchAssignment(nextProps.params.id)
 		}
 	}
@@ -87,6 +88,7 @@ export default class Set extends Component {
 				starred: this.props.starred,
 				selectStarredItems: this.props.selectStarredItems,
 				isFetchingSupplemental: this.props.isFetchingSupplemental,
+				isFetchingInstances: this.props.isFetchingInstances,
 				updateCase: this.props.updateCase,
 				creator_id: this.props.creator_id,
 				creator_username: this.props.creator_username, 
