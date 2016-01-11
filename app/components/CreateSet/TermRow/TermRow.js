@@ -17,7 +17,7 @@ export default class TermRow extends Component {
 		term: null,
 		def: null,
 		index: null,
-		locked_in: false
+		hasCreatedItem: false
 	}
 
 	sparkNewRow(index, total_count) {
@@ -45,18 +45,24 @@ export default class TermRow extends Component {
 	componentWillReceiveProps(nextProps) {
 		this.setState({total_count: nextProps.total_count})
 		if(document.activeElement == document.body) this.setState({ active_row: false })
-		if(this.props.item !== nextProps.item) this.setState({locked_in: false});
+		if(this.props.item !== nextProps.item) this.setState({hasCreatedItem: false});
 		const { item } = nextProps;
 		this.setState({item: item})
  	}
 
 	saveTerm = (term) => { 
 	    const { createItem, updateItem, index, item, association, asc_id } = this.props;
-	    if(item == undefined && true) {
+	    if(item == undefined && !this.state.hasCreatedItem) {
 	    	createItem(index, { name: 'target', prop: term }, {name: 'association_ref', prop: asc_id})
 	    	this.setState({
-	    		locked_in: true
+	    		hasCreatedItem: true
 	    	})
+	    	return;
+	    }
+	    if(item == undefined && this.state.hasCreatedItem) {
+	    	setTimeout(() => {
+	    		this.saveTerm(term)
+	    	}, 500)
 	    	return;
 	    }
 	    if(item !== undefined 
@@ -79,11 +85,17 @@ export default class TermRow extends Component {
 
 	saveDefinition = (def) => { 
 	    const { createItem, updateItem, index, item, association, asc_id } = this.props;
-	    if(item == undefined && true) {
+	    if(item == undefined && !this.state.hasCreatedItem) {
 	    	createItem(index, { name: 'cue', prop: def }, {name: 'association_ref', prop: asc_id})
 	    	this.setState({
-	    		locked_in: true
+	    		hasCreatedItem: true
 	    	})
+	    	return;
+	    }
+	    if(item == undefined && this.state.hasCreatedItem) {
+	    	setTimeout(() => {
+	    		this.saveDefinition(def)
+	    	}, 500)
 	    	return;
 	    }
 	    if(item !== undefined 
