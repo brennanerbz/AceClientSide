@@ -29,9 +29,6 @@ export default class SelectInput extends Component {
 		return(
 			<div style={c_style} 
 				className="select_input">
-				<HiddenElement 
-					options={this.state.options}
-				/>
 				<SelectedItem 
 					handleClick={() => {
 						this.setState({
@@ -65,6 +62,12 @@ export default class SelectInput extends Component {
 	}
 }
 
+/*
+<HiddenElement 
+					options={this.state.options}
+				/>
+*/
+
 class SelectedItem extends Component {
 	static propTypes = {
 
@@ -84,7 +87,7 @@ class SelectedItem extends Component {
 				}}>
 				<div className="list_item select_option">
 					{
-						selected_item.img == null
+						selected_item !== null && selected_item.img == null
 						? selected_item.message
 						: null
 					}

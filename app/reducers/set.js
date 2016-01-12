@@ -19,6 +19,9 @@ import {
 	RECEIVE_ITEM_SUCCESS,
 	RECEIVE_ITEM_FAILURE,
 
+	CREATE_ASSIGNMENT,
+	CREATE_ASSIGNMENT_SUCCESS,
+
 	REQUEST_ASSIGNMENT,
 	RECEIVE_ASSIGNMENT_SUCCESS,
 	RECEIVE_ASSIGNMENT_FAILURE,
@@ -50,6 +53,7 @@ const initial_setstate = {
 	isFetchingInstances: false,
 	isFetchingSet: false,
 	isFetchingAssociations: false,
+	isCreatingAssignment: false,
 	set: {},
 	assignment: {},
 	id: null,
@@ -129,6 +133,17 @@ export default function setView(state = initial_setstate, action) {
 				isFetchingSet: false,
 				start: action.end,
 				end: state.set.associations_count
+			}
+		case CREATE_ASSIGNMENT:
+			return {
+				...state,
+				isCreatingAssignment: true
+			}
+		case CREATE_ASSIGNMENT_SUCCESS:
+			return {
+				...state,
+				isCreatingAssignment: false,
+				assignment: action.assignment
 			}
 		case RECEIVE_ASSIGNMENT_SUCCESS:
 			let assignment = action.assignment,

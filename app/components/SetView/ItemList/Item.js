@@ -12,7 +12,7 @@ export default class Item extends Component {
 	state = {
 		mouseIsOver: false,
 		starred: false,
-		case: null
+		instance: null
 	}
 
 	componentDidMount() {
@@ -20,7 +20,7 @@ export default class Item extends Component {
 		if(_case !== null && _case !== undefined) {
 			this.setState({
 				starred: _case.starred,
-				case: _case
+				instance: _case
 			})
 		} 
 	}
@@ -29,23 +29,31 @@ export default class Item extends Component {
 		const { _case, association, isFetchingInstances } = nextProps;
 		if(!isFetchingInstances && _case !== null && _case !== undefined) {
 			this.setState({
-				case: _case,
+				instance: _case,
 				starred: _case.starred
 			})
 		} else if (_case == undefined || _case == null) {
 			this.setState({
-				case: null,
+				instance: null,
 				starred: false
 			});
 		}
 	}
 
 	starItem() {
-		const { updateCase } = this.props;
+		const { createAssignment, updateCase, set } = this.props,
+		{ instance } = this.state;
+		if(instance == null) {
+			createAssignment(set.id)
+			setTimeout(() => {
+				this.starItem()
+			}, 500)
+			return;
+		}
+		updateCase(instance, {starred: !this.state.starred})
 		this.setState({
 			starred: !this.state.starred
 		})
-		updateCase(this.state.case, {starred: !this.state.starred})
 	}
 
 	render() {

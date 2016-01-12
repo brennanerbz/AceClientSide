@@ -11,6 +11,7 @@ export default class Terms extends Component {
 	render() {
 		return(
 			<ItemList
+				createAssignment={this.props.createAssignment}
 				assignment={this.props.assignment}
 				isFetchingAssociations={this.props.isFetchingAssociations}
 				fetchAssociations={this.props.fetchAssociations}

@@ -196,6 +196,9 @@ export const CREATE_ASSIGNMENT_SUCCESS = 'CREATE_ASSIGNMENT_SUCCESS';
 export const CREATE_ASSIGNMENT_FAILURE = 'CREATE_ASSIGNMENT_FAILURE';
 export function createAssignment(set_id, permission) { 
 	return (dispatch, getState) => {
+		if(getState().setView.isCreatingAssignment 
+		|| Object.keys(getState().setView.assignment).length > 0) return;
+
 		dispatch({type: CREATE_ASSIGNMENT})
 		let user_id = getState().user.user.id,
 			assignment = Object.assign({..._assignmenttemplate}, {
@@ -298,13 +301,13 @@ export const UPDATE_CASE_SUCCESS = 'UPDATE_CASE_SUCCESS';
 export const UPDATE_CASE_FAILURE = 'UPDATE_CASE_FAILURE';
 export function updateCase(_case, ...args) {
 	return (dispatch, getState) => {
-		if(getState().setView.assignment == {}) {
-			dispatch(createAssignment(getState().setView.id))
-			setTimeout(() => {
-				dispatch(updateCase(_case, ...args))
-			}, 150)
-			return;
-		}
+		// if(Object.keys(getState().setView.assignment).length == 0) {
+		// 	dispatch(createAssignment(getState().setView.id))
+		// 	setTimeout(() => {
+		// 		dispatch(updateCase(_case, ...args))
+		// 	}, 150)
+		// 	return;
+		// }
 		let updated_case = Object.assign({}, default_case)
 		if(args.length > 0) {
 			for(var i = 0; i < args.length; i++) {

@@ -16,10 +16,6 @@ export default class ItemProgress extends Component {
 	}
 
 	renderProgressCircle(_case, item) {
-		if(this.state.renderedProgressCircle) {
-			$('.' + String(item.id)).circleProgress()
-			return;
-		}
 		let value = _case.hypothesis.forecast !== false ? _case.hypothesis.forecast[0][1] : 0,
 		start_value = value !== 0 ? _case.hypothesis.storage_strength : 0,
 		color;
@@ -59,30 +55,17 @@ export default class ItemProgress extends Component {
 
 	componentDidMount() {
 		let { _case, item } = this.props;
-		// if(_case !== null) this.renderProgressCircle(_case, item)
+		if(_case !== null) {
+			this.renderProgressCircle(_case, item)
+		}
 	}	
 
 	componentWillReceiveProps(nextProps) {
 		let { _case, item, filteredStarredItems } = nextProps
-		this.renderProgressCircle(_case, item)
-		if(!this.props.filteredStarredItems && filteredStarredItems || this.props.filteredStarredItems && !filteredStarredItems) {
-			// $('.' + String(item.id)).circleProgress()
+		if(_case !== null && !this.state.renderedProgressCircle) {
+			this.renderProgressCircle(_case, item)
 		}
 	} 
-
-	componentWillUpdate(nextProps, nextState) {
-		let { _case, item } = nextProps
-		if(_case !== null) {
-
-		}
-		if(_case !== null && !this.state.renderedProgressCircle) {
-			// this.renderProgressCircle(_case, item)
-		}
-		if(_case !== null && this.props.item.id !== item.id) {
-			var value = $('.' + String(item.id)).circleProgress('value');
-			console.log('value', value) 
-		}
-	}
 
 	render() {
 		const { _case, item } = this.props;

@@ -84,6 +84,7 @@ export default class Set extends Component {
 		const { isFetching, isFetchingSupplemental, associations } = this.props;
 		var setChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
+				createAssignment: this.props.createAssignment,
 				assignment: this.props.assignment,
 				fetchAssociations: this.props.fetchAssociations,
 				isFetchingAssociations: this.props.isFetchingAssociations,
