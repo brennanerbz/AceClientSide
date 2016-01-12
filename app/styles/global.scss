@@ -1634,6 +1634,8 @@ textarea:hover:ms-input-placeholder {
 			line-height: normal;
 			border-top-left-radius: 4px;
 			border-top-right-radius: 4px;
+			white-space: normal!important; 
+			text-overflow: initial!important;
 		}
 		.modal-body {
 			border-bottom: none;
