@@ -94,6 +94,7 @@ export var createState = {
 
   order: 1,
   last_index: 4,
+  isCreatingAssociation: false,
   associations: {
     asc_0: {
       order: 1,
@@ -329,6 +330,11 @@ export function createset(state = createState, action) {
         term_choices: null,
         check_subjects: true
       }
+    case CREATE_ASSOCIATION:
+      return {
+        ...state,
+        isCreatingAssociation: true
+      }
     case CREATE_ASSOCIATION_SUCCESS:
       if(state.cleared) return { ...state }
       let associations = state.associations,
@@ -353,6 +359,7 @@ export function createset(state = createState, action) {
       associations_order.splice(i, ref);
       return {
         ...state,
+        isCreatingAssociation: false,
         associations: associations,
         order: order + 1,
         associations_order: associations_order,

@@ -24,11 +24,14 @@ export function fetchSet(user_id, set_id, pushState) {
 			assignment = await getState().sets.assignments.filter(assign => assign.set_id == set_id)[0]
 			await axios.get(`${api_url}/sets/${set_id}`).then(res => { 
 				set = res.data 
+				if(set.editability == 'creator' && set.creator_id !== getState().user.user.id) {
+					pushState(null, '/error')
+					return;
+				}
 			})
 			await axios.get(`${api_url}/assignments/${assignment.id}`).then((res) => {
 				assignment = res.data
 			}) 
-			
 			assignment.set.associations.associations.forEach((asc, i) => {
 				let root_asc_name = 'asc_' + i
 				items[asc.item_id] = asc.item
@@ -42,10 +45,6 @@ export function fetchSet(user_id, set_id, pushState) {
 				}
 				associations_order.push(root_asc_name)
 			})
-			if(set.editability == 'creator' && set.creator_id !== getState().user.user.id) {
-				pushState(null, '/')
-				return;
-			}
 			dispatch({type: LOAD_EDITING_SUCCESS, set, assignment, items, associations, associations_order})
 		} catch(err) {
 			if(err.status == 404) pushState(null, '/error')
@@ -582,7 +581,7 @@ export function createItem(index, ...args) {
 			dispatch(createSet())
 			setTimeout(() => {
 				dispatch(createItem(index, ...args))
-			}, 50)
+			}, 15)
 			return; 
 		}
 
@@ -619,6 +618,7 @@ export function createItem(index, ...args) {
 		.send(item)
 		.end((err, res) => {
 			item = res.body;
+			console.log('item BODY:', res)
 			if(res.ok) {
 				if(Object.keys(association).length == 0) {
 					dispatch({type: CREATE_ITEM_SUCCESS, item, index})
@@ -709,28 +709,39 @@ export const CREATE_ASSOCIATION = 'CREATE_ASSOCIATION';
 export const CREATE_ASSOCIATION_SUCCESS = 'CREATE_ASSOCIATION_SUCCESS';
 export const CREATE_ASSOCIATION_FAILURE = 'CREATE_ASSOCIATION_FAILURE';
 export function createAssociation(item_id, index, ref) {
-	return async(dispatch, getState) => {
-		try {
-			let set_id = getState().createset.set.id,
-				order = getState().createset.order,
-				association;
-			association = Object.assign({..._associationtemplate}, {
-				item_id: item_id,
-				set_id: set_id,
-				order: order
-			})
-			await axios.post(`${api_url}/associations/`, association)
-			.then(res => { 
-				association = res.data
-				dispatch({type: CREATE_ASSOCIATION_SUCCESS, association, index, ref})
-			})
-		} catch(err) {
-			dispatch({
-				type: CREATE_ASSOCIATION_FAILURE,
-				error: Error(err),
-				err: err
-			})
+	return (dispatch, getState) => {
+		if(getState().createset.isCreatingAssociation) {
+			setTimeout(() => {
+				dispatch(createAssociation(item_id, index, ref))
+			}, 15)
+			return;
 		}
+		dispatch({type: CREATE_ASSOCIATION})
+		let set_id = getState().createset.set.id,
+			order = getState().createset.order,
+			association;
+		association = Object.assign({..._associationtemplate}, {
+			item_id: item_id,
+			set_id: set_id,
+			order: order
+		})
+		console.log(association)
+		request
+		.post(`${api_url}/associations/`)
+		.send(association)
+		.end((err, res) => {
+			console.log('association BODY:', res)
+			if(res.ok) {
+				association = res.body
+				dispatch({type: CREATE_ASSOCIATION_SUCCESS, association, index, ref})
+			} else {
+				dispatch({
+					type: CREATE_ASSOCIATION_FAILURE,
+					error: Error(err),
+					err: err
+				})
+			}
+		})
 	}
 }
 
