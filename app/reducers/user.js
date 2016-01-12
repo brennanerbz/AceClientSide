@@ -28,6 +28,10 @@ import {
 	UPDATE_USER_DRAFT_STATUS_FAILURE
 } from '../actions/createset';
 
+import {
+	RECEIVE_ASSIGNMENTS_SUCCESS
+} from '../actions/usersets';
+
 var _userinitialstate = {
 	isFetchingUser: false,
 	isFetchingToken: false,
@@ -68,8 +72,9 @@ export default function user(state = _userinitialstate, action) {
 		case CREATE_USER_SUCCESS:
 			return {
 				...state,
+				showLoadingZone: true,
 				isFetchingUser: false,
-				user: action.new_user,
+				// user: action.new_user,
 				logged_in: true
 			}
 		case LOGIN_USER_SUCCESS:
@@ -77,7 +82,8 @@ export default function user(state = _userinitialstate, action) {
 			return {
 				...state,
 				user: user,
-				logged_in: true
+				logged_in: true,
+				showLoadingZone: false
 			}
 		case LOGOUT_USER_SUCCESS:
 			return {
@@ -111,6 +117,7 @@ export default function user(state = _userinitialstate, action) {
 				...state,
 				user: action.user
 			}
+		
 		case LOGOUT_USER_FAILURE:
 		case CREATE_USER_FAILURE:
 		default:

@@ -281,7 +281,7 @@ export function fetchCases(assignment_id) {
 		dispatch({type: FETCH_CASES})
 		let cases;
 		request
-		.get(`${api_url}/assignments/${assignment_id}/instances`)
+		.get(`${api_url}/assignments/${assignment_id}/instances/`)
 		.end((err, res) => {
 			if(res.ok) {
 				cases = res.body.instances

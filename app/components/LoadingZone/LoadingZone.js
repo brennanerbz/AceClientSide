@@ -38,11 +38,10 @@ export default class LoadingZone extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		const { logged_in, assignments, user } = nextProps;
-		// console.log(user)
 		if(logged_in && user.creation !== undefined) {
 			setTimeout(() => {
 				this.props.hideLoadingZone()
-			}, 750)
+			}, 850)
 		}
 	}
 
