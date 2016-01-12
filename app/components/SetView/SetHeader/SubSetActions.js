@@ -65,12 +65,16 @@ export default class SubSetActions extends Component {
 	}
 
 	render() {
-		const { set, createset } = this.props,
+		let { set, user, assignment, createset } = this.props,
 			{mouseIsOverMoreButton} = this.state,
 			member_icon = require('../../../assets/profile_icon.png'),
 			share_icon = require('../../../assets/share.png'),
 			more = require('../../../assets/elipses.png'),
-			blue_more = require('../../../assets/blue_elipses.png')
+			blue_more = require('../../../assets/blue_elipses.png'),
+			/* Booleans to determine menu options */
+			renderCreatorOptions = false, renderAdminOptions = false, renderUserOptions = false;
+		if(set.editability == 'creator' && set.creator_id == user.id) renderCreatorOptions = true
+		else renderUserOptions = true;
 		return(
 			<div style={secondary_actions} className="secondary_actions">
 				{
@@ -99,43 +103,50 @@ export default class SubSetActions extends Component {
 						deleteAssignment={this.props.deleteAssignment}
 						pushState={this.props.pushState}
 						/>
-
-				<button onClick={() => { 
-							this.setState({more_is_open: true})
-						}} 
-						style={{
-							marginLeft: '5px',
-							height: '36px',
-							width: '36px'
-						}}
-						onMouseOver={() => this.setState({
-							mouseIsOverMoreButton: true
-						})}
-						onMouseLeave={() => this.setState({
-							mouseIsOverMoreButton: false
-						})}
-						className={classnames('button outline',  {'active': this.state.more_is_open})}
-						ref="more"				   
-						title="More actions"
-						data-placement="bottom" >
-						<img style={
-							{
-								position: 'absolute',
-								height: '4.05px',
-								width: '16.25px',
-								left: '9.5px'
-							}
-						} className="share_icon" src={mouseIsOverMoreButton ? blue_more : more}/>
-				</button>
+				{
+					this.props.assignment !== null
+					&& this.props.set.creator_id == this.props.user.id
+					&& 
+					<button onClick={() => { 
+								this.setState({more_is_open: true})
+							}} 
+							style={{
+								marginLeft: '5px',
+								height: '36px',
+								width: '36px'
+							}}
+							onMouseOver={() => this.setState({
+								mouseIsOverMoreButton: true
+							})}
+							onMouseLeave={() => this.setState({
+								mouseIsOverMoreButton: false
+							})}
+							className={classnames('button outline',  {'active': this.state.more_is_open})}
+							ref="more"				   
+							title="More actions"
+							data-placement="bottom" >
+							<img style={
+								{
+									position: 'absolute',
+									height: '4.05px',
+									width: '16.25px',
+									left: '9.5px'
+								}
+							} className="share_icon" src={mouseIsOverMoreButton ? blue_more : more}/>
+					</button>
+				}
 
 				{
 					this.state.more_is_open
 					&&
 					<BubbleDropdown 
+						assignment={this.props.assignment}
 						single_set_actions={true}
 						set_header={this.props.set_header}
 						target_node={this.refs.more}
 						pushState={this.props.pushState}
+						renderCreatorOptions={renderCreatorOptions}
+						renderUserOptions={renderUserOptions}
 						hideDropdown={() => {
 							this.setState({
 								more_is_open: false

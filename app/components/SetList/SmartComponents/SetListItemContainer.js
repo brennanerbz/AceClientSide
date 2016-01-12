@@ -15,10 +15,12 @@ export default class SetListItemContainer extends Component {
 
 	render() {
 		let root_route;
-		const { assignment, set } = this.props;
+		const { assignment, set, user_id } = this.props;
 		return(
 			<SetListItemView 
 				section={this.props.section}
+				user_id={user_id}
+				set={set}
 				assignment={this.props.assignment}
 				pushState={this.props.pushState}
 				mouseOver={() => {
@@ -42,7 +44,7 @@ export default class SetListItemContainer extends Component {
 					this.props.openModal(assignment, set, 'share')
 				}}
 				handleLearn={() => {
-					this.props.pushState(null, `/learn/${this.props.assignment.set.id}`)
+					this.props.pushState(null, `/convo/${this.props.assignment.set.id}`)
 				}}
 				handleOpen={() => {
 					

@@ -146,22 +146,37 @@ class BubbleDropdownContents extends Component {
 	renderSetDropdown() {
 		let finalized_actions = ['Learn', 'Edit', 'Divider', 'Delete'],
 			draft_actions = ['Finish', 'Divider', 'Delete'],
-			setview_actions = ['Edit', 'Settings', 'Divider', 'Delete'],
+			setview_creator_actions = ['Edit', 'Settings', 'Divider', 'Delete'],
+			// setview_user_actions = ['Learn', 'Copy', 'Divider', 'Leave and Archive'],
+			setview_user_actions = ['Learn'],
+			setview_user_adopted_actions = ['Learn', 'Copy'],
 			create_actions = ['Edit purpose', 'Privacy settings', 'Divider', 'Delete'],
 			actions;
 		if(this.props.assignment !== undefined) {
 			if(this.props.assignment.set.finalized) {
 				if(this.props.set_header) {
-					actions = setview_actions
+					if(this.props.renderCreatorOptions) {
+						actions = setview_creator_actions
+					}else if(this.props.renderUserOptions) {
+						actions = setview_user_actions
+					}
 				} else {
-					actions = finalized_actions
+					if(this.props.renderCreatorOptions) {
+						actions = setview_creator_actions
+					}else if(this.props.renderUserOptions) {
+						actions = setview_user_actions
+					}
 				}
 			} else  {
 				actions = draft_actions
 			}
 		} else {
 			if(this.props.set_header) {
-				actions = setview_actions
+				if(this.props.renderCreatorOptions) {
+					actions = setview_creator_actions
+				}else if(this.props.renderUserOptions) {
+					actions = setview_user_adopted_actions
+				}
 			} else if(this.props.single_set_actions) {
 				actions = create_actions
 			} 
@@ -195,7 +210,7 @@ class BubbleDropdownContents extends Component {
 								{
 									action !== 'Divider'
 									&&
-									<a className={classnames({'danger': action == 'Delete'})}>
+									<a className={classnames({'danger': action == 'Delete' || action == 'Leave and Archive'})}>
 										<SpriteDiv
 											name={action.toLowerCase()}
 											text={action}

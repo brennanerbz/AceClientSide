@@ -207,7 +207,8 @@ class SetListSections extends Component {
 								section={section_name} 
 								assignments={sections[prop]} 
 								openModal={this.props.openModal}
-								profileView={this.props.profile}/>
+								profileView={this.props.profile}
+								user_id={this.props.user_id}/>
 						</li>
 					)
 				}					

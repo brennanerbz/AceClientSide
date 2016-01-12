@@ -11,9 +11,13 @@ export default class SetListItemActionsView extends Component {
 	}
 
 	render() {
-		const more = require('../../../assets/elipses.png'),
+		let more = require('../../../assets/elipses.png'),
 			 blue_more = require('../../../assets/blue_elipses.png'),
-			 { isMouseOverMore } = this.state;
+			 { isMouseOverMore } = this.state,
+			 { set, user_id } = this.props,
+		 	 renderCreatorOptions = false, renderAdminOptions = false, renderUserOptions = false;
+			 if(set.editability == 'creator' && set.creator_id == user_id) renderCreatorOptions = true
+			 else renderUserOptions = true;
 		return(
 			<div className="more_actions">
 				{
@@ -64,6 +68,8 @@ export default class SetListItemActionsView extends Component {
 						set_list_item={true}
 						target_node={this.refs[`${this.props.assignment.id}`]}
 						pushState={this.props.pushState}
+						renderCreatorOptions={renderCreatorOptions}
+						renderUserOptions={renderUserOptions}
 						hideDropdown={() => {
 							this.setState({show_dropdown: false})
 						}}
