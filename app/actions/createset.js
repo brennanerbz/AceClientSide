@@ -582,7 +582,7 @@ export function createItem(index, ...args) {
 			dispatch(createSet())
 			setTimeout(() => {
 				dispatch(createItem(index, ...args))
-			}, 500)
+			}, 50)
 			return; 
 		}
 
