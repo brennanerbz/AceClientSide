@@ -25,6 +25,17 @@ export default class LoadingZone extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		height: null,
+		width: null
+	}
+
+	componentDidMount() {
+		let browserWindow = $(window)[0],
+		browserHeight = browserWindow.innerHeight, browserWidth = browserWindow.innerWidth;
+		
+	}
+
 	componentWillReceiveProps(nextProps) {
 		const { logged_in, assignments, user } = nextProps;
 		// console.log(user)
@@ -36,12 +47,16 @@ export default class LoadingZone extends Component {
 	}
 
 	render() {
-		const { rendered, logged_in } = this.props,
-		backgroundBgLarge = require('../../assets/backgroundPatternLarge.png');
+		let { rendered, logged_in } = this.props,
+		backgroundBgLarge = require('../../assets/backgroundPatternLarge.png'),
+		browserWindow = $(window)[0],
+		browserHeight = browserWindow.innerHeight, browserWidth = browserWindow.innerWidth;
 		return(
 			<div 
 			style={{
-				// backgroundImage: `url(${backgroundBgLarge})`
+				height: browserHeight,
+				width: browserWidth,
+				position: 'fixed'
 			}}
 			id="loading_zone" 
 			className={classnames("display_flex", {'rendered': rendered}, {'loggedIn': logged_in})}>

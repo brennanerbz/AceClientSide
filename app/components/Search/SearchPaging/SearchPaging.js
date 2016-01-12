@@ -96,7 +96,7 @@ export default class SearchPaging extends Component {
 				   onMouseLeave={() => this.setState({next_hover: false})}
 				   onClick={() => ::this.nextPage(pushState, tab, query, next_index)}>
 					<img src={n_active ? next_active : next_disabled} 
-						 className={classnames("right forward",  { "disabled": !n_active } )}/>
+						 className={classnames("forward",  { "disabled": !n_active } )}/>
 					{
 						n_active
 						? 

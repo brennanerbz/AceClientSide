@@ -12,33 +12,39 @@ export default class AccountSettings extends Component {
 		emailLoading: false,
 		passwordLoading: false,
 		deactivateModalOpen: false,
-		deactivateLoading: false
+		deactivateLoading: false,
+		email: '',
+		oldPassword: '',
+		newPassword: ''
 	}
 
 	handleEmailChange() {
 		this.setState({
 			emailLoading: true
 		});
-		// const { updateUser } = this.props;
-		// updateUser()
+		const { updateUser } = this.props;
+		updateUser()
 		setTimeout(() => {
 			this.setState({
-				emailLoading: false
+				emailLoading: false,
+				email: ''
 			});
-		}, 1500)
+		}, 1000)
 	}
 
 	handlePasswordChange() {
 		this.setState({
 			passwordLoading: true
 		});
-		// const { updateUser } = this.props;
-		// updateUser()
+		const { updateUser } = this.props;
+		updateUser()
 		setTimeout(() => {
 			this.setState({
-				passwordLoading: false
+				passwordLoading: false,
+				oldPassword: '',
+				newPassword: ''
 			});
-		}, 1500)
+		}, 1000)
 	}
 
 	handleDeactivateAccount() {
@@ -53,7 +59,7 @@ export default class AccountSettings extends Component {
 				deactivateLoading: false,
 				deactivateModalOpen: false
 			});
-		}, 1500)
+		}, 1000)
 	}
 
 	render() {
@@ -86,17 +92,15 @@ export default class AccountSettings extends Component {
 							<h2>Email Address</h2>
 							<p>Your email is <strong>{user.email}</strong></p>
 							<label>
-								<strong>Current Password</strong>
-								<input 
-								onChange={(e) => enterPassword(e.target.value)}
-								className="text" 
-								type="password" 
-								name="currentPassword"/>
-							</label>
-							<label>
 								<strong>New Email</strong>
 								<input 
-								onChange={(e) => changeUser('email', e.target.value)}
+								onChange={(e) => {
+									changeUser('email', e.target.value)
+									this.setState({
+										email: e.target.value
+									});
+								}}
+								value={this.state.email}
 								className="text" 
 								name="newEmail"/>
 							</label>
@@ -126,7 +130,13 @@ export default class AccountSettings extends Component {
 							<label>
 								<strong>Current Password</strong>
 								<input
-								onChange={(e) => enterPassword(e.target.value)}
+								onChange={(e) => {
+									enterPassword(e.target.value)
+									this.setState({
+										oldPassword: e.target.value
+									})
+								}}
+								value={this.state.oldPassword} 
 								className="text" 
 								type="password" 
 								name="currentPassword"/>
@@ -134,8 +144,14 @@ export default class AccountSettings extends Component {
 							<label>
 								<strong>New Password</strong>
 								<input 
-								onChange={(e) => changeUser('password', e.target.value)}
-								className="text" 
+								onChange={(e) => {
+									changeUser('password', e.target.value)
+									this.setState({
+										newPassword: e.target.value
+									})
+								}}
+								className="text"
+								value={this.state.newPassword} 
 								type="password" 
 								name="newPassword"/>
 							</label>
@@ -178,6 +194,19 @@ export default class AccountSettings extends Component {
 		);
 	}
 }
+
+/* CURRENT PASSWORD REQUIREMENT 
+<label>
+	<strong>Current Password</strong>
+	<input 
+	onChange={(e) => enterPassword(e.target.value)}
+	className="text" 
+	type="password" 
+	name="currentPassword"/>
+</label>
+
+*/
+
 
 /*
 <section className="setting">

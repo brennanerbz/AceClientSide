@@ -16,7 +16,7 @@ export default class SetListItemView extends Component {
 	 		  set_icon_complete = require('../../../assets/set_icon_lines.png'),
 			  set_icon_blank = require('../../../assets/set_icon_90.png'),
 			  defatultUserPic = require('../../../assets/backgroundPattern1.png'),
-			  defatultOtherPic = require('../../../assets/backgroundPattern2.png'),
+			  defatultOtherPic = require('../../../assets/backgroundPattern6.png'),
 			  playfulSetIcon = require('../../../assets/setIconGreen.png'),
 			  profilePic = require('../../../assets/message_profile_pic.png'),
 			  avatar;

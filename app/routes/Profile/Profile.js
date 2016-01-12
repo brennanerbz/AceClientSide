@@ -190,20 +190,6 @@ export default class Profile extends Component {
 										</span>
 									</li>
 								</ul>
-								<div className="member_card_stats">
-									<a className="member_card_stat">
-										<strong>72</strong>
-										<span className="text_muted">Terms</span>
-									</a>
-									<a className="member_card_stat">
-										<strong>12</strong>
-										<span className="text_muted">Sets</span>
-									</a>
-									<a className="member_card_stat">
-										<strong>2</strong>
-										<span className="text_muted">Starred</span>
-									</a>
-								</div>
 							</div>
 							<div className="column span_3_of_4">
 								{
@@ -242,6 +228,23 @@ export default class Profile extends Component {
 		);
 	}
 }
+
+/* USER MEMBER STATISTICS
+<div className="member_card_stats">
+	<a className="member_card_stat">
+		<strong>72</strong>
+		<span className="text_muted">Terms</span>
+	</a>
+	<a className="member_card_stat">
+		<strong>12</strong>
+		<span className="text_muted">Sets</span>
+	</a>
+	<a className="member_card_stat">
+		<strong>2</strong>
+		<span className="text_muted">Starred</span>
+	</a>
+</div>
+*/
 
 // {
 // 	school !== undefined

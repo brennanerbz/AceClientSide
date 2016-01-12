@@ -10,6 +10,14 @@ export default class SetHeader extends Component {
 		
 	}
 
+
+	/*
+	STAR ICON FOR SET
+	<span className="star">
+		<img style={{height: '15px'}} className="star_icon" src={starIcon}/>
+	</span>
+	*/
+
 	render() {
 		const image = require('../../../assets/set_profile_image.png'),
 		lockIcon = require('../../../assets/lockIcon.png'),
@@ -19,9 +27,6 @@ export default class SetHeader extends Component {
 		return(
 			<span className="set_header">				
 				<div className="page_header_wrapper header_info inline_info">
-					<span className="star">
-						<img style={{height: '15px'}} className="star_icon" src={starIcon}/>
-					</span>
 					<span className="title_wrapper">
 						{
 							set.visibility == 'private'
