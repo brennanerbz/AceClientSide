@@ -169,7 +169,6 @@ export default class Header extends Component {
 									</Link>
 								</div>
 							}
-
 							{
 								logged_in
 								&& root_path !== 'createset'
