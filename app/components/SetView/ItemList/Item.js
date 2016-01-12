@@ -63,6 +63,8 @@ export default class Item extends Component {
 					&& 
 					!isFetchingInstances
 					&&
+					this.props._case !== undefined
+					&&
 					<ItemProgress 
 						_case={this.props._case}
 						studied={this.props.studied}

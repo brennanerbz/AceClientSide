@@ -36,7 +36,10 @@ import Tabs from '../../components/SetView/Tabs/Tabs';
 	item_count: state.setView.item_count,
 	subjects: state.setView.subjects,
 	doc: state.setView.doc,
+	isFetchingAssociations: state.setView.isFetchingAssociations,
 	associations: state.setView.associations,
+	start: state.setView.start,
+	end: state.setView.end,
 	items: state.setView.items,
 	cases: state.setView.cases,
 	total_starred: state.setView.total_starred,
@@ -82,7 +85,11 @@ export default class Set extends Component {
 		var setChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
 				assignment: this.props.assignment,
+				fetchAssociations: this.props.fetchAssociations,
+				isFetchingAssociations: this.props.isFetchingAssociations,
 				associations: this.props.associations,
+				start: this.props.start,
+				end: this.props.end,
 				cases: this.props.cases,
 				total_starred: this.props.total_starred,
 				starred: this.props.starred,

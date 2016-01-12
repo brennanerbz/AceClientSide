@@ -49,6 +49,7 @@ import {
 const initial_setstate = {
 	isFetchingInstances: false,
 	isFetchingSet: false,
+	isFetchingAssociations: false,
 	set: {},
 	assignment: {},
 	id: null,
@@ -108,6 +109,11 @@ export default function setView(state = initial_setstate, action) {
 				title: action.set.title,
 				purpose: action.set.description
 			}
+		case REQUEST_ASSOCIATIONS:
+			return {
+				...state,
+				isFetchingAssociations: true
+			}
 		case RECEIVE_ASSOCIATIONS_SUCCESS:
 			let items = state.items, current_associations = state.associations;
 			action.associations.forEach(a => {
@@ -116,11 +122,12 @@ export default function setView(state = initial_setstate, action) {
 			})
 			return {
 				...state,
+				isFetchingAssociations: false,
 				associations: current_associations,
 				items: items,
 				item_count: items.length,
 				isFetchingSet: false,
-				start: action.end + 1,
+				start: action.end,
 				end: state.set.associations_count
 			}
 		case RECEIVE_ASSIGNMENT_SUCCESS:

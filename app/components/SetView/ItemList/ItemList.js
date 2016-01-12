@@ -4,6 +4,8 @@ import Item from './Item';
 import ItemListActions from './ItemListActions';
 
 import SelectInput from '../../SelectInput/SelectInput';
+import LaddaButton from 'react-ladda';
+
 
 export default class ItemList extends Component {
 	static propTypes = {
@@ -98,6 +100,19 @@ export default class ItemList extends Component {
 						/>
 					})}
 				</ul>
+				{
+					this.props.associations.length < this.props.set.associations_count
+					&&
+					<LaddaButton 
+					onClick={() => {
+						this.props.fetchAssociations(this.props.set.id, this.props.start, this.props.end)
+					}}
+					loading={this.props.isFetchingAssociations}
+					buttonStyle='expand-right'
+					className="button primary large">
+						See all terms
+					</LaddaButton>
+				}
 			</div>
 		);
 	}
