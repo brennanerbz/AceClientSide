@@ -351,8 +351,10 @@ body {
 html, body {
     width: 100%;
     height: 100%;
-    min-width: 950px!important;
-    overflow-x: hidden;
+    &:not(.createset) {
+    	min-width: 950px!important;
+    	overflow-x: hidden;
+    }
     &.chat {
     	overflow: hidden;
     }

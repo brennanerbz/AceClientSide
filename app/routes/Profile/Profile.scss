@@ -18,6 +18,12 @@
 	padding-top: 90px;
 	padding-left: 230px;
 	width: 99%;
+	.user_sets {
+		width: 76%;
+		@media screen and (max-width: 1150px) {
+			width: 65%;
+		} 
+	}
 	h1 {
 		&.member_card_names {
 			font-size: 1.8em;

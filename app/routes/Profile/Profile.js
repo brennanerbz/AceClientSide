@@ -191,7 +191,13 @@ export default class Profile extends Component {
 									</li>
 								</ul>
 							</div>
-							<div className="column span_3_of_4">
+							<div 
+							style={{
+								float: 'none',
+								position: 'relative',
+								marginLeft: '250px',
+							}}
+							className="column user_sets span_3_of_4">
 								{
 									loggedInUser.id == params.id 
 									&&

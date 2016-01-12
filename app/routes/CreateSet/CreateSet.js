@@ -140,6 +140,7 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentDidMount() {
+		$('body').addClass('createset')
 		if(!this.props.logged_in) {
 			this.setState({
 				login_prompt_modal: true
