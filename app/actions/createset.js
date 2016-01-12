@@ -8,7 +8,7 @@ const server = require('./api'),
 
 // /sets/<int: set_id>/associations/
 // /users/<int: user_id>/assignments/					GET
-// /assignments/<int: assignment_id>	
+// /assignments/<int: assignment_id>
 export const FETCH_CREATE_SET = 'FETCH_CREATE_SET';
 export function fetchSet(user_id, set_id, pushState) {
 	return async(dispatch, getState) => {
@@ -20,18 +20,15 @@ export function fetchSet(user_id, set_id, pushState) {
 				}, 250)
 				return;
 			}
-			let set = {}, items = {}, associations = {}, associations_order = [],
-			assignment = await getState().sets.assignments.filter(assign => assign.set_id == set_id)[0]
-			await axios.get(`${api_url}/sets/${set_id}`).then(res => { 
-				set = res.data 
-				if(set.editability == 'creator' && set.creator_id !== getState().user.user.id) {
-					pushState(null, '/error')
-					return;
-				}
-			})
-			await axios.get(`${api_url}/assignments/${assignment.id}`).then((res) => {
-				assignment = res.data
-			}) 
+			let items = {}, associations = {}, associations_order = [], user = getState().user.user,
+			assignment = getState().sets.assignments.filter(assign => assign.set_id == set_id)[0],
+			set = (await axios.get(`${api_url}/sets/${set_id}`)).data
+			if(set.editability == 'creator' && set.creator_id !== user.id) {
+				pushState(null, '/error')
+				return;
+			}
+			assignment = (await axios.get(`${api_url}/assignments/${assignment.id}?start=${0}&end=${set.associations_count}`)).data
+			
 			assignment.set.associations.associations.forEach((asc, i) => {
 				let root_asc_name = 'asc_' + i
 				items[asc.item_id] = asc.item
@@ -725,12 +722,10 @@ export function createAssociation(item_id, index, ref) {
 			set_id: set_id,
 			order: order
 		})
-		console.log(association)
 		request
 		.post(`${api_url}/associations/`)
 		.send(association)
 		.end((err, res) => {
-			console.log('association BODY:', res)
 			if(res.ok) {
 				association = res.body
 				dispatch({type: CREATE_ASSOCIATION_SUCCESS, association, index, ref})

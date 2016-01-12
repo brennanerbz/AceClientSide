@@ -346,14 +346,14 @@ export default class Modal extends Component {
 							  </button>
 							: null
 						}
-						<h3 className={classnames("modal-title")} id="myModalLabel">
+						<h3 className="modal-title" id="myModalLabel">
 							{
-								type !== null && type == 'share'
+								type == 'share'
 								? `Share link to '${set.title}'`
 								: null
 							}
 							{
-								type !== null && type == 'settings'
+								type == 'settings'
 								? `Settings` 
 								: null
 							}

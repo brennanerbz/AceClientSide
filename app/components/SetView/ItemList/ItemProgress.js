@@ -60,7 +60,7 @@ export default class ItemProgress extends Component {
 			this.renderProgressCircle(_case, item)
 		}
 		if(_case !== null && _case.id !== this.props._case.id) {
-			// this.renderProgressCircle(_case, item)
+			this.renderProgressCircle(_case, item)
 		}
 	} 
 
