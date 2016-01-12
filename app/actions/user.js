@@ -254,6 +254,7 @@ export function signUp(user_info, pushState) {
 		.post(`${api_url}/users/`)
 		.send(user_info)
 		.end((err, res) => {
+			console.log(res)
 			if(res.ok) {
 				new_user = {}
 				new_user = Object.assign({...res.body}, {password: null})

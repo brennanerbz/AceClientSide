@@ -197,7 +197,7 @@ export default class TermContent extends Component {
                                 if(this.state.hasBeenActive) {
                                     this.props.saveTerm(this.state.term)
                                 } else {
-                                    if(this.state.term !== '' && this.state.term.length > 0) {
+                                    if(this.state.term.length > 0) {
                                         this.props.saveTerm(this.state.term) 
                                     }
                                 }
@@ -241,7 +241,7 @@ export default class TermContent extends Component {
                                 if(this.state.hasBeenActive) {
                                     this.props.saveDefinition(this.state.definition)
                                 } else {
-                                    if(this.state.definition !== '' && this.state.definition.length > 0){
+                                    if(this.state.definition.length > 0){
                                        this.props.saveDefinition(this.state.definition) 
                                     }
                                 }
