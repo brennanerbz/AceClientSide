@@ -304,7 +304,8 @@ export function fetchTrials() {
 		let slots = getState().conversation.slots,
 			trial = {},
 			trials = [],
-			slot_id, current_slot_id = getState().conversation.current_slot.id
+			slot_id, current_slot_id = getState().conversation.current_slot.id,
+			sequence_id = getState().conversation.current_sequence.id;
 		/* Poll for the trials */
 		if(slots.length == 0) {
 			setTimeout(() => {
@@ -312,6 +313,23 @@ export function fetchTrials() {
 			}, 25)
 			return;
 		}
+		request
+		.get(`${api_url}/sequences/${sequence_id}/trials/?start=-50`)
+		.end((err, res) => {
+			if(res.ok) {
+				trials = res.body.trials
+				if(trials !== undefined && trials !== null && trials.length > 0) {
+					dispatch({type: RECEIVE_TRIALS_SUCCESS, trials})
+				}
+				dispatch(newTrial(null, current_slot_id))
+			} else {
+				dispatch({
+					type: RECEIVE_TRIALS_FAILURE,
+					error: Error(err)
+				})
+			}
+		})
+		/*
 		for(var t = 0; t < slots.length; t++) {
 			slot_id = slots[t].id;
 			request
@@ -330,7 +348,7 @@ export function fetchTrials() {
 				}
 			})
 		}
-		dispatch(newTrial(null, current_slot_id))
+		*/
 	}
 }
 

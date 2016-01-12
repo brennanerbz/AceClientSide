@@ -49,7 +49,7 @@ export default class Item extends Component {
 	}
 
 	render() {
-		const { item,  isFetchingInstances } = this.props;
+		const { item,  isFetchingInstances, _case } = this.props;
 		return(
 			<li 
 				onMouseOver={() => this.setState({
@@ -66,9 +66,10 @@ export default class Item extends Component {
 					this.props._case !== undefined
 					&&
 					<ItemProgress 
-						_case={this.props._case}
+						_case={_case}
 						studied={this.props.studied}
 						item={item}
+						filteredStarredItems={this.props.filteredStarredItems}
 					/>
 				}
 				{

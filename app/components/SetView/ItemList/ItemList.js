@@ -88,6 +88,7 @@ export default class ItemList extends Component {
 						? this.props.cases.filter(c => c.association_id == asc.id)[0]
 						: null
 						return <Item key={i} 
+									 filteredStarredItems={this.state.filterStarred}
 									 assignment={this.props.assignment}
 									 association={asc}
 									 item={asc.item} 

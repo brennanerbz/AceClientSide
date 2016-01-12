@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
+require('rc-progress/assets/index.css');
+var Line = require('rc-progress').Line;
+var Circle = require('rc-progress').Circle;
+
 import { circleProgress } from 'jquery-circle-progress';
 
 export default class ItemProgress extends Component {
@@ -12,6 +16,10 @@ export default class ItemProgress extends Component {
 	}
 
 	renderProgressCircle(_case, item) {
+		if(this.state.renderedProgressCircle) {
+			$('.' + String(item.id)).circleProgress()
+			return;
+		}
 		let value = _case.hypothesis.forecast !== false ? _case.hypothesis.forecast[0][1] : 0,
 		start_value = value !== 0 ? _case.hypothesis.storage_strength : 0,
 		color;
@@ -42,27 +50,39 @@ export default class ItemProgress extends Component {
 	    	} else {
 	    		$(this).find('strong').text(String(100 * stepValue).slice(0, 3).replace(".", ""))
 	    	}
-			if(value < 0.10) $(this).find('strong').css({left: '24.5px'})
+			if(stepValue < 0.10) $(this).find('strong').css({left: '24.5px'})
 	    })
-	    this.setState({
+	    this.setState({ 
 	    	renderedProgressCircle: true
 	    });
 	}
 
 	componentDidMount() {
 		let { _case, item } = this.props;
-		if(_case !== null) this.renderProgressCircle(_case, item)
+		// if(_case !== null) this.renderProgressCircle(_case, item)
 	}	
 
 	componentWillReceiveProps(nextProps) {
-		let { _case, item } = nextProps
-		if(_case !== null && !this.state.renderedProgressCircle) {
-			this.renderProgressCircle(_case, item)
-		}
-		if(_case !== null && _case.id !== this.props._case.id) {
-			this.renderProgressCircle(_case, item)
+		let { _case, item, filteredStarredItems } = nextProps
+		this.renderProgressCircle(_case, item)
+		if(!this.props.filteredStarredItems && filteredStarredItems || this.props.filteredStarredItems && !filteredStarredItems) {
+			// $('.' + String(item.id)).circleProgress()
 		}
 	} 
+
+	componentWillUpdate(nextProps, nextState) {
+		let { _case, item } = nextProps
+		if(_case !== null) {
+
+		}
+		if(_case !== null && !this.state.renderedProgressCircle) {
+			// this.renderProgressCircle(_case, item)
+		}
+		if(_case !== null && this.props.item.id !== item.id) {
+			var value = $('.' + String(item.id)).circleProgress('value');
+			console.log('value', value) 
+		}
+	}
 
 	render() {
 		const { _case, item } = this.props;

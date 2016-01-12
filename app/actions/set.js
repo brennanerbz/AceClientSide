@@ -298,6 +298,13 @@ export const UPDATE_CASE_SUCCESS = 'UPDATE_CASE_SUCCESS';
 export const UPDATE_CASE_FAILURE = 'UPDATE_CASE_FAILURE';
 export function updateCase(_case, ...args) {
 	return (dispatch, getState) => {
+		if(getState().setView.assignment == {}) {
+			dispatch(createAssignment(getState().setView.id))
+			setTimeout(() => {
+				dispatch(updateCase(_case, ...args))
+			}, 150)
+			return;
+		}
 		let updated_case = Object.assign({}, default_case)
 		if(args.length > 0) {
 			for(var i = 0; i < args.length; i++) {
