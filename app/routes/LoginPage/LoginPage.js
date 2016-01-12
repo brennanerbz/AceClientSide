@@ -87,7 +87,7 @@ export default class LogInPage extends Component {
 							<form className="sign_in"
 								  onSubmit={(e) => {
 								  	e.preventDefault()
-								  	::this.handleLogIn()
+								  	// ::this.handleLogIn()
 								  }}>
 								{
 									emailError

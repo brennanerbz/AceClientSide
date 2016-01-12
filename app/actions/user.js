@@ -250,6 +250,7 @@ export function signUp(user_info, pushState) {
 				delete user_info.email_error
 			}
 		}
+		console.log('BODY:', user_info)
 		request
 		.post(`${api_url}/users/`)
 		.send(user_info)

@@ -72,7 +72,7 @@ export default class SignUpForm extends Component {
 				className="sign_up_form"
 				onSubmit={(e) => {
 				  	e.preventDefault()
-				  	::this.handleSubmit()
+				  	// ::this.handleSubmit()
 				}}>
 				<input 
 					ref="first_name" 
@@ -113,7 +113,7 @@ export default class SignUpForm extends Component {
 					}}
 					onKeyDown={(e) => {
 						if(e.which == 13) {
-							::this.handleSubmit()
+							// ::this.handleSubmit()
 						}
 					}}
 					/>
