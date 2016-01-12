@@ -232,9 +232,10 @@ export function logOut(pushState) {
 				dispatch({type: LOGOUT_USER_SUCCESS}) 
 				pushState(null, '/')
 			} else {
+				alert('Wow. What happened? There must\'ve been an error logging out. Refresh and try again?')
 				dispatch({type: LOGOUT_USER_FAILURE}) 
 			}
-		}, 100)		
+		}, 500)		
 	}
 }
 

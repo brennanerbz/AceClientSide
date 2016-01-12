@@ -200,6 +200,8 @@ export default function setView(state = initial_setstate, action) {
 		case CLEAR_SETVIEW:
 			return {
 				...state = initial_setstate,
+				set: {},
+				assignment: {},
 				associations: [],
 				items: [],
 				cases: []
