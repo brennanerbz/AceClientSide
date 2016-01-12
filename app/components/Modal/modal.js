@@ -89,7 +89,7 @@ export default class Modal extends Component {
 	}
 
 	renderShareBody() {
-		let { set, loc } = this.props,
+		let { set, loc, user_id } = this.props,
 			globe = require('../../assets/globe.png'),
 			lock = require('../../assets/lock.png'),
 			icon,
@@ -118,30 +118,34 @@ export default class Modal extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="permissions_policy">
-					<img className="sprite" src={icon}/>
-					<div className="permissions_text">
-						<div className="policy_text">
-							{
-								set.visibility == 'public'
-								&&" Anyone with the link can see it "
-							}
-							{
-								set.visibility == 'private'
-								&& "Only you can see it "
-							}
-							<a className="change_permission_link"
-							   onClick={() => {
-							   	this.setState({
-							   		type: 'settings',
-							   		dynamic: true
-							   	})
-							   }}>
-								Change permissions
-							</a>
+				{
+					set.editability == 'creator' && set.creator_id == user_id
+					&&
+					<div className="permissions_policy">
+						<img className="sprite" src={icon}/>
+						<div className="permissions_text">
+							<div className="policy_text">
+								{
+									set.visibility == 'public'
+									&&" Anyone with the link can see it "
+								}
+								{
+									set.visibility == 'private'
+									&& "Only you can see it "
+								}
+								<a className="change_permission_link"
+								   onClick={() => {
+								   	this.setState({
+								   		type: 'settings',
+								   		dynamic: true
+								   	})
+								   }}>
+									Change permissions
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
+				}
 			</div>
 		);
 	}

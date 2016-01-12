@@ -81,6 +81,7 @@ export default class SetListContainer extends Component {
 					closeModal={() => {this.setState({modalIsOpen: false})}}
 					type={modalType}
 					set={selectedSet}
+					user_id={this.props.user_id}
 				/>
 				</div>
 				</div>
