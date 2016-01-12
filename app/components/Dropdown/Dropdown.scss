@@ -80,6 +80,8 @@
 			width: 32px;
 			.avatar_component {
 				margin-top: 0px;
+				margin-left: 20px;
+				margin-right: 5px;
 			}
 		}
 		.name_container {
@@ -108,7 +110,7 @@
 		li {
 			line-height: 1.5rem;
 			margin: 0;
-			.divider {
+			&.divider {
 				border-top: 1px solid rgba(0,0,0,.15);
 				margin-top: 10px;
 				padding-top: 10px;

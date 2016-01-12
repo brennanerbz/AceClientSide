@@ -9,15 +9,19 @@ export default class SetListItemView extends Component {
 	}
 
 	render() {
-		const { assignment, 
+		let { assignment, 
 				section,
 				mouseIsOver,
-				pushState } = this.props,
+				pushState, user_id, set } = this.props,
 	 		  set_icon_complete = require('../../../assets/set_icon_lines.png'),
 			  set_icon_blank = require('../../../assets/set_icon_90.png'),
-			  setIconSlack = require('../../../assets/setIconSlack.png'),
+			  defatultUserPic = require('../../../assets/backgroundPattern1.png'),
+			  defatultOtherPic = require('../../../assets/backgroundPattern2.png'),
 			  playfulSetIcon = require('../../../assets/setIconGreen.png'),
-			  profilePic = require('../../../assets/message_profile_pic.png')
+			  profilePic = require('../../../assets/message_profile_pic.png'),
+			  avatar;
+		if(set.creator_id == user_id) avatar = defatultUserPic
+		else avatar = defatultOtherPic
 		return(
 			<li className="set_item_row"
 				onMouseOver={this.props.mouseOver}
@@ -48,7 +52,7 @@ export default class SetListItemView extends Component {
 							!this.props.profileView
 							&&
 							<div className="col_content_flex creator">
-							<img src={profilePic} className="creator_pic" />
+							<img src={avatar} className="creator_pic" />
 								by &nbsp; {assignment.set.creator.username}
 							</div>
 						}

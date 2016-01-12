@@ -43,7 +43,7 @@ export default class ProfileSettings extends Component {
 
 	render() {
 		const { user, changeUser, updateUser } = this.props,
-		userProfilePic = require('../../assets/message_profile_pic.png');
+		userProfilePic = require(`../../assets/backgroundPattern${0 + 1}.png`);
 		return(
 			<article id="edit_profile_container" className="user_settings  display_flex flex_direction_column very_large_bottom_margin">
 				<div id="edit_profile_wrapper">

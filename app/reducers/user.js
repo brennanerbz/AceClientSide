@@ -82,6 +82,7 @@ export default function user(state = _userinitialstate, action) {
 		case LOGOUT_USER_SUCCESS:
 			return {
 				...state,
+				token: null,
 				user: {},
 				logged_in: false
 			}

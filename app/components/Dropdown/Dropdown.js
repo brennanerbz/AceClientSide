@@ -227,7 +227,7 @@ class BubbleDropdownContents extends Component {
 
 	renderAccountDropdown() {
 		const { user } = this.props,
-				defaultAvatar = require('../../assets/defaultAvatar.png')
+				defaultAvatar = require('../../assets/backgroundPattern1.png')
 		return (
 			<div className="account_dropdown">
 				<div className="title clickable"

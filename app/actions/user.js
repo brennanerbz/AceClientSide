@@ -234,7 +234,7 @@ export function logOut(pushState) {
 			} else {
 				dispatch({type: LOGOUT_USER_FAILURE}) 
 			}
-		}, 5)		
+		}, 100)		
 	}
 }
 

@@ -136,8 +136,8 @@ export default class Profile extends Component {
 		}),
 		userProfilePic = require('../../assets/message_profile_pic.png'),
 		searchIcon = require('../../components/Header/assets/SearchIcon.png'),
-		randomBgNum = Math.floor(Math.random() * 5),
-		backgroundPatternUrl = require(`../../assets/backgroundPattern${randomBgNum + 1}.png`);
+		// randomBgNum = Math.floor(Math.random() * 5),
+		backgroundPatternUrl = require(`../../assets/backgroundPattern${0 + 1}.png`);
 		return(
 			<DocumentTitle title={`${this.props.username} | Ace`}>
 				<div className="main_content profile_view">

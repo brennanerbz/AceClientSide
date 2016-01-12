@@ -16,7 +16,7 @@ export default class Avatar extends Component {
 	
 	render() {
 		const { is_create_set, user, pushState } = this.props,
-			defaultAvatar = require('../../assets/message_profile_pic.png');
+			defaultAvatar = require('../../assets/backgroundPattern1.png');
 		return(
 			<span id="avatar">
 				<button ref="target" 
