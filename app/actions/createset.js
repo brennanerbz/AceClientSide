@@ -126,6 +126,7 @@ export const CREATE_SET_SUCCESS = 'CREATE_SET_SUCCESS';
 export const CREATE_SET_FAILURE = 'CREATE_SET_FAILURE';
 export function createSet(title, ...args) {
 	return (dispatch, getState) => {
+		if(getState().createset.isCreatingSet || getState().createset.set !== null) return;
 		dispatch({type: CREATE_SET})
 		// TODO: check the method its being called whether from create page or copy
 		let user = getState().user.user,
@@ -577,11 +578,11 @@ export function createItem(index, ...args) {
 			association = {},
 			ref;
 
-		if(set == undefined) {
+		if(set == null) {
 			dispatch(createSet())
 			setTimeout(() => {
 				dispatch(createItem(index, ...args))
-			}, 5)
+			}, 500)
 			return; 
 		}
 

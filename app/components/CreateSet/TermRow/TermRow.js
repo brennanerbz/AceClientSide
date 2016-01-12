@@ -17,7 +17,8 @@ export default class TermRow extends Component {
 		term: null,
 		def: null,
 		index: null,
-		hasCreatedItem: false
+		hasCreatedItem: false,
+		hasCreatedSet: false
 	}
 
 	sparkNewRow(index, total_count) {
