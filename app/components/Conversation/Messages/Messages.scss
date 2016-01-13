@@ -40,7 +40,7 @@
 			margin: 1rem 0;
 			#end_display_meta {
 				padding: 0 1.1rem 0 0;
-				font-size: 1.1rem;
+				font-size: 1.15rem;
 				color: #555459;
 				font-family: "Lato",sans-serif;
 				line-height: 1.5rem;
@@ -58,6 +58,23 @@
 				p {
 					color: #555459;
 				    margin: 0 auto 1rem;
+				    &.set_intro {
+				    	padding-left: 50px;
+				    	position: relative;
+				    	.octicon {
+				    		position: absolute;
+				    		left: 0;
+				    		top: 5px;
+				    		font-family: FontAwesome;
+				    		font-size: 40px;
+				    		&.info {
+				    			&:before {
+				    				color: #4c9689;
+				    				content: '\f05a'
+				    			}
+				    		}
+				    	}
+				    }
 				}
 				ul {
 					&.end_display_actions {

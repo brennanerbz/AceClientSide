@@ -101,7 +101,7 @@ export default class Modal extends Component {
 			icon = lock
 		}
 		dev_root_path = 'localhost:3000'
-		prod_root_path = 'https://ace.herokuapp.com' // CHANGE THIS ROOT PATH FOR PRODUCTION
+		prod_root_path = 'acuit.herokuapp.com' // CHANGE THIS ROOT PATH FOR PRODUCTION
 		return (
 			<div className="modal-body share_link">
 				<h2>Link to set</h2>
@@ -112,7 +112,7 @@ export default class Modal extends Component {
 							<input readOnly={true} 
 								   ref="share_link"
 								   type="text" id="share_link" 
-								   value={`${dev_root_path}/set/${set.id}`} />
+								   value={`${prod_root_path}/set/${set.id}`} />
 							<label style={{display: 'none'}} htmlFor="share_link"></label>
 							<small className="secondary_label"></small>
 						</div>

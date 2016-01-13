@@ -6,7 +6,8 @@ export default class EndDisplayHelp extends Component {
 	}
 
 	render() {
-		const { paddingHeight, setName, setId } = this.props;
+		const { paddingHeight, setName, setId } = this.props,
+		acuBotLogo = require('../../../../assets/slackbot_icon.png');
 		return(
 			<div style={{}} id="end_help">
 				<div id="end_display_help">
@@ -17,17 +18,28 @@ export default class EndDisplayHelp extends Component {
 							<a>{setName}</a>
 						</h1>
 						<p className="small_bottom_margin set_intro">
-							This is the very beginning of the <a>{setName}</a> learn mode.
+							<span className="octicon">
+								<img style={{height: '40px'}} src={acuBotLogo}/>
+							</span>
+							This is the very beginning of your practice mode with Acubot. Acubot tries to be helpful, but is only a bot, after all.
 						</p>
-						<ul className="end_display_actions">
-							<li>
-								<img className="settings icon"/>
-								<a>Change settings</a>
-							</li>
-						</ul>
+						<p className="small_bottom_margin set_intro">
+							<span className="octicon info"></span>
+							<strong>Info:</strong> Abubot will ask you questions on the material you've entered, give you helpful feedback if you make a mistake and offer more examples. Here is the first question...
+						</p>
 					</div>
 				</div>
 			</div>
 		);
 	}
 }
+
+/* SETTINGS LINK *
+
+<ul className="end_display_actions">
+	<li>
+		<img className="settings icon"/>
+	</li>
+</ul>
+<a>Change settings</a>
+/* */
