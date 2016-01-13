@@ -231,6 +231,7 @@ export function logOut(pushState) {
 			if(document.cookie.length == 0) {
 				dispatch({type: LOGOUT_USER_SUCCESS}) 
 				pushState(null, '/')
+				dispatch(clearAll())
 			} else {
 				alert('Wow. What happened? There must\'ve been an error logging out. Refresh and try again?')
 				dispatch({type: LOGOUT_USER_FAILURE}) 
@@ -298,6 +299,13 @@ export const HIDE_LOADING_ZONE = 'HIDE_LOADING_ZONE'
 export function hideLoadingZone() {
 	return {
 		type: HIDE_LOADING_ZONE
+	}
+}
+
+export const CLEAR_ALL = 'CLEAR_ALL';
+export function clearAll() {
+	return {
+		type: CLEAR_ALL
 	}
 }
 

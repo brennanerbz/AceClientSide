@@ -41,7 +41,7 @@ export default class LoadingZone extends Component {
 		if(logged_in && user.creation !== undefined) {
 			setTimeout(() => {
 				this.props.hideLoadingZone()
-			}, 850)
+			}, 1000)
 		}
 	}
 

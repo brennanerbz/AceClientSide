@@ -3,7 +3,7 @@ import assign from 'lodash/object/assign';
 import {
 	REQUEST_ASSIGNMENTS,
 	RECEIVE_ASSIGNMENTS_SUCCESS,
-	RECEIVE_ASSINGMENTS_FAILURE
+	RECEIVE_ASSINGMENTS_FAILURE,
 } from '../actions/usersets';
 
 import {
@@ -13,6 +13,10 @@ import {
 import {
 	IMPORT_TEXT_SUCCESS
 } from '../actions/import';
+
+import {
+	CLEAR_ALL
+} from '../actions/user';
 
 let init_state = {
 	isFetchingAssignments: false,
@@ -69,6 +73,12 @@ export default function sets(state = init_state, action) {
 				...state,
 				assignments: a,
 				sets: s
+			}
+		case CLEAR_ALL:
+			return {
+				...state = init_state,
+				assignments: [],
+				sets: []
 			}
 		case RECEIVE_ASSINGMENTS_FAILURE:
 		default:

@@ -67,6 +67,11 @@ export default class Home extends Component {
 		})
 	}
 
+	componentWillUnmount() {
+		const { clearAll } = this.props;
+		// clearAll()
+	}
+
 	render() {	
 		const { assignments, isFetching, pushState, openImportModal } = this.props,
 		emptySets = require('../../assets/null_sets.png');
