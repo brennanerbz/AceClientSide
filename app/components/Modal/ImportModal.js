@@ -24,7 +24,7 @@ export default class ImportModal extends Component {
 
 	state = {
 		type: '',
-		subject: '',
+		subject: 'Biology',
 		text: ''
 	}
 

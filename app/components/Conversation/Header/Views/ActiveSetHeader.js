@@ -10,7 +10,8 @@ export default class ActiveSetHeader extends Component {
 
 	render() {
 		const { setTitle, currentSequence, assignments, pushState } = this.props,
-		currentSet = assignments.filter(a => a.set_id == currentSequence.set_id)[0] || {}
+		currentSet = currentSequence.set
+		// currentSet = assignments.filter(a => a.set_id == currentSequence.set_id)[0] || {}
 		return(
 			<h2 id="active_set_header" className="overflow_ellipsis">
 				<span className="star icon">Star</span>

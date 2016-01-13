@@ -6,16 +6,16 @@ export default class SetTitle extends Component {
 	}
 
 	render() {
-		let { setTitle, currentSet, pushState } = this.props,
+		let { setTitle, currentSet, currentSequence, pushState } = this.props,
 		setIcon = require('../../../../assets/set_icon_lines.png'),
 		lockIcon = require('../../../../assets/lock.png'),
 		icon;
-		if(currentSet.privacy == 'public') icon = setIcon
-		else if (currentSet.privacy == 'private') icon = lockIcon
+		// if(currentSet.privacy == 'public') icon = setIcon
+		// else if (currentSet.privacy == 'private') icon = lockIcon
 		return(
 			<span className="name"
 				  onClick={() => {
-				  	pushState(null, `/set/${currentSet.set_id}`)
+				  	pushState(null, `/set/${currentSequence.set_id}`)
 				  }}>
 				<span className="prefix">
 					{

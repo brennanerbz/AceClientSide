@@ -25,7 +25,7 @@ export default class EndDisplayHelp extends Component {
 						</p>
 						<p className="small_bottom_margin set_intro">
 							<span className="octicon info"></span>
-							<strong>Info:</strong> Abubot will ask you questions on the material you've entered, give you helpful feedback if you make a mistake and offer more examples. Here is the first question...
+							<strong>Info:</strong> Acubot will ask you questions on the material you've entered, give you helpful feedback if you make a mistake and offer more examples. Here is the first question...
 						</p>
 					</div>
 				</div>
