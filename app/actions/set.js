@@ -297,6 +297,7 @@ var default_case = {
 	hidden: false,
 	message: null
 }
+export const UPDATE_CASE = 'UPDATE_CASE';
 export const UPDATE_CASE_SUCCESS = 'UPDATE_CASE_SUCCESS';
 export const UPDATE_CASE_FAILURE = 'UPDATE_CASE_FAILURE';
 export function updateCase(_case, ...args) {
@@ -308,6 +309,7 @@ export function updateCase(_case, ...args) {
 		// 	}, 150)
 		// 	return;
 		// }
+		dispatch({type: UPDATE_CASE})
 		let updated_case = Object.assign({}, default_case)
 		if(args.length > 0) {
 			for(var i = 0; i < args.length; i++) {

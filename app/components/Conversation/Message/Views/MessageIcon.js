@@ -7,7 +7,7 @@ export default class MessageIcon extends Component {
 
 	render() {
 		let botIcon = require('../../../../assets/slackbot_icon.png'),
-		profilePic = require('../../../../assets/message_profile_pic.png'),
+		profilePic = require('../../../../assets/backgroundPattern1.png'),
 		icon, { message } = this.props;
 		if(message.user == 'acubot') icon = botIcon
 		else icon = profilePic

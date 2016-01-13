@@ -233,6 +233,7 @@ export default class CreateSetPage extends Component {
 	}
 
 	componentWillUnmount() {
+		$('body').removeClass('createset')
 		const { set, 
 				isCreatingSet,
 				updateSet, 
