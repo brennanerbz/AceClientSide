@@ -24,13 +24,16 @@ export default class ImportModal extends Component {
 
 	state = {
 		type: '',
+		subject: '',
 		text: ''
 	}
 
 	handleSnippetSubmit() {
 		const { importText, pushState } = this.props,
-		{ text } = this.state;
-		importText(text, pushState)
+		{ text, subject } = this.state;
+		if(text.length > 1) {
+			importText(text, subject, pushState)
+		}
 	}
 
 	componentDidMount() {
@@ -103,9 +106,16 @@ export default class ImportModal extends Component {
 								<select 
 								name="subject_type"
 								id="text_snippet_subject_select"
-								className="small no_top_margin">
-									<option value="auto">Auto Detect Subject</option>
-									<option value="acc">Accounting</option>
+								className="small no_top_margin"
+								onChange={(e) => {
+									this.setState({
+										subject: e.target.value
+									});
+								}}>
+									<option value="Biology">Biology</option>
+									<option value="Econommics">Economics</option>
+									<option value="Psychology">Psychology</option>
+									<option value="Government">Government</option>
 								</select>
 							</label>
 							<input 
@@ -154,6 +164,10 @@ export default class ImportModal extends Component {
 		);
 	}
 }
+
+/* AUTO DETECT SUBJET OPTION 
+<option value="auto">Auto Detect Subject</option>
+*/
 
 
 /* -------------TODO: add the select set feature *------------/
