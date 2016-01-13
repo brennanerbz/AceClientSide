@@ -113,7 +113,7 @@ export default class ImportModal extends Component {
 									});
 								}}>
 									<option value="Biology">Biology</option>
-									<option value="Econommics">Economics</option>
+									<option value="Economics">Economics</option>
 									<option value="Psychology">Psychology</option>
 									<option value="Government">Government</option>
 								</select>
