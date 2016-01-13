@@ -1,4 +1,28 @@
-
+#welcome_zone {
+	flex-direction: column;
+	justify-content: center;
+	// resize: vertical;
+	overflow: auto;
+	position: absolute;
+	left: 295px;
+	// width: 100%;
+	height: 85%;
+	// z-index: -1;
+	#welcome_prompt {
+		resize: vertical;
+		overflow: auto;
+		position: relative;
+		display: table;
+		margin: 0 auto;
+		text-align: center;
+		z-index: 1;
+		h3 {
+			color: #4D384B;
+			font-weight: 400;
+			font-size: 22px;
+		}
+	}
+}
 
 
 

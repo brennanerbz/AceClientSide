@@ -114,7 +114,10 @@ export default class FlunkApp extends Component {
 			{ showLoadingZone } = this.props;
 		route !== '/' ? root_path = regex.exec(route)[1] : root_path = '/'
 		var childrenWithProps = React.Children.map(this.props.children, (child) => {
-			return React.cloneElement(child, { root_path: root_path })
+			return React.cloneElement(child, { 
+				root_path: root_path,
+				openImportModal: () => this.setState({openImportModal: true})
+			})
 		})
 		return( 
 			<div>

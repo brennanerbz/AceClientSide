@@ -30,7 +30,7 @@ export default class Index extends Component {
 				}
 				{
 					this.props.logged_in
-					&& <Home />
+					&& <Home {...this.props}/>
 				}
 			</div>
 		);
