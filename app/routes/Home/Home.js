@@ -68,17 +68,17 @@ export default class Home extends Component {
 	}
 
 	render() {	
-		const { sets, isFetching, pushState, openImportModal } = this.props,
+		const { assignments, isFetching, pushState, openImportModal } = this.props,
 		emptySets = require('../../assets/null_sets.png');
 		return(
 			<DocumentTitle title="Learn more, work less">
 				<div className="main_content">
 					{ 
-						!isFetching && sets.length > 0
+						!isFetching && (assignments.filter(a => !a.deleted)).length > 0
 						&& <SetListContainer {...this.props}/> 
 					}
 					{
-						sets.length == 0
+						(assignments.filter(a => !a.deleted)).length == 0
 						&&
 						<div id="welcome_zone" className="display_flex">
 							<div id="welcome_prompt">
@@ -92,18 +92,18 @@ export default class Home extends Component {
 									width: '55%',
 									textAlign: 'center',
 								}}>
-								You haven't created anything. To get started, create a study set or let us automatically do the work!
+									You haven't created anything. To get started, create a study set or let us automatically do the work!
 								</h3>
 								<button 
 								onClick={() => pushState(null, '/createset')}
 								style={{marginRight: '5px'}} 
 								className="primary button">
-								Create
+									Create
 								</button>
 								<button 
 								onClick={() => this.props.openImportModal()}
 								className="outline button">
-								Import
+									Import
 								</button>
 							</div>
 						</div>
