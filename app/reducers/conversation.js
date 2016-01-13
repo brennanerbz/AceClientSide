@@ -319,6 +319,7 @@ export default function conversation(state = initial_convostate, action) {
 				...state,
 				isFetchingTrials: false,
 				trials: action.trials,
+				current_trial: action.trials.slice(-1)[0],
 				messages: messages,
 				messages_length: messages.length
 			}

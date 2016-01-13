@@ -321,7 +321,16 @@ export function fetchTrials() {
 				if(trials !== undefined && trials !== null && trials.length > 0) {
 					dispatch({type: RECEIVE_TRIALS_SUCCESS, trials})
 				}
-				dispatch(newTrial(null, current_slot_id))
+				if(trials.length > 0) {
+					let trial = trials.slice(-1)[0]
+					if(trial.completion == null) {
+						return;
+					} else {
+						dispatch(newTrial(null, current_slot_id))
+					}	
+				} else {
+					dispatch(newTrial(null, current_slot_id))
+				}
 			} else {
 				dispatch({
 					type: RECEIVE_TRIALS_FAILURE,
