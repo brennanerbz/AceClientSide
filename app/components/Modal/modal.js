@@ -208,14 +208,6 @@ export default class Modal extends Component {
 	render() {
 		const { assignment, pushState, deleteAssignment, set, updateSet, createSet, deactivateAccount} = this.props,
 			  { type, dynamic } = this.state;
-		console.log(this.props.type)
-		return (
-			<SettingsModal 
-				set={set}
-				updateSet={updateSet}
-				createSet={createSet}
-			/>
-		)
 		return(
 			<div ref="modal" 
 				 className="modal fade" 

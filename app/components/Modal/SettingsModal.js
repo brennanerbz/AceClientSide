@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class SettingsModal extends Component {
+
 	static propTypes = {
+		set: PropTypes.object.isRequired,
+		updateSet: PropTypes.func.isRequired,
+		createSet: PropTypes.func,
+		closeModal: PropTypes.func.isRequired,
+		isDynamicModal: PropTypes.bool
 	}
 
 	state = {
@@ -137,6 +143,7 @@ export default class SettingsModal extends Component {
 	}
 
 	render() {
+		const { isDynamicModal } = this.props;
 		return(
 			<div ref="modal" id="modal-settings"  className="modal fade">
 				<div className="modal-dialog">
@@ -150,14 +157,22 @@ export default class SettingsModal extends Component {
 							</div>
 						</div>
 						{this.renderBody()}
-						<div className="modal-footer">
-							<button className="button outline">
-							Cancel
-							</button>
-							<button className="button primary">
-							Save settings
-							</button>
-						</div>
+						{
+							isDynamicModal
+							&&
+							<div className="modal-footer">
+								<button 
+								data-dismiss="modal"
+								className="button outline">
+								Cancel
+								</button>
+								<button 
+								data-dismiss="modal"
+								className="button primary">
+								Save settings
+								</button>
+							</div>
+						}
 					</div>
 				</div>
 			</div>
