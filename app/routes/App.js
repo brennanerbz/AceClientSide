@@ -52,7 +52,8 @@ export default class FlunkApp extends Component {
 		error_msg: false,
 		error_type: 0,
 		success_msg: false,
-		openImportModal: false
+		openImportModal: false,
+		showOnboard: true
 	}
 
 	onlinePoll = {}
@@ -107,12 +108,19 @@ export default class FlunkApp extends Component {
 		clearInterval(this.onlinePoll)
 	}
 
+	componentDidMount() {
+		this.setState({
+			showOnboard: true
+		});
+	}
+
 	render() {
 		let route = this.props.router.location.pathname,
 			count = route.match(/\//g).length,
 			regex = count >= 2 ? /\/(.*?)\// : /\/(.*)/,
 			root_path,
-			{ showLoadingZone } = this.props;
+			{ showLoadingZone } = this.props,
+			{ showOnboard } = this.state;
 		route !== '/' ? root_path = regex.exec(route)[1] : root_path = '/'
 		var childrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, { 
@@ -132,9 +140,14 @@ export default class FlunkApp extends Component {
 					<div className={classnames("outer_shell", {
 						"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
 					})}>
-						<OnboardCoach
-							
-						/>
+						{
+							this.state.showOnboard
+							&&
+							<OnboardCoach
+								closeOnboard={() => this.setState({showOnboard: false})}
+							/>
+						}
+						
 						<ImportModal
 						open={this.state.openImportModal}
 						closeModal={() => this.setState({openImportModal: false})}

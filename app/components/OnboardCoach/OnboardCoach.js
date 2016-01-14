@@ -59,7 +59,12 @@ export default class OnboardCoach extends Component {
 						this.renderSetsCoach()
 					}
 					<div id="coach_footer">
-						<a className="button coach_got_it right">Got it</a>
+						<a 
+						onClick={() => {
+							this.props.closeOnboard()
+							console.log('clcik')
+						}}
+						className="button coach_got_it right">Got it</a>
 					</div>
 				</div>
 			</div>
