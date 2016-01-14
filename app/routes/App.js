@@ -14,6 +14,7 @@ import LandingPage from './LandingPage/LandingPage';
 import Home from './Home/Home';
 import LoadingZone from '../components/LoadingZone/LoadingZone';
 import ImportModal from '../components/Modal/ImportModal';
+import OnboardCoach from '../components/OnboardCoach/OnboardCoach';
 /* Actions */
 import * as actions from '../actions/usersets';
 import * as user from '../actions/user';
@@ -131,6 +132,9 @@ export default class FlunkApp extends Component {
 					<div className={classnames("outer_shell", {
 						"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
 					})}>
+						<OnboardCoach
+							
+						/>
 						<ImportModal
 						open={this.state.openImportModal}
 						closeModal={() => this.setState({openImportModal: false})}

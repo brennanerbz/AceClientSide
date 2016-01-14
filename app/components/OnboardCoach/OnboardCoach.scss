@@ -1,0 +1,51 @@
+#onboard_coach {
+	position: absolute;
+	max-width: 420px;
+	z-index: 150;
+	border-radius: .625rem;
+	&.sets_onboard_div {
+		background: #2ab27b;
+		#coach_arrow {
+			background: #2ab27b;
+		}
+	}
+	#coach_arrow {
+		position: absolute;
+		width: 21px;
+		height: 21px;
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+	#coach_content {
+		color: #fff;
+		font-size: .9375rem;
+		line-height: 1.25rem;
+		padding: 1.5rem 1.125rem 1.125rem 1.5rem;
+		width: 100%;
+		height: 100%;
+		border-radius: .625rem;
+		.coach_message {
+			h2 {
+				color: inherit;
+			    margin: 0 0 .25rem;
+			    line-height: 1.5rem;
+			    font-weight: 900;
+			    font-size: 1.5em;
+			}
+			p {
+				font-size: 1.05em;
+			}
+		}
+	}
+	#coach_footer {
+		min-height: 2.25rem;
+		.button {
+			color: #fff!important;
+		}
+		.coach_got_it {
+			background: rgba(0,0,0,.5)!important;
+		}
+	}
+}
