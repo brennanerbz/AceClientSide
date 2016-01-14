@@ -1266,11 +1266,12 @@ button:focus, input[type="button"]:focus {
     display:block;
     visibility:visible;
     padding:5px 3px;
-    font-size:13px;
+    font-size:14px;
+    font-weight: 600;
     opacity:0;
     filter:alpha(opacity=0);
     &.side_tool {
-    	width: 60%;
+    	width: 70%;
     }
     &.bottom_tool {
     	white-space: nowrap;
@@ -1282,7 +1283,7 @@ button:focus, input[type="button"]:focus {
   margin-top: 4.5px;
 }
 .tooltip-side {
-    left: 0!important;
+    left: -10px!important;
 }
 .tooltip.in{
     opacity:1;

@@ -1,8 +1,6 @@
 
 .sidenav {
 	font-family: "Lato";
-	// -webkit-font-smoothing: antialiased;
-	// -webkit-font-smoothing: subpixel-antialiased;
 	top: 45px;
 	width: 220px;
 	float: left;
@@ -11,13 +9,15 @@
 	background:#fff;
 	letter-spacing: 0.012em;
 	border-right: 1px solid #eee;
-	// box-shadow: 0px 1px 1px 0px rgba(146,146,146,0.50);
 	color: #383F45;
 	padding-top: 2rem;	
 	padding-left: 1.25em;
 	padding-right: 1.25em;
 	* {
 		-webkit-font-smoothing: antialiased;
+	}
+	.sidenav_sets_wrapper {
+		position: relative;
 	}
 	.sidenav_main {
 		margin-bottom: 1.5rem;
@@ -76,22 +76,27 @@
 			transition: all .1s ease-out 0s;
 		}
 	}
-	span.new_set_btn {
-		opacity: 0.3;
-		float: right!important;
-		margin-right: 1pc;
-		padding: 0;
-		font-size: 0;
-		cursor: pointer;
-		-webkit-transition: opacity 50ms;
-		-moz-transition: opacity 50ms;
-		-o-transition: opacity 50ms;
-		transition: opacity 50ms;	
-		.new_set_icon {
-			height: 18px;
-		}
-		&:hover {
-			opacity: 0.8;
+	span {
+		&.octicon {
+			font-family: FontAwesome;
+			font-size: 15px;
+			position: absolute;
+			right: 0;
+			top: -5px;
+			cursor: pointer;
+			color: #383F45 !important;
+			opacity: 0.6;
+			&:hover {
+				opacity: 0.9;
+			}
+			&.plus {
+				height: 15px;
+				&:after {
+					// height: 15px!important;
+					// background-size: 15px 15px;
+					// content: url('../../assets/add_circle_icon.png')
+				}
+			}
 		}		
 	}
 	.sidenav_list {

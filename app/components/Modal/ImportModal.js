@@ -39,7 +39,6 @@ export default class ImportModal extends Component {
 	componentDidMount() {
 		if(this.props.open) {
 			$(this.refs.importModal).modal()
-			console.log('changes')
 		}
 		$(this.refs.importModal).on('hidden.bs.modal', (e) => {
 			this.props.closeModal()

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 import moment from 'moment';
 
 // @connect (state => state.user.sets, state.router.location)
@@ -11,7 +13,13 @@ import SideNavSetListItem from './SideNavSetListItem';
 	sets: state.sets.sets,
 	assignments: state.sets.assignments,
 	assignment: state.setView.assignment
-}))
+	}),
+	dispatch => ({
+		...bindActionCreators({
+			pushState
+		}, dispatch)
+	})
+)
 export default class SetList extends Component {
 	static propTypes = {
 		sets: PropTypes.array
@@ -29,7 +37,7 @@ export default class SetList extends Component {
 	}
 
 	render() {
-		let { sets, params, assignments } = this.props,
+		let { sets, params, assignments, pushState } = this.props,
 			  add_circle_icon = require('../../assets/add_circle_icon.png');
 		sets.sort((set1, set2) => {
 			return (moment(set1.creation).isBefore(set2.creation)) ? -1 : 1
@@ -43,17 +51,20 @@ export default class SetList extends Component {
 		let id = params !== undefined ? params.id : ''
 		return(
 			<div className="sidenav_sets_wrapper">
-				<Link to="/createset">
-				<span className="side_icon new_set_btn">
-					
+				<span 
+				ref="set_action"
+				data-toggle="tooltip"
+				title="Create new set"
+				onClick={() => pushState(null, '/createset')} 
+				className="octicon plus">
+					<img style={{height: '17.5px', width: '17.5px'}} src={add_circle_icon}/>
 				</span>
-				</Link>
 				<h2 ref='set_header' 
 					className="sidenav_header" 
 					data-toggle="tooltip" 
 					title="Browse all sets">
 					<span className="sidenav_header_label">
-					Sets
+					Sets ({sets.length})
 					</span>
 				</h2>
 				<ul className="sidenav_list">
