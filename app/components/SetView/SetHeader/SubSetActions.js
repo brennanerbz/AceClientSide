@@ -102,6 +102,7 @@ export default class SubSetActions extends Component {
 						assignment={this.props.assignment}
 						deleteAssignment={this.props.deleteAssignment}
 						pushState={this.props.pushState}
+						user_id={this.props.user.id}
 						/>
 				{
 					this.props.assignment !== null

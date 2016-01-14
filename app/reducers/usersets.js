@@ -7,7 +7,8 @@ import {
 } from '../actions/usersets';
 
 import {
-	CREATE_ASSIGNMENT_SUCCESS
+	CREATE_ASSIGNMENT_SUCCESS,
+	UPDATE_SET_SUCCESS
 } from '../actions/createset';
 
 import {
@@ -18,6 +19,7 @@ import {
 	CLEAR_ALL
 } from '../actions/user';
 
+
 let init_state = {
 	isFetchingAssignments: false,
 	assignmentsFlag: false,
@@ -27,6 +29,21 @@ let init_state = {
 
 export default function sets(state = init_state, action) {
 	switch(action.type) {
+		case UPDATE_SET_SUCCESS:
+			return {
+				...state,
+				assignments: state.assignments.map(a => {
+					if(a.set_id == action.set.id) {
+						a.set = action.set
+					}
+					return a
+				}),
+				sets: state.sets.map(s => {
+					return s.id == action.set.id
+					? action.set
+					: s
+				})
+			}
 		case REQUEST_ASSIGNMENTS:
 			return {
 				...state,
