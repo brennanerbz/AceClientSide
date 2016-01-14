@@ -1,54 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-// import Menu from '../../Menu/Menu';
 import classnames from 'classnames';
+
+import BubbleDropdown from '../../Dropdown/Dropdown';
+/* Modal Types */
 import Modal from '../../Modal/modal';
+import SettingsModal from '../../Modal/SettingsModal';
 
-//TODO: replace the inline-styles with scss file
-
-var _member_styles = {
-	display: 'inline-block',
-	verticalAlign: 'middle',
-	height: '15px',
-	opacity: '0.6',
-	marginRight: '5px'
-}
-var _member_count_style = {
-	display: 'inline-block',
-	verticalAlign: 'middle',
-	color: '#555549',
-	marginRight: '5px'
-}
 var secondary_actions = {
 	position: 'relative',
 	display: 'inline-flex',
 	verticalAlign: 'middle'
 }
-var _icon = {
-	position: 'absolute',
-	display: 'inline-block',
-	height: '16px',
-	top: '6px',
-	left: '8px',
-	opacity: '0.8'
-}
-var _smallicon = {
-	position: 'absolute',
-	display: 'inline-block',
-	top: '11px',
-	left: '0px',
-	opacity: '0.8'
-}
-var member_count_container = {
-	paddingTop: '5px'
-}
-
-import BubbleDropdown from '../../Dropdown/Dropdown';
 
 export default class SubSetActions extends Component {
 	static propTypes = {
 	}
 
 	state = {
+		isSettingsModalOpen: false,
+		isDynamicModal: false,
 		modal_open: false,
 		modal_type: null,
 		more_is_open: false,
@@ -66,7 +36,7 @@ export default class SubSetActions extends Component {
 
 	render() {
 		let { set, user, assignment, createset } = this.props,
-			{mouseIsOverMoreButton} = this.state,
+			{ mouseIsOverMoreButton, isSettingsModalOpen, isDynamicModal} = this.state,
 			member_icon = require('../../../assets/profile_icon.png'),
 			share_icon = require('../../../assets/share.png'),
 			more = require('../../../assets/elipses.png'),
@@ -91,7 +61,14 @@ export default class SubSetActions extends Component {
 						Share					
 					</button>
 				}
-
+				<SettingsModal 
+					open={isSettingsModalOpen}
+					closeModal={() => this.setState({isSettingsModalOpen: false})}
+					set={this.props.set}
+					updateSet={this.props.updateSet}
+					createSet={this.props.createSet}
+					isDynamicModal={isDynamicModal}
+				/>
 				<Modal  open={this.state.modal_open} 
 						closeModal={() => this.setState({ modal_open: false })}
 						type={this.state.modal_type}
@@ -164,14 +141,12 @@ export default class SubSetActions extends Component {
 						}}
 						handleSettings={() => {
 							this.setState({
-								modal_open: true,
-								modal_type: 'settings'
+								isSettingsModalOpen: true
 							});
 						}}
 						handlePrivacySettings={() => {
 							this.setState({
-								modal_open: true,
-								modal_type: 'settings'
+								isSettingsModalOpen: true
 							});
 						}}
 						handleDelete={() => {

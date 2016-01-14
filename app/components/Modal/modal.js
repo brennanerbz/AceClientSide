@@ -7,6 +7,7 @@ import SignUpForm from '../../routes/LandingPage/SignUpForm';
 import ImportModal from './ImportModal';
 import LaddaButton from 'react-ladda';
 
+import SettingsModal from './SettingsModal'
 
 export default class Modal extends Component {
 	static propTypes = {
@@ -55,27 +56,6 @@ export default class Modal extends Component {
 		if((!prevProps.open && this.props.open) ) {
 			if(this.props.type == 'textarea') setTimeout(() => { $(this.refs.purpose_input).focus() }, 300)
 			if(this.props.type == 'share') setTimeout(() => { $(this.refs.share_link).select() }, 300)
-		}
-	}
-
-	changeVisibilitySettings(val) {
-		const { set, updateSet, createSet } = this.props;
-		if(set == null) {
-			createSet(null, {name: 'visibility', prop: val })
-			return;
-		}
-		if(set !== null) {
-			updateSet(set, {name: 'visibility', prop: val })
-		}
-	}
-	changeEditabilitySettings(val) {
-		const { set, updateSet, createSet } = this.props;
-		if(set == null) {
-			createSet(null, {name: 'editability', prop: val })
-			return;
-		} 
-		if(set !== null) {
-			updateSet(set, {name: 'editability', prop: val })
 		}
 	}
 
@@ -148,88 +128,6 @@ export default class Modal extends Component {
 				}
 			</div>
 		);
-	}
-
-	renderSettingsBody() {
-		const { set } = this.props;
-		return (
-			<div className="modal-body no_footer">
-				<p className="bold no_bottom_margin">Privacy</p>
-				<p className="small_bottom_margin">Who can view?</p>
-				<p className="left_margin">
-					<label className="radio small_bottom_margin">
-						<input ref="public_privacy"
-							   type="radio" 
-							   defaultChecked={true}
-							   checked={set !== null ? set.visibility == 'public' : null}
-							   onChange={() => ::this.changeVisibilitySettings('public')} 
-							   className="small_right_margin" 
-							   value="public"/>
-						<span className="small_left_margin">Everyone: &nbsp;</span>
-						<span className="normal">
-						All users can view this set
-						</span>
-					</label>
-					<label className="radio small_bottom_margin">
-						<input ref="private_privacy"
-							   type="radio" 
-							   defaultChecked={false}
-							   checked={set !== null ? set.visibility == 'private' : null}
-							   onChange={() => ::this.changeVisibilitySettings('private')} 
-							   className="small_right_margin" 
-							   value="private"/>
-						<span className="small_left_margin">Just me: &nbsp;</span>
-						<span className="normal">
-						Only you can view this set
-						</span>
-					</label>
-				</p>
-				<p className="bold no_bottom_margin">Editing</p>
-				<p className="small_bottom_margin">Who can edit?</p>
-				<p className="left_margin">
-					<label className="radio small_bottom_margin">
-						<input ref="group_editing"
-							   type="radio" 
-							   defaultChecked={false}
-							   checked={set !== null ? set.editability == 'group' : null}
-							   onChange={() => ::this.changeEditabilitySettings('group')}
-							   className="small_right_margin"
-							   value="group"/>
-						<span className="small_left_margin">Group: &nbsp;</span>
-						<span className="normal">
-						Only members of selected groups can edit
-						</span>
-					</label>
-					<label className="radio small_bottom_margin">
-						<input ref="admin_editing"
-							   type="radio" 
-							   defaultChecked={false}
-							   checked={set !== null ? set.editability == 'admin' : null}
-							   onChange={() => ::this.changeEditabilitySettings('admin')} 
-							   className="small_right_margin" 
-							   value="admin"/>
-						<span className="small_left_margin">Admins: &nbsp;</span>
-						<span className="normal">
-						Only admins can edit this set
-						</span>
-					</label>
-					<label className="radio small_bottom_margin">
-						<input ref="creator_editing"
-							   type="radio" 
-							   defaultChecked={true}
-							   checked={set !== null ? set.editability == 'creator' : null}
-							   onChange={() => ::this.changeEditabilitySettings('creator')} 
-							   type="radio" 
-							   className="small_right_margin" 
-							   value="creator"/>
-						<span className="small_left_margin">Just me: &nbsp;</span>
-						<span className="normal">
-						Only you can edit this set
-						</span>
-					</label>
-				</p>
-			</div>
-		)
 	}
 
 	renderConfirmBody() {
@@ -308,8 +206,16 @@ export default class Modal extends Component {
 	}
 
 	render() {
-		const { assignment, pushState, deleteAssignment, set, deactivateAccount} = this.props,
+		const { assignment, pushState, deleteAssignment, set, updateSet, createSet, deactivateAccount} = this.props,
 			  { type, dynamic } = this.state;
+		console.log(this.props.type)
+		return (
+			<SettingsModal 
+				set={set}
+				updateSet={updateSet}
+				createSet={createSet}
+			/>
+		)
 		return(
 			<div ref="modal" 
 				 className="modal fade" 

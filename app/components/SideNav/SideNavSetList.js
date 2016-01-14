@@ -64,7 +64,7 @@ export default class SetList extends Component {
 					data-toggle="tooltip" 
 					title="Browse all sets">
 					<span className="sidenav_header_label">
-					Sets ({sets.length})
+					Sets ({assignments.length})
 					</span>
 				</h2>
 				<ul className="sidenav_list">
