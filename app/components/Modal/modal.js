@@ -68,68 +68,7 @@ export default class Modal extends Component {
 		}
 	}
 
-	renderShareBody() {
-		let { set, loc, user_id } = this.props,
-			globe = require('../../assets/globe.png'),
-			lock = require('../../assets/lock.png'),
-			icon,
-			dev_root_path,
-			prod_root_path;
-		if(set.visibility == 'public') {
-			icon = globe
-		} else {
-			icon = lock
-		}
-		dev_root_path = 'localhost:3000'
-		prod_root_path = 'acuit.herokuapp.com' // CHANGE THIS ROOT PATH FOR PRODUCTION
-		return (
-			<div className="modal-body share_link">
-				<h2>Link to set</h2>
-				<div className="copy_link_input_container"
-					 onClick={() => this.refs.share_link.select()}>
-					<div className="text_input inline">
-						<div className="text_input_wrapper">
-							<input readOnly={true} 
-								   ref="share_link"
-								   type="text" id="share_link" 
-								   value={`${prod_root_path}/set/${set.id}`} />
-							<label style={{display: 'none'}} htmlFor="share_link"></label>
-							<small className="secondary_label"></small>
-						</div>
-					</div>
-				</div>
-				{
-					set.editability == 'creator' && set.creator_id == user_id
-					&&
-					<div className="permissions_policy">
-						<img className="sprite" src={icon}/>
-						<div className="permissions_text">
-							<div className="policy_text">
-								{
-									set.visibility == 'public'
-									&&" Anyone with the link can see it "
-								}
-								{
-									set.visibility == 'private'
-									&& "Only you can see it "
-								}
-								<a className="change_permission_link"
-								   onClick={() => {
-								   	this.setState({
-								   		type: 'settings',
-								   		dynamic: true
-								   	})
-								   }}>
-									Change permissions
-								</a>
-							</div>
-						</div>
-					</div>
-				}
-			</div>
-		);
-	}
-
+	
 	renderConfirmBody() {
 		return (
 			<div className="modal-body">

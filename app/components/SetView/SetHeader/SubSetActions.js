@@ -4,7 +4,8 @@ import classnames from 'classnames';
 import BubbleDropdown from '../../Dropdown/Dropdown';
 /* Modal Types */
 import Modal from '../../Modal/modal';
-import SettingsModal from '../../Modal/SettingsModal';
+import DynamicModal from '../../Modal/DynamicModal';
+
 
 var secondary_actions = {
 	position: 'relative',
@@ -17,26 +18,17 @@ export default class SubSetActions extends Component {
 	}
 
 	state = {
-		isSettingsModalOpen: false,
-		isDynamicModal: false,
+		isModalOpen: false,
+		isDynamicContentActive: false,
 		modal_open: false,
 		modal_type: null,
 		more_is_open: false,
 		mouseIsOverMoreButton: false
 	}	
 
-
-	toggleModal(value) {
-		// $('[data-toggle="tooltip"]').tooltip('hide')
-		this.setState({ 
-			modal_open: true,
-			modal_type: value
-		});
-	}
-
 	render() {
 		let { set, user, assignment, createset } = this.props,
-			{ mouseIsOverMoreButton, isSettingsModalOpen, isDynamicModal} = this.state,
+			{ mouseIsOverMoreButton, isModalOpen, isDynamicContentActive, modalType} = this.state,
 			member_icon = require('../../../assets/profile_icon.png'),
 			share_icon = require('../../../assets/share.png'),
 			more = require('../../../assets/elipses.png'),
@@ -51,7 +43,13 @@ export default class SubSetActions extends Component {
 					this.props.assignment !== null
 					&&
 					<button className={classnames('button outline')}
-						    onClick={() => ::this.toggleModal('share')}
+						    onClick={() => {
+						    	this.setState({
+						    		isModalOpen: true,
+						    		isDynamicContentActive: false,
+						    		modalType: 'share'
+						    	});
+						    }}
 						    style={{
 						    	marginLeft: '5px'
 						    }}
@@ -61,13 +59,22 @@ export default class SubSetActions extends Component {
 						Share					
 					</button>
 				}
-				<SettingsModal 
-					open={isSettingsModalOpen}
-					closeModal={() => this.setState({isSettingsModalOpen: false})}
+				<DynamicModal
+					open={isModalOpen}
+					closeModal={() => this.setState({isModalOpen: false})}
+					isDynamicContentActive={isDynamicContentActive}
+					changeDynamicState={(value, type) => {
+						this.setState({
+							isDynamicContentActive: value,
+							modalType: type
+						})
+					}}
+					type={modalType}
 					set={this.props.set}
 					updateSet={this.props.updateSet}
 					createSet={this.props.createSet}
-					isDynamicModal={isDynamicModal}
+					user={this.props.user}
+					user_id={this.props.user.id}
 				/>
 				<Modal  open={this.state.modal_open} 
 						closeModal={() => this.setState({ modal_open: false })}
@@ -141,12 +148,16 @@ export default class SubSetActions extends Component {
 						}}
 						handleSettings={() => {
 							this.setState({
-								isSettingsModalOpen: true
+								isModalOpen: true,
+								isDynamicContentActive: false,
+								modalType: 'settings'
 							});
 						}}
 						handlePrivacySettings={() => {
 							this.setState({
-								isSettingsModalOpen: true
+								isModalOpen: true,
+								isDynamicContentActive: false,
+								modalType: 'settings'
 							});
 						}}
 						handleDelete={() => {

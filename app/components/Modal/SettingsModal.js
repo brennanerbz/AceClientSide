@@ -21,26 +21,16 @@ export default class SettingsModal extends Component {
 			visibility: set.visibility,
 			editability: set.editability
 		});
-		$(this.refs.modal).on('hidden.bs.modal', (e) => {
-			this.props.closeModal()
-		})
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if(!this.props.open && nextProps.open) {
-			$(this.refs.modal).modal()
-		}
-		if(this.props.open && !nextProps.open) {
-			$(this.refs.modal).modal('hide')
-		}
 	}
 
 	changeVisibilitySettings = (setting) => {
-		const { set, updateSet, createSet } = this.props;
-		if(set == null) {
-			createSet(null, {name: 'visibility', prop: setting })
-		} else if(set !== null) {
-			updateSet(set, {name: 'visibility', prop: setting })
+		const { set, updateSet, createSet, isDynamicContentActive } = this.props;
+		if(!isDynamicContentActive) {
+			if(set == null) {
+				createSet(null, {name: 'visibility', prop: setting })
+			} else if(set !== null) {
+				updateSet(set, {name: 'visibility', prop: setting })
+			}
 		}
 		this.setState({
 			visibility: setting
@@ -48,15 +38,27 @@ export default class SettingsModal extends Component {
 	}
 
 	changeEditabilitySettings = (setting) => {
-		const { set, updateSet, createSet } = this.props;
-		if(set == null) {
-			createSet(null, {name: 'editability', prop: setting })
-		} else if(set !== null) {
-			updateSet(set, {name: 'editability', prop: setting })
+		const { set, updateSet, createSet, isDynamicContentActive } = this.props;
+		if(!isDynamicContentActive) {
+			if(set == null) {
+				createSet(null, {name: 'editability', prop: setting })
+			} else if(set !== null) {
+				updateSet(set, {name: 'editability', prop: setting })
+			}
 		}
 		this.setState({
 			editability: setting
 		});
+	}
+
+	submitSettingsChanges = () => {
+		const { visibility, editability } = this.state,
+		{ set, createSet, updateSet } = this.props;
+		if(set == null) {
+			createSet(null, {name: 'editability', prop: editability }, {name: 'visibility', prop: visibility })
+		} else if(set !== null) {
+			updateSet(set, {name: 'editability', prop: editability }, {name: 'visibility', prop: visibility })
+		}
 	}
 
 	renderBody = () => {
@@ -143,38 +145,43 @@ export default class SettingsModal extends Component {
 	}
 
 	render() {
-		const { isDynamicModal } = this.props;
+		const { isDynamicContentActive, changeDynamicState } = this.props;
 		return(
-			<div ref="modal" id="modal-settings"  className="modal fade">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header settings">
-							<button 
-							data-dismiss="modal"
-							className="button primary right button-small">Done</button>
-							<div className="modal-title">
-								Settings
-							</div>
-						</div>
-						{this.renderBody()}
-						{
-							isDynamicModal
-							&&
-							<div className="modal-footer">
-								<button 
-								data-dismiss="modal"
-								className="button outline">
-								Cancel
-								</button>
-								<button 
-								data-dismiss="modal"
-								className="button primary">
-								Save settings
-								</button>
-							</div>
-						}
+			<div className="modal-content">
+				<div className="modal-header settings">
+					{
+						!isDynamicContentActive
+						&&
+						<button 
+						data-dismiss="modal"
+						className="button primary right button-small">Done</button>
+					}
+					<div className="modal-title">
+						Settings
 					</div>
 				</div>
+				{this.renderBody()}
+				{
+					isDynamicContentActive
+					&&
+					<div className="modal-footer">
+						<button 
+						onClick={() => {
+							changeDynamicState(false, 'share')
+						}}
+						className="button outline">
+							Cancel
+						</button>
+						<button 
+						onClick={() => {
+							this.submitSettingsChanges()
+							changeDynamicState(false, 'share')
+						}}
+						className="button primary">
+							Save settings
+						</button>
+					</div>
+				}
 			</div>
 		);
 	}
