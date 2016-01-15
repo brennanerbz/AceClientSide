@@ -41,13 +41,19 @@ export default class SetListItemContainer extends Component {
 					)}
 				}
 				handleShare={() => {
-					this.props.openModal(assignment, set, 'share')
+					this.props.openDynamicModal(assignment, set, 'share')
 				}}
 				handleLearn={() => {
 					this.props.pushState(null, `/convo/${this.props.assignment.set.id}`)
 				}}
 				handleOpen={() => {
 					
+				}}
+				handleSettings={() => {
+					this.props.openDynamicModal(assignment, set, 'settings')
+				}}
+				handlePrivacySettings={() => {
+					this.props.openDynamicModal(assignment, set, 'settings')
 				}}
 				handleEdit={() => {
 					this.props.pushState(null, `/createset/${this.props.assignment.set.id}`)

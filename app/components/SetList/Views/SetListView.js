@@ -21,6 +21,7 @@ export default class SetListView extends Component {
 								updateSet={this.props.updateSet}
 								deleteAssignment={this.props.deleteAssignment}
 								openModal={this.props.openModal}
+								openDynamicModal={this.props.openDynamicModal}
 								profileView={this.props.profileView}
 								user_id={this.props.user_id}/>
 					})

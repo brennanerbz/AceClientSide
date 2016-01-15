@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
 require('../Style/SetList.scss');
+import DynamicModal from '../../Modal/DynamicModal';
 import Modal from '../../Modal/modal';
 import SetListView from '../Views/SetListView';
 
@@ -16,8 +17,12 @@ export default class SetListContainer extends Component {
 		sets: null,
 		modalType: null,
 		modalIsOpen: false,
+		isDynamicContentActive: false,
+		isDynamicModalOpen: false,
 		selectedAssignment: null,
+		selectedAssignmentId: null,
 		selectedSet: null,
+		selectedSetId: null,
 		selectedModalType: null
 	}
 
@@ -31,8 +36,11 @@ export default class SetListContainer extends Component {
 	render() {
 		const { selectedAssignment, 
 				selectedSet, 
+				selectedSetId,
 				modalType, 
-				modalIsOpen } = this.state;
+				modalIsOpen,
+				isDynamicModalOpen,
+				isDynamicContentActive } = this.state;
 		return(
 			<div id="browse_box">
 				<div id="browse_box_wrapper">
@@ -71,8 +79,36 @@ export default class SetListContainer extends Component {
 							modalIsOpen: true
 						});
 					}}
+					openDynamicModal={(assignment, set, type) => {
+						this.setState({
+							isDynamicModalOpen: true,
+							selectedSetId: set.id,
+							selectedAssignmentId: assignment.id,
+							modalType: type
+						});
+					}}
 					{...this.props}/>
 				</div>
+				<DynamicModal
+					open={isDynamicModalOpen}
+					closeModal={() => this.setState({
+						isDynamicModalOpen: false,
+						modalType: ''
+					})}
+					isDynamicContentActive={isDynamicContentActive}
+					changeDynamicState={(value, type) => {
+						this.setState({
+							isDynamicContentActive: value,
+							modalType: type
+						})
+					}}
+					type={modalType}
+					set={this.props.sets !== undefined ? this.props.sets.filter(s => s.id == selectedSetId)[0] : null}
+					updateSet={this.props.updateSet}
+					createSet={this.props.createSet}
+					user={this.props.user}
+					user_id={this.props.user_id}
+				/>
 				<Modal 
 					assignment={selectedAssignment}
 					deleteAssignment={this.props.deleteAssignment}
@@ -208,6 +244,7 @@ class SetListSections extends Component {
 								section={section_name} 
 								assignments={sections[prop]} 
 								openModal={this.props.openModal}
+								openDynamicModal={this.props.openDynamicModal}
 								profileView={this.props.profile}
 								user_id={this.props.user_id}/>
 						</li>
