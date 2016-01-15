@@ -60,7 +60,6 @@ export default class FlunkApp extends Component {
 
 	pollConnection() {
 		let online = window.navigator.onLine
-		console.log('online: ', online)
 		if(!online) {
 			this.setState({
 				show_notification: true,

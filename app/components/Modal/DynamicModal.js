@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 import ShareModal from './ShareModal';
 import SettingsModal from './SettingsModal';
-import DynamicContent from './DynamicContent';
 
 export default class DynamicModal extends Component {
 
