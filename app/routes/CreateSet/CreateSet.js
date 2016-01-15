@@ -18,6 +18,8 @@ import TermRows from '../../components/CreateSet/TermRows/TermRows';
 import CreateSetHeader from '../../components/CreateSet/CreateSetHeader/CreateSetHeader';
 import SavingLabel from '../../components/CreateSet/SavingLabel/SavingLabel';
 import QuestionModeToggle from '../../components/CreateSet/QuestionModeToggle/QuestionModeToggle';
+
+import DynamicModal from '../../components/Modal/DynamicModal';
 import Modal from '../../components/Modal/modal';
 import ImportModal from '../../components/Modal/ImportModal';
 
@@ -85,8 +87,11 @@ export default class CreateSetPage extends Component {
 
 	state = {
 		editing: false,
+		isDynamicModalOpen: false,
 		isModalOpen: false,
+		isImportModalOpen: false,
 		modalType: '',
+		isDynamicContentActive: false,
 		fullErrorMessage: false,
 		titleErrorMessage: false,
 		itemErrorMessage: false,
@@ -279,45 +284,76 @@ export default class CreateSetPage extends Component {
 
 	render() {
 		const { isLoadingSet, rendered, editing, set, user, assignment, pushState, associations } = this.props,
-		{ showAutosavePrompt } = this.state;
+		{ showAutosavePrompt, modalType, isDynamicContentActive } = this.state,
+		{ isDynamicModalOpen, isModalOpen, isImportModalOpen } = this.state;
 		return(
 			<DocumentTitle title="Create | Ace">
 				<div>
-					{
-						this.state.modalType !== 'import'
-						?
-						<Modal 
-							open={this.state.isModalOpen}
-							closeModal={() => this.setState({ 
-								isModalOpen: false,
-								modalType: ''
-							})}
-							type={this.state.modalType}
-							set={this.props.set}
-							loc={this.props.loc}
-							updateSet={this.props.updateSet}
-							createSet={this.props.createSet}
-							assignment={this.props.assignment}
-							deleteAssignment={this.props.deleteAssignment}
-							pushState={this.props.pushState}
-							import={this.state.modalType == 'import'}
-						/>
-						:
-						<ImportModal 
-							open={this.state.isModalOpen}
-							closeModal={() => this.setState({
-								isModalOpen: false,
-								modalType: ''
-							})}
-							type={this.state.modalType}
-						/>
-					}
+
+					<DynamicModal
+						open={isDynamicModalOpen}
+						closeModal={() => this.setState({
+							isDynamicModalOpen: false,
+							modalType: ''
+						})}
+						isDynamicContentActive={isDynamicContentActive}
+						changeDynamicState={(value, type) => {
+							this.setState({
+								isDynamicContentActive: value,
+								modalType: type
+							})
+						}}
+						type={modalType}
+						set={this.props.set}
+						updateSet={this.props.updateSet}
+						createSet={this.props.createSet}
+						user={this.props.user}
+						user_id={this.props.user.id}
+					/>
+							
+					<Modal 
+						open={isModalOpen}
+						closeModal={() => this.setState({ 
+							isModalOpen: false,
+							modalType: ''
+						})}
+						type={this.state.modalType}
+						set={this.props.set}
+						loc={this.props.loc}
+						updateSet={this.props.updateSet}
+						createSet={this.props.createSet}
+						assignment={this.props.assignment}
+						deleteAssignment={this.props.deleteAssignment}
+						pushState={this.props.pushState}
+					/>
+							
+					<ImportModal 
+						open={isImportModalOpen}
+						closeModal={() => this.setState({
+							isImportModalOpen: false,
+							modalType: ''
+						})}
+						type={this.state.modalType}
+					/>
+
 					<ButtonGroup
+						toggleDynamicModal={(type) => {
+							this.setState({
+								isDynamicModalOpen: true,
+								modalType: type
+							});
+						}}
 						toggleModal={(type) => {
 							this.setState({
 								isModalOpen: true,
 								modalType: type
 							})
+						}}
+						toggleImportModal={(type) => {
+							this.setState({
+								isImportModalOpen: true,
+								modalType: type
+							});
 						}}
 						rendered={rendered}
 						set={this.props.set}
@@ -327,6 +363,7 @@ export default class CreateSetPage extends Component {
 						pushState={this.props.pushState}
 						handleSave={::this.handleSave}
 					/>
+
 					<div className={classnames("CreateSetPage", {"rendered": rendered })}>
 					{
 						isLoadingSet

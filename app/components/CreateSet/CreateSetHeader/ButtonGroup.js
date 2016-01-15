@@ -13,7 +13,8 @@ export default class ButtonGroup extends Component {
     }
 
 	render() {
-        const { handleSave, set, editing, pushState, assignment, rendered, toggleModal } = this.props,
+        const { handleSave, set, editing, pushState, assignment, rendered, 
+            toggleDynamicModal, toggleModal, toggleImportModal } = this.props,
         { mouseIsOverMoreButton } = this.state,
         member_icon = require('../../../assets/profile_icon.png'),
         share_icon = require('../../../assets/share.png'),
@@ -50,7 +51,7 @@ export default class ButtonGroup extends Component {
                                 marginRight: '0px'
                             }}
                             className="button outline "
-                            onClick={() => toggleModal('import')}>
+                            onClick={() => toggleImportModal('import')}>
                             Import
                             <span className="new_label">
                                 New!
@@ -61,7 +62,7 @@ export default class ButtonGroup extends Component {
                         this.props.assignment !== null
                         &&
                         <button className={classnames('button outline ')}
-                                onClick={() => toggleModal('share')}
+                                onClick={() => toggleDynamicModal('share')}
                                 style={{
                                     marginLeft: '5px'
                                 }}
@@ -115,10 +116,10 @@ export default class ButtonGroup extends Component {
                                 toggleModal('textarea')
                             }}
                             handleSettings={() => {
-                                toggleModal('settings')
+                                toggleDynamicModal('settings')
                             }}
                             handlePrivacySettings={() => {
-                                toggleModal('settings')
+                                toggleDynamicModal('settings')
                             }}
                             handleDelete={() => {
                                 toggleModal('confirm')

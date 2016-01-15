@@ -4,7 +4,7 @@ import ShareModal from './ShareModal';
 import SettingsModal from './SettingsModal';
 import DynamicContent from './DynamicContent';
 
-export default class DynamincModal extends Component {
+export default class DynamicModal extends Component {
 
 	static propTypes = {
 	}

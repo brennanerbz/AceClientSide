@@ -4,10 +4,7 @@ require('./modal.scss')
 require('../../routes/Import/Import.scss')
 
 import SignUpForm from '../../routes/LandingPage/SignUpForm';
-import ImportModal from './ImportModal';
 import LaddaButton from 'react-ladda';
-
-import SettingsModal from './SettingsModal'
 
 export default class Modal extends Component {
 	static propTypes = {
@@ -47,15 +44,10 @@ export default class Modal extends Component {
 			$(this.refs.modal).modal('hide')
 		}
 	}
-
-	// shouldComponentUpdate(nextProps) {
-	// 	return !(!nextProps.open && !this.props.open)
-	// }
 	
 	componentDidUpdate(prevProps) {
 		if((!prevProps.open && this.props.open) ) {
 			if(this.props.type == 'textarea') setTimeout(() => { $(this.refs.purpose_input).focus() }, 300)
-			if(this.props.type == 'share') setTimeout(() => { $(this.refs.share_link).select() }, 300)
 		}
 	}
 
@@ -155,49 +147,17 @@ export default class Modal extends Component {
 				 aria-labelledby="myModalLabel"
 				 aria-hidden="true">
 				<div className={classnames({"sign_up": type == 'log_in'}, "modal-dialog")} role="document">
-					<div className={classnames("modal-content", {
-						"no_shadow": false
-					})}>
-					<div className={classnames("modal-header", 
-						{ "settings": type == 'settings' },
-						{ "sign_up": type == 'log_in'}
-						) }>
-						{
-							type !== 'settings' && type !== 'log_in'
-							? 
-							<button type="button" 
-									className="close" 
-									data-dismiss="modal"
-									onClick={() => this.props.closeModal()}
-									aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							<span className="sr-only">Close</span>
-							</button>
-							: null
-						}
-						{
-							type == 'settings' && !dynamic
-							? <button type="button"
-									  className="button primary button-small float_right"
-									  onClick={() => {
-									  	this.props.closeModal()
-									  }}
-									  data-dismiss="modal" >
-							  Done
-							  </button>
-							: null
-						}
+					<div className="modal-content">
+					<div className="modal-header">
+						<button type="button" 
+								className="close" 
+								data-dismiss="modal"
+								onClick={() => this.props.closeModal()}
+								aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						<span className="sr-only">Close</span>
+						</button>
 						<h3 className="modal-title" id="myModalLabel">
-							{
-								type == 'share'
-								? `Share link to '${set.title}'`
-								: null
-							}
-							{
-								type == 'settings'
-								? `Settings` 
-								: null
-							}
 							{
 								type == 'textarea'
 								? 'Edit purpose'
@@ -227,16 +187,6 @@ export default class Modal extends Component {
 							}
 						</h3>
 					</div>
-					{
-						type !== null && type == 'share'
-						? ::this.renderShareBody()
-						: null
-					}
-					{
-						type !== null && type == 'settings'
-						? ::this.renderSettingsBody(...this.props)
-						: null
-					}
 					{
 						type == 'textarea'
 						? ::this.renderTextAreaBody()
