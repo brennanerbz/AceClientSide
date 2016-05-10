@@ -141,11 +141,13 @@ export default class FlunkApp extends Component {
 						"void": root_path == '/' && !this.props.logged_in || (root_path == 'convo')
 					})}>
 						{
+							/*
 							this.state.showOnboard
 							&&
 							<OnboardCoach
 								closeOnboard={() => this.setState({showOnboard: false})}
 							/>
+							*/
 						}
 						
 						<ImportModal
